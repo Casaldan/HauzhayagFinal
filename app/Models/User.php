@@ -17,7 +17,8 @@ class User extends Authenticatable
         'password',
         'role',
         'status',
-        'class_year'  // Add this if it's not already there
+        'class_year',
+        'is_admin'
     ];
 
     protected $hidden = [
@@ -28,10 +29,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'is_admin' => 'boolean',
     ];
 
     public function hasRole($role)
     {
         return $this->role === $role;
+    }
+
+    public function isAdmin()
+    {
+        return $this->is_admin;
     }
 }

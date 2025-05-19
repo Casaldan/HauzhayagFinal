@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\ApplicationReceived;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\JobListingController;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -27,28 +28,22 @@ Route::get('/', function () {
 
 Route::middleware('guest')->group(function () {
     Route::get('/admin/login', [AdminController::class, 'showLoginForm'])->name('admin.login');
-    Route::post('/admin/login', [AdminController::class, 'login']);
+    Route::post('/admin/login', [AdminController::class, 'login'])->name('admin.login.submit');
 });
 
 // Admin Protected Routes
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::post('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
-    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/admin/students', [StudentController::class, 'index'])->name('admin.students.index');
-    Route::post('/admin/students/{tracking_code}/approve', [StudentController::class, 'approve'])->name('admin.students.approve');
-    Route::post('/admin/students/{tracking_code}/reject', [StudentController::class, 'reject'])->name('admin.students.reject');
-    Route::delete('/admin/students/{tracking_code}', [StudentController::class, 'destroy'])->name('admin.students.destroy');
-    
-    // Applications routes
-    Route::get('/admin/applications', [ScholarshipController::class, 'index'])->name('admin.applications.index');
-    Route::post('/admin/applications/{id}/status', [ScholarshipController::class, 'updateStatus'])->name('admin.applications.updateStatus');
-    
-    // Scholars route
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
+    Route::get('/students', [StudentController::class, 'index'])->name('admin.students.index');
+    Route::post('/students/{tracking_code}/approve', [StudentController::class, 'approve'])->name('admin.students.approve');
+    Route::post('/students/{tracking_code}/reject', [StudentController::class, 'reject'])->name('admin.students.reject');
+    Route::delete('/students/{tracking_code}', [StudentController::class, 'destroy'])->name('admin.students.destroy');
+    Route::get('/applications', [ScholarshipController::class, 'index'])->name('admin.applications.index');
+    Route::post('/applications/{id}/status', [ScholarshipController::class, 'updateStatus'])->name('admin.applications.updateStatus');
     Route::get('/scholars', [AdminController::class, 'showScholars'])->name('admin.scholars');
-    
-    // Settings routes
-    Route::get('/admin/settings', [AdminController::class, 'showSettings'])->name('admin.settings');
-    Route::put('/admin/settings', [AdminController::class, 'updateSettings'])->name('admin.settings.update');
+    Route::get('/settings', [AdminController::class, 'showSettings'])->name('admin.settings');
+    Route::put('/settings', [AdminController::class, 'updateSettings'])->name('admin.settings.update');
 });
 
 // Scholarship Routes

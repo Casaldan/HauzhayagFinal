@@ -233,13 +233,13 @@
                     </div>
                     <!-- Slide 2 -->
                     <div class="min-w-full h-full">
-                        <img src="{{ asset('image/firedrill.jpg') }}" alt="Description 1" class="w-full h-full object-cover"
+                        <img src="{{ asset('image/learning.jpg') }}" alt="Description 1" class="w-full h-full object-cover"
                              alt="Community Support"
                              class="w-full h-full object-cover">
                     </div>
                     <!-- Slide 3 -->
                     <div class="min-w-full h-full">
-                        <img src="{{ asset('image/goods.jpg') }}" alt="Description 1" class="w-full h-full object-cover"
+                        <img src="{{ asset('image/program.jpg') }}" alt="Description 1" class="w-full h-full object-cover"
                              alt="Education Success"
                              class="w-full h-full object-cover">
                     </div>
@@ -268,77 +268,98 @@
     <p>Testing component rendering.</p>
 </x-test> -->
 
+        <!-- Vision and Mission -->
+        <div class="max-w-7xl mx-auto px-4 mt-24">
+            <h2 class="text-3xl font-bold text-center mb-12 animate-bounce-in">About Us</h2>
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+                <div class="bg-sky-200 p-8 rounded-xl hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in-left" style="animation-delay: 0.1s">
+                    <div class="text-primary text-4xl mb-4">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4 text-black">Our Vision</h3>
+                    <p class="text-gray-600 leading-relaxed">To create a world where every student has access to quality education and career opportunities, regardless of their background or circumstances.</p>
+                </div>
+                <div class="bg-sky-200 p-8 rounded-xl hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in-right" style="animation-delay: 0.2s">
+                    <div class="text-primary text-4xl mb-4">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4 text-black">Our Mission</h3>
+                    <p class="text-gray-600 leading-relaxed">To empower students through comprehensive scholarship programs, guidance, and development, creating a lasting impact on their lives and communities.</p>
+                </div>
+            </div>
+        </div>
+
         <!-- Scholarships Section with scroll animations -->
         <section id="scholarships" class="max-w-7xl mx-auto py-16 px-4 bg-gradient-to-br from-blue-50 via-white to-blue-50 rounded-3xl shadow-lg my-12">
-            <h2 class="text-3xl font-bold text-center mb-12 text-primary animate-bounce-in">Scholarship & Programs</h2>
-  <div class="grid md:grid-cols-3 gap-8">
-      <!-- Scholarship 1 -->
-                <div class="bg-white shadow-lg p-6 rounded-xl flex flex-col border-t-4 border-primary hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in-left" style="animation-delay: 0.1s">
+            <h2 class="text-3xl font-bold text-center mb-12 text-black animate-bounce-in">Scholarship & Programs</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Scholarship 1 -->
+                <div class="bg-sky-200 shadow-lg p-6 rounded-xl flex flex-col border-t-4 border-primary hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in-left" style="animation-delay: 0.1s">
                     <div class="text-primary text-2xl mb-4"><i class="fas fa-users"></i></div>
-          <h3 class="text-xl font-semibold mb-2">Community-based Scholarship</h3>
-          <p class="text-gray-600 mb-4">Open to all qualified students who demonstrate academic excellence and financial need.</p>
-          <ul class="list-disc list-inside text-gray-600 mb-6">
-              <li>Full tuition coverage</li>
-              <li>Monthly allowance</li>
-              <li>Mentorship program</li>
-          </ul>
+                    <h3 class="text-xl font-semibold mb-2">Community-based Scholarship</h3>
+                    <p class="text-gray-600 mb-4">Open to all qualified students who demonstrate academic excellence and financial need.</p>
+                    <ul class="list-disc list-inside text-gray-600 mb-6">
+                        <li>Full tuition coverage</li>
+                        <li>Monthly allowance</li>
+                        <li>Mentorship program</li>
+                    </ul>
                     <button class="flex items-center justify-center gap-2 bg-primary text-white py-2 px-6 rounded-lg hover:bg-blue-400 mt-auto transition mb-2 font-semibold shadow" onclick="openScholarshipModal()">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"></path></svg>
                         Apply Now
                     </button>
-      </div>
-     
-      <!-- Scholarship 2 -->
-                <div class="bg-white shadow-lg p-6 rounded-xl flex flex-col border-t-4 border-primary hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in" style="animation-delay: 0.2s">
+                </div>
+                
+                <!-- Scholarship 2 -->
+                <div class="bg-sky-200 shadow-lg p-6 rounded-xl flex flex-col border-t-4 border-primary hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in" style="animation-delay: 0.2s">
                     <div class="text-primary text-2xl mb-4"><i class="fas fa-female"></i></div>
-          <h3 class="text-xl font-semibold mb-2">In-house Scholarship for Girls</h3>
-          <p class="text-gray-600 mb-4">Exclusive program designed to empower young women through education and leadership.</p>
-          <ul class="list-disc list-inside text-gray-600 mb-6">
-              <li>Full tuition and housing</li>
-              <li>Leadership training</li>
-              <li>Career guidance</li>
-          </ul>
+                    <h3 class="text-xl font-semibold mb-2">In-house Scholarship for Girls</h3>
+                    <p class="text-gray-600 mb-4">Exclusive program designed to empower young women through education and leadership.</p>
+                    <ul class="list-disc list-inside text-gray-600 mb-6">
+                        <li>Full tuition and housing</li>
+                        <li>Leadership training</li>
+                        <li>Career guidance</li>
+                    </ul>
                     <button class="flex items-center justify-center gap-2 bg-primary text-white py-2 px-6 rounded-lg hover:bg-blue-400 mt-auto transition mb-2 font-semibold shadow" onclick="openScholarshipModal()">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"></path></svg>
                         Apply Now
                     </button>
-      </div>
-     
-      <!-- Scholarship 3 -->
-                <div class="bg-white shadow-lg p-6 rounded-xl flex flex-col border-t-4 border-primary hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in-right" style="animation-delay: 0.3s">
+                </div>
+                
+                <!-- Scholarship 3 -->
+                <div class="bg-sky-200 shadow-lg p-6 rounded-xl flex flex-col border-t-4 border-primary hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in-right" style="animation-delay: 0.3s">
                     <div class="text-primary text-2xl mb-4"><i class="fas fa-female"></i></div>
-          <h3 class="text-xl font-semibold mb-2">Feeding Program</h3>
-          <p class="text-gray-600 mb-4">A feeding program for less fortunate children living nearby area.</p>
-          <ul class="list-disc list-inside text-gray-600 mb-6">
-              <li>Food Every Sunday</li>
-              <li>Parent's Orientation about Food Consumption</li>
-              <li>Free Check-up</li>
-          </ul>
-      </div>
-  </div>
-</section>
+                    <h3 class="text-xl font-semibold mb-2">Feeding Program</h3>
+                    <p class="text-gray-600 mb-4">A feeding program for less fortunate children living nearby area.</p>
+                    <ul class="list-disc list-inside text-gray-600 mb-6">
+                        <li>Food Every Sunday</li>
+                        <li>Parent's Orientation about Food Consumption</li>
+                        <li>Free Check-up</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
         <!-- Job Offers Section with enhanced animations -->
-<section id="job-offers" class="bg-white py-16">
+<section id="job-offers" class="bg-sky-blue-100 py-16">
          <div class="max-w-7xl mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-12 animate-bounce-in">Job Opportunities</h2>
                 <div class="grid md:grid-cols-3 gap-8">
                     <!-- Job Cards (3) -->
-                    <div class="bg-neutral shadow rounded-lg p-6 flex flex-col hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in-left" style="animation-delay: 0.1s">
+                    <div class="bg-sky-200 shadow rounded-lg p-6 flex flex-col hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in-left" style="animation-delay: 0.1s">
                         <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Full-time</span>
                         <h3 class="mt-4 font-semibold text-lg">Software Developer</h3>
                         <p class="text-gray-600">Build innovative solutions for education.</p>
                         <p class="text-sm text-gray-500 mt-2">Tech Solutions Inc. | San Francisco, CA</p>
                         <button class="mt-auto bg-primary text-white w-full py-2 px-6 rounded-lg hover:bg-blue-700 transition" onclick="openJobDetailsModal()">View Details</button>
                     </div>
-                    <div class="bg-neutral shadow rounded-lg p-6 flex flex-col hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in" style="animation-delay: 0.2s">
+                    <div class="bg-sky-200 shadow rounded-lg p-6 flex flex-col hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in" style="animation-delay: 0.2s">
                         <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">Part-time</span>
                         <h3 class="mt-4 font-semibold text-lg">Marketing Coordinator</h3>
                         <p class="text-gray-600">Promote our mission through marketing.</p>
                         <p class="text-sm text-gray-500 mt-2">Global Marketing Agency | New York, NY</p>
                         <button class="mt-auto bg-primary text-white w-full py-2 px-6 rounded-lg hover:bg-blue-700 transition" onclick="openJobDetailsModal()">View Details</button>
                     </div>
-                    <div class="bg-neutral shadow rounded-lg p-6 flex flex-col hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in-right" style="animation-delay: 0.3s">
+                    <div class="bg-sky-200 shadow rounded-lg p-6 flex flex-col hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in-right" style="animation-delay: 0.3s">
                         <span class="bg-yellow-100 text-yellow-800 text-sm px-3 py-1 rounded-full">Internship</span>
                         <h3 class="mt-4 font-semibold text-lg">Research Assistant</h3>
                         <p class="text-gray-600">Gain experience in education research.</p>
@@ -350,9 +371,9 @@
         </section>
 
         <!-- Events Section with enhanced animations -->
-<section id="events" class="py-16 bg-neutral">
+<section id="events" class="py-16 bg-blue-500">
     <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-12 animate-bounce-in">Upcoming Events</h2>
+        <h2 class="text-3xl font-bold text-center mb-12 text-white animate-bounce-in">Upcoming Events</h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             @forelse($events as $event)
             <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in-left" style="animation-delay: 0.1s">
@@ -398,12 +419,12 @@
             </div>
             @empty
             <div class="col-span-full text-center py-12">
-                <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-16 h-16 text-white mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                           d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                 </svg>
-                <h3 class="text-xl font-medium text-gray-500">No upcoming events at the moment</h3>
-                <p class="text-gray-400 mt-2">Check back later for new events!</p>
+                <h3 class="text-xl font-medium text-white">No upcoming events at the moment</h3>
+                <p class="text-white mt-2">Check back later for new events!</p>
             </div>
             @endforelse
         </div>
@@ -411,13 +432,13 @@
 </section>
 
         <!-- Success Stories Section with enhanced animations -->
-        <section id="success-stories" class="py-20 bg-gradient-to-b from-neutral to-white">
+        <section id="success-stories" class="py-20 bg-sky-100">
             <div class="max-w-7xl mx-auto px-2 sm:px-6">
-                <h2 class="text-4xl font-extrabold text-center text-primary mb-12 tracking-tight animate-bounce-in">Our Top Testimony</h2>
+                <h2 class="text-4xl font-extrabold text-center text-black mb-12 tracking-tight animate-bounce-in">Our Top Testimony</h2>
                 <div class="relative overflow-hidden">
                     <div id="slides" class="flex transition-transform duration-500 ease-in-out" style="width: 100%;">
                         <!-- Slide 1 -->
-                        <div class="slide flex flex-col md:flex-row items-center min-w-full gap-8 bg-gray-50 rounded-2xl shadow-xl p-6 md:p-14 hover:animate-elevate transition-all duration-300" style="animation-delay: 0.1s">
+                        <div class="slide flex flex-col md:flex-row items-center min-w-full gap-8 bg-white rounded-2xl shadow-xl p-6 md:p-14 hover:animate-elevate transition-all duration-300" style="animation-delay: 0.1s">
                             <div class="relative flex flex-col items-center w-full md:w-1/2">
                                 <!-- Large Orange Circle Background -->
                                 <div class="absolute z-0 flex justify-center items-center" style="top: 0; left: 50%; transform: translateX(-50%);">
@@ -452,7 +473,7 @@
                             </div>
                         </div>
                         <!-- Slide 2 -->
-                        <div class="slide flex flex-col md:flex-row items-center min-w-full gap-8 bg-gray-50 rounded-2xl shadow-xl p-6 md:p-14 hover:animate-elevate transition-all duration-300" style="animation-delay: 0.2s">
+                        <div class="slide flex flex-col md:flex-row items-center min-w-full gap-8 bg-white rounded-2xl shadow-xl p-6 md:p-14 hover:animate-elevate transition-all duration-300" style="animation-delay: 0.2s">
                             <div class="relative flex flex-col items-center w-full md:w-1/2">
                                 <div class="absolute z-0 flex justify-center items-center" style="top: 0; left: 50%; transform: translateX(-50%);">
                                     <div class="w-72 h-72 md:w-96 md:h-96 rounded-full bg-blue-400 ring-4 ring-black flex items-center justify-center">
@@ -483,7 +504,7 @@
                             </div>
                         </div>
                         <!-- Slide 3 -->
-                        <div class="slide flex flex-col md:flex-row items-center min-w-full gap-8 bg-gray-50 rounded-2xl shadow-xl p-6 md:p-14 hover:animate-elevate transition-all duration-300" style="animation-delay: 0.3s">
+                        <div class="slide flex flex-col md:flex-row items-center min-w-full gap-8 bg-white rounded-2xl shadow-xl p-6 md:p-14 hover:animate-elevate transition-all duration-300" style="animation-delay: 0.3s">
                             <div class="relative flex flex-col items-center w-full md:w-1/2">
                                 <div class="absolute z-0 flex justify-center items-center" style="top: 0; left: 50%; transform: translateX(-50%);">
                                     <div class="w-72 h-72 md:w-96 md:h-96 rounded-full bg-blue-400 ring-4 ring-black flex items-center justify-center">
@@ -534,15 +555,15 @@
         <!-- Track Application Section -->
         <section id="track-application" class="py-20 bg-gradient-to-b from-white to-neutral">
             <div class="max-w-3xl mx-auto px-4">
-                <h2 class="text-4xl font-extrabold text-center text-primary mb-8 tracking-tight animate-bounce-in">Track Your Application</h2>
+                <h2 class="text-4xl font-extrabold text-center text-black mb-8 tracking-tight animate-bounce-in">Track Your Application</h2>
                 <p class="text-center text-gray-600 mb-8">Enter your tracking code to check your scholarship application status</p>
-                <div class="bg-white/90 p-10 rounded-3xl shadow-2xl border border-primary/20 animate-fade-in">
+                <div class="bg-gray-400 p-10 rounded-3xl shadow-2xl border border-primary/20 animate-fade-in">
                     <form method="POST" action="{{ route('scholarship.track') }}" class="space-y-8">
                         @csrf
                         <div>
                             <label for="tracking_code" class="block text-base font-semibold mb-2 text-gray-700">Tracking Code</label>
                             <input type="text" name="tracking_code" id="tracking_code"
-                                class="w-full px-5 py-3 border-2 border-primary/30 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-colors text-lg placeholder-gray-400 shadow-sm"
+                                class="w-full px-5 py-3 border-2 border-primary/30 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-colors text-lg placeholder-gray-400 shadow-sm bg-white"
                                 placeholder="Enter your 8-digit tracking code"
                                 maxlength="8"
                                 required>
@@ -570,35 +591,17 @@
         </section>
 
         <!-- About Us Section -->
-        <section id="about-us" class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-12 animate-bounce-in">About Us</h2>
+        <section id="about-us" class="bg-sky-200 py-16">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12 animate-bounce-in">Past Events</h2>
                
-                <!-- Vision and Mission -->
-                <div class="grid md:grid-cols-2 gap-8 mb-16">
-                    <div class="bg-primary/5 p-8 rounded-xl hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in-left" style="animation-delay: 0.1s">
-                        <div class="text-primary text-4xl mb-4">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                        <h3 class="text-2xl font-semibold mb-4">Our Vision</h3>
-                        <p class="text-gray-700 leading-relaxed">To create a world where every student has access to quality education and career opportunities, regardless of their background or circumstances.</p>
-                    </div>
-                    <div class="bg-primary/5 p-8 rounded-xl hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in-right" style="animation-delay: 0.2s">
-                        <div class="text-primary text-4xl mb-4">
-                            <i class="fas fa-bullseye"></i>
-                        </div>
-                        <h3 class="text-2xl font-semibold mb-4">Our Mission</h3>
-                        <p class="text-gray-700 leading-relaxed">To empower students through comprehensive scholarship programs, guidance, and development, creating a lasting impact on their lives and communities.</p>
-                    </div>
-                </div>
-
                 <!-- Impact Slider -->
                 <div class="relative overflow-hidden rounded-2xl shadow-xl animate-on-scroll">
                     <div id="impactSlides" class="flex transition-transform duration-500 ease-in-out">
                         <!-- Slide 1 -->
                         <div class="min-w-full">
                             <div class="relative h-96">
-                                <img src="{{ asset('image/feeding2.jpg') }}" alt="Description 1" class="w-full h-full object-cover"
+                                <img src="{{ asset('image/feed.jpg') }}" alt="Description 1" class="w-full h-full object-cover"
                                      alt="Hauz Hayag feeding"
                                      class="w-full h-full object-cover">
                                 <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
@@ -612,14 +615,13 @@
                         <!-- Slide 2 -->
                         <div class="min-w-full">
                             <div class="relative h-96">
-                                <img src="{{ asset('image/education.jpg') }}" alt="Description 1" class="w-full h-full object-cover"
+                                <img src="{{ asset('image/christmasparty.jpg') }}" alt="Description 1" class="w-full h-full object-cover"
                                      alt="Hauz Hayag Education"
                                      class="w-full h-full object-cover">
                                 <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
                                     <div class="text-center text-white p-8">
-                                        <h3 class="text-3xl font-bold mb-4">Education</h3>
-                                        <p class="text-xl">The goal is to equip individuals with knowledge, skills, and values for a better future. It aims to help them lead successful and meaningful lives.
-</p>
+                                        <h3 class="text-3xl font-bold mb-4">Christmas Party</h3>
+                                        <p class="text-xl">Have your-elf a merry little Christmas!</p>
                                     </div>
                                 </div>
                             </div>
@@ -627,7 +629,7 @@
                         <!-- Slide 3 -->
                         <div class="min-w-full">
                             <div class="relative h-96">
-                                <img src="{{ asset('image/growth.jpg') }}" alt="Description 1" class="w-full h-full object-cover"
+                                <img src="{{ asset('image/learning.jpg') }}" alt="Description 1" class="w-full h-full object-cover"
                                      alt="Award Ceremony"
                                      class="w-full h-full object-cover">
                                 <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
@@ -656,7 +658,7 @@
             </div>
         </section>
 
-        <footer class="bg-[#e6f4ea] text-gray-800 py-10 px-6 mt-12 animate-fade-in">
+        <footer class="bg-blue-500 text-white py-10 px-6 mt-12 animate-fade-in">
             <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
               <!-- About Section -->
               <div>
@@ -687,7 +689,7 @@
               </div>
             </div>
          
-            <div class="border-t mt-10 pt-4 text-center text-sm text-gray-500">
+            <div class="border-t mt-10 pt-4 text-center text-sm text-white">
               &copy; 2025 Hauz Hayag Scholarship. All rights reserved.
             </div>
           </footer>
