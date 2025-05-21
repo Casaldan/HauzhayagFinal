@@ -255,9 +255,6 @@
                         <button class="bg-primary text-white px-8 py-3 rounded-lg hover:bg-blue-400 transition hover-scale" onclick="openDonationModal()">
                             <i class="fas fa-heart mr-2 animate-pulse-slow"></i>Donate Now
                         </button>
-                        <button class="bg-white text-primary border-2 border-white px-8 py-3 rounded-lg hover:bg-white/90 transition hover-scale" onclick="openEventModal()">
-                            <i class="fas fa-calendar-alt mr-2 animate-bounce-slow"></i>Register for Events
-                        </button>
                     </div>
                 </div>
             </div>
@@ -777,17 +774,21 @@
                     <input type="tel" id="welcome_phone_number" name="phone_number" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" value="{{ old('phone_number') }}">
                 </div>
                 <div>
-                    <label for="welcome_scholarship_type" class="block text-sm font-medium text-gray-700">Scholarship Type</label>
-                    <select name="scholarship_type" id="welcome_scholarship_type" required
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm">
-                        <option value="" disabled {{ old('scholarship_type') ? '' : 'selected' }}>Select Type</option>
-                        <option value="home_based" {{ old('scholarship_type') == 'home_based' ? 'selected' : '' }}>Home Based</option>
-                        <option value="in_house" {{ old('scholarship_type') == 'in_house' ? 'selected' : '' }}>In House</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="welcome_transcript" class="block text-sm font-medium mb-1">Upload Transcript (PDF, JPG, PNG - Max 5MB)</label>
-                    <input type="file" id="welcome_transcript" name="transcript" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20" required accept=".pdf,.jpg,.jpeg,.png">
+                    <label for="welcome_transcript" class="block text-sm font-medium mb-1">Required Documents</label>
+                    <div class="relative">
+                        <input type="file" id="welcome_transcript" name="transcript" class="hidden" accept=".pdf">
+                        <button type="button" onclick="document.getElementById('fileOptions').classList.toggle('hidden')" class="w-full text-left px-4 py-2 border rounded-lg bg-white hover:bg-gray-50">
+                            Choose File
+                        </button>
+                        <div id="fileOptions" class="hidden absolute z-10 w-full mt-1 bg-white border rounded-lg shadow-lg">
+                            <div class="p-2">
+                                <button type="button" onclick="selectFile('slip')" class="w-full text-left px-4 py-2 hover:bg-gray-100 rounded">Copy of your slip</button>
+                                <button type="button" onclick="selectFile('address')" class="w-full text-left px-4 py-2 hover:bg-gray-100 rounded">Sketch going to your present address</button>
+                                <button type="button" onclick="selectFile('home')" class="w-full text-left px-4 py-2 hover:bg-gray-100 rounded">Picture of your home</button>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-2 text-sm text-gray-500">Note: All documents must be in PDF format. Maximum file size: 5MB.</p>
                 </div>
                 <button type="submit" class="w-full bg-primary text-white py-2 rounded-lg hover:bg-blue-400 transition">
                     Submit Application
@@ -1287,6 +1288,20 @@
                 console.error('Registration error:', error);
             }
         }
+
+        function selectFile(type) {
+            document.getElementById('fileOptions').classList.add('hidden');
+            document.getElementById('welcome_transcript').click();
+        }
+
+        // Close the options when clicking outside
+        document.addEventListener('click', function(event) {
+            const fileOptions = document.getElementById('fileOptions');
+            const button = event.target.closest('button');
+            if (!button && !fileOptions.contains(event.target)) {
+                fileOptions.classList.add('hidden');
+            }
+        });
     </script>
 </body>
 </html>

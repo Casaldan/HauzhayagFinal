@@ -32,18 +32,29 @@ Route::middleware('guest')->group(function () {
 });
 
 // Admin Protected Routes
-Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+Route::middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])->prefix('admin')->group(function () {
     Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/students', [StudentController::class, 'index'])->name('admin.students.index');
     Route::post('/students/{tracking_code}/approve', [StudentController::class, 'approve'])->name('admin.students.approve');
     Route::post('/students/{tracking_code}/reject', [StudentController::class, 'reject'])->name('admin.students.reject');
     Route::delete('/students/{tracking_code}', [StudentController::class, 'destroy'])->name('admin.students.destroy');
+    
+    // Applications routes
     Route::get('/applications', [ScholarshipController::class, 'index'])->name('admin.applications.index');
     Route::post('/applications/{id}/status', [ScholarshipController::class, 'updateStatus'])->name('admin.applications.updateStatus');
+    
+    // Scholars route
     Route::get('/scholars', [AdminController::class, 'showScholars'])->name('admin.scholars');
+    
+    // Settings routes
     Route::get('/settings', [AdminController::class, 'showSettings'])->name('admin.settings');
     Route::put('/settings', [AdminController::class, 'updateSettings'])->name('admin.settings.update');
+
+    // Job Listing Routes
+    Route::resource('jobs', \App\Http\Controllers\Admin\JobListingController::class);
+    Route::post('jobs/{job}/approve', [\App\Http\Controllers\Admin\JobListingController::class, 'approve'])->name('jobs.approve');
+    Route::post('jobs/{job}/reject', [\App\Http\Controllers\Admin\JobListingController::class, 'reject'])->name('jobs.reject');
 });
 
 // Scholarship Routes
@@ -116,11 +127,11 @@ Route::middleware(['auth'])->group(function () {
 
 // Volunteer routes with auth
 Route::middleware(['auth'])->group(function () {
+    Route::get('/volunteers', [VolunteerController::class, 'index'])->name('volunteers.index');
+    Route::post('/volunteers', [VolunteerController::class, 'store'])->name('volunteers.store');
     Route::get('/volunteer/events', [VolunteerController::class, 'viewEvents'])->name('volunteer.events');
     Route::get('/volunteers/calendar', [VolunteerController::class, 'viewCalendar'])->name('volunteer.calendar');
     Route::post('/volunteers/job-offers', [VolunteerController::class, 'addJobOffer'])->name('volunteer.addJobOffer');
-    Route::get('/volunteers', [VolunteerController::class, 'index'])->name('volunteers.index');
-    Route::post('/volunteers', [VolunteerController::class, 'store'])->name('volunteers.store');
     Route::post('/volunteers/{volunteer}/status', [VolunteerController::class, 'updateStatus'])->name('volunteers.updateStatus');
 });
 
@@ -154,8 +165,9 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
-// Define the route for viewing jobs
-Route::get('/jobs/listings', [JobListingController::class, 'index'])->name('jobs.listings');
+// Public Job Listing Routes
+Route::get('/jobs', [JobListingController::class, 'index'])->name('jobs.index');
+Route::get('/jobs/{job}', [JobListingController::class, 'show'])->name('jobs.show');
 
 // API route for job details (for modal)
 Route::get('/api/job-listings/{id}', function($id) {
@@ -171,13 +183,6 @@ Route::get('/scholarship/track/{tracking_code}', [App\Http\Controllers\Scholarsh
 
 // New route for students to view job listings
 // Route::get('/jobs/listings', [JobListingController::class, 'index'])->name('jobs.listings');
-
-// API route for job details (for modal)
-// Route::get('/api/job-listings/{id}', function($id) {
-//     return \App\Models\JobListing::findOrFail($id);
-// });
-
-// Route::get('/jobs', [JobListingController::class, 'index'])->name('jobs.index');
 
 // Route::get('/admin/jobs/create', [JobListingController::class, 'create'])->name('jobs.create');
 // Route::post('/admin/jobs', [JobListingController::class, 'store'])->name('jobs.store');
