@@ -259,9 +259,6 @@
                         <button class="bg-primary text-white px-8 py-3 rounded-lg hover:bg-blue-400 transition hover-scale" onclick="openDonationModal()">
                             <i class="fas fa-heart mr-2 animate-pulse-slow"></i>Donate Now
                         </button>
-                        <button class="bg-white text-primary border-2 border-white px-8 py-3 rounded-lg hover:bg-white/90 transition hover-scale" onclick="openEventModal()">
-                            <i class="fas fa-calendar-alt mr-2 animate-bounce-slow"></i>Register for Events
-                        </button>
                     </div>
                 </div>
             </div>

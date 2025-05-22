@@ -6,23 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::table('events', function (Blueprint $table) {
-            //
+        Schema::table('job_listings', function (Blueprint $table) {
+            $table->integer('hours_per_week')->nullable()->change();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::table('events', function (Blueprint $table) {
-            //
+        Schema::table('job_listings', function (Blueprint $table) {
+            $table->integer('hours_per_week')->nullable(false)->change();
         });
     }
-};
+}; 
