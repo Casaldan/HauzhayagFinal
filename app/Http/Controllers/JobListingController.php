@@ -46,10 +46,16 @@ class JobListingController extends Controller
 
     public function show(JobListing $job)
     {
-        if ($job->status !== 'approved') {
+        // Debug: dump the current user
+        \Log::info('Current user:', ['user' => auth()->user()]);
+        if ($job->status !== 'approved' && (!auth()->check() || !auth()->user()->is_admin)) {
             abort(404);
         }
-
+        // If the user is a volunteer, show the volunteer view
+        if (auth()->check() && !auth()->user()->is_admin) {
+            return view('volunteers.job_show', compact('job'));
+        }
+        // Default to the main job details view
         return view('jobs.show', compact('job'));
     }
 
