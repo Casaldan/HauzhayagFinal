@@ -83,10 +83,25 @@
                             @if($job->salary)
                                 <p class="text-gray-700 mb-2"><span class="font-semibold">Salary:</span> {{ $job->salary }}</p>
                             @endif
-                            <p class="text-gray-600 mt-2">{{ Str::limit($job->description, 100) }}</p>
-                        </div>
-                        <div class="mt-4">
-                            <button onclick="showJobDetails({{ $job->id }})" class="bg-secondary text-white px-4 py-2 rounded hover:bg-secondary/80 transition">View Details</button>
+                            <p class="text-gray-700 mb-2"><span class="font-semibold">Description:</span> {{ $job->description }}</p>
+                            @if($job->requirements)
+                                <p class="text-gray-700 mb-2"><span class="font-semibold">Requirements:</span> {{ $job->requirements }}</p>
+                            @endif
+                            @if($job->qualifications)
+                                <p class="text-gray-700 mb-2"><span class="font-semibold">Qualifications:</span> {{ $job->qualifications }}</p>
+                            @endif
+                            @if($job->contact_person)
+                                <p class="text-gray-700 mb-2"><span class="font-semibold">Contact Person:</span> {{ $job->contact_person }}</p>
+                            @endif
+                            @if($job->contact_email)
+                                <p class="text-gray-700 mb-2"><span class="font-semibold">Contact Email:</span> {{ $job->contact_email }}</p>
+                            @endif
+                            @if($job->contact_phone)
+                                <p class="text-gray-700 mb-2"><span class="font-semibold">Contact Phone:</span> {{ $job->contact_phone }}</p>
+                            @endif
+                            @if($job->contact_link)
+                                <p class="text-gray-700 mb-2"><span class="font-semibold">Contact Link:</span> <a href="{{ $job->contact_link }}" class="text-blue-600 hover:underline" target="_blank">{{ $job->contact_link }}</a></p>
+                            @endif
                         </div>
                     </div>
                 @empty
@@ -96,35 +111,6 @@
             <div class="mt-8">
                 {{ $jobs->links() }}
             </div>
-            <!-- Job Details Modal (hidden by default) -->
-            <div id="job-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-                <div class="bg-white rounded-lg shadow-lg p-8 max-w-lg w-full relative">
-                    <button onclick="closeJobModal()" class="absolute top-2 right-2 text-gray-400 hover:text-gray-600">&times;</button>
-                    <div id="job-modal-content">
-                        <!-- Job details will be loaded here -->
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
-    <script>
-        function showJobDetails(jobId) {
-            fetch(`/api/job-listings/${jobId}`)
-                .then(response => response.json())
-                .then(job => {
-                    document.getElementById('job-modal-content').innerHTML = `
-                        <h2 class='text-xl font-bold text-primary mb-2'>${job.title}</h2>
-                        <p class='mb-2'><span class='font-semibold'>Company:</span> ${job.company}</p>
-                        <p class='mb-2'><span class='font-semibold'>Location:</span> ${job.location}</p>
-                        ${job.salary ? `<p class='mb-2'><span class='font-semibold'>Salary:</span> ${job.salary}</p>` : ''}
-                        <p class='mb-2'><span class='font-semibold'>Description:</span> ${job.description}</p>
-                        ${job.requirements ? `<p class='mb-2'><span class='font-semibold'>Requirements:</span> ${job.requirements}</p>` : ''}
-                    `;
-                    document.getElementById('job-modal').classList.remove('hidden');
-                });
-        }
-        function closeJobModal() {
-            document.getElementById('job-modal').classList.add('hidden');
-        }
-    </script>
 </x-app-layout> 

@@ -10,8 +10,10 @@ class WelcomeController extends Controller
 {
     public function index()
     {
-        // Get upcoming events for the welcome page
-        $events = Event::where('start_date', '>', Carbon::now())
+        // Get only approved and admin-posted upcoming events for the welcome page
+        $events = Event::where('status', 'active')
+            ->where('is_admin_posted', true)
+            ->where('start_date', '>', Carbon::now())
             ->orderBy('start_date', 'asc')
             ->take(6)
             ->get();

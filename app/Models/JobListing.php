@@ -67,31 +67,6 @@ class JobListing extends Model
         return $query->where('status', 'approved');
     }
 
-    public function dashboard()
-    {
-        try {
-            // Load only admin-posted and active events
-            $events = Event::where('status', 'active')
-                          ->where('is_admin_posted', true)
-                          ->where('end_date', '>', now())
-                          ->get();
-            
-            // Load only admin-posted and approved jobs
-            $jobs = JobListing::where('status', 'approved')
-                             ->where('is_admin_posted', true)
-                             ->where(function($query) {
-                                 $query->whereNull('expires_at')
-                                       ->orWhere('expires_at', '>', now());
-                             })
-                             ->get();
-            
-            return view('volunteers.volunteerdashboard', compact('events', 'jobs'));
-        } catch (\Exception $e) {
-            \Log::error('Volunteer Dashboard Error: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'An error occurred while loading the dashboard.');
-        }
-    }
-
     public function scopePending($query)
     {
         return $query->where('status', 'pending');

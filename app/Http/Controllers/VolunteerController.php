@@ -17,45 +17,51 @@ use Illuminate\Support\Facades\DB;
 
 class VolunteerController extends Controller
 {
+    public function index()
+    {
+        // Logic to retrieve volunteers data
+        $volunteers = Volunteer::all();
+        return view('volunteers.index', compact('volunteers'));
+    }
+
     public function dashboard()
     {
-        // Fetch all upcoming events (active and not ended), regardless of who posted them
-        $events = Event::where('status', 'active')
-            ->where('end_date', '>', now())
-            ->orderBy('start_date', 'asc')
-            ->get();
+        try {
+            // Load only admin-posted and active events
+            $events = Event::where('status', 'active')
+                          ->where('is_admin_posted', true)
+                          ->where('end_date', '>', now())
+                          ->get();
+            
+            // Load all jobs for the job listings section
+            $allJobs = JobListing::orderBy('created_at', 'desc')->get();
 
-        // Fetch all jobs that are approved, regardless of who posted them
-        $jobs = JobListing::where('status', 'approved')
-            ->where(function($query) {
-                $query->whereNull('expires_at')
-                      ->orWhere('expires_at', '>', now());
-            })
-            ->get();
+            // Calculate volunteer hours
+            $currentMonth = now()->month;
+            $currentYear = now()->year;
+            $volunteerId = auth()->id();
 
-        // Calculate hours for the current month for the logged-in volunteer
-        $currentMonth = Carbon::now()->month;
-        $currentYear = Carbon::now()->year;
-        $volunteerId = auth()->id();
-        
-        // Calculate current month hours
-        $hoursThisMonth = VolunteerHour::where('volunteer_id', $volunteerId)
-            ->whereMonth('date', $currentMonth)
-            ->whereYear('date', $currentYear)
-            ->sum('hours');
+            $hoursThisMonth = \App\Models\VolunteerHour::where('volunteer_id', $volunteerId)
+                ->whereMonth('date', $currentMonth)
+                ->whereYear('date', $currentYear)
+                ->sum('hours');
 
-        // Calculate total hours
-        $totalHours = VolunteerHour::where('volunteer_id', $volunteerId)
-            ->sum('hours');
+            $totalHours = \App\Models\VolunteerHour::where('volunteer_id', $volunteerId)
+                ->sum('hours');
 
-        // Fetch recent activities (last 5 volunteer hour records)
-        $recentActivities = VolunteerHour::with('event')
-            ->where('volunteer_id', $volunteerId)
-            ->orderBy('date', 'desc')
-            ->take(5)
-            ->get();
+            $recentActivities = \App\Models\VolunteerHour::with('event')
+                ->where('volunteer_id', $volunteerId)
+                ->orderBy('date', 'desc')
+                ->take(5)
+                ->get();
 
-        return view('volunteers.volunteerdashboard', compact('events', 'jobs', 'hoursThisMonth', 'totalHours', 'recentActivities'));
+            return view('volunteers.volunteerdashboard', compact(
+                'events', 'allJobs', 'hoursThisMonth', 'totalHours', 'recentActivities'
+            ));
+        } catch (\Exception $e) {
+            \Log::error('Volunteer Dashboard Error: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while loading the dashboard.');
+        }
     }
 
     public function jobPost()
@@ -72,12 +78,18 @@ class VolunteerController extends Controller
         return view('volunteers.volunteer_job_post', compact('jobs'));
     }
 
+    /**
+     * Store a newly created volunteer in the database.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         // Validate the request data
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:volunteers',
             'phone' => 'required|string|max:20',
             'skills' => 'nullable|array',
             'status' => 'required|in:Active,Pending,Inactive',
@@ -90,49 +102,34 @@ class VolunteerController extends Controller
         }
 
         try {
-            DB::beginTransaction();
-
-            // Create the volunteer as a User with role 'volunteer'
-            $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make('volunteer123'), // Set a default password
-                'phone' => $request->phone,
-                'role' => 'volunteer',
-            ]);
-
-            // Process skills array
-            $skills = $request->skills;
-            if (is_array($skills)) {
-                $skills = array_filter($skills); // Remove empty values
-            }
-
-            // Create the volunteer record
+            // Create the volunteer
             $volunteer = Volunteer::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'phone' => $request->phone,
-                'skills' => !empty($skills) ? json_encode($skills) : null,
+                'skills' => $request->skills ? json_encode($request->skills) : null,
                 'status' => $request->status,
                 'notes' => $request->notes,
                 'start_date' => $request->start_date,
             ]);
 
-            DB::commit();
-
-            // Return success response
             return response()->json([
                 'message' => 'Volunteer created successfully',
+                'id' => $volunteer->id,
                 'volunteer' => $volunteer
             ], 201);
-
         } catch (\Exception $e) {
-            DB::rollBack();
-            Log::error('Failed to create volunteer:', ['error' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
             return response()->json(['message' => 'Failed to create volunteer', 'error' => $e->getMessage()], 500);
         }
     }
 
+    /**
+     * Update the volunteer's status.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function updateStatus(Request $request, $id)
     {
         // Validate the request data
@@ -161,14 +158,10 @@ class VolunteerController extends Controller
         }
     }
 
-    public function viewEvents()
-    {
-        return view('volunteers.events');
-    }
-
     public function viewCalendar()
     {
-        return view('volunteer.calendar');
+        // Logic for viewing calendar
+        return view('volunteers.calendar');
     }
 
     public function addJobOffer(Request $request)
@@ -246,5 +239,90 @@ class VolunteerController extends Controller
             Log::error('Failed to delete volunteer:', ['error' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
             return response()->json(['message' => 'Failed to delete volunteer', 'error' => $e->getMessage()], 500);
         }
+    }
+
+    public function events()
+    {
+        $events = \App\Models\Event::where('status', 'active')
+            ->where('is_admin_posted', true)
+            ->where('end_date', '>', now())
+            ->orderBy('start_date', 'asc')
+            ->get();
+        return view('volunteers.events', compact('events'));
+    }
+
+    public function showEvent($id)
+    {
+        $event = \App\Models\Event::findOrFail($id);
+        return view('volunteers.event_show', compact('event'));
+    }
+
+    public function createJob()
+    {
+        return view('volunteers.job_create');
+    }
+
+    public function storeJob(Request $request)
+    {
+        $request->validate([
+            'poster_name' => 'required|string|max:255',
+            'company_name' => 'required|string|max:255',
+            'role' => 'required|string|max:255',
+            'salary' => 'required|string|max:255',
+            'description' => 'required|string',
+            'qualifications' => 'required|string',
+            'contact_email' => 'required|email|max:255',
+            'contact_phone' => 'nullable|string|max:20',
+            'contact_person' => 'required|string|max:255',
+            'contact_link' => 'nullable|url|max:255',
+            'category' => 'required|string|max:255',
+            'type' => 'required|string|max:255',
+            // 'location' => 'required|string|max:255',
+            // 'hours_per_week' => 'required|numeric|min:1',
+        ]);
+
+        $job = JobListing::create([
+            'title' => $request->role,
+            'description' => $request->description,
+            'company' => $request->company_name,
+            'company_name' => $request->company_name,
+            'role' => $request->role,
+            'salary_min' => null,
+            'salary_max' => null,
+            'status' => 'pending', // Needs admin approval
+            'qualifications' => $request->qualifications,
+            'contact_email' => $request->contact_email,
+            'contact_phone' => $request->contact_phone,
+            'contact_person' => $request->contact_person,
+            'posted_by' => auth()->id(),
+            'is_admin_posted' => false,
+            'benefits' => null,
+            'requirements' => null,
+            'category' => $request->category,
+            'type' => $request->type,
+            'employment_type' => null,
+            'start_date' => null,
+            'end_date' => null,
+            'expires_at' => null,
+            'contact_link' => $request->contact_link,
+            'salary' => $request->salary,
+            // 'location' => $request->location,
+        ]);
+
+        return redirect()->route('volunteer.dashboard')->with('success', 'Job post submitted successfully for admin approval.');
+    }
+
+    public function jobListings()
+    {
+        $adminJobs = \App\Models\JobListing::where('is_admin_posted', true)
+            ->where('status', 'approved')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $myJobs = \App\Models\JobListing::where('posted_by', auth()->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('volunteers.job_listings', compact('adminJobs', 'myJobs'));
     }
 }
