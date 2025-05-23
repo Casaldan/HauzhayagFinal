@@ -69,7 +69,7 @@
             <!-- Page Header -->
             <div class="mb-6">
                 <h1 class="text-2xl font-bold text-gray-800">Student Dashboard</h1>
-                <p class="text-gray-600">Welcome back! Here's an overview of your academic journey.</p>
+                <p class="text-gray-600">Welcome back, {{ Auth::user()->name }}! Here's an overview of your academic journey.</p>
             </div>
 
             <!-- Notifications -->

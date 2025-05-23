@@ -18,6 +18,38 @@
             }
         }
     </script>
+    <style>
+        /* Custom styles for FullCalendar */
+        .fc-event {
+            background-color: #3490dc; /* Example event background color */
+            border-color: #2779bd; /* Example event border color */
+            color: #ffffff; /* Example event text color */
+            border-radius: 4px; /* Example rounded corners for events */
+            padding: 2px 4px; /* Example padding for events */
+            font-size: 0.85em; /* Example font size for events */
+            cursor: pointer; /* Indicate clickable events */
+        }
+
+        /* Optional: Style the calendar header */
+        .fc-header-toolbar {
+            margin-bottom: 1.5em; /* Space below header */
+            font-size: 1.1em; /* Slightly larger header font */
+        }
+
+        /* Optional: Style calendar day cells with events */
+        /* This might require more complex JS/CSS depending on FullCalendar version and setup */
+        /* For simplicity, focusing on styling the event element itself first */
+
+        /* General calendar container styling */
+         .fc .fc-daygrid-day.fc-day-today {
+            background-color: #e2e8f0; /* Highlight today's date with a light background */
+         }
+
+         .fc-daygrid-event {
+             margin-top: 2px;
+         }
+
+    </style>
 </head>
 <body class="bg-gray-100">
     <div class="flex h-screen overflow-hidden">
@@ -57,13 +89,16 @@
                     Job Listings
                 </a>
                 <div class="mt-auto pt-20">
-                    <a href="/logout" class="flex items-center px-4 py-3 hover:bg-[#2C5F6E] transition-colors text-red-300 hover:text-red-200">
-                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-                        </svg>
-                        Logout
-                    </a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="flex items-center px-4 py-3 hover:bg-[#2C5F6E] transition-colors text-red-300 hover:text-red-200 w-full text-left">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                      d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                            </svg>
+                            Logout
+                        </button>
+                    </form>
                 </div>
             </nav>
         </div>

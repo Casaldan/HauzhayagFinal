@@ -31,11 +31,13 @@ class LoginController extends Controller
             $request->session()->regenerate();
             $user = Auth::user();
             if ($user->role === 'admin') {
-                return redirect('/admin/dashboard');
+                return redirect()->intended('/admin/dashboard');
             } elseif ($user->role === 'student') {
-                return redirect('/student/dashboard');
+                return redirect()->intended('/student/dashboard');
+            } elseif ($user->role === 'volunteer') {
+                return redirect()->intended('/volunteer/dashboard');
             } else {
-                return redirect('/home');
+                return redirect()->intended($this->redirectPath());
             }
         }
 

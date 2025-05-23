@@ -78,6 +78,100 @@
                 <p class="text-gray-600">Manage student applications and active students</p>
             </div>
 
+            <!-- Stats Overview Section -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <!-- Pending Applications -->
+                <div class="bg-white rounded-lg shadow-sm p-4 border-l-4 border-yellow-500">
+                    <div class="flex justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">Pending Applications</p>
+                            <p class="text-xl font-bold text-gray-800 mt-1">{{ $pendingApplicationsCount }}</p>
+                        </div>
+                        <div class="rounded-full bg-yellow-100 p-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Approved Applications -->
+                <div class="bg-white rounded-lg shadow-sm p-4 border-l-4 border-green-500">
+                    <div class="flex justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">Approved Applications</p>
+                            <p class="text-xl font-bold text-gray-800 mt-1">{{ $approvedApplicationsCount }}</p>
+                        </div>
+                        <div class="rounded-full bg-green-100 p-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Active Students -->
+                <div class="bg-white rounded-lg shadow-sm p-4 border-l-4 border-blue-500">
+                    <div class="flex justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">Active Students</p>
+                            <p class="text-xl font-bold text-gray-800 mt-1">{{ $activeStudentsCount }}</p>
+                        </div>
+                        <div class="rounded-full bg-blue-100 p-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search and Filter Tools -->
+            <div class="flex flex-wrap gap-3 mb-4">
+                <div class="relative flex-grow max-w-md">
+                    <input 
+                        type="text" 
+                        id="search" 
+                        placeholder="Search students..." 
+                        class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary"
+                    >
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </div>
+                
+                <!-- Status Filter -->
+                <div class="relative">
+                    <select id="status-filter" class="appearance-none pl-3 pr-10 py-2 border border-gray-300 bg-white rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary text-sm">
+                        <option>All Statuses</option>
+                        <option>Approved</option>
+                        <option>Pending</option>
+                        <option>Rejected</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Type Filter -->
+                <div class="relative">
+                    <select id="type-filter" class="appearance-none pl-3 pr-10 py-2 border border-gray-300 bg-white rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary text-sm">
+                        <option>All Types</option>
+                        <option>Home-based</option>
+                        <option>Center-based</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
             <!-- Tabs -->
             <div class="mb-6 border-b border-gray-200">
                 <nav class="-mb-px flex space-x-8">
@@ -246,47 +340,68 @@
             const searchInput = document.getElementById('search');
             const statusFilter = document.getElementById('status-filter');
             const typeFilter = document.getElementById('type-filter');
-            const table = document.querySelector('table');
-            const rows = table.querySelectorAll('tbody tr');
+            const tabs = document.querySelectorAll('.mb-6 nav a');
+            let activeTab = 'applicants'; // Default active tab
 
-            // Search functionality
+            // Add event listeners to tabs to switch active content
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetTab = this.getAttribute('href').substring(1);
+
+                    // Update active tab state
+                    tabs.forEach(t => t.classList.remove('border-primary', 'text-primary', 'font-medium'));
+                    this.classList.add('border-primary', 'text-primary', 'font-medium');
+
+                    // Hide all tab content
+                    document.querySelectorAll('#applicants, #students').forEach(section => section.style.display = 'none');
+
+                    // Show the target tab content
+                    document.getElementById(targetTab).style.display = 'block';
+
+                    activeTab = targetTab; // Update active tab variable
+                    filterTable(); // Re-apply filters for the new active tab
+                });
+            });
+
+             // Initialize display: show applicants tab by default
+             document.getElementById('students').style.display = 'none';
+             document.querySelector('.mb-6 nav a[href="#applicants"]').classList.add('border-primary', 'text-primary', 'font-medium');
+
+
+            // Search and filter functionality
             searchInput.addEventListener('keyup', function() {
                 filterTable();
             });
 
-            // Status filter
             statusFilter.addEventListener('change', function() {
                 filterTable();
             });
 
-            // Type filter
             typeFilter.addEventListener('change', function() {
                 filterTable();
             });
 
             function filterTable() {
                 const searchTerm = searchInput.value.toLowerCase();
-                const statusValue = statusFilter.value;
-                const typeValue = typeFilter.value;
+                const statusValue = statusFilter.value.toLowerCase();
+                const typeValue = typeFilter.value.toLowerCase();
 
-                rows.forEach(row => {
+                // Determine which table to filter based on the active tab
+                const currentTable = document.querySelector(`#${activeTab} table tbody`).querySelectorAll('tr');
+
+                currentTable.forEach(row => {
                     const name = row.querySelector('td:nth-child(1)').textContent.toLowerCase();
                     const email = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-                    const type = row.querySelector('td:nth-child(5)').textContent.toLowerCase();
-                    const status = row.querySelector('td:nth-child(6)').textContent.trim();
+                    // For applicants, type is in 5th column, status in 6th
+                    // For students, type is in 4th column, status in 5th
+                    const rowType = activeTab === 'applicants' ? row.querySelector('td:nth-child(5)').textContent.trim().toLowerCase() : row.querySelector('td:nth-child(4)').textContent.trim().toLowerCase();
+                    const rowStatus = activeTab === 'applicants' ? row.querySelector('td:nth-child(6)').textContent.trim().toLowerCase() : row.querySelector('td:nth-child(5)').textContent.trim().toLowerCase();
 
                     const matchesSearch = name.includes(searchTerm) || email.includes(searchTerm);
-                    const matchesStatus = statusValue === 'All Statuses' || status === statusValue;
-                    
-                    // Handle type filtering
-                    let matchesType = true;
-                    if (typeValue) {
-                        // Get the actual scholarship type from the row's data
-                        const rowType = row.querySelector('td:nth-child(5)').textContent.trim().toLowerCase();
-                        matchesType = rowType === typeValue;
-                    }
+                    const matchesStatus = statusValue === 'all statuses' || rowStatus.includes(statusValue);
+                    const matchesType = typeValue === 'all types' || rowType.includes(typeValue);
 
-                    // Show row if all conditions are met
                     if (matchesSearch && matchesStatus && matchesType) {
                         row.style.display = '';
                     } else {
@@ -294,6 +409,9 @@
                     }
                 });
             }
+
+            // Initial filter application on page load
+            filterTable();
         });
     </script>
 </x-app-layout>

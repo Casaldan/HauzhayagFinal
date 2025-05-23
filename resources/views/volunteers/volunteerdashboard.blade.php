@@ -1,6 +1,57 @@
 @extends('layouts.app')
 
 @section('content')
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Dashboard</title>
+
+    <!-- Add Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2C5F6E',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for FullCalendar */
+        .fc-event {
+            background-color: #3490dc; /* Example event background color */
+            border-color: #2779bd; /* Example event border color */
+            color: #ffffff; /* Example event text color */
+            border-radius: 4px; /* Example rounded corners for events */
+            padding: 2px 4px; /* Example padding for events */
+            font-size: 0.85em; /* Example font size for events */
+            cursor: pointer; /* Indicate clickable events */
+        }
+
+        /* Optional: Style the calendar header */
+        .fc-header-toolbar {
+            margin-bottom: 1.5em; /* Space below header */
+            font-size: 1.1em; /* Slightly larger header font */
+        }
+
+        /* Optional: Style calendar day cells with events */
+        /* This might require more complex JS/CSS depending on FullCalendar version and setup */
+        /* For simplicity, focusing on styling the event element itself first */
+
+        /* General calendar container styling */
+         .fc .fc-daygrid-day.fc-day-today {
+            background-color: #e2e8f0; /* Highlight today's date with a light background */
+         }
+
+         .fc-daygrid-event {
+             margin-top: 2px;
+         }
+
+    </style>
+</head>
 <div class="flex h-screen overflow-hidden">
     <!-- Sidebar Navigation -->
     <div class="w-64 bg-[#1B4B5A] text-white flex flex-col fixed h-full">
@@ -45,7 +96,7 @@
         <!-- Page Header -->
         <div class="mb-6">
             <h1 class="text-2xl font-bold text-gray-800">Volunteer Dashboard</h1>
-            <p class="text-gray-600">Welcome back! Here's an overview of your volunteer activities.</p>
+            <p class="text-gray-600">Welcome back, {{ Auth::user()->name }}! Here's an overview of your academic journey.</p>
         </div>
         <!-- Stats Overview -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">

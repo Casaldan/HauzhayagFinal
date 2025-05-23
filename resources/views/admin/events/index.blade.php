@@ -1,7 +1,55 @@
 <x-app-layout>
+<style>
+    /* Custom styles for FullCalendar */
+    .fc-event {
+        background-color: #3490dc; /* Example event background color */
+        border-color: #2779bd; /* Example event border color */
+        color: #ffffff; /* Example event text color */
+        border-radius: 4px; /* Example rounded corners for events */
+        padding: 2px 4px; /* Example padding for events */
+        font-size: 0.85em; /* Example font size for events */
+        cursor: pointer; /* Indicate clickable events */
+    }
+
+    /* Optional: Style the calendar header */
+    .fc-header-toolbar {
+        margin-bottom: 1.5em; /* Space below header */
+        font-size: 1.1em; /* Slightly larger header font */
+    }
+
+    /* Optional: Style calendar day cells with events */
+    /* This might require more complex JS/CSS depending on FullCalendar version and setup */
+    /* For simplicity, focusing on styling the event element itself first */
+
+    /* General calendar container styling */
+     .fc .fc-daygrid-day.fc-day-today {
+        background-color: #e2e8f0; /* Highlight today's date with a light background */
+     }
+
+     .fc-daygrid-event {
+         margin-top: 2px;
+     }
+
+    /* Sticky sidebar styles */
+    .sidebar-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 16rem; /* 64 = 16rem */
+        overflow-y: auto;
+    }
+
+    .main-content {
+        margin-left: 16rem; /* Same as sidebar width */
+        min-height: 100vh;
+        width: calc(100% - 16rem);
+    }
+
+</style>
 <div class="flex min-h-screen bg-gray-50">
     <!-- Sidebar -->
-    <div class="w-64 min-h-screen bg-[#1B4B5A] text-white flex flex-col">
+    <div class="sidebar-container bg-[#1B4B5A] text-white flex flex-col">
         <div class="p-4 flex items-center space-x-2">
             <img src="{{ asset('image/logohauzhayag.jpg') }}" alt="Hauz Hayag Logo" class="h-14 w-auto rounded-lg shadow-md">
             <h1 class="text-2xl font-bold">Hauz Hayag</h1>
@@ -55,7 +103,7 @@
         </div>
     </div>
     <!-- Main Content -->
-    <div class="flex-1 flex flex-col">
+    <div class="main-content flex flex-col">
         <!-- Header -->
         <div class="bg-white p-6 flex flex-col md:flex-row md:justify-between md:items-center shadow-sm border-b mb-4">
             <h2 class="text-2xl font-bold text-gray-800">Event Management</h2>

@@ -19,7 +19,13 @@ class StudentController extends Controller
     {
         $applications = ScholarshipApplication::where('status', 'pending')->latest()->get();
         $students = User::where('role', 'student')->where('status', 'active')->latest()->get();
-        return view('admin.students.index', compact('applications', 'students'));
+
+        // Get counts for display
+        $pendingApplicationsCount = ScholarshipApplication::where('status', 'pending')->count();
+        $approvedApplicationsCount = ScholarshipApplication::where('status', 'approved')->count();
+        $activeStudentsCount = User::where('role', 'student')->where('status', 'active')->count();
+
+        return view('admin.students.index', compact('applications', 'students', 'pendingApplicationsCount', 'approvedApplicationsCount', 'activeStudentsCount'));
     }
 
     /**
