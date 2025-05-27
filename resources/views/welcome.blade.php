@@ -185,7 +185,7 @@
                     </a>
                     <a href="/login" class="flex items-center space-x-2 bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-400 transition">
                         <i class="fas fa-lock"></i>
-                        <span>Login</span>
+                        <span>Logins</span>
                     </a>
                 </nav>                
             </div>
