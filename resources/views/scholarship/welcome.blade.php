@@ -65,16 +65,12 @@
                         @enderror
                     </div>
 
-                    <!-- Scholarship Type -->
+                    <!-- Scholarship Justification -->
                     <div class="space-y-2">
-                        <label for="scholarship_type" class="block text-sm font-medium text-gray-700">Scholarship Type</label>
-                        <select name="scholarship_type" id="scholarship_type" required
-                            class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                            <option value="">Select Type</option>
-                            <option value="home_based" {{ old('scholarship_type') == 'home_based' ? 'selected' : '' }}>Home Based</option>
-                            <option value="in_house" {{ old('scholarship_type') == 'in_house' ? 'selected' : '' }}>In House</option>
-                        </select>
-                        @error('scholarship_type')
+                        <label for="scholarship_justification" class="block text-sm font-medium text-gray-700">Why do you deserve a scholarship?</label>
+                        <textarea name="scholarship_justification" id="scholarship_justification" rows="4" required
+                            class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">{{ old('scholarship_justification') }}</textarea>
+                        @error('scholarship_justification')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>

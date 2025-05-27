@@ -776,17 +776,20 @@
                     <input type="tel" id="welcome_phone_number" name="phone_number" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" value="{{ old('phone_number') }}">
                 </div>
                 <div>
-                    <label for="welcome_scholarship_type" class="block text-sm font-medium text-gray-700">Scholarship Type</label>
-                    <select name="scholarship_type" id="welcome_scholarship_type" required
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm">
-                        <option value="" disabled {{ old('scholarship_type') ? '' : 'selected' }}>Select Type</option>
-                        <option value="home_based" {{ old('scholarship_type') == 'home_based' ? 'selected' : '' }}>Home Based</option>
-                        <option value="in_house" {{ old('scholarship_type') == 'in_house' ? 'selected' : '' }}>In House</option>
-                    </select>
+                    <label for="welcome_scholarship_justification" class="block text-sm font-medium text-gray-700">Why do you deserve a scholarship?</label>
+                    <textarea name="scholarship_justification" id="welcome_scholarship_justification" rows="4" required class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm">{{ old('scholarship_justification') }}</textarea>
                 </div>
                 <div>
-                    <label for="welcome_transcript" class="block text-sm font-medium mb-1">Upload Transcript (PDF, JPG, PNG - Max 5MB)</label>
-                    <input type="file" id="welcome_transcript" name="transcript" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20" required accept=".pdf,.jpg,.jpeg,.png">
+                    <label for="welcome_grade_slip" class="block text-sm font-medium mb-1">Upload Copy of Grade Slip (PDF only)</label>
+                    <input type="file" id="welcome_grade_slip" name="grade_slip" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20" required accept=".pdf">
+                </div>
+                <div>
+                    <label for="welcome_sketch" class="block text-sm font-medium mb-1">Upload Sketch of Going to Your House (PDF only)</label>
+                    <input type="file" id="welcome_sketch" name="sketch" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20" required accept=".pdf">
+                </div>
+                <div>
+                    <label for="welcome_home_picture" class="block text-sm font-medium mb-1">Upload Picture of Your Home (PDF only)</label>
+                    <input type="file" id="welcome_home_picture" name="home_picture" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20" required accept=".pdf">
                 </div>
                 <button type="submit" class="w-full bg-primary text-white py-2 rounded-lg hover:bg-blue-400 transition">
                     Submit Application
