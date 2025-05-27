@@ -115,7 +115,7 @@
                 </div>
             </div>
             <!-- Hours Volunteered -->
-            <div class="bg-white rounded-lg shadow-sm p-4 border-l-4 border-green-500">
+            <!-- <div class="bg-white rounded-lg shadow-sm p-4 border-l-4 border-green-500">
                 <div class="flex justify-between">
                     <div>
                         <p class="text-sm font-medium text-gray-500">Hours This Month</p>
@@ -127,7 +127,7 @@
                         </svg>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- Job Applications -->
             <div class="bg-white rounded-lg shadow-sm p-4 border-l-4 border-purple-500">
                 <div class="flex justify-between">

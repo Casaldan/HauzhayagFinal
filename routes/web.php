@@ -72,6 +72,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 // Student routes
 Route::middleware(['auth', \App\Http\Middleware\RedirectIfNotStudent::class])->prefix('student')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\Student\DashboardController::class, 'index'])->name('student.dashboard');
+    Route::get('/events', [App\Http\Controllers\Student\DashboardController::class, 'eventsIndex'])->name('student.events.index');
 });
 
 // Other routes...
