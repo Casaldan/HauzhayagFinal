@@ -169,14 +169,14 @@ Route::get('/jobs/{job}', [JobListingController::class, 'show'])->name('jobs.sho
 
 // Admin Job Management Routes
 Route::middleware(['auth'])->prefix('admin')->group(function () {
-    Route::get('/jobs', [JobListingController::class, 'adminIndex'])->name('jobs.admin.index');
-    Route::get('/jobs/create', [JobListingController::class, 'create'])->name('jobs.create');
-    Route::post('/jobs', [JobListingController::class, 'store'])->name('jobs.store');
-    Route::get('/jobs/{job}/edit', [JobListingController::class, 'edit'])->name('jobs.edit');
-    Route::put('/jobs/{job}', [JobListingController::class, 'update'])->name('jobs.update');
-    Route::delete('/jobs/{job}', [JobListingController::class, 'destroy'])->name('jobs.destroy');
-    Route::post('/jobs/{job}/approve', [JobListingController::class, 'approve'])->name('jobs.approve');
-    Route::post('/jobs/{job}/reject', [JobListingController::class, 'reject'])->name('jobs.reject');
+    Route::get('/jobs', [JobListingController::class, 'adminIndex'])->name('admin.jobs.index');
+    Route::get('/jobs/create', [JobListingController::class, 'create'])->name('admin.jobs.create');
+    Route::post('/jobs', [JobListingController::class, 'store'])->name('admin.jobs.store');
+    Route::get('/jobs/{job}/edit', [JobListingController::class, 'edit'])->name('admin.jobs.edit');
+    Route::put('/jobs/{job}', [JobListingController::class, 'update'])->name('admin.jobs.update');
+    Route::delete('/jobs/{job}', [JobListingController::class, 'destroy'])->name('admin.jobs.destroy');
+    Route::post('/jobs/{job}/approve', [JobListingController::class, 'approve'])->name('admin.jobs.approve');
+    Route::post('/jobs/{job}/reject', [JobListingController::class, 'reject'])->name('admin.jobs.reject');
 });
 
 // API route for job details (for modal)
