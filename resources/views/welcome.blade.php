@@ -674,7 +674,7 @@
                   <li><a href="#home" class="hover:underline">Home</a></li>
                   <li><a href="#scholarships" class="hover:underline">Programs</a></li>
                   <li><a href="#about-us" class="hover:underline">About Us</a></li>
-                  <li><button class="hover:underline text-left" onclick="handleLoginClick()">Login</button></li>
+                  <li><button class="hover:underline text-left" onclick="handleLoginClick()">Logins</button></li>
                 </ul>
               </div>
          
