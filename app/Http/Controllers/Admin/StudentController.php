@@ -22,7 +22,7 @@ class StudentController extends Controller
 
         // Get counts for display
         $pendingApplicationsCount = ScholarshipApplication::where('status', 'pending')->count();
-        $approvedApplicationsCount = ScholarshipApplication::where('status', 'approved')->count();
+        $approvedApplicationsCount = User::where('role', 'student')->where('status', 'active')->count();
         $activeStudentsCount = User::where('role', 'student')->where('status', 'active')->count();
 
         return view('admin.students.index', compact('applications', 'students', 'pendingApplicationsCount', 'approvedApplicationsCount', 'activeStudentsCount'));

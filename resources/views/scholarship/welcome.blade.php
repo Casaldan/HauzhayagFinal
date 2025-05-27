@@ -86,11 +86,11 @@
                                 <div class="flex text-sm text-gray-600">
                                     <label for="transcript" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                                         <span>Upload a file</span>
-                                        <input id="transcript" name="transcript" type="file" class="sr-only" required accept=".pdf,.jpg,.jpeg,.png">
+                                        <input id="transcript" name="transcript" type="file" class="sr-only" required accept=".jpg,.jpeg,.png">
                                     </label>
                                     <p class="pl-1">or drag and drop</p>
                                 </div>
-                                <p class="text-xs text-gray-500">PDF, JPG, JPEG, PNG up to 5MB</p>
+                                <p class="text-xs text-gray-500">JPG, JPEG, PNG up to 5MB</p>
                             </div>
                         </div>
                         @error('transcript')

@@ -30,7 +30,7 @@ class ScholarshipController extends Controller
             'email' => 'required|email|max:255',
             'phone_number' => 'nullable|string|max:20',
             'scholarship_type' => 'required|string|in:home_based,in_house', // Adjust types if needed
-            'transcript' => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120', // Max 5MB example
+            'transcript' => 'required|file|mimes:jpg,jpeg,png|max:5120', // Max 5MB example
         ]);
 
         // 2. Handle File Upload

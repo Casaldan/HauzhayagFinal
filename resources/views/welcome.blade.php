@@ -160,7 +160,7 @@
                         <i class="fas fa-bars text-2xl"></i>
                     </button>
                 </div>
-               
+
                 <!-- Desktop Navigation -->
                 <nav class="hidden md:flex items-center space-x-8">
                     <a href="#home" class="flex items-center space-x-2 text-gray-700 hover:text-primary transition">
@@ -185,7 +185,7 @@
                     </a>
                     <a href="/login" class="flex items-center space-x-2 bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-400 transition">
                         <i class="fas fa-lock"></i>
-                        <span>Logins</span>
+                        <span>Login</span>
                     </a>
                 </nav>                
             </div>
@@ -264,7 +264,7 @@
             </div>
         </section>
 
-    
+
 <!-- <x-test>
     <p>Testing component rendering.</p>
 </x-test> -->
@@ -288,7 +288,7 @@
                         Apply Now
                     </button>
       </div>
-     
+
       <!-- Scholarship 2 -->
                 <div class="bg-white shadow-lg p-6 rounded-xl flex flex-col border-t-4 border-primary hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in" style="animation-delay: 0.2s">
                     <div class="text-primary text-2xl mb-4"><i class="fas fa-female"></i></div>
@@ -304,7 +304,7 @@
                         Apply Now
                     </button>
       </div>
-     
+
       <!-- Scholarship 3 -->
                 <div class="bg-white shadow-lg p-6 rounded-xl flex flex-col border-t-4 border-primary hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in-right" style="animation-delay: 0.3s">
                     <div class="text-primary text-2xl mb-4"><i class="fas fa-female"></i></div>
@@ -574,7 +574,7 @@
         <section id="about-us" class="bg-white py-16">
     <div class="max-w-7xl mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-12 animate-bounce-in">About Us</h2>
-               
+
                 <!-- Vision and Mission -->
                 <div class="grid md:grid-cols-2 gap-8 mb-16">
                     <div class="bg-primary/5 p-8 rounded-xl hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in-left" style="animation-delay: 0.1s">
@@ -666,7 +666,7 @@
                   Supporting education through scholarship and nourishment. Hauz Hayag believes in empowering the youth for a brighter future.
                 </p>
               </div>
-         
+
               <!-- Quick Links -->
               <div>
                 <h2 class="text-lg font-semibold mb-4">Quick Links</h2>
@@ -674,10 +674,11 @@
                   <li><a href="#home" class="hover:underline">Home</a></li>
                   <li><a href="#scholarships" class="hover:underline">Programs</a></li>
                   <li><a href="#about-us" class="hover:underline">About Us</a></li>
+                  <li><button class="hover:underline text-left" onclick="handleLoginClick()">Login</button></li>
                   <li><button class="hover:underline text-left" onclick="handleLoginClick()">Logins</button></li>
                 </ul>
               </div>
-         
+
               <!-- Contact Info -->
               <div>
                 <h2 class="text-lg font-semibold mb-4">Contact Us</h2>
@@ -687,7 +688,7 @@
                 <p class="text-sm">🌐 hayag-project.com</p>
               </div>
             </div>
-         
+
             <div class="border-t mt-10 pt-4 text-center text-sm text-gray-500">
               &copy; 2025 Hauz Hayag Scholarship. All rights reserved.
             </div>
@@ -776,20 +777,17 @@
                     <input type="tel" id="welcome_phone_number" name="phone_number" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" value="{{ old('phone_number') }}">
                 </div>
                 <div>
-                    <label for="welcome_scholarship_justification" class="block text-sm font-medium text-gray-700">Why do you deserve a scholarship?</label>
-                    <textarea name="scholarship_justification" id="welcome_scholarship_justification" rows="4" required class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm">{{ old('scholarship_justification') }}</textarea>
+                    <label for="welcome_scholarship_type" class="block text-sm font-medium text-gray-700">Scholarship Type</label>
+                    <select name="scholarship_type" id="welcome_scholarship_type" required
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm">
+                        <option value="" disabled {{ old('scholarship_type') ? '' : 'selected' }}>Select Type</option>
+                        <option value="home_based" {{ old('scholarship_type') == 'home_based' ? 'selected' : '' }}>Home Based</option>
+                        <option value="in_house" {{ old('scholarship_type') == 'in_house' ? 'selected' : '' }}>In House</option>
+                    </select>
                 </div>
                 <div>
-                    <label for="welcome_grade_slip" class="block text-sm font-medium mb-1">Upload Copy of Grade Slip (PDF only)</label>
-                    <input type="file" id="welcome_grade_slip" name="grade_slip" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20" required accept=".pdf">
-                </div>
-                <div>
-                    <label for="welcome_sketch" class="block text-sm font-medium mb-1">Upload Sketch of Going to Your House (PDF only)</label>
-                    <input type="file" id="welcome_sketch" name="sketch" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20" required accept=".pdf">
-                </div>
-                <div>
-                    <label for="welcome_home_picture" class="block text-sm font-medium mb-1">Upload Picture of Your Home (PDF only)</label>
-                    <input type="file" id="welcome_home_picture" name="home_picture" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20" required accept=".pdf">
+                    <label for="welcome_transcript" class="block text-sm font-medium mb-1">Upload Transcript (PDF, JPG, PNG - Max 5MB)</label>
+                    <input type="file" id="welcome_transcript" name="transcript" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20" required accept=".pdf,.jpg,.jpeg,.png">
                 </div>
                 <button type="submit" class="w-full bg-primary text-white py-2 rounded-lg hover:bg-blue-400 transition">
                     Submit Application
