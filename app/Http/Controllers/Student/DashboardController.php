@@ -59,4 +59,19 @@ class DashboardController extends Controller
             'notifications'
         ));
     }
+
+    /**
+     * Display the list of events for students.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function eventsIndex()
+    {
+        $events = Event::whereIn('status', ['approved', 'active'])
+            ->where('start_date', '>=', Carbon::now()->startOfDay())
+            ->orderBy('start_date', 'asc')
+            ->get();
+
+        return view('student.events.index', compact('events'));
+    }
 } 

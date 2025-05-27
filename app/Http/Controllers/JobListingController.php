@@ -80,10 +80,12 @@ class JobListingController extends Controller
             'contact_email' => 'required|email|max:255',
             'contact_phone' => 'nullable|string|max:255',
             'expires_at' => 'nullable|date',
+            'category' => 'required|string|max:255',
         ]);
 
         $validated['status'] = 'pending';
         $validated['is_admin_posted'] = false;
+        $validated['type'] = $validated['employment_type'] ?? null;
         
         JobListing::create($validated);
         
