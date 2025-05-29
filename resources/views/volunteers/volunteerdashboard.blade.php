@@ -110,9 +110,9 @@
             <p class="text-gray-600 mt-1">Welcome back, {{ Auth::user()->name }}! Here's an overview of your academic journey.</p>
         </div>
         <!-- Stats Overview -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-6">
             <!-- Upcoming Events -->
-            <div class="bg-white rounded-lg shadow-sm p-4 border-l-4 border-blue-500">
+            <div class="bg-sky-100 rounded-lg shadow-sm p-4 border-l-4 border-blue-500">
                 <div class="flex justify-between">
                     <div>
                         <p class="text-sm font-medium text-gray-500">Upcoming Events</p>
@@ -140,7 +140,7 @@
                 </div>
             </div> -->
             <!-- Job Applications -->
-            <div class="bg-white rounded-lg shadow-sm p-4 border-l-4 border-purple-500">
+            <div class="bg-sky-100 rounded-lg shadow-sm p-4 border-l-4 border-purple-500">
                 <div class="flex justify-between">
                     <div>
                         <p class="text-sm font-medium text-gray-500">Approved Jobs</p>
@@ -156,7 +156,7 @@
         </div>
 
         <!-- Calendar and Events Section -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-6">
             <!-- Calendar View -->
             <div class="lg:col-span-2 bg-white rounded-lg shadow p-6">
                 <div id="calendar"></div>
@@ -267,7 +267,8 @@
             },
             events: '{{ route("events.json") }}',
             eventClick: function(info) {
-                window.location.href = '{{ route("volunteer.events") }}';
+                // Redirect to the specific event details page using the event ID
+                window.location.href = '{{ url('/volunteer/events/') }}' + '/' + info.event.id;
             }
         });
         calendar.render();

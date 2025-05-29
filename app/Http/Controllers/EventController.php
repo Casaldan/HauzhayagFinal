@@ -85,7 +85,6 @@ class EventController extends Controller
                 'id' => $event->id,
                 'title' => $event->title,
                 'start' => $event->start_date->format('Y-m-d\TH:i:s'),
-                'end' => $event->end_date->format('Y-m-d\TH:i:s'),
             ];
         });
 
