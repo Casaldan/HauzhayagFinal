@@ -125,20 +125,20 @@
                     </div>
                 </div>
             </div>
-            <!-- Hours Volunteered -->
-            <!-- <div class="bg-white rounded-lg shadow-sm p-4 border-l-4 border-green-500">
+            <!-- My Events Status -->
+            <div class="bg-sky-100 rounded-lg shadow-sm p-4 border-l-4 border-green-500">
                 <div class="flex justify-between">
                     <div>
-                        <p class="text-sm font-medium text-gray-500">Hours This Month</p>
-                        <p class="text-xl font-bold text-gray-800 mt-1">{{ $hoursThisMonth }}</p>
+                        <p class="text-sm font-medium text-gray-500">My Events</p>
+                        <p class="text-xl font-bold text-gray-800 mt-1">{{ isset($myEvents) ? $myEvents->count() : 0 }}</p>
                     </div>
                     <div class="rounded-full bg-green-100 p-2">
                         <svg class="h-5 w-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                     </div>
                 </div>
-            </div> -->
+            </div>
             <!-- Job Applications -->
             <div class="bg-sky-100 rounded-lg shadow-sm p-4 border-l-4 border-purple-500">
                 <div class="flex justify-between">
@@ -152,6 +152,39 @@
                         </svg>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- My Events Status Section -->
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-medium text-gray-900">My Events Status</h2>
+            </div>
+            <div class="space-y-4">
+                @if(isset($myEvents))
+                    @forelse($myEvents as $event)
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-md font-medium text-gray-900">{{ $event->title }}</h3>
+                                <p class="text-sm text-gray-600 mt-1">{{ \Carbon\Carbon::parse($event->start_date)->format('F d, Y') }}</p>
+                                <p class="text-sm text-gray-500 mt-1">{{ Str::limit($event->description, 100) }}</p>
+                            </div>
+                            <span class="px-3 py-1 text-sm font-semibold rounded-full
+                                @if($event->status == 'approved') bg-green-100 text-green-800
+                                @elseif($event->status == 'pending') bg-yellow-100 text-yellow-800
+                                @elseif($event->status == 'rejected') bg-red-100 text-red-800
+                                @else bg-gray-100 text-gray-800 @endif">
+                                {{ ucfirst($event->status) }}
+                            </span>
+                        </div>
+                    </div>
+                    @empty
+                    <div class="text-center text-gray-500 py-4">No events submitted yet.</div>
+                    @endforelse
+                @else
+                    <div class="text-center text-gray-500 py-4">No events submitted yet.</div>
+                @endif
             </div>
         </div>
 

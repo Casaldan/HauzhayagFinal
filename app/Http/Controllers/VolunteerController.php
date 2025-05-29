@@ -36,6 +36,12 @@ class VolunteerController extends Controller
             // Load all jobs for the job listings section
             $allJobs = JobListing::orderBy('created_at', 'desc')->get();
 
+            // Load volunteer's events
+            $myEvents = Event::where('posted_by', auth()->id())
+                           ->where('is_admin_posted', false)
+                           ->orderBy('created_at', 'desc')
+                           ->get();
+
             // Calculate volunteer hours
             $currentMonth = now()->month;
             $currentYear = now()->year;
@@ -56,7 +62,7 @@ class VolunteerController extends Controller
                 ->get();
 
             return view('volunteers.volunteerdashboard', compact(
-                'events', 'allJobs', 'hoursThisMonth', 'totalHours', 'recentActivities'
+                'events', 'allJobs', 'hoursThisMonth', 'totalHours', 'recentActivities', 'myEvents'
             ));
         } catch (\Exception $e) {
             \Log::error('Volunteer Dashboard Error: ' . $e->getMessage());
