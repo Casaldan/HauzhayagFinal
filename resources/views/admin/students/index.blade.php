@@ -72,6 +72,13 @@
         </div>
         <!-- Main Content Area -->
         <div class="flex-1 p-6 bg-gray-50 ml-64 overflow-y-auto h-screen">
+            <!-- Success Message -->
+            @if (session('success'))
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    <span class="block sm:inline">{{ session('success') }}</span>
+                </div>
+            @endif
+
             <!-- Page Header -->
             <div class="mb-6">
                 <h1 class="text-2xl font-bold text-gray-800">Student Management</h1>
@@ -399,7 +406,14 @@
                     const rowStatus = activeTab === 'applicants' ? row.querySelector('td:nth-child(6)').textContent.trim().toLowerCase() : row.querySelector('td:nth-child(5)').textContent.trim().toLowerCase();
 
                     const matchesSearch = name.includes(searchTerm) || email.includes(searchTerm);
-                    const matchesStatus = statusValue === 'all statuses' || rowStatus.includes(statusValue);
+                    
+                    // Adjust status filtering for students tab
+                    let matchesStatus;
+                    if (activeTab === 'students' && statusValue === 'approved') {
+                        matchesStatus = rowStatus === 'active';
+                    } else {
+                        matchesStatus = statusValue === 'all statuses' || rowStatus.includes(statusValue);
+                    }
                     const matchesType = typeValue === 'all types' || rowType.includes(typeValue);
 
                     if (matchesSearch && matchesStatus && matchesType) {

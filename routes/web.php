@@ -135,6 +135,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/applications', [ScholarshipController::class, 'index'])->name('admin.applications.index');
     Route::post('/applications/{id}/status', [ScholarshipController::class, 'updateStatus'])->name('admin.applications.updateStatus');
+    Route::get('/applications/{tracking_code}', [App\Http\Controllers\Admin\StudentController::class, 'show'])->name('admin.applications.show');
     // Student management
     Route::get('/students', [App\Http\Controllers\Admin\StudentController::class, 'index'])
         ->middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])
@@ -193,3 +194,5 @@ Route::get('/scholarship/track/{tracking_code}', [App\Http\Controllers\Scholarsh
 
 // New route for students to view job listings
 Route::get('/jobs/listings', [JobListingController::class, 'index'])->name('jobs.listings');
+
+Route::get('/admin/login', [AdminController::class, 'showLoginForm'])->name('admin.login');

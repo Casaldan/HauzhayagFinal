@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Models\JobListing;
 
 class WelcomeController extends Controller
 {
@@ -18,6 +19,11 @@ class WelcomeController extends Controller
             ->take(6)
             ->get();
 
-        return view('welcome', compact('events'));
+        // Get approved job listings
+        $jobs = JobListing::where('status', 'approved')
+                          ->latest()
+                          ->get();
+
+        return view('welcome', compact('events', 'jobs'));
     }
 }

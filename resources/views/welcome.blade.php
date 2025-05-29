@@ -123,17 +123,9 @@
         }
     </script>
     <style>
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease-out;
-        }
-        .animate-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        
         .hover-scale {
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease-in-out;
         }
         .hover-scale:hover {
             transform: scale(1.05);
@@ -171,6 +163,10 @@
                         <i class="fas fa-graduation-cap"></i>
                         <span>Scholarships</span>
                     </a>
+                    <a href="#track-application" class="flex items-center space-x-2 text-gray-700 hover:text-primary transition">
+                        <i class="fas fa-search"></i>
+                        <span>Track Application</span>
+                    </a>
                     <a href="#job-offers" class="flex items-center space-x-2 text-gray-700 hover:text-primary transition">
                         <i class="fas fa-briefcase"></i>
                         <span>Job Offers</span>
@@ -200,6 +196,10 @@
                     <i class="fas fa-graduation-cap"></i>
                     <span>Scholarships</span>
                 </a>
+                <a href="#track-application" class="flex items-center space-x-2 text-gray-700 hover:text-primary transition">
+                    <i class="fas fa-search"></i>
+                    <span>Track Application</span>
+                </a>
                 <a href="#job-offers" class="flex items-center space-x-2 text-gray-700 hover:text-primary transition">
                     <i class="fas fa-briefcase"></i>
                     <span>Job Offers</span>
@@ -212,7 +212,7 @@
                     <i class="fas fa-info-circle"></i>
                     <span>About Us</span>
                 </a>
-                <a href="/login" class="flex items-center space-x-2 bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-400 transition">
+                <a href="{{ route('login') }}" class="flex items-center space-x-2 bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-400 transition">
                     <i class="fas fa-lock"></i>
                     <span>Login</span>
                 </a>
@@ -274,7 +274,7 @@
             <h2 class="text-3xl font-bold text-center mb-12 text-primary animate-bounce-in">Scholarship & Programs</h2>
   <div class="grid md:grid-cols-3 gap-8">
       <!-- Scholarship 1 -->
-                <div class="bg-white shadow-lg p-6 rounded-xl flex flex-col border-t-4 border-primary hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in-left" style="animation-delay: 0.1s">
+                <div class="bg-white shadow-lg p-6 rounded-xl flex flex-col border-t-4 border-primary animate-bounce-in-left hover-scale" style="animation-delay: 0.1s">
                     <div class="text-primary text-2xl mb-4"><i class="fas fa-users"></i></div>
           <h3 class="text-xl font-semibold mb-2">Community-based Scholarship</h3>
           <p class="text-gray-600 mb-4">Open to all qualified students who demonstrate academic excellence and financial need.</p>
@@ -290,7 +290,7 @@
       </div>
 
       <!-- Scholarship 2 -->
-                <div class="bg-white shadow-lg p-6 rounded-xl flex flex-col border-t-4 border-primary hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in" style="animation-delay: 0.2s">
+                <div class="bg-white shadow-lg p-6 rounded-xl flex flex-col border-t-4 border-primary animate-bounce-in hover-scale" style="animation-delay: 0.2s">
                     <div class="text-primary text-2xl mb-4"><i class="fas fa-female"></i></div>
           <h3 class="text-xl font-semibold mb-2">In-house Scholarship for Girls</h3>
           <p class="text-gray-600 mb-4">Exclusive program designed to empower young women through education and leadership.</p>
@@ -306,7 +306,7 @@
       </div>
 
       <!-- Scholarship 3 -->
-                <div class="bg-white shadow-lg p-6 rounded-xl flex flex-col border-t-4 border-primary hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in-right" style="animation-delay: 0.3s">
+                <div class="bg-white shadow-lg p-6 rounded-xl flex flex-col border-t-4 border-primary animate-bounce-in-right hover-scale" style="animation-delay: 0.3s">
                     <div class="text-primary text-2xl mb-4"><i class="fas fa-female"></i></div>
           <h3 class="text-xl font-semibold mb-2">Feeding Program</h3>
           <p class="text-gray-600 mb-4">A feeding program for less fortunate children living nearby area.</p>
@@ -319,97 +319,92 @@
   </div>
 </section>
 
-        <!-- Job Offers Section with enhanced animations -->
-<section id="job-offers" class="bg-white py-16">
-         <div class="max-w-7xl mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-12 animate-bounce-in">Job Opportunities</h2>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <!-- Job Cards (3) -->
-                    <div class="bg-neutral shadow rounded-lg p-6 flex flex-col hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in-left" style="animation-delay: 0.1s">
-                        <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Full-time</span>
-                        <h3 class="mt-4 font-semibold text-lg">Software Developer</h3>
-                        <p class="text-gray-600">Build innovative solutions for education.</p>
-                        <p class="text-sm text-gray-500 mt-2">Tech Solutions Inc. | San Francisco, CA</p>
-                        <button class="mt-auto bg-primary text-white w-full py-2 px-6 rounded-lg hover:bg-blue-700 transition" onclick="openJobDetailsModal()">View Details</button>
-                    </div>
-                    <div class="bg-neutral shadow rounded-lg p-6 flex flex-col hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in" style="animation-delay: 0.2s">
-                        <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">Part-time</span>
-                        <h3 class="mt-4 font-semibold text-lg">Marketing Coordinator</h3>
-                        <p class="text-gray-600">Promote our mission through marketing.</p>
-                        <p class="text-sm text-gray-500 mt-2">Global Marketing Agency | New York, NY</p>
-                        <button class="mt-auto bg-primary text-white w-full py-2 px-6 rounded-lg hover:bg-blue-700 transition" onclick="openJobDetailsModal()">View Details</button>
-                    </div>
-                    <div class="bg-neutral shadow rounded-lg p-6 flex flex-col hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in-right" style="animation-delay: 0.3s">
-                        <span class="bg-yellow-100 text-yellow-800 text-sm px-3 py-1 rounded-full">Internship</span>
-                        <h3 class="mt-4 font-semibold text-lg">Research Assistant</h3>
-                        <p class="text-gray-600">Gain experience in education research.</p>
-                        <p class="text-sm text-gray-500 mt-2">Education Institute | Boston, MA</p>
-                        <button class="mt-auto bg-primary text-white w-full py-2 px-6 rounded-lg hover:bg-blue-700 transition" onclick="openJobDetailsModal()">View Details</button>
-                    </div>
+        <!-- Job Offers Section -->
+        <section id="job-offers" class="py-16 bg-white animate-on-scroll">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-gray-800 text-center mb-8">Job Offers</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    @forelse ($jobs as $job)
+                        <div class="bg-neutral rounded-lg shadow-md p-6 hover-scale">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ $job->title }}</h3>
+                            <p class="text-gray-600 mb-2"><i class="fas fa-building mr-2"></i>{{ $job->company_name ?? 'N/A' }}</p>
+                            <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt mr-2"></i>{{ $job->location ?? 'N/A' }}</p>
+                            <p class="text-gray-600 mb-4"><i class="fas fa-clock mr-2"></i>{{ $job->employment_type ?? 'N/A' }}</p>
+                            <button onclick="showJobDetailsModal({{ $job->id }})" class="text-primary hover:underline focus:outline-none">
+                                View Details <i class="fas fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    @empty
+                        <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center text-gray-600">
+                            No job offers available at the moment.
+                        </div>
+                    @endforelse
                 </div>
+
             </div>
         </section>
 
-        <!-- Events Section with enhanced animations -->
-<section id="events" class="py-16 bg-neutral">
-    <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-12 animate-bounce-in">Upcoming Events</h2>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            @forelse($events as $event)
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in-left" style="animation-delay: 0.1s">
-                <div class="relative h-48 overflow-hidden bg-primary/10">
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <svg class="w-20 h-20 text-primary/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <!-- Events Section -->
+        <section id="events" class="py-16 bg-gray-100 animate-on-scroll">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12 animate-bounce-in">Upcoming Events</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    @forelse($events as $event)
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden animate-bounce-in-left hover-scale" style="animation-delay: 0.1s">
+                        <div class="relative h-48 overflow-hidden bg-primary/10">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <svg class="w-20 h-20 text-primary/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ $event->title }}</h3>
+                            <div class="flex items-center text-gray-600 mb-2">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                                <span class="text-sm">
+                                    {{ \Carbon\Carbon::parse($event->start_date)->format('M d, Y - h:i A') }}
+                                </span>
+                            </div>
+                            <div class="flex items-center text-gray-600 mb-4">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                                <span class="text-sm">{{ $event->location }}</span>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ $event->description }}</p>
+                            <div class="flex justify-end">
+                                <button onclick="showEventDetails('{{ $event->id }}')" 
+                                        class="text-primary hover:text-primary/80 text-sm font-medium flex items-center focus:outline-none">
+                                    View Details
+                                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    @empty
+                    <div class="col-span-full text-center py-12">
+                        <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                                   d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                         </svg>
+                        <h3 class="text-xl font-medium text-gray-500">No upcoming events at the moment</h3>
+                        <p class="text-gray-400 mt-2">Check back later for new events!</p>
                     </div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ $event->title }}</h3>
-                    <div class="flex items-center text-gray-600 mb-2">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                        </svg>
-                        <span class="text-sm">
-                            {{ \Carbon\Carbon::parse($event->start_date)->format('M d, Y - h:i A') }}
-                        </span>
-                    </div>
-                    <div class="flex items-center text-gray-600 mb-4">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                        </svg>
-                        <span class="text-sm">{{ $event->location }}</span>
-                    </div>
-                    <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ $event->description }}</p>
-                    <div class="flex justify-end">
-                        <button onclick="showEventDetails('{{ $event->id }}')" 
-                                class="text-primary hover:text-primary/80 text-sm font-medium flex items-center">
-                            Learn More
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                            </svg>
-                        </button>
-                    </div>
+                    @endforelse
                 </div>
             </div>
-            @empty
-            <div class="col-span-full text-center py-12">
-                <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                </svg>
-                <h3 class="text-xl font-medium text-gray-500">No upcoming events at the moment</h3>
-                <p class="text-gray-400 mt-2">Check back later for new events!</p>
-            </div>
-            @endforelse
-        </div>
-    </div>
-</section>
+        </section>
 
         <!-- Success Stories Section with enhanced animations -->
         <section id="success-stories" class="py-20 bg-gradient-to-b from-neutral to-white">
@@ -699,22 +694,50 @@
     <div id="jobDetailsModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden">
         <div class="bg-white p-6 md:p-10 rounded-xl shadow-lg w-full max-w-md mx-2 relative">
             <button onclick="closeJobDetailsModal()" class="absolute top-2 right-3 text-gray-400 hover:text-black text-2xl font-bold">&times;</button>
-            <h2 class="text-2xl font-bold mb-4 text-primary text-center">Job Details</h2>
+            <div class="flex items-center justify-center mb-4">
+                <img src="{{ asset('image/logohauzhayag.jpg') }}" alt="Hauz Hayag Logo" class="h-12 w-auto rounded-lg mr-4">
+                <h2 id="jobTitleModal" class="text-2xl font-bold text-primary text-center"></h2>
+            </div>
             <div class="space-y-4">
                 <div>
                     <h3 class="font-semibold text-gray-700">Company</h3>
-                    <p class="text-gray-600">Sample Company</p>
+                    <p id="jobCompanyModal" class="text-gray-600"></p>
                 </div>
                 <div>
                     <h3 class="font-semibold text-gray-700">Role</h3>
-                    <p class="text-gray-600">Sample Role</p>
+                    <p id="jobRoleModal" class="text-gray-600"></p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-700">Location</h3>
+                    <p id="jobLocationModal" class="text-gray-600"></p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-700">Employment Type</h3>
+                    <p id="jobEmploymentTypeModal" class="text-gray-600"></p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-700">Description</h3>
+                    <p id="jobDescriptionModal" class="text-gray-600"></p>
                 </div>
                 <div>
                     <h3 class="font-semibold text-gray-700">Qualifications</h3>
-                    <ul class="list-disc list-inside text-gray-600">
+                    <ul id="jobQualificationsModal" class="list-disc list-inside text-gray-600">
+                        <!-- Add more fields as needed: Contact Email, Contact Phone, Contact Person, etc. -->
                         <li>Sample Qualification 1</li>
                         <li>Sample Qualification 2</li>
                     </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-700">Contact Email</h3>
+                    <p id="jobContactEmailModal" class="text-gray-600"></p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-700">Contact Phone</h3>
+                    <p id="jobContactPhoneModal" class="text-gray-600"></p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-700">Contact Person</h3>
+                    <p id="jobContactPersonModal" class="text-gray-600"></p>
                 </div>
             </div>
         </div>
@@ -724,24 +747,24 @@
     <div id="eventRegistrationModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden">
         <div class="bg-white p-6 md:p-10 rounded-xl shadow-lg w-full max-w-md mx-2 relative">
             <button onclick="closeEventModal()" class="absolute top-2 right-3 text-gray-400 hover:text-black text-2xl font-bold">&times;</button>
-            <h2 class="text-2xl font-bold mb-4 text-primary text-center">Event Registration</h2>
-            <form class="space-y-4">
+            <div class="flex items-center justify-center mb-4">
+                <img src="{{ asset('image/logohauzhayag.jpg') }}" alt="Hauz Hayag Logo" class="h-12 w-auto rounded-lg mr-4">
+                <h2 id="eventTitleModal" class="text-2xl font-bold text-primary text-center"></h2>
+            </div>
+            <div class="space-y-4">
                 <div>
-                    <label for="full_name" class="block text-sm font-medium mb-1">Full Name</label>
-                    <input type="text" id="full_name" name="full_name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                    <h3 class="font-semibold text-gray-700">Date & Time</h3>
+                    <p id="eventDateTimeModal" class="text-gray-600"></p>
                 </div>
                 <div>
-                    <label for="email" class="block text-sm font-medium mb-1">Email</label>
-                    <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                    <h3 class="font-semibold text-gray-700">Location</h3>
+                    <p id="eventLocationModal" class="text-gray-600"></p>
                 </div>
                 <div>
-                    <label for="phone_number" class="block text-sm font-medium mb-1">Phone Number</label>
-                    <input type="tel" id="phone_number" name="phone_number" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                    <h3 class="font-semibold text-gray-700">Description</h3>
+                    <p id="eventDescriptionModal" class="text-gray-600"></p>
                 </div>
-                <button type="submit" class="w-full bg-primary text-white py-2 rounded-lg hover:bg-blue-400 transition">
-                    Register Now
-                </button>
-            </form>
+            </div>
         </div>
     </div>
 
@@ -882,6 +905,9 @@
     </div>
 
     <script>
+        // Pass job data to JavaScript
+        const jobListings = @json($jobs);
+
         // Mobile menu toggle
         const mobileMenuButton = document.getElementById('mobileMenuButton');
         const mobileMenu = document.getElementById('mobileMenu');
@@ -1285,6 +1311,60 @@
                 }
             } catch (error) {
                 console.error('Registration error:', error);
+            }
+        }
+
+        // Function to show job details in a modal
+        function showJobDetailsModal(jobId) {
+            const job = jobListings.find(job => job.id === jobId);
+            if (job) {
+                document.getElementById('jobTitleModal').textContent = job.title;
+                document.getElementById('jobCompanyModal').textContent = job.company_name ?? job.company ?? 'N/A';
+                document.getElementById('jobRoleModal').textContent = job.role ?? 'N/A';
+                document.getElementById('jobLocationModal').textContent = job.location ?? 'N/A';
+                document.getElementById('jobEmploymentTypeModal').textContent = job.employment_type ?? 'N/A';
+                document.getElementById('jobDescriptionModal').textContent = job.description ?? 'N/A';
+                document.getElementById('jobContactEmailModal').textContent = job.contact_email ?? 'N/A';
+                document.getElementById('jobContactPhoneModal').textContent = job.contact_phone ?? 'N/A';
+                document.getElementById('jobContactPersonModal').textContent = job.contact_person ?? 'N/A';
+
+                // Populate qualifications list
+                const qualificationsList = document.getElementById('jobQualificationsModal');
+                qualificationsList.innerHTML = ''; // Clear previous qualifications
+                if (job.qualifications) {
+                    const qualificationsArray = job.qualifications.split(/\r?\n/);
+                    qualificationsArray.forEach(qualification => {
+                        if (qualification.trim() !== '') {
+                            const li = document.createElement('li');
+                            li.textContent = qualification.trim();
+                            qualificationsList.appendChild(li);
+                        }
+                    });
+                } else {
+                     const li = document.createElement('li');
+                     li.textContent = 'No qualifications listed.';
+                     qualificationsList.appendChild(li);
+                }
+
+                document.getElementById('jobDetailsModal').classList.remove('hidden');
+            }
+        }
+
+        // Function to close job details modal
+        function closeJobDetailsModal() {
+            document.getElementById('jobDetailsModal').classList.add('hidden');
+        }
+
+        // Function to show event details modal
+        function showEventDetails(eventId) {
+            const event = eventListings.find(event => event.id == eventId);
+            if (event) {
+                document.getElementById('eventTitleModal').textContent = event.title;
+                document.getElementById('eventDateTimeModal').textContent = new Date(event.start_date).toLocaleString(); // Format date and time
+                document.getElementById('eventLocationModal').textContent = event.location;
+                document.getElementById('eventDescriptionModal').textContent = event.description;
+
+                document.getElementById('eventRegistrationModal').classList.remove('hidden'); // Assuming eventRegistrationModal is the correct modal
             }
         }
     </script>

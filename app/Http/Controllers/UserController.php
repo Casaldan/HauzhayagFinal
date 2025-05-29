@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Models\ScholarshipApplication; // Import ScholarshipApplication model
 
 class UserController extends Controller
 {
@@ -37,11 +38,15 @@ class UserController extends Controller
         }
 
         $users = $query->latest()->paginate(10);
+
+        // Fetch pending scholarship applications
+        $pendingApplications = ScholarshipApplication::where('status', 'pending')->latest()->get();
         
         return view('admin.users.index', [
             'users' => $users,
             'currentRole' => request('role', 'all'),
-            'currentStatus' => request('status', 'all')
+            'currentStatus' => request('status', 'all'),
+            'pendingApplications' => $pendingApplications // Pass pending applications to the view
         ]);
     }
 

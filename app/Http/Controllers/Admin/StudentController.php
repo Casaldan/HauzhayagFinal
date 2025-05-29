@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\ScholarshipApplication;
 use App\Models\User;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 class StudentController extends Controller
 {
@@ -47,6 +48,9 @@ class StudentController extends Controller
             $user->status = 'active'; // Assuming active status upon approval
             $user->scholarship_type = $application->scholarship_type; // Update scholarship type for existing user
             $user->save();
+            
+            // Log user details after update
+            Log::info('User updated after scholarship approval', ['user_id' => $user->id, 'email' => $user->email, 'role' => $user->role, 'status' => $user->status]);
         } else {
             // If user does not exist, create a new student user
             $user = User::create([
@@ -64,10 +68,13 @@ class StudentController extends Controller
         $application->status = 'approved';
         $application->save();
 
+        // Log application status after save
+        Log::info('Application status updated after approval', ['tracking_code' => $application->tracking_code, 'status' => $application->status]);
+
         // Send email with credentials to the new student
         // TODO: Implement email sending with credentials
 
-        return redirect()->route('admin.students.index.shortcut')->with('success', 'Application approved and student account created successfully');
+        return redirect()->route('admin.students.index')->with('success', 'Application approved and student account created successfully');
     }
 
     /**
@@ -108,5 +115,17 @@ class StudentController extends Controller
         $user = User::where('role', 'student')->findOrFail($id);
         $user->delete();
         return redirect()->route('admin.students.index')->with('success', 'Student deleted successfully.');
+    }
+
+    /**
+     * Show the details of a scholarship application.
+     *
+     * @param  string  $tracking_code
+     * @return \Illuminate\View\View
+     */
+    public function show($tracking_code)
+    {
+        $application = ScholarshipApplication::where('tracking_code', $tracking_code)->firstOrFail();
+        return view('admin.applications.show', compact('application'));
     }
 }
