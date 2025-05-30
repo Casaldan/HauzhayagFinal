@@ -351,7 +351,7 @@
                 <h2 class="text-3xl font-bold text-center mb-12 animate-bounce-in">Upcoming Events</h2>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     @forelse($events as $event)
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden animate-bounce-in-left hover-scale" style="animation-delay: 0.1s">
+                    <div class="bg-blue-100 rounded-lg shadow-lg overflow-hidden animate-bounce-in-left hover-scale" style="animation-delay: 0.1s">
                         <div class="relative h-48 overflow-hidden bg-primary/10">
                             <div class="absolute inset-0 flex items-center justify-center">
                                 <svg class="w-20 h-20 text-primary/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -382,12 +382,9 @@
                             </div>
                             <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ $event->description }}</p>
                             <div class="flex justify-end">
-                                <button onclick="showEventDetails('{{ $event->id }}')" 
-                                        class="text-primary hover:text-primary/80 text-sm font-medium flex items-center focus:outline-none">
-                                    View Details
-                                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                                    </svg>
+                                <button onclick="openEventApplicationModal('{{ $event->id }}')" 
+                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm">
+                                    Apply
                                 </button>
                             </div>
                         </div>
@@ -743,78 +740,36 @@
         </div>
     </div>
 
-    <!-- Event Registration Modal -->
+    <!-- Event Application Modal (Repurposed from Event Registration Modal) -->
     <div id="eventRegistrationModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden">
         <div class="bg-white p-6 md:p-10 rounded-xl shadow-lg w-full max-w-md mx-2 relative">
             <button onclick="closeEventModal()" class="absolute top-2 right-3 text-gray-400 hover:text-black text-2xl font-bold">&times;</button>
             <div class="flex items-center justify-center mb-4">
                 <img src="{{ asset('image/logohauzhayag.jpg') }}" alt="Hauz Hayag Logo" class="h-12 w-auto rounded-lg mr-4">
-                <h2 id="eventTitleModal" class="text-2xl font-bold text-primary text-center"></h2>
+                <h2 id="eventApplicationTitleModal" class="text-2xl font-bold text-primary text-center">Event Application</h2>
             </div>
-            <div class="space-y-4">
-                <div>
-                    <h3 class="font-semibold text-gray-700">Date & Time</h3>
-                    <p id="eventDateTimeModal" class="text-gray-600"></p>
-                </div>
-                <div>
-                    <h3 class="font-semibold text-gray-700">Location</h3>
-                    <p id="eventLocationModal" class="text-gray-600"></p>
-                </div>
-                <div>
-                    <h3 class="font-semibold text-gray-700">Description</h3>
-                    <p id="eventDescriptionModal" class="text-gray-600"></p>
-                </div>
-            </div>
-        </div>
-    </div>
+            <form id="eventApplicationForm" class="space-y-4">
+                {{-- Add a hidden input for event ID if needed for submission --}}
+                <input type="hidden" id="applyingEventId" name="event_id" value="">
 
-    <!-- Scholarship Application Modal -->
-    <div id="scholarshipApplicationModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden" onclick="backgroundCloseDonationModal(event)">
-        <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-lg relative" onclick="event.stopPropagation()">
-            <button onclick="closeScholarshipModal()" class="absolute top-2 right-3 text-gray-400 hover:text-black text-xl font-bold">&times;</button>
-            <h2 class="text-2xl font-bold mb-4 text-primary text-center">Scholarship Application</h2>
-
-            @if ($errors->scholarship->any())
-                <div class="mb-4 p-4 bg-red-100 text-red-700 rounded-lg border border-red-300">
-                    <p class="font-semibold">Please fix the following errors:</p>
-                    <ul class="list-disc list-inside mt-2">
-                        @foreach ($errors->scholarship->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            <form action="/scholarship/apply" method="POST" enctype="multipart/form-data" class="space-y-4">
-                @csrf
                 <div>
-                    <label for="welcome_full_name" class="block text-sm font-medium mb-1">Full Name</label>
-                    <input type="text" id="welcome_full_name" name="full_name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" value="{{ old('full_name') }}" required>
+                    <label for="applicantFullName" class="block text-sm font-medium text-gray-700">Full Name</label>
+                    <input type="text" id="applicantFullName" name="full_name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary" required>
                 </div>
                 <div>
-                    <label for="welcome_email" class="block text-sm font-medium mb-1">Email</label>
-                    <input type="email" id="welcome_email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" value="{{ old('email') }}" required>
+                    <label for="applicantEmail" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" id="applicantEmail" name="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary" required>
                 </div>
                 <div>
-                    <label for="welcome_phone_number" class="block text-sm font-medium mb-1">Phone Number</label>
-                    <input type="tel" id="welcome_phone_number" name="phone_number" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" value="{{ old('phone_number') }}">
+                    <label for="applicantPhone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                    <input type="tel" id="applicantPhone" name="phone" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
                 </div>
-                <div>
-                    <label for="welcome_scholarship_type" class="block text-sm font-medium text-gray-700">Scholarship Type</label>
-                    <select name="scholarship_type" id="welcome_scholarship_type" required
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm">
-                        <option value="" disabled {{ old('scholarship_type') ? '' : 'selected' }}>Select Type</option>
-                        <option value="home_based" {{ old('scholarship_type') == 'home_based' ? 'selected' : '' }}>Home Based</option>
-                        <option value="in_house" {{ old('scholarship_type') == 'in_house' ? 'selected' : '' }}>In House</option>
-                    </select>
+                 <div>
+                    <label for="applicantReason" class="block text-sm font-medium text-gray-700">Why do you want to apply?</label>
+                    <textarea id="applicantReason" name="reason" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary" required></textarea>
                 </div>
-                <div>
-                    <label for="welcome_transcript" class="block text-sm font-medium mb-1">Upload Transcript (PDF, JPG, PNG - Max 5MB)</label>
-                    <input type="file" id="welcome_transcript" name="transcript" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20" required accept=".pdf,.jpg,.jpeg,.png">
-                </div>
-                <button type="submit" class="w-full bg-primary text-white py-2 rounded-lg hover:bg-blue-400 transition">
-                    Submit Application
-                </button>
+                
+                <button type="submit" class="w-full py-2 px-4 bg-primary text-white rounded-md font-semibold hover:bg-primary/90 transition">Submit Application</button>
             </form>
         </div>
     </div>
@@ -1355,18 +1310,50 @@
             document.getElementById('jobDetailsModal').classList.add('hidden');
         }
 
-        // Function to show event details modal
-        function showEventDetails(eventId) {
-            const event = eventListings.find(event => event.id == eventId);
-            if (event) {
-                document.getElementById('eventTitleModal').textContent = event.title;
-                document.getElementById('eventDateTimeModal').textContent = new Date(event.start_date).toLocaleString(); // Format date and time
-                document.getElementById('eventLocationModal').textContent = event.location;
-                document.getElementById('eventDescriptionModal').textContent = event.description;
+        // Function to show event details modal (now opens application modal) -- Renamed
+        function openEventApplicationModal(eventId) {
+            // Optionally set the event ID in the hidden input
+            document.getElementById('applyingEventId').value = eventId;
+            
+            // You might want to fetch and display some event details in the modal here
+            // const event = eventListings.find(event => event.id == eventId);
+            // if (event) {
+            //     document.getElementById('eventApplicationTitleModal').textContent = 'Apply for ' + event.title;
+            // }
 
-                document.getElementById('eventRegistrationModal').classList.remove('hidden'); // Assuming eventRegistrationModal is the correct modal
-            }
+            document.getElementById('eventRegistrationModal').classList.remove('hidden');
         }
+
+        // Function to close event modal -- Keep existing name for consistency with modal ID
+        function closeEventModal() {
+            document.getElementById('eventRegistrationModal').classList.add('hidden');
+            // Clear the form fields on close if needed
+             document.getElementById('eventApplicationForm').reset();
+             document.getElementById('applyingEventId').value = ''; // Clear hidden event ID
+        }
+
+        // Add event application modal to the click-outside handler
+         document.addEventListener('click', function(event) {
+             const eventAppModal = document.getElementById('eventRegistrationModal');
+             if (event.target === eventAppModal) {
+                 closeEventModal();
+             }
+         });
+
+         // Add event application modal to the escape key handler
+         document.addEventListener('keydown', function(event) {
+             if (event.key === 'Escape') {
+                 closeEventModal();
+             }
+         });
+
+         // You will need to add JavaScript here to handle the form submission (e.g., using fetch API)
+         document.getElementById('eventApplicationForm').addEventListener('submit', function(e) {
+             e.preventDefault();
+             // Handle form submission, e.g., send data to a backend endpoint
+             alert('Application submitted! (This is a demo, no data is sent)');
+             closeEventModal();
+         });
     </script>
 </body>
 </html>

@@ -163,7 +163,7 @@
             <div class="space-y-4">
                 @if(isset($myEvents))
                     @forelse($myEvents as $event)
-                    <div class="border border-gray-200 rounded-lg p-4">
+                    <div class="border border-gray-200 rounded-lg p-4 bg-sky-100">
                         <div class="flex justify-between items-start">
                             <div>
                                 <h3 class="text-md font-medium text-gray-900">{{ $event->title }}</h3>
@@ -198,15 +198,17 @@
             <div class="bg-white rounded-lg shadow p-6">
                 <h3 class="text-lg font-semibold mb-4">Upcoming Events</h3>
                 <div class="space-y-4" id="upcoming-events">
-                    @forelse($events as $event)
-                    <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="window.location.href='{{ route('volunteer.events') }}'">
-                        <h4 class="font-semibold">{{ $event->title }}</h4>
-                        <p class="text-sm text-gray-600">{{ \Carbon\Carbon::parse($event->start_date)->format('F j, Y') }}</p>
-                        <p class="text-sm text-gray-500">{{ Str::limit($event->description, 100) }}</p>
-                    </div>
-                    @empty
-                    <div class="text-center text-gray-500 py-4">No upcoming events found.</div>
-                    @endforelse
+                    {{-- Events will be loaded here by JavaScript --}}
+                </div>
+                {{-- Button added below upcoming events --}}
+                <div class="mt-4 text-center space-x-4">
+                    <a href="{{ route('volunteer.events') }}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        View All Upcoming Events
+                    </a>
+                    {{-- Apply button --}}
+                    <a href="{{ route('volunteer.jobs.listings') }}" class="inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                        Apply
+                    </a>
                 </div>
             </div>
         </div>
