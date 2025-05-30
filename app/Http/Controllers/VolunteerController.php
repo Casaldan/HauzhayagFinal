@@ -183,9 +183,7 @@ class VolunteerController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'location' => 'required|string|max:255',
-            'type' => 'required|string|in:Full-time,Part-time,Contract,Temporary,Internship',
             'employment_type' => 'required|string|in:Paid,Unpaid',
-            'hours_per_week' => 'nullable|numeric',
             'category' => 'required|string|max:255',
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date|after_or_equal:start_date',
@@ -205,9 +203,9 @@ class VolunteerController extends Controller
             'company' => Auth::user()->name, // Assuming the logged-in user is the company/poster
             'company_name' => Auth::user()->name, // Assuming the logged-in user is the company/poster
             'location' => $request->location,
-            'type' => $request->type,
+            'type' => null,
             'employment_type' => $request->employment_type,
-            'hours_per_week' => $request->hours_per_week,
+            'hours_per_week' => null,
             'status' => 'pending', // Jobs posted by volunteers might need admin approval
             'category' => $request->category,
             'start_date' => $request->start_date,
@@ -282,7 +280,7 @@ class VolunteerController extends Controller
             'contact_person' => 'required|string|max:255',
             'contact_link' => 'nullable|url|max:255',
             'category' => 'required|string|max:255',
-            'type' => 'required|string|max:255',
+            // 'type' => 'required|string|max:255',
             // 'location' => 'required|string|max:255',
             // 'hours_per_week' => 'required|numeric|min:1',
         ]);
@@ -305,7 +303,7 @@ class VolunteerController extends Controller
             'benefits' => null,
             'requirements' => null,
             'category' => $request->category,
-            'type' => $request->type,
+            'type' => null,
             'employment_type' => null,
             'start_date' => null,
             'end_date' => null,
