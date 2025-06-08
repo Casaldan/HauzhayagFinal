@@ -10,7 +10,26 @@ class EventController extends Controller
 {
     public function index()
     {
-        return view('admin.events.index');
+        $events = Event::latest()->paginate(10);
+        $totalEventsCount = Event::count();
+        $activeEventsCount = Event::where('status', 'active')->count();
+        $completedEventsCount = Event::where('status', 'completed')->count();
+        $upcomingEventsCount = Event::where('start_date', '>', now())->count();
+
+        // Get upcoming events for the calendar/list view
+        $upcomingEvents = Event::where('start_date', '>', now())
+            ->orderBy('start_date', 'asc')
+            ->take(10)
+            ->get();
+
+        return view('admin.events.index', compact(
+            'events',
+            'totalEventsCount',
+            'activeEventsCount',
+            'completedEventsCount',
+            'upcomingEventsCount',
+            'upcomingEvents'
+        ));
     }
 
     public function create()

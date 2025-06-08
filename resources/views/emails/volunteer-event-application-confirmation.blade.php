@@ -65,39 +65,39 @@
     <div class="header">
         <h1>Volunteer Application Confirmation</h1>
     </div>
-
+    
     <div class="content">
         <p>Dear {{ $application->full_name }},</p>
-
+        
         <p>Thank you for applying to volunteer for our event! We have received your application and it is currently being reviewed by our team.</p>
-
+        
         <div class="event-details">
             <h3>Event Details:</h3>
             <p><strong>Event:</strong> {{ $application->event->title }}</p>
             <p><strong>Date:</strong> {{ $application->event->start_date->format('F j, Y') }}</p>
             <p><strong>Location:</strong> {{ $application->event->location }}</p>
         </div>
-
+        
         <p>Your application tracking code is:</p>
-
+        
         <div class="tracking-code">{{ $application->tracking_code }}</div>
-
+        
         <p>You can use this code to check the status of your application at any time by visiting our website and entering this code in the tracking form.</p>
-
+        
         <p style="text-align: center;">
             <a href="{{ url('/volunteer/track?code=' . $application->tracking_code) }}" class="track-link">
                 Track Your Application Status
             </a>
         </p>
-
+        
         <p><strong>Current Status:</strong> Pending Review</p>
-
+        
         <p>We appreciate your interest in volunteering with us and will notify you of any updates to your application status via email.</p>
-
+        
         <div class="footer">
             <p>Best regards,<br>
             <strong>The Hauz Hayag Team</strong></p>
-
+            
             <p><em>Please keep this email and your tracking code for your records.</em></p>
         </div>
     </div>

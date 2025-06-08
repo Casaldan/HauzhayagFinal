@@ -33,6 +33,7 @@ class JobListing extends Model
         'qualifications',
         'contact_person',
         'expires_at',
+        'expiry_date',
         'is_admin_posted',
         'posted_by'
     ];
@@ -41,6 +42,7 @@ class JobListing extends Model
         'start_date' => 'date',
         'end_date' => 'date',
         'expires_at' => 'datetime',
+        'expiry_date' => 'date',
         'is_admin_posted' => 'boolean',
         'salary_min' => 'decimal:2',
         'salary_max' => 'decimal:2'

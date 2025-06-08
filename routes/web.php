@@ -44,6 +44,13 @@ Route::middleware(['auth'])->group(function () {
     // Volunteer event list and details
     Route::get('/volunteer/events', [\App\Http\Controllers\VolunteerController::class, 'events'])->name('volunteer.events');
     Route::get('/volunteer/events/{id}', [\App\Http\Controllers\VolunteerController::class, 'showEvent'])->name('volunteer.events.show');
+    Route::get('/volunteer/events/{event}/apply', [\App\Http\Controllers\VolunteerController::class, 'showApplicationForm'])->name('volunteer.events.apply');
+    Route::post('/volunteer/events/apply', [\App\Http\Controllers\VolunteerEventApplicationController::class, 'store'])->name('volunteer.events.apply.store');
+
+    // Volunteer application tracking
+    Route::get('/volunteer/success', [\App\Http\Controllers\VolunteerApplicationController::class, 'showSuccess'])->name('volunteer.success');
+    Route::get('/volunteer/track', [\App\Http\Controllers\VolunteerApplicationController::class, 'showTrackForm'])->name('volunteer.track');
+    Route::post('/volunteer/track', [\App\Http\Controllers\VolunteerApplicationController::class, 'track'])->name('volunteer.track.submit');
 });
 
 // Scholarship Routes
@@ -147,6 +154,12 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     // Admin Volunteer Management
     Route::get('/volunteers', [App\Http\Controllers\AdminController::class, 'volunteerIndex'])->name('admin.volunteers.index');
+    Route::get('/volunteers/event-applications', [App\Http\Controllers\AdminController::class, 'getVolunteerEventApplications'])->name('admin.volunteers.event-applications');
+
+    // Admin Volunteer Applications Management
+    Route::get('/volunteer-applications', [App\Http\Controllers\VolunteerEventApplicationController::class, 'index'])->name('admin.volunteer-applications.index');
+    Route::get('/volunteer-applications/{application}', [App\Http\Controllers\VolunteerEventApplicationController::class, 'show'])->name('admin.volunteer-applications.show');
+    Route::patch('/volunteer-applications/{application}/status', [App\Http\Controllers\VolunteerEventApplicationController::class, 'updateStatus'])->name('admin.volunteer-applications.update-status');
 });
 
 // Admin Scholars Route
@@ -161,6 +174,12 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
+// Test route for volunteer event registration
+Route::get('/test-volunteer-events', function () {
+    $events = \App\Models\Event::all();
+    return view('test.volunteer-events', compact('events'));
+})->name('test.volunteer.events');
+
 // Public Job Listing Routes
 Route::get('/jobs', [JobListingController::class, 'index'])->name('jobs.index');
 Route::get('/jobs/{job}', [JobListingController::class, 'show'])->name('jobs.show');
@@ -169,7 +188,7 @@ Route::get('/jobs/{job}', [JobListingController::class, 'show'])->name('jobs.sho
 Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/jobs', [JobListingController::class, 'adminIndex'])->name('admin.jobs.index');
     Route::get('/jobs/create', [JobListingController::class, 'create'])->name('admin.jobs.create');
-    Route::post('/jobs', [JobListingController::class, 'store'])->name('admin.jobs.store');
+    Route::post('/jobs', [JobListingController::class, 'adminStore'])->name('admin.jobs.store');
     Route::get('/jobs/{job}/edit', [JobListingController::class, 'edit'])->name('admin.jobs.edit');
     Route::put('/jobs/{job}', [JobListingController::class, 'update'])->name('admin.jobs.update');
     Route::delete('/jobs/{job}', [JobListingController::class, 'destroy'])->name('admin.jobs.destroy');
@@ -196,3 +215,8 @@ Route::get('/jobs/listings', [JobListingController::class, 'index'])->name('jobs
 Route::post('/volunteer/event-registration', [App\Http\Controllers\VolunteerEventApplicationController::class, 'store']);
 Route::get('/admin/volunteer-applications', [App\Http\Controllers\VolunteerEventApplicationController::class, 'index'])->name('admin.volunteer-applications.index');
 Route::patch('/admin/volunteer-applications/{application}/status', [App\Http\Controllers\VolunteerEventApplicationController::class, 'updateStatus'])->name('admin.volunteer-applications.update-status');
+
+// Volunteer event application tracking routes
+Route::get('/volunteer/track-application', [App\Http\Controllers\VolunteerEventApplicationController::class, 'showTrackForm'])->name('volunteer.event-application.track.form');
+Route::post('/volunteer/track-application', [App\Http\Controllers\VolunteerEventApplicationController::class, 'track'])->name('volunteer.event-application.track');
+Route::get('/volunteer/application/{tracking_code}', [App\Http\Controllers\VolunteerEventApplicationController::class, 'showByTrackingCode'])->name('volunteer.event-application.show');

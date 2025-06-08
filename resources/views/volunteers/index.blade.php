@@ -118,10 +118,10 @@
                         <div>
                             <p class="text-sm font-medium text-gray-500">Pending Applications</p>
                             <p class="text-xl font-bold text-gray-800 mt-1">
-                                @if(isset($volunteers))
-                                    {{ $volunteers->where('status', 'Pending')->count() }}
+                                @if(isset($pendingEventApplicationsCount))
+                                    {{ $pendingEventApplicationsCount }}
                                 @else
-                                    7
+                                    0
                                 @endif
                             </p>
                         </div>
@@ -139,11 +139,7 @@
                         <div>
                             <p class="text-sm font-medium text-gray-500">Hours Served (Month)</p>
                             <p class="text-xl font-bold text-gray-800 mt-1">
-                                @if(isset($totalHours))
-                                    {{ $totalHours }}
-                                @else
-                                    432
-                                @endif
+                                {{ $hoursServed ?? 432 }}
                             </p>
                         </div>
                         <div class="rounded-full bg-green-100 p-2">
@@ -160,11 +156,7 @@
                         <div>
                             <p class="text-sm font-medium text-gray-500">Upcoming Events</p>
                             <p class="text-xl font-bold text-gray-800 mt-1">
-                                @if(isset($upcomingEvents))
-                                    {{ $upcomingEvents }}
-                                @else
-                                    5
-                                @endif
+                                {{ $upcomingEventsCount ?? 5 }}
                             </p>
                         </div>
                         <div class="rounded-full bg-purple-100 p-2">
@@ -420,66 +412,62 @@
             <!-- Pending Applications Tab Content -->
             <div id="pending-tab" class="tab-content hidden">
                 <div class="bg-white rounded-lg shadow-sm p-6">
-                    <h3 class="text-lg font-medium text-gray-900 mb-4">Pending Volunteer Applications</h3>
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Pending Volunteer Event Applications</h3>
                     <div class="space-y-4">
-                        @if(isset($volunteers))
+                        @if(isset($volunteerEventApplications))
                             @php
-                                $pendingVolunteers = $volunteers->where('status', 'Pending');
+                                $pendingEventApplications = $volunteerEventApplications->where('status', 'pending');
                             @endphp
-                            
-                            @if($pendingVolunteers->count() > 0)
-                                @foreach($pendingVolunteers as $volunteer)
+
+                            @if($pendingEventApplications->count() > 0)
+                                @foreach($pendingEventApplications as $application)
                                     <div class="border border-gray-200 rounded-lg p-4">
                                         <div class="flex items-start justify-between">
-                                            <div>
-                                                <h4 class="text-md font-medium text-gray-900">{{ $volunteer->name }}</h4>
-                                                <p class="text-sm text-gray-600 mt-1">Applied on: {{ $volunteer->created_at->format('M d, Y') }}</p>
+                                            <div class="flex-1">
+                                                <h4 class="text-md font-medium text-gray-900">{{ $application->full_name }}</h4>
+                                                <p class="text-sm text-gray-600 mt-1">{{ $application->email }}</p>
+                                                @if($application->phone_number)
+                                                    <p class="text-sm text-gray-600">{{ $application->phone_number }}</p>
+                                                @endif
+                                                <p class="text-sm text-gray-600">Event: <span class="font-medium">{{ $application->event->title ?? 'N/A' }}</span></p>
+                                                <p class="text-sm text-gray-500 mt-1">Applied on: {{ $application->created_at->format('M d, Y H:i') }}</p>
+                                                @if($application->application_reason)
+                                                    <p class="text-sm text-gray-600 mt-2">
+                                                        <span class="font-medium">Reason:</span> {{ Str::limit($application->application_reason, 100) }}
+                                                    </p>
+                                                @endif
                                             </div>
-                                            <div class="flex space-x-2">
-                                                <button type="button" data-volunteer-id="{{ $volunteer->id }}" class="approve-volunteer-btn inline-flex items-center px-3 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700">
+                                            <div class="flex space-x-2 ml-4">
+                                                <button type="button"
+                                                        onclick="updateEventApplicationStatus({{ $application->id }}, 'approved')"
+                                                        class="inline-flex items-center px-3 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700">
                                                     Approve
                                                 </button>
-                                                <button type="button" data-volunteer-id="{{ $volunteer->id }}" class="reject-volunteer-btn inline-flex items-center px-3 py-1 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                                                <button type="button"
+                                                        onclick="updateEventApplicationStatus({{ $application->id }}, 'rejected')"
+                                                        class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
                                                     Reject
                                                 </button>
                                             </div>
                                         </div>
-                                        <div class="mt-2">
-                                            @php
-                                                $skills = is_string($volunteer->skills) ? json_decode($volunteer->skills, true) : $volunteer->skills;
-                                                if (!is_array($skills)) $skills = [];
-                                            @endphp
-                                            <p class="text-sm text-gray-600">Skills: {{ implode(', ', $skills) }}</p>
-                                            <p class="text-sm text-gray-600">Email: {{ $volunteer->email }}</p>
-                                            <p class="text-sm text-gray-600">Phone: {{ $volunteer->phone }}</p>
-                                        </div>
                                     </div>
                                 @endforeach
                             @else
-                                <p class="text-gray-500 italic">No pending applications at this time.</p>
+                                <div class="text-center py-8">
+                                    <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
+                                    <h3 class="mt-2 text-sm font-medium text-gray-900">No pending applications</h3>
+                                    <p class="mt-1 text-sm text-gray-500">All volunteer event applications have been processed.</p>
+                                </div>
                             @endif
                         @else
-                            <!-- Example pending applications (only shown when no volunteers exist in database) -->
-                            <div class="border border-gray-200 rounded-lg p-4">
-                                <div class="flex items-start justify-between">
-                                    <div>
-                                        <h4 class="text-md font-medium text-gray-900">Jane Smith</h4>
-                                        <p class="text-sm text-gray-600 mt-1">Applied on: Oct 15, 2023</p>
-                                    </div>
-                                    <div class="flex space-x-2">
-                                        <button type="button" class="inline-flex items-center px-3 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700">
-                                            Approve
-                                        </button>
-                                        <button type="button" class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-                                            Reject
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="mt-2">
-                                    <p class="text-sm text-gray-600">Skills: Event Planning</p>
-                                    <p class="text-sm text-gray-600">Email: jane@example.com</p>
-                                    <p class="text-sm text-gray-600">Phone: 987-654-3210</p>
-                                </div>
+                            <div class="text-center py-8">
+                                <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                                <h3 class="mt-2 text-sm font-medium text-gray-900">No pending applications</h3>
+                                <p class="mt-1 text-sm text-gray-500">No volunteer event applications at this time.</p>
                             </div>
                         @endif
                     </div>
@@ -828,7 +816,40 @@
                 switchTab(tabId);
             }
         });
-        
+
+        // Update event application status functionality
+        window.updateEventApplicationStatus = async function(applicationId, status) {
+            if (!confirm(`Are you sure you want to ${status} this application?`)) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/admin/volunteer-applications/${applicationId}/status`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({ status: status })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to update application status');
+                }
+
+                const data = await response.json();
+                alert(`Application ${status} successfully!`);
+
+                // Reload the page to reflect changes
+                window.location.reload();
+
+            } catch (error) {
+                console.error('Error updating application status:', error);
+                alert('Failed to update application status. Please try again.');
+            }
+        };
+
         // View volunteer profile functionality
         const viewButtons = document.querySelectorAll('.view-volunteer-btn');
         viewButtons.forEach(button => {

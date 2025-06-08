@@ -18,12 +18,12 @@ class StudentController extends Controller
     public function index()
     {
         $applications = ScholarshipApplication::where('status', 'pending')->latest()->get();
-        $students = User::where('role', 'student')->where('status', 'active')->latest()->get();
+        $students = User::where('role', 'student')->latest()->get();
 
         // Get counts for display
         $pendingApplicationsCount = ScholarshipApplication::where('status', 'pending')->count();
         $approvedApplicationsCount = User::where('role', 'student')->where('status', 'active')->count();
-        $activeStudentsCount = User::where('role', 'student')->where('status', 'active')->count();
+        $activeStudentsCount = User::where('role', 'student')->count();
 
         return view('admin.students.index', compact('applications', 'students', 'pendingApplicationsCount', 'approvedApplicationsCount', 'activeStudentsCount'));
     }
@@ -46,6 +46,7 @@ class StudentController extends Controller
             $user->role = 'student';
             $user->status = 'active'; // Assuming active status upon approval
             $user->scholarship_type = $application->scholarship_type; // Update scholarship type for existing user
+            $user->transcript_path = $application->transcript_path; // Copy transcript from application
             $user->save();
         } else {
             // If user does not exist, create a new student user
@@ -57,6 +58,7 @@ class StudentController extends Controller
                 'status' => 'active',
                 'phone_number' => $application->phone_number,
                 'scholarship_type' => $application->scholarship_type,
+                'transcript_path' => $application->transcript_path, // Copy transcript from application
             ]);
         }
 

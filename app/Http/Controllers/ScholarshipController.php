@@ -29,7 +29,6 @@ class ScholarshipController extends Controller
             'full_name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone_number' => 'nullable|string|max:20',
-            'scholarship_type' => 'required|string|in:home_based,in_house', // Adjust types if needed
             'transcript' => 'required|file|mimes:jpg,jpeg,png|max:5120', // Max 5MB example
         ]);
 
@@ -51,7 +50,7 @@ class ScholarshipController extends Controller
             'full_name' => $validatedData['full_name'],
             'email' => $validatedData['email'],
             'phone_number' => $validatedData['phone_number'],
-            'scholarship_type' => $validatedData['scholarship_type'],
+            'scholarship_type' => 'general', // Default scholarship type
             'transcript_path' => $transcriptPath,
             'tracking_code' => $trackingCode,
             'status' => 'pending', // Default status
@@ -69,7 +68,7 @@ class ScholarshipController extends Controller
                 'class_year' => Carbon::now()->format('Y'), // Add current year as class year
                 'status' => 'active', // Add status field
                 'phone_number' => $validatedData['phone_number'], // Add phone_number
-                'scholarship_type' => $validatedData['scholarship_type'], // Add scholarship_type
+                'scholarship_type' => 'general', // Default scholarship type
             ]);
         }
 
@@ -131,8 +130,35 @@ class ScholarshipController extends Controller
         ]);
 
         $application = ScholarshipApplication::findOrFail($id);
+        $oldStatus = $application->status;
         $application->status = $request->status;
         $application->save();
+
+        // If status is changed to approved, create or update user account
+        if ($request->status === 'approved' && $oldStatus !== 'approved') {
+            $user = User::where('email', $application->email)->first();
+
+            if ($user) {
+                // If user exists, update their role to 'student'
+                $user->role = 'student';
+                $user->status = 'active';
+                $user->scholarship_type = $application->scholarship_type ?? 'general';
+                $user->transcript_path = $application->transcript_path;
+                $user->save();
+            } else {
+                // If user does not exist, create a new student user
+                User::create([
+                    'name' => $application->full_name,
+                    'email' => $application->email,
+                    'password' => Hash::make(Str::random(10)), // Generate random password
+                    'role' => 'student',
+                    'status' => 'active',
+                    'phone_number' => $application->phone_number,
+                    'scholarship_type' => $application->scholarship_type ?? 'general',
+                    'transcript_path' => $application->transcript_path,
+                ]);
+            }
+        }
 
         return response()->json([
             'message' => 'Application status updated successfully',

@@ -115,7 +115,49 @@ class JobListingController extends Controller
     public function adminIndex()
     {
         $jobs = JobListing::latest()->get();
-        return view('jobs.admin_index', compact('jobs'));
+        return view('admin.jobs.index', compact('jobs'));
+    }
+
+    public function adminStore(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'company_name' => 'required|string|max:255',
+            'location' => 'nullable|string|max:255',
+            'employment_type' => 'nullable|string|max:255',
+            'qualifications' => 'nullable|string',
+            'minimum_salary' => 'nullable|numeric|min:0',
+            'maximum_salary' => 'nullable|numeric|min:0',
+            'contact_person' => 'nullable|string|max:255',
+            'contact_email' => 'nullable|email|max:255',
+            'contact_phone' => 'nullable|string|max:255',
+            'expiry_date' => 'nullable|date|after:today',
+            'category' => 'nullable|string|max:255',
+        ]);
+
+        $validated['status'] = 'approved'; // Admin jobs are auto-approved
+        $validated['is_admin_posted'] = true;
+        $validated['posted_by'] = auth()->id();
+
+        JobListing::create($validated);
+
+        return redirect()->route('admin.jobs.index')
+            ->with('success', 'Job listing created successfully!');
+    }
+
+    public function approve($id)
+    {
+        $job = JobListing::findOrFail($id);
+        $job->update(['status' => 'approved']);
+        return redirect()->route('admin.jobs.index')->with('success', 'Job approved successfully!');
+    }
+
+    public function reject($id)
+    {
+        $job = JobListing::findOrFail($id);
+        $job->update(['status' => 'rejected']);
+        return redirect()->route('admin.jobs.index')->with('success', 'Job rejected successfully!');
     }
 
     public function edit($id)
@@ -147,19 +189,5 @@ class JobListingController extends Controller
         return redirect()->route('jobs.admin.index')->with('success', 'Job deleted successfully!');
     }
 
-    public function approve($id)
-    {
-        $job = JobListing::findOrFail($id);
-        $job->status = 'approved';
-        $job->save();
-        return redirect()->route('jobs.admin.index')->with('success', 'Job approved successfully!');
-    }
 
-    public function reject($id)
-    {
-        $job = JobListing::findOrFail($id);
-        $job->status = 'rejected';
-        $job->save();
-        return redirect()->route('jobs.admin.index')->with('success', 'Job rejected successfully!');
-    }
 }

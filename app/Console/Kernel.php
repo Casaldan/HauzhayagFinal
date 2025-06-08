@@ -26,7 +26,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire:daily')->hourly();
+        // Remove expired jobs daily at midnight
+        $schedule->command('jobs:remove-expired')->daily();
     }
 
     /**

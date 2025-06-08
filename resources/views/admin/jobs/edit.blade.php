@@ -1,14 +1,62 @@
-@extends('layouts.app')
+@extends('layouts.admin')
+
+@push('styles')
+<style>
+    /* Enhanced hover effects for form elements */
+    .form-input:focus {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Enhanced button hover effects */
+    .btn-hover:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Smooth transitions for all interactive elements */
+    .transition-all {
+        transition: all 0.3s ease-in-out;
+    }
+</style>
+@endpush
 
 @section('content')
-<div class="min-h-screen flex items-center justify-center bg-gray-50 py-8">
-    <div class="w-full max-w-md mx-auto">
-        <div class="flex flex-col items-center mb-6">
-            <img src="{{ asset('image/logohauzhayag.jpg') }}" alt="Hauz Hayag Logo" class="h-16 w-16 rounded-lg shadow mb-2">
-            <h2 class="text-2xl font-extrabold text-gray-900 text-center">Edit Job</h2>
-            <p class="text-gray-500 text-center">Update the job details below</p>
+<div class="p-8">
+    <!-- Header -->
+    <div class="bg-white p-4 flex justify-between items-center shadow-sm rounded-lg mb-6">
+        <h2 class="text-xl flex items-center">
+            <svg class="w-6 h-6 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+            </svg>
+            Edit Job Listing
+        </h2>
+        <div class="flex items-center space-x-3">
+            <span class="text-gray-600">Admin</span>
+            <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-medium">
+                AD
+            </div>
         </div>
-        <div class="bg-white rounded-xl shadow-lg p-8">
+    </div>
+
+    <!-- Page Header -->
+    <div class="mb-6">
+        <h1 class="text-2xl font-bold text-gray-800">Edit Job: {{ $job->title }}</h1>
+        <p class="text-gray-600">Update job posting details</p>
+    </div>
+
+    <!-- Job Edit Form -->
+    <div class="bg-white rounded-lg shadow-sm p-6">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-lg font-semibold text-gray-800">Job Details</h3>
+            <a href="{{ route('admin.jobs.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-all btn-hover">
+                <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                Back to Jobs
+            </a>
+        </div>
             <form action="{{ route('admin.jobs.update', $job) }}" method="POST" class="space-y-6">
                 @csrf
                 @method('PUT')
@@ -97,13 +145,47 @@
                         class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 @error('contact_phone') border-red-500 @enderror">
                     @error('contact_phone')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
                 </div>
-                <div class="flex justify-between mt-8">
-                    <a href="{{ route('admin.jobs.index') }}" class="px-6 py-2 bg-gray-100 text-gray-700 rounded-lg font-semibold shadow-sm hover:bg-gray-200 transition-colors">Cancel</a>
-                    <button type="submit" class="px-8 py-2 bg-blue-600 text-white rounded-lg font-bold shadow-lg hover:bg-blue-700 transition-colors">Update Job</button>
+                <!-- Action Buttons -->
+                <div class="flex justify-end space-x-4 pt-6 border-t border-gray-200 mt-8">
+                    <a href="{{ route('admin.jobs.index') }}" class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-all btn-hover">
+                        <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                        Cancel
+                    </a>
+                    <button type="submit" class="bg-secondary text-white px-6 py-2 rounded-lg hover:bg-secondary/80 transition-all btn-hover">
+                        <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Update Job Listing
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-@endsection 
+@endsection
+
+@push('scripts')
+<script>
+    // Form validation and enhancement
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add form validation feedback
+        const form = document.querySelector('form');
+        const inputs = form.querySelectorAll('input, textarea, select');
+
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.hasAttribute('required') && !this.value.trim()) {
+                    this.classList.add('border-red-500');
+                    this.classList.remove('border-gray-300');
+                } else {
+                    this.classList.remove('border-red-500');
+                    this.classList.add('border-gray-300');
+                }
+            });
+        });
+    });
+</script>
+@endpush
 

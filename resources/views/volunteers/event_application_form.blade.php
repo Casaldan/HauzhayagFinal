@@ -23,6 +23,12 @@
                             <input type="email" name="email" id="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
                         </div>
 
+                        <!-- Phone Number -->
+                        <div class="mb-4">
+                            <label for="phone_number" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                            <input type="tel" name="phone_number" id="phone_number" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
+                        </div>
+
                         <!-- Address -->
                         <div class="mb-4">
                             <label for="address" class="block text-sm font-medium text-gray-700">Address</label>

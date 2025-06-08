@@ -22,7 +22,9 @@ class User extends Authenticatable
         'phone',
         'skills',
         'notes',
-        'start_date'
+        'start_date',
+        'transcript_path',
+        'scholarship_type'
     ];
 
     protected $hidden = [

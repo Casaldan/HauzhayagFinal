@@ -27,6 +27,9 @@ return new class extends Migration
             if (!Schema::hasColumn('users', 'start_date')) {
                 $table->date('start_date')->nullable();
             }
+            if (!Schema::hasColumn('users', 'transcript_path')) {
+                $table->string('transcript_path')->nullable();
+            }
         });
     }
 

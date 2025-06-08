@@ -1,31 +1,86 @@
-@extends('layouts.app')
+@extends('layouts.admin')
+
+@push('styles')
+<style>
+    /* Enhanced hover effects for form elements */
+    .form-input:focus {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Enhanced button hover effects */
+    .btn-hover:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Smooth transitions for all interactive elements */
+    .transition-all {
+        transition: all 0.3s ease-in-out;
+    }
+</style>
+@endpush
 
 @section('content')
-<div class="p-6 max-w-3xl mx-auto">
-    <div class="bg-white rounded-lg shadow p-6">
+<div class="p-8">
+    <!-- Header -->
+    <div class="bg-white p-4 flex justify-between items-center shadow-sm rounded-lg mb-6">
+        <h2 class="text-xl flex items-center">
+            <svg class="w-6 h-6 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 12h6m-3-3v6m-7 4h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+            Create New Job Listing
+        </h2>
+        <div class="flex items-center space-x-3">
+            <span class="text-gray-600">Admin</span>
+            <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-medium">
+                AD
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="mb-6">
+        <h1 class="text-2xl font-bold text-gray-800">Add New Job Listing</h1>
+        <p class="text-gray-600">Create a new job posting for students and applicants</p>
+    </div>
+
+    <!-- Job Creation Form -->
+    <div class="bg-white rounded-lg shadow-sm p-6">
         <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold text-gray-800">Create New Job Listing</h2>
-            <a href="{{ route('admin.jobs.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
-                &#8592; Back to List
+            <h3 class="text-lg font-semibold text-gray-800">Job Details</h3>
+            <a href="{{ route('admin.jobs.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-all btn-hover">
+                <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                Back to Jobs
             </a>
         </div>
         <form action="{{ route('admin.jobs.store') }}" method="POST" class="space-y-6">
             @csrf
-            <div class="form-group">
-                <label for="title" class="block text-sm font-medium text-gray-700">Job Title <span class="text-red-500">*</span></label>
-                <input type="text" id="title" name="title" value="{{ old('title') }}" required class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/30 @error('title') border-red-500 @enderror">
-                @error('title')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
+
+            <!-- Basic Information Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="form-group">
+                    <label for="title" class="block text-sm font-medium text-gray-700 mb-2">Job Title <span class="text-red-500">*</span></label>
+                    <input type="text" id="title" name="title" value="{{ old('title') }}" required
+                           class="form-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition-all @error('title') border-red-500 @enderror">
+                    @error('title')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="company_name" class="block text-sm font-medium text-gray-700 mb-2">Company Name <span class="text-red-500">*</span></label>
+                    <input type="text" id="company_name" name="company_name" value="{{ old('company_name') }}" required
+                           class="form-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition-all @error('company_name') border-red-500 @enderror">
+                    @error('company_name')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
+                </div>
             </div>
 
             <div class="form-group">
-                <label for="company_name" class="block text-sm font-medium text-gray-700">Company Name <span class="text-red-500">*</span></label>
-                <input type="text" id="company_name" name="company_name" value="{{ old('company_name') }}" required class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/30 @error('company_name') border-red-500 @enderror">
-                @error('company_name')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
-            </div>
-
-            <div class="form-group">
-                <label for="role" class="block text-sm font-medium text-gray-700">Role <span class="text-red-500">*</span></label>
-                <input type="text" id="role" name="role" value="{{ old('role') }}" required class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/30 @error('role') border-red-500 @enderror">
+                <label for="role" class="block text-sm font-medium text-gray-700 mb-2">Role <span class="text-red-500">*</span></label>
+                <input type="text" id="role" name="role" value="{{ old('role') }}" required
+                       class="form-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition-all @error('role') border-red-500 @enderror">
                 @error('role')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
             </div>
 
@@ -130,18 +185,47 @@
                 @error('status')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
             </div>
 
-            <div class="flex justify-end space-x-4">
-                <a href="{{ route('admin.jobs.index') }}" class="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg font-semibold text-lg shadow hover:bg-gray-300 transition-colors">
+            <!-- Action Buttons -->
+            <div class="flex justify-end space-x-4 pt-6 border-t border-gray-200">
+                <a href="{{ route('admin.jobs.index') }}" class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-all btn-hover">
+                    <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
                     Cancel
                 </a>
-                <button type="submit" class="px-8 py-3 bg-green-600 text-white rounded-lg font-bold text-lg shadow-lg hover:bg-green-700 transition-colors transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2">
-                    Create Job
+                <button type="submit" class="bg-secondary text-white px-6 py-2 rounded-lg hover:bg-secondary/80 transition-all btn-hover">
+                    <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                    </svg>
+                    Create Job Listing
                 </button>
             </div>
         </form>
     </div>
 </div>
 @endsection
-@endsection
+
+@push('scripts')
+<script>
+    // Form validation and enhancement
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add form validation feedback
+        const form = document.querySelector('form');
+        const inputs = form.querySelectorAll('input, textarea, select');
+
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.hasAttribute('required') && !this.value.trim()) {
+                    this.classList.add('border-red-500');
+                    this.classList.remove('border-gray-300');
+                } else {
+                    this.classList.remove('border-red-500');
+                    this.classList.add('border-gray-300');
+                }
+            });
+        });
+    });
+</script>
+@endpush
 
 

@@ -14,7 +14,7 @@
     </div>
 
     <div class="mt-8">
-        <a href="{{ route('volunteer.track.form') }}" class="text-primary hover:underline font-medium mr-4">
+        <a href="{{ route('volunteer.track') }}" class="text-primary hover:underline font-medium mr-4">
             Track Your Application
         </a>
         <a href="{{ url('/') }}" class="text-gray-600 hover:underline font-medium">

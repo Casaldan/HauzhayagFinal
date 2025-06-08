@@ -5,7 +5,7 @@
     <h1 class="text-2xl font-bold text-center mb-8">Track Volunteer Application Status</h1>
 
     <div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg">
-        <form action="{{ route('volunteer.track') }}" method="POST" class="space-y-4">
+        <form action="{{ route('volunteer.track.submit') }}" method="POST" class="space-y-4">
             @csrf
             <div>
                 <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>

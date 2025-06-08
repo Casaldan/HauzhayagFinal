@@ -11,9 +11,12 @@ class VolunteerEventApplication extends Model
         'event_id',
         'full_name',
         'email',
+        'phone_number',
         'application_reason',
+        'tracking_code',
         'status',
-        'applied_at'
+        'applied_at',
+        'admin_notes'
     ];
 
     protected $casts = [

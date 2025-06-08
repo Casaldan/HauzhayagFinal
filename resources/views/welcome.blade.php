@@ -563,16 +563,34 @@
 
         <!-- Track Application Section -->
         <section id="track-application" class="py-20 bg-gradient-to-b from-white to-neutral">
-            <div class="max-w-3xl mx-auto px-4">
+            <div class="max-w-4xl mx-auto px-4">
                 <h2 class="text-4xl font-extrabold text-center text-primary mb-8 tracking-tight animate-bounce-in">Track Your Application</h2>
-                <p class="text-center text-gray-600 mb-8">Enter your tracking code to check your scholarship application status</p>
-                <div class="bg-white/90 p-10 rounded-3xl shadow-2xl border border-primary/20 animate-fade-in">
+                <p class="text-center text-gray-600 mb-12">Enter your tracking code to check your application status</p>
+
+                <!-- Application Type Tabs -->
+                <div class="flex justify-center mb-8">
+                    <div class="bg-white rounded-xl p-1 shadow-lg">
+                        <button onclick="switchTrackingTab('scholarship')" id="scholarshipTab" class="px-6 py-3 rounded-lg font-medium transition-all duration-300 bg-primary text-white">
+                            Scholarship Application
+                        </button>
+                        <button onclick="switchTrackingTab('volunteer')" id="volunteerTab" class="px-6 py-3 rounded-lg font-medium transition-all duration-300 text-gray-600 hover:text-primary">
+                            Volunteer Application
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Scholarship Tracking Form -->
+                <div id="scholarshipTracking" class="bg-white/90 p-10 rounded-3xl shadow-2xl border border-primary/20 animate-fade-in">
+                    <div class="text-center mb-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Track Scholarship Application</h3>
+                        <p class="text-gray-600">Enter your 8-digit scholarship tracking code</p>
+                    </div>
                     <form method="POST" action="{{ route('scholarship.track') }}" class="space-y-8">
                         @csrf
                         <div>
-                            <label for="tracking_code" class="block text-base font-semibold mb-2 text-gray-700">Tracking Code</label>
-                            <input type="text" name="tracking_code" id="tracking_code"
-                                class="w-full px-5 py-3 border-2 border-primary/30 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-colors text-lg placeholder-gray-400 shadow-sm"
+                            <label for="scholarship_tracking_code" class="block text-base font-semibold mb-2 text-gray-700">Tracking Code</label>
+                            <input type="text" name="tracking_code" id="scholarship_tracking_code"
+                                class="w-full px-5 py-3 border-2 border-primary/30 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-colors text-lg placeholder-gray-400 shadow-sm text-center font-mono"
                                 placeholder="Enter your 8-digit tracking code"
                                 maxlength="8"
                                 required>
@@ -591,10 +609,53 @@
                                 <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                                 </svg>
-                                Track Application
+                                Track Scholarship
                             </button>
                         </div>
                     </form>
+                </div>
+
+                <!-- Volunteer Event Tracking Form -->
+                <div id="volunteerTracking" class="bg-white/90 p-10 rounded-3xl shadow-2xl border border-primary/20 animate-fade-in hidden">
+                    <div class="text-center mb-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Track Volunteer Application</h3>
+                        <p class="text-gray-600">Enter your 8-digit volunteer event tracking code</p>
+                    </div>
+                    <form method="POST" action="{{ route('volunteer.event-application.track') }}" class="space-y-8">
+                        @csrf
+                        <div>
+                            <label for="volunteer_tracking_code" class="block text-base font-semibold mb-2 text-gray-700">Tracking Code</label>
+                            <input type="text" name="tracking_code" id="volunteer_tracking_code"
+                                class="w-full px-5 py-3 border-2 border-primary/30 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-colors text-lg placeholder-gray-400 shadow-sm text-center font-mono"
+                                placeholder="Enter your 8-digit tracking code"
+                                maxlength="8"
+                                required>
+                        </div>
+                        <div class="flex justify-center">
+                            <button type="submit"
+                                class="inline-flex items-center px-8 py-3 border border-transparent text-lg font-semibold rounded-xl shadow-md text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all gap-2 group">
+                                <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                </svg>
+                                Track Volunteer Application
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="mt-8 text-center">
+                    <p class="text-gray-600 mb-4">Don't have a tracking code?</p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="#scholarships" class="inline-flex items-center px-4 py-2 bg-white text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300">
+                            <i class="fas fa-graduation-cap mr-2"></i>
+                            Apply for Scholarship
+                        </a>
+                        <a href="#events" class="inline-flex items-center px-4 py-2 bg-white text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300">
+                            <i class="fas fa-hands-helping mr-2"></i>
+                            Volunteer for Events
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -757,6 +818,10 @@
                 <div>
                     <label for="volunteer_email" class="block text-sm font-medium mb-1">Gmail</label>
                     <input type="email" id="volunteer_email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                </div>
+                <div>
+                    <label for="volunteer_phone" class="block text-sm font-medium mb-1">Phone Number</label>
+                    <input type="tel" id="volunteer_phone" name="phone_number" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
                 </div>
                 <div>
                     <label for="application_reason" class="block text-sm font-medium mb-1">Why would you apply for this event?</label>
@@ -1294,6 +1359,7 @@
                 event_id: formData.get('event_id'),
                 full_name: formData.get('full_name'),
                 email: formData.get('email'),
+                phone_number: formData.get('phone_number'),
                 application_reason: formData.get('application_reason')
             };
 
@@ -1428,6 +1494,46 @@
                 console.error('Registration error:', error);
             }
         }
+
+        // Tracking tab switching function
+        function switchTrackingTab(type) {
+            const scholarshipTab = document.getElementById('scholarshipTab');
+            const volunteerTab = document.getElementById('volunteerTab');
+            const scholarshipTracking = document.getElementById('scholarshipTracking');
+            const volunteerTracking = document.getElementById('volunteerTracking');
+
+            if (type === 'scholarship') {
+                // Update tab styles
+                scholarshipTab.classList.add('bg-primary', 'text-white');
+                scholarshipTab.classList.remove('text-gray-600');
+                volunteerTab.classList.remove('bg-primary', 'text-white');
+                volunteerTab.classList.add('text-gray-600');
+
+                // Show/hide forms
+                scholarshipTracking.classList.remove('hidden');
+                volunteerTracking.classList.add('hidden');
+            } else {
+                // Update tab styles
+                volunteerTab.classList.add('bg-primary', 'text-white');
+                volunteerTab.classList.remove('text-gray-600');
+                scholarshipTab.classList.remove('bg-primary', 'text-white');
+                scholarshipTab.classList.add('text-gray-600');
+
+                // Show/hide forms
+                volunteerTracking.classList.remove('hidden');
+                scholarshipTracking.classList.add('hidden');
+            }
+        }
+
+        // Auto-format tracking code inputs
+        document.addEventListener('DOMContentLoaded', function() {
+            const trackingInputs = document.querySelectorAll('#scholarship_tracking_code, #volunteer_tracking_code');
+            trackingInputs.forEach(input => {
+                input.addEventListener('input', function(e) {
+                    e.target.value = e.target.value.toUpperCase();
+                });
+            });
+        });
     </script>
 </body>
 </html>

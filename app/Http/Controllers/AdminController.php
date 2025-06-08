@@ -92,8 +92,48 @@ class AdminController extends Controller
     public function volunteerIndex()
     {
         $volunteers = Volunteer::latest()->paginate(10);
+        $totalVolunteersCount = Volunteer::count();
         $activeVolunteersCount = Volunteer::where('status', 'Active')->count();
-        return view('volunteers.index', compact('volunteers', 'activeVolunteersCount'));
+        $inactiveVolunteersCount = Volunteer::where('status', 'Inactive')->count();
+        $pendingVolunteersCount = Volunteer::where('status', 'Pending')->count();
+
+        // Get volunteer event applications
+        $volunteerEventApplications = \App\Models\VolunteerEventApplication::with('event')
+            ->latest()
+            ->get();
+
+        $pendingEventApplicationsCount = $volunteerEventApplications->where('status', 'pending')->count();
+
+        // Add pending event applications to the pending volunteers count
+        $totalPendingCount = $pendingVolunteersCount + $pendingEventApplicationsCount;
+
+        // Calculate hours served (mock data for now)
+        $hoursServed = 432; // You can calculate this from actual volunteer hours
+
+        // Get upcoming events count
+        $upcomingEventsCount = \App\Models\Event::where('start_date', '>', now())->count();
+
+        return view('admin.volunteers.index', compact(
+            'volunteers',
+            'totalVolunteersCount',
+            'activeVolunteersCount',
+            'inactiveVolunteersCount',
+            'pendingVolunteersCount',
+            'totalPendingCount',
+            'volunteerEventApplications',
+            'pendingEventApplicationsCount',
+            'hoursServed',
+            'upcomingEventsCount'
+        ));
+    }
+
+    public function getVolunteerEventApplications()
+    {
+        $applications = \App\Models\VolunteerEventApplication::with('event')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return response()->json($applications);
     }
 
     public function approveVolunteer(Volunteer $volunteer)

@@ -31,6 +31,12 @@ class VolunteerApplicationController extends Controller
         return view('admin.volunteer-applications.index', compact('applications'));
     }
 
+    public function show(VolunteerApplication $application)
+    {
+        $application->load('event');
+        return response()->json($application);
+    }
+
     public function updateStatus(Request $request, VolunteerApplication $application)
     {
         $validated = $request->validate([
@@ -39,6 +45,24 @@ class VolunteerApplicationController extends Controller
         ]);
 
         $application->update($validated);
+
+        // If approved, create a new volunteer record
+        if ($validated['status'] === 'approved') {
+            // Check if volunteer with this email already exists
+            $existingVolunteer = \App\Models\Volunteer::where('email', $application->email)->first();
+
+            if (!$existingVolunteer) {
+                \App\Models\Volunteer::create([
+                    'name' => $application->full_name,
+                    'email' => $application->email,
+                    'phone' => $application->phone_number,
+                    'skills' => json_encode(['Event Volunteer']), // Default skill
+                    'status' => 'Active',
+                    'notes' => 'Created from event application: ' . $application->event->title . '. Reason: ' . $application->reason,
+                    'start_date' => now(),
+                ]);
+            }
+        }
 
         return response()->json([
             'message' => 'Application status updated successfully',

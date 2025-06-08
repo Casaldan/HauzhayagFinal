@@ -201,6 +201,54 @@
                 @endforelse
             </div>
         </div>
+
+        <!-- Volunteer Applications Section -->
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+            <h2 class="text-lg font-medium text-gray-900 mb-4">My Event Applications</h2>
+
+            <!-- Pending Applications -->
+            <div class="mb-6">
+                <h3 class="text-md font-medium text-gray-700 mb-3">Pending Applications</h3>
+                <div class="space-y-3">
+                    @forelse($pendingApplications as $application)
+                        <div class="border border-yellow-200 rounded-lg p-4 bg-yellow-50">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="text-sm font-medium text-gray-900">{{ $application->event->title }}</h4>
+                                    <p class="text-xs text-gray-600 mt-1">{{ $application->event->location }}</p>
+                                    <p class="text-xs text-gray-500 mt-1">Applied: {{ $application->created_at->format('M d, Y') }}</p>
+                                </div>
+                                <span class="px-2 py-1 text-xs rounded bg-yellow-100 text-yellow-800">Pending</span>
+                            </div>
+                        </div>
+                    @empty
+                        <div class="text-center text-gray-500 py-4 text-sm">No pending applications</div>
+                    @endforelse
+                </div>
+            </div>
+
+            <!-- Approved Applications -->
+            <div>
+                <h3 class="text-md font-medium text-gray-700 mb-3">Approved Applications</h3>
+                <div class="space-y-3">
+                    @forelse($approvedApplications as $application)
+                        <div class="border border-green-200 rounded-lg p-4 bg-green-50">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="text-sm font-medium text-gray-900">{{ $application->event->title }}</h4>
+                                    <p class="text-xs text-gray-600 mt-1">{{ $application->event->location }}</p>
+                                    <p class="text-xs text-gray-500 mt-1">Event Date: {{ \Carbon\Carbon::parse($application->event->start_date)->format('M d, Y') }}</p>
+                                </div>
+                                <span class="px-2 py-1 text-xs rounded bg-green-100 text-green-800">Approved</span>
+                            </div>
+                        </div>
+                    @empty
+                        <div class="text-center text-gray-500 py-4 text-sm">No approved applications yet</div>
+                    @endforelse
+                </div>
+            </div>
+        </div>
+
         <!-- My Job Listings Section -->
         <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
             <div class="flex justify-between items-center mb-4">

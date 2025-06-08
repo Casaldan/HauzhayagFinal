@@ -1,184 +1,233 @@
-@extends('layouts.app')
+@extends('layouts.admin')
+
+@push('styles')
+<style>
+    /* Enhanced hover effects for cards */
+    .job-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Enhanced button hover effects */
+    .btn-hover:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Enhanced table styling */
+    .table-row:hover {
+        background-color: #F8FAFC;
+        transform: scale(1.01);
+    }
+
+    /* Smooth transitions for all interactive elements */
+    .transition-all {
+        transition: all 0.3s ease-in-out;
+    }
+</style>
+@endpush
 
 @section('content')
-<div class="flex">
-    <div class="w-64 min-h-screen bg-[#1B4B5A] text-white">
-        <div class="p-4 flex items-center space-x-2">
-            <img src="{{ asset('image/logohauzhayag.jpg') }}"
-                 alt="Hauz Hayag Logo"
-                 class="h-16 w-auto rounded-lg shadow-md">
-            <h1 class="text-2xl font-bold">Hauz Hayag</h1>
+<div class="p-8">
+    <!-- Header -->
+    <div class="bg-white p-4 flex justify-between items-center shadow-sm rounded-lg mb-6">
+        <h2 class="text-xl flex items-center">
+            <svg class="w-6 h-6 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 12h6m-3-3v6m-7 4h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+            Job Management
+        </h2>
+        <div class="flex items-center space-x-3">
+            <span class="text-gray-600">Admin</span>
+            <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-medium">
+                AD
+            </div>
         </div>
-        <nav class="mt-8">
-            <a href="/dashboard" class="flex items-center px-4 py-3 bg-[#2C5F6E] hover:bg-[#2C5F6E] transition-colors">
-                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-                </svg>
-                Dashboard
-            </a>
-            <a href="/users" class="flex items-center px-4 py-3 hover:bg-[#2C5F6E] transition-colors">
-                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
-                </svg>
-                User Management
-            </a>
-            <a href="/events" class="flex items-center px-4 py-3 hover:bg-[#2C5F6E] transition-colors">
-                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                </svg>
-                Events
-            </a>
-            <a href="/students" class="flex items-center px-4 py-3 hover:bg-[#2C5F6E] transition-colors">
-                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-                </svg>
-                Students
-            </a>
-            <a href="/volunteers" class="flex items-center px-4 py-3 hover:bg-[#2C5F6E] transition-colors">
-                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-                </svg>
-                Volunteers
-            </a>
-            <a href="/admin/jobs" class="flex items-center px-4 py-3 hover:bg-[#2C5F6E] transition-colors">
-                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-3-3v6m-7 4h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                </svg>
-                Jobs
-            </a>
-            <div class="mt-auto pt-20">
-                <a href="/logout" class="flex items-center px-4 py-3 hover:bg-[#2C5F6E] transition-colors text-red-300 hover:text-red-200">
-                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-                    </svg>
-                    Logout
-                </a>
-            </div>
-        </nav>
     </div>
-    <div class="flex-1 bg-gray-100">
-        <div class="p-6">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-gray-800">Job Listings Management</h2>
-                <div class="flex space-x-4">
-                    <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center px-4 py-2 bg-gray-200 text-gray-700 rounded font-semibold text-lg shadow hover:bg-gray-300 transition">
-                        <span class="mr-2">&#8592;</span> Back to Dashboard
-                    </a>
-                    <a href="{{ route('admin.jobs.create') }}" class="inline-flex items-center px-8 py-3 bg-green-600 text-white rounded font-bold text-lg shadow-lg hover:bg-green-700 transition transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2">
-                        <span class="mr-2 text-2xl">+</span> Create Job
-                    </a>
+
+    <!-- Page Header -->
+    <div class="mb-6">
+        <h1 class="text-2xl font-bold text-gray-800">Job Listings</h1>
+        <p class="text-gray-600">Manage and organize job postings</p>
+    </div>
+
+    <!-- Stats Overview Section -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <!-- Total Jobs -->
+        <div class="bg-white rounded-lg shadow-sm p-4 border-l-4 border-blue-500 job-card transition-all">
+            <div class="flex justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-500">Total Jobs</p>
+                    <p class="text-xl font-bold text-gray-800 mt-1">{{ $jobs->count() }}</p>
+                </div>
+                <div class="rounded-full bg-blue-100 p-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-3-3v6m-7 4h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
                 </div>
             </div>
+        </div>
 
-            @if(session('success'))
-                <div class="mb-4 p-4 bg-green-100 text-green-800 rounded">
-                    {{ session('success') }}
+        <!-- Active Jobs -->
+        <div class="bg-white rounded-lg shadow-sm p-4 border-l-4 border-green-500 job-card transition-all">
+            <div class="flex justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-500">Active Jobs</p>
+                    <p class="text-xl font-bold text-gray-800 mt-1">{{ $jobs->where('status', 'approved')->count() }}</p>
                 </div>
-            @endif
+                <div class="rounded-full bg-green-100 p-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+            </div>
+        </div>
 
-            <div class="bg-white rounded-lg shadow overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Title</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Company</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Role</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Type</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Location</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Posted By</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Expires</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        @forelse($jobs as $job)
-                            <tr>
-                                <td class="px-4 py-3">{{ $job->title }}</td>
-                                <td class="px-4 py-3">{{ $job->company_name ?? 'N/A' }}</td>
-                                <td class="px-4 py-3">{{ $job->role }}</td>
-                                <td class="px-4 py-3">{{ $job->employment_type ?? 'N/A' }}</td>
-                                <td class="px-4 py-3">{{ $job->location ?? 'Not specified' }}</td>
-                                <td class="px-4 py-3">
-                                    @if($job->status === 'approved')
-                                        <span class="inline-block px-2 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded">Approved</span>
-                                    @elseif($job->status === 'pending')
-                                        <span class="inline-block px-2 py-1 text-xs font-semibold bg-yellow-100 text-yellow-800 rounded">Pending</span>
-                                    @else
-                                        <span class="inline-block px-2 py-1 text-xs font-semibold bg-red-100 text-red-800 rounded">Rejected</span>
-                                    @endif
-                                </td>
-                                <td class="px-4 py-3">
-                                    @if($job->is_admin_posted)
-                                        <span class="inline-block px-2 py-1 text-xs font-semibold bg-blue-100 text-blue-800 rounded">Admin</span>
-                                    @else
-                                        <span class="inline-block px-2 py-1 text-xs font-semibold bg-cyan-100 text-cyan-800 rounded">Public</span>
-                                    @endif
-                                </td>
-                                <td class="px-4 py-3">
-                                    @if($job->expires_at)
-                                        {{ $job->expires_at->format('M d, Y') }}
-                                        @if($job->expires_at < now())
-                                            <br><span class="inline-block px-2 py-1 text-xs font-semibold bg-red-100 text-red-800 rounded">Expired</span>
-                                        @endif
-                                    @else
-                                        <span class="text-gray-400">No expiry</span>
-                                    @endif
-                                </td>
-                                <td class="px-4 py-3">
-                                    <div class="flex space-x-1">
-                                        <a href="{{ route('admin.jobs.show', $job) }}" class="inline-flex items-center px-2 py-1 bg-gray-100 text-gray-700 rounded hover:bg-gray-200" title="View">
-                                            View
-                                        </a>
-                                        <a href="{{ route('admin.jobs.edit', $job) }}" class="inline-flex items-center px-2 py-1 bg-blue-100 text-blue-700 rounded hover:bg-blue-200" title="Edit">
-                                            Edit
-                                        </a>
-                                        @if(!$job->is_admin_posted && $job->status === 'pending')
-                                            <form action="{{ route('admin.jobs.approve', $job) }}" method="POST" class="inline">
-                                                @csrf
-                                                <button type="submit" class="inline-flex items-center px-2 py-1 bg-green-100 text-green-700 rounded hover:bg-green-200" title="Approve">
-                                                    Approve
-                                                </button>
-                                            </form>
-                                            <form action="{{ route('admin.jobs.reject', $job) }}" method="POST" class="inline">
-                                                @csrf
-                                                <button type="submit" class="inline-flex items-center px-2 py-1 bg-yellow-100 text-yellow-700 rounded hover:bg-yellow-200" title="Reject">
-                                                    Reject
-                                                </button>
-                                            </form>
-                                        @endif
-                                        <form action="{{ route('admin.jobs.destroy', $job) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this job listing?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="inline-flex items-center px-2 py-1 bg-red-100 text-red-700 rounded hover:bg-red-200" title="Delete">
-                                                Delete
-                                            </button>
-                                        </form>
+        <!-- Pending Jobs -->
+        <div class="bg-white rounded-lg shadow-sm p-4 border-l-4 border-yellow-500 job-card transition-all">
+            <div class="flex justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-500">Pending Jobs</p>
+                    <p class="text-xl font-bold text-gray-800 mt-1">{{ $jobs->where('status', 'pending')->count() }}</p>
+                </div>
+                <div class="rounded-full bg-yellow-100 p-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expired Jobs -->
+        <div class="bg-white rounded-lg shadow-sm p-4 border-l-4 border-red-500 job-card transition-all">
+            <div class="flex justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-500">Expired Jobs</p>
+                    <p class="text-xl font-bold text-gray-800 mt-1">{{ $jobs->where('expires_at', '<', now())->count() }}</p>
+                </div>
+                <div class="rounded-full bg-red-100 p-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Job Button -->
+    <div class="flex justify-end mb-4">
+        <a href="{{ route('admin.jobs.create') }}" class="bg-secondary text-white px-4 py-2 rounded-lg hover:bg-secondary/80 transition-all btn-hover">
+            <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+            </svg>
+            Add New Job
+        </a>
+    </div>
+
+    @if(session('success'))
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <div class="bg-white rounded-lg shadow overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Job Details</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Company & Location</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Expiry Date</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @forelse($jobs as $job)
+                        <tr class="table-row transition-all duration-200">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-bold">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-3-3v6m-7 4h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                        </svg>
                                     </div>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="9" class="text-center py-4 text-gray-400">
-                                    No job listings found
-                                </td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-            <div class="mt-6 flex justify-center">
-                {{ $jobs->links() }}
-            </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">{{ $job->title ?? $job->role }}</div>
+                                        <div class="text-sm text-gray-500">{{ Str::limit($job->description, 60) }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">{{ $job->company_name ?? $job->company }}</div>
+                                <div class="text-sm text-gray-500">{{ $job->location ?? 'Remote' }}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 py-1 text-xs rounded-full
+                                    {{ $job->status === 'approved' ? 'bg-green-100 text-green-800' :
+                                       ($job->status === 'rejected' ? 'bg-red-100 text-red-800' :
+                                        'bg-yellow-100 text-yellow-800') }}">
+                                    {{ ucfirst($job->status) }}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                @if($job->expires_at)
+                                    {{ $job->expires_at->format('M d, Y') }}
+                                @else
+                                    <span class="text-gray-400">No expiry</span>
+                                @endif
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
+                                <a href="#" onclick="editJob({{ $job->id }})" class="bg-blue-600 text-white px-3 py-1 rounded-lg hover:bg-blue-700 transition-all btn-hover">
+                                    Edit
+                                </a>
+                                <form action="{{ route('admin.jobs.destroy', $job) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this job?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded-lg hover:bg-red-700 transition-all btn-hover">
+                                        Delete
+                                    </button>
+                                </form>
+                            </td>
+                    @empty
+                        <tr>
+                            <td colspan="5" class="px-6 py-8 text-center text-gray-500">
+                                <div class="flex flex-col items-center">
+                                    <svg class="w-12 h-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-3-3v6m-7 4h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                    </svg>
+                                    <p class="text-lg font-medium">No jobs found</p>
+                                    <p class="text-sm">Get started by creating your first job listing.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 @endsection
 
-@push('styles')
-<style>
-    .btn-group .btn { margin-right: 2px; }
-    .table td, .table th { vertical-align: middle; }
-    .table th { white-space: nowrap; }
-</style>
-@endpush 
+@push('scripts')
+<script>
+    function editJob(jobId) {
+        // Redirect to edit page
+        window.location.href = `/admin/jobs/${jobId}/edit`;
+    }
+
+    // Enhanced interactions
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add confirmation for delete actions
+        const deleteButtons = document.querySelectorAll('form[action*="destroy"] button');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (!confirm('Are you sure you want to delete this job? This action cannot be undone.')) {
+                    e.preventDefault();
+                }
+            });
+        });
+    });
+</script>
+@endpush

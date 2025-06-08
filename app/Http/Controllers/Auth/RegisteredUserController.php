@@ -28,6 +28,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => 'student', // default role
+            'status' => 'active', // set status to active for new users
         ]);
 
         Auth::login($user);

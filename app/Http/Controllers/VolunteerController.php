@@ -55,8 +55,22 @@ class VolunteerController extends Controller
                 ->take(5)
                 ->get();
 
+            // Get volunteer applications by email (since volunteers might not be registered users)
+            $user = auth()->user();
+            $pendingApplications = \App\Models\VolunteerEventApplication::where('email', $user->email)
+                ->where('status', 'pending')
+                ->with('event')
+                ->latest()
+                ->get();
+
+            $approvedApplications = \App\Models\VolunteerEventApplication::where('email', $user->email)
+                ->where('status', 'approved')
+                ->with('event')
+                ->latest()
+                ->get();
+
             return view('volunteers.volunteerdashboard', compact(
-                'events', 'allJobs', 'hoursThisMonth', 'totalHours', 'recentActivities'
+                'events', 'allJobs', 'hoursThisMonth', 'totalHours', 'recentActivities', 'pendingApplications', 'approvedApplications'
             ));
         } catch (\Exception $e) {
             \Log::error('Volunteer Dashboard Error: ' . $e->getMessage());
@@ -255,6 +269,11 @@ class VolunteerController extends Controller
     {
         $event = \App\Models\Event::findOrFail($id);
         return view('volunteers.event_show', compact('event'));
+    }
+
+    public function showApplicationForm(\App\Models\Event $event)
+    {
+        return view('volunteers.event_application_form', compact('event'));
     }
 
     public function createJob()
