@@ -32,12 +32,30 @@ class JobListingController extends Controller
 
         // Location filter
         if ($request->has('location') && $request->location !== '') {
-            $query->where('location', $request->location);
+            $query->where('location', 'LIKE', '%' . $request->location . '%');
         }
 
         // For volunteer/public view, use the correct view and pass companies/locations for filters
-        $companies = JobListing::where('status', 'approved')->distinct()->pluck('company_name');
-        $locations = JobListing::where('status', 'approved')->distinct()->pluck('location');
+        $companies = JobListing::where('status', 'approved')
+            ->whereNotNull('company_name')
+            ->distinct()
+            ->pluck('company_name')
+            ->merge(
+                JobListing::where('status', 'approved')
+                    ->whereNull('company_name')
+                    ->whereNotNull('company')
+                    ->distinct()
+                    ->pluck('company')
+            )
+            ->filter()
+            ->unique();
+
+        $locations = JobListing::where('status', 'approved')
+            ->whereNotNull('location')
+            ->distinct()
+            ->pluck('location')
+            ->filter()
+            ->unique();
 
         $jobs = $query->latest()->paginate(10)->withQueryString();
 
@@ -86,6 +104,7 @@ class JobListingController extends Controller
         $validated['status'] = 'pending';
         $validated['is_admin_posted'] = false;
         $validated['type'] = $validated['employment_type'] ?? null;
+        $validated['location'] = trim($validated['location']);
         
         JobListing::create($validated);
         
@@ -111,13 +130,14 @@ class JobListingController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'company' => 'required|string|max:255',
-            'location' => 'required|string|max:255',
+            'company_name' => 'required|string|max:255',
+            'location' => 'nullable|string|max:255',
             'salary' => 'nullable|string|max:255',
             'requirements' => 'nullable|string',
         ]);
+        $validated['location'] = trim($validated['location']);
         $job->update($validated);
-        return redirect()->route('jobs.admin.index')->with('success', 'Job updated successfully!');
+        return redirect()->route('admin.jobs.index')->with('success', 'Job updated successfully!');
     }
 
     public function destroy($id)

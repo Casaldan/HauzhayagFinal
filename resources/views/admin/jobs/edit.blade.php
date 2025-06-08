@@ -42,11 +42,12 @@
                     </select>
                     @error('employment_type')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
                 </div>
-                <div>
-                    <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
-                    <input type="text" id="location" name="location" value="{{ old('location', $job->location) }}"
-                        class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 @error('location') border-red-500 @enderror">
-                    @error('location')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
+                <div class="mb-4">
+                    <label for="location" class="block text-sm font-medium text-gray-700">Location <span class="text-red-500">*</span></label>
+                    <input type="text" name="location" id="location" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" value="{{ old('location', $job->location) }}" required>
+                    @error('location')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div>
                     <label for="expires_at" class="block text-sm font-medium text-gray-700">Expiry Date</label>
@@ -105,3 +106,4 @@
     </div>
 </div>
 @endsection 
+

@@ -78,11 +78,18 @@
                     <div class="bg-white rounded-lg shadow-md p-6 flex flex-col justify-between">
                         <div>
                             <h2 class="text-xl font-semibold text-primary mb-2">{{ $job->title }}</h2>
-                            <p class="text-gray-700 mb-2"><span class="font-semibold">Company:</span> {{ $job->company }}</p>
-                            <p class="text-gray-700 mb-2"><span class="font-semibold">Location:</span> {{ $job->location }}</p>
+                            <p class="text-gray-700 mb-2"><span class="font-semibold">Company:</span> {{ $job->company_name ?? $job->company ?? 'Not specified' }}</p>
+                            <p class="text-gray-700 mb-2"><span class="font-semibold">Location:</span> {{ $job->location ?? 'Not specified' }}</p>
                             @if($job->salary)
                                 <p class="text-gray-700 mb-2"><span class="font-semibold">Salary:</span> {{ $job->salary }}</p>
                             @endif
+                            <p class="text-gray-700 mb-2"><span class="font-semibold">Posted By:</span>
+                                @if($job->is_admin_posted)
+                                    Admin
+                                @else
+                                    Volunteer
+                                @endif
+                            </p>
                             <p class="text-gray-700 mb-2"><span class="font-semibold">Description:</span> {{ $job->description }}</p>
                             @if($job->requirements)
                                 <p class="text-gray-700 mb-2"><span class="font-semibold">Requirements:</span> {{ $job->requirements }}</p>

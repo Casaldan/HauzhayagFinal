@@ -148,78 +148,92 @@
 </head>
 
 <body class="bg-neutral font-sans">
-    <header class="bg-white shadow fixed w-full top-0 z-50 animate-slide-down">
+    <header class="bg-gradient-to-r from-white/95 to-neutral/95 backdrop-blur-md shadow-xl fixed w-full top-0 z-50 animate-slide-down border-b border-primary/10">
         <div class="max-w-7xl mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
-            <div class="flex items-center space-x-4">
-                    <img src="{{ asset('image/logohauzhayag.jpg') }}"
-                         alt="Hauz Hayag Logo"
-                         class="h-16 w-auto rounded-lg shadow-md">
-                    <span class="text-2xl font-bold text-primary">Hauz Hayag</span>
-                    <button id="mobileMenuButton" class="md:hidden text-gray-600 hover:text-primary">
+            <div class="flex items-center space-x-4 group">
+                    <div class="relative">
+                        <img src="{{ asset('image/logohauzhayag.jpg') }}"
+                             alt="Hauz Hayag Logo"
+                             class="h-16 w-auto rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 transform group-hover:scale-105">
+                        <div class="absolute inset-0 bg-primary/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Hauz Hayag</h1>
+                        <p class="text-sm text-gray-600 font-medium">Scholarship Foundation</p>
+                    </div>
+                    <button id="mobileMenuButton" class="md:hidden text-gray-600 hover:text-primary p-2 rounded-lg hover:bg-primary/5 transition-all duration-300">
                         <i class="fas fa-bars text-2xl"></i>
                     </button>
                 </div>
 
                 <!-- Desktop Navigation -->
-                <nav class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="flex items-center space-x-2 text-gray-700 hover:text-primary transition">
-                        <i class="fas fa-home"></i>
-                        <span>Home</span>
+                <nav class="hidden lg:flex items-center space-x-1">
+                    <a href="#home" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 hover:text-primary hover:bg-primary/5 transition-all duration-300 ease-in-out transform hover:scale-105">
+                        <i class="fas fa-home text-lg"></i>
+                        <span class="font-medium">Home</span>
                     </a>
-                    <a href="#scholarships" class="flex items-center space-x-2 text-gray-700 hover:text-primary transition">
-                        <i class="fas fa-graduation-cap"></i>
-                        <span>Scholarships</span>
+                    <a href="#scholarships" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 hover:text-primary hover:bg-primary/5 transition-all duration-300 ease-in-out transform hover:scale-105">
+                        <i class="fas fa-graduation-cap text-lg"></i>
+                        <span class="font-medium">Scholarships</span>
                     </a>
-                    <a href="#job-offers" class="flex items-center space-x-2 text-gray-700 hover:text-primary transition">
-                        <i class="fas fa-briefcase"></i>
-                        <span>Job Offers</span>
+                    <a href="#job-offers" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 hover:text-primary hover:bg-primary/5 transition-all duration-300 ease-in-out transform hover:scale-105">
+                        <i class="fas fa-briefcase text-lg"></i>
+                        <span class="font-medium">Job Offers</span>
                     </a>
-                    <a href="#events" class="flex items-center space-x-2 text-gray-700 hover:text-primary transition">
-                        <i class="fas fa-calendar-alt"></i>
-                        <span>Events</span>
+                    <a href="#events" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 hover:text-primary hover:bg-primary/5 transition-all duration-300 ease-in-out transform hover:scale-105">
+                        <i class="fas fa-calendar-alt text-lg"></i>
+                        <span class="font-medium">Events</span>
                     </a>
-                    <a href="#about-us" class="flex items-center space-x-2 text-gray-700 hover:text-primary transition">
-                        <i class="fas fa-info-circle"></i>
-                        <span>About Us</span>
+                    <a href="#about-us" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 hover:text-primary hover:bg-primary/5 transition-all duration-300 ease-in-out transform hover:scale-105">
+                        <i class="fas fa-info-circle text-lg"></i>
+                        <span class="font-medium">About Us</span>
                     </a>
-                    <a href="/login" class="flex items-center space-x-2 bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-400 transition">
-                        <i class="fas fa-lock"></i>
+                    <a href="#track-application" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 hover:text-primary hover:bg-primary/5 transition-all duration-300 ease-in-out transform hover:scale-105">
+                        <i class="fas fa-search text-lg"></i>
+                        <span class="font-medium">Track Application</span>
+                    </a>
+                    <a href="/login" class="flex items-center space-x-2 bg-gradient-to-r from-primary to-secondary text-white px-6 py-3 rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 font-medium ml-4">
+                        <i class="fas fa-sign-in-alt text-lg"></i>
                         <span>Login</span>
                     </a>
-                </nav>                
+                </nav>
             </div>
 
             <!-- Mobile Navigation -->
-            <nav id="mobileMenu" class="md:hidden hidden py-4 space-y-4">
-                <a href="#home" class="flex items-center space-x-2 text-gray-700 hover:text-primary transition">
-                    <i class="fas fa-home"></i>
-                    <span>Home</span>
+            <nav id="mobileMenu" class="lg:hidden hidden bg-white/95 backdrop-blur-md border-t border-primary/10 rounded-b-2xl shadow-xl">
+                <div class="px-4 pt-4 pb-3 space-y-2">
+                <a href="#home" class="flex items-center space-x-3 text-gray-700 hover:text-primary hover:bg-primary/5 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out">
+                    <i class="fas fa-home text-lg"></i>
+                    <span class="font-medium">Home</span>
                 </a>
-                <a href="#scholarships" class="flex items-center space-x-2 text-gray-700 hover:text-primary transition">
-                    <i class="fas fa-graduation-cap"></i>
-                    <span>Scholarships</span>
+                <a href="#scholarships" class="flex items-center space-x-3 text-gray-700 hover:text-primary hover:bg-primary/5 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out">
+                    <i class="fas fa-graduation-cap text-lg"></i>
+                    <span class="font-medium">Scholarships</span>
                 </a>
-                <a href="#job-offers" class="flex items-center space-x-2 text-gray-700 hover:text-primary transition">
-                    <i class="fas fa-briefcase"></i>
-                    <span>Job Offers</span>
+                <a href="#job-offers" class="flex items-center space-x-3 text-gray-700 hover:text-primary hover:bg-primary/5 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out">
+                    <i class="fas fa-briefcase text-lg"></i>
+                    <span class="font-medium">Job Offers</span>
                 </a>
-                <a href="#events" class="flex items-center space-x-2 text-gray-700 hover:text-primary transition">
-                    <i class="fas fa-calendar-alt"></i>
-                    <span>Events</span>
+                <a href="#events" class="flex items-center space-x-3 text-gray-700 hover:text-primary hover:bg-primary/5 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out">
+                    <i class="fas fa-calendar-alt text-lg"></i>
+                    <span class="font-medium">Events</span>
                 </a>
-                <a href="#about-us" class="flex items-center space-x-2 text-gray-700 hover:text-primary transition">
-                    <i class="fas fa-info-circle"></i>
-                    <span>About Us</span>
+                <a href="#about-us" class="flex items-center space-x-3 text-gray-700 hover:text-primary hover:bg-primary/5 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out">
+                    <i class="fas fa-info-circle text-lg"></i>
+                    <span class="font-medium">About Us</span>
                 </a>
-                <a href="/login" class="flex items-center space-x-2 bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-400 transition">
-                    <i class="fas fa-lock"></i>
-                    <span>Login</span>
+                <a href="#track-application" class="flex items-center space-x-3 text-gray-700 hover:text-primary hover:bg-primary/5 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out">
+                    <i class="fas fa-search text-lg"></i>
+                    <span class="font-medium">Track Application</span>
                 </a>
-                <a href="/scholarship/login" class="flex items-center space-x-2 bg-secondary text-white px-4 py-2 rounded-lg hover:bg-yellow-500 transition">
-                    <i class="fas fa-graduation-cap"></i>
-                    <span>Scholarship Login</span>
-                </a>
+                </div>
+                <div class="px-4 pb-4 space-y-3">
+                    <a href="/login" class="w-full bg-gradient-to-r from-primary to-secondary text-white px-4 py-3 rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg font-medium flex items-center justify-center space-x-2">
+                        <i class="fas fa-sign-in-alt text-lg"></i>
+                        <span>Login</span>
+                    </a>
+                </div>
             </nav>
         </div>
     </header>
@@ -321,34 +335,49 @@
 
         <!-- Job Offers Section with enhanced animations -->
 <section id="job-offers" class="bg-white py-16">
-         <div class="max-w-7xl mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-12 animate-bounce-in">Job Opportunities</h2>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <!-- Job Cards (3) -->
-                    <div class="bg-neutral shadow rounded-lg p-6 flex flex-col hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in-left" style="animation-delay: 0.1s">
-                        <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Full-time</span>
-                        <h3 class="mt-4 font-semibold text-lg">Software Developer</h3>
-                        <p class="text-gray-600">Build innovative solutions for education.</p>
-                        <p class="text-sm text-gray-500 mt-2">Tech Solutions Inc. | San Francisco, CA</p>
-                        <button class="mt-auto bg-primary text-white w-full py-2 px-6 rounded-lg hover:bg-blue-700 transition" onclick="openJobDetailsModal()">View Details</button>
-                    </div>
-                    <div class="bg-neutral shadow rounded-lg p-6 flex flex-col hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in" style="animation-delay: 0.2s">
-                        <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">Part-time</span>
-                        <h3 class="mt-4 font-semibold text-lg">Marketing Coordinator</h3>
-                        <p class="text-gray-600">Promote our mission through marketing.</p>
-                        <p class="text-sm text-gray-500 mt-2">Global Marketing Agency | New York, NY</p>
-                        <button class="mt-auto bg-primary text-white w-full py-2 px-6 rounded-lg hover:bg-blue-700 transition" onclick="openJobDetailsModal()">View Details</button>
-                    </div>
-                    <div class="bg-neutral shadow rounded-lg p-6 flex flex-col hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in-right" style="animation-delay: 0.3s">
-                        <span class="bg-yellow-100 text-yellow-800 text-sm px-3 py-1 rounded-full">Internship</span>
-                        <h3 class="mt-4 font-semibold text-lg">Research Assistant</h3>
-                        <p class="text-gray-600">Gain experience in education research.</p>
-                        <p class="text-sm text-gray-500 mt-2">Education Institute | Boston, MA</p>
-                        <button class="mt-auto bg-primary text-white w-full py-2 px-6 rounded-lg hover:bg-blue-700 transition" onclick="openJobDetailsModal()">View Details</button>
-                    </div>
+    <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12 animate-bounce-in">Job Opportunities</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            @forelse($jobs as $index => $job)
+                <div class="bg-neutral shadow-md rounded-lg p-6 flex flex-col hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out animate-bounce-in-left transform" style="animation-delay: {{ ($index * 0.1) + 0.1 }}s">
+                    @if($job->employment_type)
+                        <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full mb-2">{{ ucfirst($job->employment_type) }}</span>
+                    @elseif($job->type)
+                        <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full mb-2">{{ ucfirst($job->type) }}</span>
+                    @endif
+                    <h3 class="mt-4 font-semibold text-lg">{{ $job->title }}</h3>
+                    <p class="text-gray-600">{{ Str::limit($job->description, 60) }}</p>
+                    <p class="text-sm text-gray-500 mt-2">
+                        {{ $job->company_name ?? $job->company ?? 'Company Not Specified' }}
+                        @if($job->location)
+                            | {{ $job->location }}
+                        @endif
+                    </p>
+                    <button class="mt-auto bg-primary text-white w-full py-2 px-6 rounded-lg hover:bg-blue-700 hover:shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out" onclick="openJobDetailsModal({{ $job->id }})">View Details</button>
                 </div>
+            @empty
+                <div class="col-span-full text-center py-12">
+                    <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2M8 6v10a2 2 0 002 2h4a2 2 0 002-2V6"/>
+                    </svg>
+                    <h3 class="text-xl font-medium text-gray-500">No job opportunities available at the moment</h3>
+                    <p class="text-gray-400 mt-2">Check back later for new opportunities!</p>
+                </div>
+            @endforelse
+        </div>
+        @if($jobs->count() > 0)
+            <div class="text-center mt-8">
+                <a href="{{ route('jobs.index') }}" class="inline-flex items-center px-6 py-3 bg-primary text-white rounded-lg hover:bg-blue-700 hover:shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out">
+                    View All Jobs
+                    <svg class="w-4 h-4 ml-2 transition-transform duration-300 ease-in-out group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </a>
             </div>
-        </section>
+        @endif
+    </div>
+</section>
 
         <!-- Events Section with enhanced animations -->
 <section id="events" class="py-16 bg-neutral">
@@ -356,7 +385,7 @@
         <h2 class="text-3xl font-bold text-center mb-12 animate-bounce-in">Upcoming Events</h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             @forelse($events as $event)
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in-left" style="animation-delay: 0.1s">
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out transform animate-bounce-in-left" style="animation-delay: 0.1s">
                 <div class="relative h-48 overflow-hidden bg-primary/10">
                     <div class="absolute inset-0 flex items-center justify-center">
                         <svg class="w-20 h-20 text-primary/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -387,9 +416,9 @@
                     </div>
                     <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ $event->description }}</p>
                     <div class="flex justify-end">
-                        <button onclick="showEventDetails('{{ $event->id }}')" 
-                                class="text-primary hover:text-primary/80 text-sm font-medium flex items-center">
-                            Learn More
+                        <button onclick="openEventRegistrationModal('{{ $event->id }}')"
+                                class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-700 hover:shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out text-sm font-medium flex items-center">
+                            Register Now
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                             </svg>
@@ -418,7 +447,7 @@
                 <div class="relative overflow-hidden">
                     <div id="slides" class="flex transition-transform duration-500 ease-in-out" style="width: 100%;">
                         <!-- Slide 1 -->
-                        <div class="slide flex flex-col md:flex-row items-center min-w-full gap-8 bg-gray-50 rounded-2xl shadow-xl p-6 md:p-14 hover:animate-elevate transition-all duration-300" style="animation-delay: 0.1s">
+                        <div class="slide flex flex-col md:flex-row items-center min-w-full gap-8 bg-gray-50 rounded-2xl shadow-xl p-6 md:p-14 hover:shadow-2xl hover:scale-105 transition-all duration-300 ease-in-out transform" style="animation-delay: 0.1s">
                             <div class="relative flex flex-col items-center w-full md:w-1/2">
                                 <!-- Large Orange Circle Background -->
                                 <div class="absolute z-0 flex justify-center items-center" style="top: 0; left: 50%; transform: translateX(-50%);">
@@ -453,7 +482,7 @@
                             </div>
                         </div>
                         <!-- Slide 2 -->
-                        <div class="slide flex flex-col md:flex-row items-center min-w-full gap-8 bg-gray-50 rounded-2xl shadow-xl p-6 md:p-14 hover:animate-elevate transition-all duration-300" style="animation-delay: 0.2s">
+                        <div class="slide flex flex-col md:flex-row items-center min-w-full gap-8 bg-gray-50 rounded-2xl shadow-xl p-6 md:p-14 hover:shadow-2xl hover:scale-105 transition-all duration-300 ease-in-out transform" style="animation-delay: 0.2s">
                             <div class="relative flex flex-col items-center w-full md:w-1/2">
                                 <div class="absolute z-0 flex justify-center items-center" style="top: 0; left: 50%; transform: translateX(-50%);">
                                     <div class="w-72 h-72 md:w-96 md:h-96 rounded-full bg-blue-400 ring-4 ring-black flex items-center justify-center">
@@ -484,7 +513,7 @@
                             </div>
                         </div>
                         <!-- Slide 3 -->
-                        <div class="slide flex flex-col md:flex-row items-center min-w-full gap-8 bg-gray-50 rounded-2xl shadow-xl p-6 md:p-14 hover:animate-elevate transition-all duration-300" style="animation-delay: 0.3s">
+                        <div class="slide flex flex-col md:flex-row items-center min-w-full gap-8 bg-gray-50 rounded-2xl shadow-xl p-6 md:p-14 hover:shadow-2xl hover:scale-105 transition-all duration-300 ease-in-out transform" style="animation-delay: 0.3s">
                             <div class="relative flex flex-col items-center w-full md:w-1/2">
                                 <div class="absolute z-0 flex justify-center items-center" style="top: 0; left: 50%; transform: translateX(-50%);">
                                     <div class="w-72 h-72 md:w-96 md:h-96 rounded-full bg-blue-400 ring-4 ring-black flex items-center justify-center">
@@ -577,14 +606,14 @@
 
                 <!-- Vision and Mission -->
                 <div class="grid md:grid-cols-2 gap-8 mb-16">
-                    <div class="bg-primary/5 p-8 rounded-xl hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in-left" style="animation-delay: 0.1s">
+                    <div class="bg-primary/5 p-8 rounded-xl hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out transform animate-bounce-in-left" style="animation-delay: 0.1s">
                         <div class="text-primary text-4xl mb-4">
                             <i class="fas fa-eye"></i>
                         </div>
                         <h3 class="text-2xl font-semibold mb-4">Our Vision</h3>
                         <p class="text-gray-700 leading-relaxed">To create a world where every student has access to quality education and career opportunities, regardless of their background or circumstances.</p>
                     </div>
-                    <div class="bg-primary/5 p-8 rounded-xl hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in-right" style="animation-delay: 0.2s">
+                    <div class="bg-primary/5 p-8 rounded-xl hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out transform animate-bounce-in-right" style="animation-delay: 0.2s">
                         <div class="text-primary text-4xl mb-4">
                             <i class="fas fa-bullseye"></i>
                         </div>
@@ -697,48 +726,43 @@
 
     <!-- Job Details Modal -->
     <div id="jobDetailsModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden">
-        <div class="bg-white p-6 md:p-10 rounded-xl shadow-lg w-full max-w-md mx-2 relative">
+        <div class="bg-white p-6 md:p-10 rounded-xl shadow-lg w-full max-w-lg mx-2 relative">
             <button onclick="closeJobDetailsModal()" class="absolute top-2 right-3 text-gray-400 hover:text-black text-2xl font-bold">&times;</button>
             <h2 class="text-2xl font-bold mb-4 text-primary text-center">Job Details</h2>
-            <div class="space-y-4">
-                <div>
-                    <h3 class="font-semibold text-gray-700">Company</h3>
-                    <p class="text-gray-600">Sample Company</p>
-                </div>
-                <div>
-                    <h3 class="font-semibold text-gray-700">Role</h3>
-                    <p class="text-gray-600">Sample Role</p>
-                </div>
-                <div>
-                    <h3 class="font-semibold text-gray-700">Qualifications</h3>
-                    <ul class="list-disc list-inside text-gray-600">
-                        <li>Sample Qualification 1</li>
-                        <li>Sample Qualification 2</li>
-                    </ul>
-                </div>
+            <div id="jobDetailsContent" class="space-y-4">
+                <div class="text-center text-gray-500">Loading...</div>
+            </div>
+            <div class="mt-6 text-center">
+                <a href="/jobs" class="inline-flex items-center px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition">
+                    View All Jobs
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </a>
             </div>
         </div>
     </div>
 
     <!-- Event Registration Modal -->
     <div id="eventRegistrationModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden">
-        <div class="bg-white p-6 md:p-10 rounded-xl shadow-lg w-full max-w-md mx-2 relative">
-            <button onclick="closeEventModal()" class="absolute top-2 right-3 text-gray-400 hover:text-black text-2xl font-bold">&times;</button>
+        <div class="bg-white p-6 md:p-10 rounded-xl shadow-lg w-full max-w-lg mx-2 relative">
+            <button onclick="closeEventRegistrationModal()" class="absolute top-2 right-3 text-gray-400 hover:text-black text-2xl font-bold">&times;</button>
             <h2 class="text-2xl font-bold mb-4 text-primary text-center">Event Registration</h2>
-            <form class="space-y-4">
+            <form id="eventRegistrationForm" class="space-y-4" onsubmit="submitEventRegistration(event)">
+                <input type="hidden" id="event_id" name="event_id">
                 <div>
-                    <label for="full_name" class="block text-sm font-medium mb-1">Full Name</label>
-                    <input type="text" id="full_name" name="full_name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                    <label for="volunteer_full_name" class="block text-sm font-medium mb-1">Full Name</label>
+                    <input type="text" id="volunteer_full_name" name="full_name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
                 </div>
                 <div>
-                    <label for="email" class="block text-sm font-medium mb-1">Email</label>
-                    <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                    <label for="volunteer_email" class="block text-sm font-medium mb-1">Gmail</label>
+                    <input type="email" id="volunteer_email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
                 </div>
                 <div>
-                    <label for="phone_number" class="block text-sm font-medium mb-1">Phone Number</label>
-                    <input type="tel" id="phone_number" name="phone_number" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                    <label for="application_reason" class="block text-sm font-medium mb-1">Why would you apply for this event?</label>
+                    <textarea id="application_reason" name="application_reason" rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Please explain why you want to participate in this event..." required></textarea>
                 </div>
-                <button type="submit" class="w-full bg-primary text-white py-2 rounded-lg hover:bg-blue-400 transition">
+                <button type="submit" class="w-full bg-primary text-white py-2 rounded-lg hover:bg-blue-700 hover:shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out">
                     Register Now
                 </button>
             </form>
@@ -922,8 +946,79 @@
             document.getElementById('scholarshipApplicationModal').classList.add('hidden');
         }
 
-        function openJobDetailsModal() {
-            document.getElementById('jobDetailsModal').classList.remove('hidden');
+        function openJobDetailsModal(jobId) {
+            const modal = document.getElementById('jobDetailsModal');
+            const content = document.getElementById('jobDetailsContent');
+
+            // Show modal
+            modal.classList.remove('hidden');
+
+            // Show loading state
+            content.innerHTML = '<div class="text-center text-gray-500">Loading...</div>';
+
+            // Fetch job details
+            if (jobId) {
+                fetch(`/api/job-listings/${jobId}`)
+                    .then(response => response.json())
+                    .then(job => {
+                        content.innerHTML = `
+                            <div class="space-y-4">
+                                <div>
+                                    <h3 class="font-semibold text-gray-700">Job Title</h3>
+                                    <p class="text-gray-600">${job.title || 'Not specified'}</p>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-700">Company</h3>
+                                    <p class="text-gray-600">${job.company_name || job.company || 'Not specified'}</p>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-700">Location</h3>
+                                    <p class="text-gray-600">${job.location || 'Not specified'}</p>
+                                </div>
+                                ${job.employment_type || job.type ? `
+                                <div>
+                                    <h3 class="font-semibold text-gray-700">Employment Type</h3>
+                                    <p class="text-gray-600">${job.employment_type || job.type}</p>
+                                </div>
+                                ` : ''}
+                                <div>
+                                    <h3 class="font-semibold text-gray-700">Description</h3>
+                                    <p class="text-gray-600">${job.description || 'No description available'}</p>
+                                </div>
+                                ${job.qualifications ? `
+                                <div>
+                                    <h3 class="font-semibold text-gray-700">Qualifications</h3>
+                                    <p class="text-gray-600">${job.qualifications}</p>
+                                </div>
+                                ` : ''}
+                                ${job.contact_person ? `
+                                <div>
+                                    <h3 class="font-semibold text-gray-700">Contact Person</h3>
+                                    <p class="text-gray-600">${job.contact_person}</p>
+                                </div>
+                                ` : ''}
+                                ${job.contact_email ? `
+                                <div>
+                                    <h3 class="font-semibold text-gray-700">Contact Email</h3>
+                                    <p class="text-gray-600">${job.contact_email}</p>
+                                </div>
+                                ` : ''}
+                                ${job.contact_phone ? `
+                                <div>
+                                    <h3 class="font-semibold text-gray-700">Contact Phone</h3>
+                                    <p class="text-gray-600">${job.contact_phone}</p>
+                                </div>
+                                ` : ''}
+                            </div>
+                        `;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching job details:', error);
+                        content.innerHTML = '<div class="text-center text-red-500">Error loading job details</div>';
+                    });
+            } else {
+                content.innerHTML = '<div class="text-center text-gray-500">No job details available</div>';
+            }
         }
 
         function closeJobDetailsModal() {
@@ -1179,6 +1274,52 @@
 
         // Auto-advance hero slides every 5 seconds
         setInterval(nextHeroSlide, 5000);
+
+        // Event registration functions
+        function openEventRegistrationModal(eventId) {
+            document.getElementById('event_id').value = eventId;
+            document.getElementById('eventRegistrationModal').classList.remove('hidden');
+        }
+
+        function closeEventRegistrationModal() {
+            document.getElementById('eventRegistrationModal').classList.add('hidden');
+            document.getElementById('eventRegistrationForm').reset();
+        }
+
+        function submitEventRegistration(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const data = {
+                event_id: formData.get('event_id'),
+                full_name: formData.get('full_name'),
+                email: formData.get('email'),
+                application_reason: formData.get('application_reason')
+            };
+
+            // Send to backend
+            fetch('/volunteer/event-registration', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    alert('Registration submitted successfully! You will be notified about the status.');
+                    closeEventRegistrationModal();
+                } else {
+                    alert('Error: ' + result.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            });
+        }
 
         // Add scroll animation observer
         const observer = new IntersectionObserver((entries) => {

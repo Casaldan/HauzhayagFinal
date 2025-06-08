@@ -19,9 +19,7 @@ use App\Http\Controllers\JobListingController;
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 //login Routes
 
@@ -193,3 +191,8 @@ Route::get('/scholarship/track/{tracking_code}', [App\Http\Controllers\Scholarsh
 
 // New route for students to view job listings
 Route::get('/jobs/listings', [JobListingController::class, 'index'])->name('jobs.listings');
+
+// Volunteer event application routes
+Route::post('/volunteer/event-registration', [App\Http\Controllers\VolunteerEventApplicationController::class, 'store']);
+Route::get('/admin/volunteer-applications', [App\Http\Controllers\VolunteerEventApplicationController::class, 'index'])->name('admin.volunteer-applications.index');
+Route::patch('/admin/volunteer-applications/{application}/status', [App\Http\Controllers\VolunteerEventApplicationController::class, 'updateStatus'])->name('admin.volunteer-applications.update-status');

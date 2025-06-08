@@ -98,7 +98,7 @@
                                 <td class="px-4 py-3">{{ $job->company_name ?? 'N/A' }}</td>
                                 <td class="px-4 py-3">{{ $job->role }}</td>
                                 <td class="px-4 py-3">{{ $job->employment_type ?? 'N/A' }}</td>
-                                <td class="px-4 py-3">{{ $job->location ?? 'N/A' }}</td>
+                                <td class="px-4 py-3">{{ $job->location ?? 'Not specified' }}</td>
                                 <td class="px-4 py-3">
                                     @if($job->status === 'approved')
                                         <span class="inline-block px-2 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded">Approved</span>

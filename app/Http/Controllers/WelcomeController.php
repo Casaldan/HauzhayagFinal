@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Models\JobListing;
 
 class WelcomeController extends Controller
 {
@@ -18,6 +19,18 @@ class WelcomeController extends Controller
             ->take(6)
             ->get();
 
-        return view('welcome', compact('events'));
+        // Get all approved job listings (both admin-posted and volunteer-posted)
+        $jobs = JobListing::where('status', 'approved')
+            ->where(function($query) {
+                $query->whereNull('expires_at')
+                      ->orWhere('expires_at', '>', now());
+            })
+            ->orderBy('created_at', 'desc')
+            ->take(6)
+            ->get();
+
+        return view('welcome', compact('events', 'jobs'));
     }
 }
+
+
