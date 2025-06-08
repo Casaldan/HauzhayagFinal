@@ -29,6 +29,7 @@ class ScholarshipController extends Controller
             'full_name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone_number' => 'nullable|string|max:20',
+            'scholarship_type' => 'required|string|in:community_based,in_house',
             'transcript' => 'required|file|mimes:jpg,jpeg,png|max:5120', // Max 5MB example
         ]);
 
@@ -50,7 +51,7 @@ class ScholarshipController extends Controller
             'full_name' => $validatedData['full_name'],
             'email' => $validatedData['email'],
             'phone_number' => $validatedData['phone_number'],
-            'scholarship_type' => 'general', // Default scholarship type
+            'scholarship_type' => $validatedData['scholarship_type'], // Use actual scholarship type from form
             'transcript_path' => $transcriptPath,
             'tracking_code' => $trackingCode,
             'status' => 'pending', // Default status
@@ -68,7 +69,7 @@ class ScholarshipController extends Controller
                 'class_year' => Carbon::now()->format('Y'), // Add current year as class year
                 'status' => 'active', // Add status field
                 'phone_number' => $validatedData['phone_number'], // Add phone_number
-                'scholarship_type' => 'general', // Default scholarship type
+                'scholarship_type' => $validatedData['scholarship_type'], // Use actual scholarship type from form
             ]);
         }
 

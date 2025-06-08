@@ -283,52 +283,37 @@ class VolunteerController extends Controller
 
     public function storeJob(Request $request)
     {
-        $request->validate([
-            'poster_name' => 'required|string|max:255',
-            'company_name' => 'required|string|max:255',
-            'role' => 'required|string|max:255',
-            'salary' => 'required|string|max:255',
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'company_name' => 'nullable|string|max:255',
+            'role' => 'nullable|string|max:255',
             'description' => 'required|string',
-            'qualifications' => 'required|string',
-            'contact_email' => 'required|email|max:255',
-            'contact_phone' => 'nullable|string|max:20',
-            'contact_person' => 'required|string|max:255',
-            'contact_link' => 'nullable|url|max:255',
+            'location' => 'required|string|max:255',
+            'employment_type' => 'nullable|string|max:255',
+            'type' => 'nullable|string|max:255',
             'category' => 'required|string|max:255',
-            'type' => 'required|string|max:255',
-            // 'location' => 'required|string|max:255',
-            // 'hours_per_week' => 'required|numeric|min:1',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date',
+            'requirements' => 'nullable|string',
+            'benefits' => 'nullable|string',
+            'contact_email' => 'required|email|max:255',
+            'contact_phone' => 'nullable|string|max:255',
+            'contact_person' => 'required|string|max:255',
+            'qualifications' => 'required|string',
+            'salary_min' => 'nullable|numeric|min:0',
+            'salary_max' => 'nullable|numeric|min:0',
+            'expires_at' => 'nullable|date',
         ]);
 
-        $job = JobListing::create([
-            'title' => $request->role,
-            'description' => $request->description,
-            'company' => $request->company_name,
-            'company_name' => $request->company_name,
-            'role' => $request->role,
-            'salary_min' => null,
-            'salary_max' => null,
-            'status' => 'pending', // Needs admin approval
-            'qualifications' => $request->qualifications,
-            'contact_email' => $request->contact_email,
-            'contact_phone' => $request->contact_phone,
-            'contact_person' => $request->contact_person,
-            'posted_by' => auth()->id(),
-            'is_admin_posted' => false,
-            'benefits' => null,
-            'requirements' => null,
-            'category' => $request->category,
-            'type' => $request->type,
-            'employment_type' => null,
-            'start_date' => null,
-            'end_date' => null,
-            'expires_at' => null,
-            'contact_link' => $request->contact_link,
-            'salary' => $request->salary,
-            // 'location' => $request->location,
-        ]);
+        // Set default values for volunteer-created jobs
+        $validated['status'] = 'pending'; // Needs admin approval
+        $validated['is_admin_posted'] = false;
+        $validated['posted_by'] = auth()->id();
+        $validated['type'] = $validated['employment_type'] ?? 'full-time';
 
-        return redirect()->route('volunteer.dashboard')->with('success', 'Job post submitted successfully for admin approval.');
+        $job = JobListing::create($validated);
+
+        return redirect()->route('volunteer.dashboard')->with('success', 'Job listing submitted successfully! It will be reviewed by an administrator before being published.');
     }
 
     public function jobListings()

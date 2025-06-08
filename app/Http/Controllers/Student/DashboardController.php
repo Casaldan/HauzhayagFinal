@@ -74,4 +74,35 @@ class DashboardController extends Controller
 
         return view('student.events.index', compact('events'));
     }
-} 
+
+    /**
+     * Display the list of job listings for students.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function jobsIndex()
+    {
+        $jobs = JobListing::where('status', 'approved')
+            ->latest()
+            ->get();
+
+        // Get unique companies and locations for filtering
+        $companies = JobListing::where('status', 'approved')
+            ->whereNotNull('company_name')
+            ->distinct()
+            ->pluck('company_name')
+            ->filter()
+            ->sort()
+            ->values();
+
+        $locations = JobListing::where('status', 'approved')
+            ->whereNotNull('location')
+            ->distinct()
+            ->pluck('location')
+            ->filter()
+            ->sort()
+            ->values();
+
+        return view('student.jobs.index', compact('jobs', 'companies', 'locations'));
+    }
+}

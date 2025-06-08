@@ -146,47 +146,55 @@ class JobListingController extends Controller
             ->with('success', 'Job listing created successfully!');
     }
 
-    public function approve($id)
+    public function approve(JobListing $job)
     {
-        $job = JobListing::findOrFail($id);
         $job->update(['status' => 'approved']);
         return redirect()->route('admin.jobs.index')->with('success', 'Job approved successfully!');
     }
 
-    public function reject($id)
+    public function reject(JobListing $job)
     {
-        $job = JobListing::findOrFail($id);
         $job->update(['status' => 'rejected']);
         return redirect()->route('admin.jobs.index')->with('success', 'Job rejected successfully!');
     }
 
-    public function edit($id)
+    public function edit(JobListing $job)
     {
-        $job = JobListing::findOrFail($id);
-        return view('jobs.edit', compact('job'));
+        return view('admin.jobs.edit', compact('job'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, JobListing $job)
     {
-        $job = JobListing::findOrFail($id);
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'required|string',
             'company_name' => 'required|string|max:255',
-            'location' => 'nullable|string|max:255',
-            'salary' => 'nullable|string|max:255',
+            'role' => 'nullable|string|max:255',
+            'description' => 'required|string',
+            'qualifications' => 'required|string',
+            'location' => 'required|string|max:255',
+            'employment_type' => 'nullable|string|max:255',
+            'category' => 'required|string|max:255',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
             'requirements' => 'nullable|string',
+            'benefits' => 'nullable|string',
+            'contact_email' => 'required|email|max:255',
+            'contact_phone' => 'nullable|string|max:255',
+            'contact_person' => 'required|string|max:255',
+            'salary_min' => 'nullable|numeric|min:0',
+            'salary_max' => 'nullable|numeric|min:0|gte:salary_min',
+            'expires_at' => 'nullable|date',
         ]);
+
         $validated['location'] = trim($validated['location']);
         $job->update($validated);
         return redirect()->route('admin.jobs.index')->with('success', 'Job updated successfully!');
     }
 
-    public function destroy($id)
+    public function destroy(JobListing $job)
     {
-        $job = JobListing::findOrFail($id);
         $job->delete();
-        return redirect()->route('jobs.admin.index')->with('success', 'Job deleted successfully!');
+        return redirect()->route('admin.jobs.index')->with('success', 'Job deleted successfully!');
     }
 
 

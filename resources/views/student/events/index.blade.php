@@ -1,73 +1,170 @@
-<x-app-layout>
-    <div class="flex">
-        <!-- Sidebar (reuse from student dashboard) -->
-        <div class="w-64 min-h-screen bg-[#1B4B5A] text-white flex flex-col">
-            <div class="p-4 flex items-center space-x-2">
-                <img src="{{ asset('image/logohauzhayag.jpg') }}" alt="Hauz Hayag Logo" class="h-16 w-auto rounded-lg shadow-md">
-                <h1 class="text-2xl font-bold">Hauz Hayag</h1>
-            </div>
-            <nav class="mt-8 flex-1 flex flex-col">
-                <a href="{{ route('student.dashboard') }}" class="flex items-center px-4 py-3 hover:bg-[#2C5F6E] transition-colors">
-                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-                    </svg>
-                    Dashboard
-                </a>
-                <a href="{{ route('jobs.listings') }}" class="flex items-center px-4 py-3 hover:bg-[#2C5F6E] transition-colors">
-                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                              d="M9 12h6m-3-3v6m-7 4h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                    </svg>
-                    Job Listings
-                </a>
-                <a href="{{ route('student.events.index') }}" class="flex items-center px-4 py-3 bg-[#2C5F6E] hover:bg-[#2C5F6E] transition-colors">
-                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                    </svg>
-                    Events
-                </a>
-                <div class="mt-auto pt-20">
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="w-full flex items-center px-4 py-3 hover:bg-[#2C5F6E] transition-colors text-red-300 hover:text-red-200">
-                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                      d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-                            </svg>
-                            Logout
-                        </button>
-                    </form>
-                </div>
-            </nav>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Events - {{ config('app.name', 'Hauz Hayag') }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3A5F6B',
+                        secondary: '#2C5F6E',
+                        neutral: '#f8fafc'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Enhanced hover effects */
+        .hover-scale {
+            transition: transform 0.3s ease-in-out;
+        }
+        .hover-scale:hover {
+            transform: scale(1.02);
+        }
+
+        /* Card animations */
+        .card-hover {
+            transition: all 0.3s ease-in-out;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-['Inter']">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <x-sidebar role="student" currentRoute="{{ request()->route()->getName() ?? 'events' }}" />
 
         <!-- Main Content -->
-        <div class="flex-1 p-8 bg-gray-50">
-            <h1 class="text-2xl font-bold text-gray-800 mb-6">Available Events</h1>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                @forelse($events as $event)
-                    <div class="bg-white rounded-lg shadow-md p-6 flex flex-col justify-between">
-                        <div>
-                            <h2 class="text-xl font-semibold text-primary mb-2">{{ $event->title }}</h2>
-                            <p class="text-gray-700 mb-2"><span class="font-semibold">Date:</span> {{ \Carbon\Carbon::parse($event->start_date)->format('F j, Y') }}</p>
-                            <p class="text-gray-700 mb-2"><span class="font-semibold">Time:</span> {{ \Carbon\Carbon::parse($event->start_date)->format('g:i A') }} - {{ \Carbon\Carbon::parse($event->end_date)->format('g:i A') }}</p>
-                            <p class="text-gray-700 mb-2"><span class="font-semibold">Location:</span> {{ $event->location }}</p>
-                            <p class="text-gray-700 mb-2"><span class="font-semibold">Description:</span> {{ $event->description }}</p>
+        <div class="flex-1 ml-64 overflow-y-auto">
+            <div class="p-8">
+                <!-- Header -->
+                <div class="bg-white p-6 flex justify-between items-center shadow-sm rounded-lg mb-8">
+                    <div>
+                        <h2 class="text-2xl font-bold flex items-center text-gray-800">
+                            <svg class="w-7 h-7 mr-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                            Available Events
+                        </h2>
+                        <p class="text-gray-600 mt-1">Discover and join exciting events</p>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <span class="text-gray-600 font-medium">{{ $events->count() }} Events Available</span>
+                        <div class="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                         </div>
-                        {{-- You can add a link to view event details if you have a show route for student events --}}
-                        {{-- <div class="mt-4">
-                            <a href="{{ route('student.events.show', $event->id) }}" class="text-blue-600 hover:underline">View Details</a>
-                        </div> --}}
                     </div>
-                @empty
-                    <div class="col-span-3 text-center text-gray-500">
-                        No events available at the moment.
+                </div>
+
+                <!-- Events Grid -->
+                <div class="grid gap-6">
+                    @forelse($events as $event)
+                    <div class="bg-white rounded-xl shadow-lg p-6 card-hover border-l-4 border-green-500">
+                        <div class="flex justify-between items-start">
+                            <div class="flex-1">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div>
+                                        <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ $event->title }}</h3>
+                                        <div class="space-y-2">
+                                            <p class="text-sm text-gray-600 flex items-center">
+                                                <svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                                </svg>
+                                                {{ \Carbon\Carbon::parse($event->start_date)->format('F j, Y') }}
+                                            </p>
+                                            <p class="text-sm text-gray-600 flex items-center">
+                                                <svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                                </svg>
+                                                {{ \Carbon\Carbon::parse($event->start_date)->format('g:i A') }} - {{ \Carbon\Carbon::parse($event->end_date)->format('g:i A') }}
+                                            </p>
+                                            <p class="text-sm text-gray-600 flex items-center">
+                                                <svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                                </svg>
+                                                {{ $event->location }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-end space-y-2">
+                                        <span class="px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                                            {{ ucfirst($event->status) }}
+                                        </span>
+                                        @if($event->is_admin_posted)
+                                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800">
+                                                Admin Event
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <!-- Event Description -->
+                                <p class="text-gray-700 mb-4">{{ $event->description }}</p>
+
+                                <!-- Action Button -->
+                                <div class="flex justify-end">
+                                    <button class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition-all duration-300 hover-scale flex items-center">
+                                        <span>Register Now</span>
+                                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                @endforelse
+                    @empty
+                    <div class="text-center py-16">
+                        <svg class="w-20 h-20 text-gray-400 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        <h3 class="text-xl font-medium text-gray-500 mb-2">No events available</h3>
+                        <p class="text-gray-400">Check back later for new events!</p>
+                    </div>
+                    @endforelse
+                </div>
             </div>
         </div>
     </div>
-</x-app-layout> 
+
+    <script>
+        // Add smooth animations on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate cards on load
+            const cards = document.querySelectorAll('.card-hover');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease-out';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // Add click animations
+            const buttons = document.querySelectorAll('.hover-scale');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

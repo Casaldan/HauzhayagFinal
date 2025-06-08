@@ -28,8 +28,8 @@ class JobListingController extends Controller
             'role' => 'nullable|string|max:255',
             'description' => 'required|string',
             'location' => 'required|string|max:255',
-            'type' => 'required|string|max:255',
-            'hours_per_week' => 'required|string|max:255',
+            'employment_type' => 'nullable|string|max:255',
+            'type' => 'nullable|string|max:255',
             'category' => 'required|string|max:255',
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date',
@@ -37,11 +37,18 @@ class JobListingController extends Controller
             'benefits' => 'nullable|string',
             'contact_email' => 'required|email|max:255',
             'contact_phone' => 'nullable|string|max:255',
-            'employment_type' => 'nullable|string|max:255',
+            'contact_person' => 'required|string|max:255',
+            'qualifications' => 'required|string',
+            'salary_min' => 'nullable|numeric|min:0',
+            'salary_max' => 'nullable|numeric|min:0',
+            'expires_at' => 'nullable|date',
+            'status' => 'nullable|string|max:255',
         ]);
 
-        $validated['status'] = 'approved';
+        // Set default values for admin-created jobs
+        $validated['status'] = $validated['status'] ?? 'approved';
         $validated['is_admin_posted'] = true;
+        $validated['type'] = $validated['employment_type'] ?? 'full-time';
 
         $job = JobListing::create($validated);
 
@@ -67,8 +74,7 @@ class JobListingController extends Controller
             'role' => 'nullable|string|max:255',
             'description' => 'required|string',
             'location' => 'required|string|max:255',
-            'type' => 'required|string|max:255',
-            'hours_per_week' => 'required|string|max:255',
+            'employment_type' => 'nullable|string|max:255',
             'status' => 'required|string|max:255',
             'category' => 'required|string|max:255',
             'start_date' => 'nullable|date',
@@ -77,7 +83,11 @@ class JobListingController extends Controller
             'benefits' => 'nullable|string',
             'contact_email' => 'required|email|max:255',
             'contact_phone' => 'nullable|string|max:255',
-            'employment_type' => 'nullable|string|max:255',
+            'contact_person' => 'required|string|max:255',
+            'qualifications' => 'required|string',
+            'salary_min' => 'nullable|numeric|min:0',
+            'salary_max' => 'nullable|numeric|min:0',
+            'expires_at' => 'nullable|date',
         ]);
 
         $job->update($validated);

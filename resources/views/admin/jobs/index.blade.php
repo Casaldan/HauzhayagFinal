@@ -131,6 +131,28 @@
         </div>
     @endif
 
+    @php
+        $pendingJobsCount = $jobs->where('status', 'pending')->count();
+    @endphp
+
+    @if($pendingJobsCount > 0)
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-yellow-700">
+                        <strong>{{ $pendingJobsCount }}</strong> job{{ $pendingJobsCount > 1 ? 's' : '' }} pending approval.
+                        <span class="font-medium">Review and approve volunteer-submitted job listings below.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <div class="bg-white rounded-lg shadow overflow-hidden">
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
@@ -145,7 +167,7 @@
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                     @forelse($jobs as $job)
-                        <tr class="table-row transition-all duration-200">
+                        <tr class="table-row transition-all duration-200 {{ $job->status === 'pending' ? 'bg-yellow-50 border-l-4 border-yellow-400' : '' }}">
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
                                     <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-bold">
@@ -178,17 +200,40 @@
                                     <span class="text-gray-400">No expiry</span>
                                 @endif
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
-                                <a href="#" onclick="editJob({{ $job->id }})" class="bg-blue-600 text-white px-3 py-1 rounded-lg hover:bg-blue-700 transition-all btn-hover">
-                                    Edit
-                                </a>
-                                <form action="{{ route('admin.jobs.destroy', $job) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this job?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded-lg hover:bg-red-700 transition-all btn-hover">
-                                        Delete
-                                    </button>
-                                </form>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <div class="flex items-center justify-end space-x-2">
+                                    @if($job->status === 'pending')
+                                        <!-- Approve Button -->
+                                        <form action="{{ route('admin.jobs.approve', $job) }}" method="POST" class="inline-block">
+                                            @csrf
+                                            <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out btn-hover shadow-md hover:shadow-lg">
+                                                <i class="fas fa-check mr-1"></i>Approve
+                                            </button>
+                                        </form>
+
+                                        <!-- Reject Button -->
+                                        <form action="{{ route('admin.jobs.reject', $job) }}" method="POST" class="inline-block">
+                                            @csrf
+                                            <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-all duration-300 ease-in-out btn-hover shadow-md hover:shadow-lg">
+                                                <i class="fas fa-times mr-1"></i>Reject
+                                            </button>
+                                        </form>
+                                    @endif
+
+                                    <!-- Edit Button -->
+                                    <a href="#" onclick="editJob({{ $job->id }})" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 ease-in-out btn-hover shadow-md hover:shadow-lg">
+                                        <i class="fas fa-edit mr-1"></i>Edit
+                                    </a>
+
+                                    <!-- Delete Button -->
+                                    <form action="{{ route('admin.jobs.destroy', $job) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this job?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-all duration-300 ease-in-out btn-hover shadow-md hover:shadow-lg">
+                                            <i class="fas fa-trash mr-1"></i>Delete
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                     @empty
                         <tr>
@@ -228,6 +273,48 @@
                 }
             });
         });
+
+        // Add enhanced confirmation for approve actions
+        const approveButtons = document.querySelectorAll('form[action*="approve"] button');
+        approveButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (!confirm('Are you sure you want to approve this job? It will become visible to all users.')) {
+                    e.preventDefault();
+                }
+            });
+        });
+
+        // Add enhanced confirmation for reject actions
+        const rejectButtons = document.querySelectorAll('form[action*="reject"] button');
+        rejectButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (!confirm('Are you sure you want to reject this job? This action cannot be undone.')) {
+                    e.preventDefault();
+                }
+            });
+        });
+
+        // Highlight pending jobs on page load
+        const pendingRows = document.querySelectorAll('tr.bg-yellow-50');
+        pendingRows.forEach(row => {
+            row.style.animation = 'pulse 2s infinite';
+        });
     });
 </script>
+
+<style>
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.8; }
+    }
+
+    .btn-hover {
+        transition: all 0.3s ease-in-out;
+    }
+
+    .btn-hover:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+</style>
 @endpush

@@ -297,7 +297,7 @@
               <li>Monthly allowance</li>
               <li>Mentorship program</li>
           </ul>
-                    <button class="flex items-center justify-center gap-2 bg-primary text-white py-2 px-6 rounded-lg hover:bg-blue-400 mt-auto transition mb-2 font-semibold shadow" onclick="openScholarshipModal()">
+                    <button class="flex items-center justify-center gap-2 bg-primary text-white py-2 px-6 rounded-lg hover:bg-blue-400 mt-auto transition mb-2 font-semibold shadow" onclick="openScholarshipModal('community_based')">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"></path></svg>
                         Apply Now
                     </button>
@@ -313,7 +313,7 @@
               <li>Leadership training</li>
               <li>Career guidance</li>
           </ul>
-                    <button class="flex items-center justify-center gap-2 bg-primary text-white py-2 px-6 rounded-lg hover:bg-blue-400 mt-auto transition mb-2 font-semibold shadow" onclick="openScholarshipModal()">
+                    <button class="flex items-center justify-center gap-2 bg-primary text-white py-2 px-6 rounded-lg hover:bg-blue-400 mt-auto transition mb-2 font-semibold shadow" onclick="openScholarshipModal('in_house')">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"></path></svg>
                         Apply Now
                     </button>
@@ -865,15 +865,8 @@
                     <label for="welcome_phone_number" class="block text-sm font-medium mb-1">Phone Number</label>
                     <input type="tel" id="welcome_phone_number" name="phone_number" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" value="{{ old('phone_number') }}">
                 </div>
-                <div>
-                    <label for="welcome_scholarship_type" class="block text-sm font-medium text-gray-700">Scholarship Type</label>
-                    <select name="scholarship_type" id="welcome_scholarship_type" required
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm">
-                        <option value="" disabled {{ old('scholarship_type') ? '' : 'selected' }}>Select Type</option>
-                        <option value="home_based" {{ old('scholarship_type') == 'home_based' ? 'selected' : '' }}>Home Based</option>
-                        <option value="in_house" {{ old('scholarship_type') == 'in_house' ? 'selected' : '' }}>In House</option>
-                    </select>
-                </div>
+                <!-- Hidden field for scholarship type - will be set dynamically -->
+                <input type="hidden" name="scholarship_type" id="welcome_scholarship_type_hidden" value="community_based">
                 <div>
                     <label for="welcome_transcript" class="block text-sm font-medium mb-1">Upload Transcript (PDF, JPG, PNG - Max 5MB)</label>
                     <input type="file" id="welcome_transcript" name="transcript" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20" required accept=".pdf,.jpg,.jpeg,.png">
@@ -1003,7 +996,18 @@
             document.getElementById('donationModal').classList.add('hidden');
         }
 
-        function openScholarshipModal() {
+        function openScholarshipModal(scholarshipType = 'community_based') {
+            // Set the scholarship type in the hidden field
+            document.getElementById('welcome_scholarship_type_hidden').value = scholarshipType;
+
+            // Update modal title based on scholarship type
+            const modalTitle = document.querySelector('#scholarshipApplicationModal h2');
+            if (scholarshipType === 'in_house') {
+                modalTitle.textContent = 'In-House Scholarship Application';
+            } else {
+                modalTitle.textContent = 'Community-Based Scholarship Application';
+            }
+
             document.getElementById('scholarshipApplicationModal').classList.remove('hidden');
         }
 

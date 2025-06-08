@@ -124,23 +124,16 @@
                 @error('qualifications')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <label for="employment_type" class="block text-sm font-medium text-gray-700">Employment Type <span class="text-red-500">*</span></label>
-                    <select id="employment_type" name="employment_type" required class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/30 @error('employment_type') border-red-500 @enderror">
-                        <option value="">Select Type</option>
-                        <option value="Full-time" {{ old('employment_type') == 'Full-time' ? 'selected' : '' }}>Full-time</option>
-                        <option value="Part-time" {{ old('employment_type') == 'Part-time' ? 'selected' : '' }}>Part-time</option>
-                        <option value="Contract" {{ old('employment_type') == 'Contract' ? 'selected' : '' }}>Contract</option>
-                        <option value="Internship" {{ old('employment_type') == 'Internship' ? 'selected' : '' }}>Internship</option>
-                    </select>
-                    @error('employment_type')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
-                </div>
-                <div>
-                    <label for="hours_per_week" class="block text-sm font-medium text-gray-700">Hours per Week</label>
-                    <input type="number" id="hours_per_week" name="hours_per_week" value="{{ old('hours_per_week') }}" class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/30 @error('hours_per_week') border-red-500 @enderror">
-                    @error('hours_per_week')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
-                </div>
+            <div class="form-group">
+                <label for="employment_type" class="block text-sm font-medium text-gray-700">Employment Type</label>
+                <select id="employment_type" name="employment_type" class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/30 @error('employment_type') border-red-500 @enderror">
+                    <option value="">Select Type (Optional)</option>
+                    <option value="Full-time" {{ old('employment_type') == 'Full-time' ? 'selected' : '' }}>Full-time</option>
+                    <option value="Part-time" {{ old('employment_type') == 'Part-time' ? 'selected' : '' }}>Part-time</option>
+                    <option value="Contract" {{ old('employment_type') == 'Contract' ? 'selected' : '' }}>Contract</option>
+                    <option value="Internship" {{ old('employment_type') == 'Internship' ? 'selected' : '' }}>Internship</option>
+                </select>
+                @error('employment_type')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -176,13 +169,15 @@
             </div>
 
             <div class="form-group">
-                <label for="status" class="block text-sm font-medium text-gray-700">Status <span class="text-red-500">*</span></label>
-                <select id="status" name="status" required class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/30 @error('status') border-red-500 @enderror">
+                <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+                <select id="status" name="status" class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/30 @error('status') border-red-500 @enderror">
+                    <option value="">Auto-approve (Default)</option>
                     <option value="pending" {{ old('status') == 'pending' ? 'selected' : '' }}>Pending</option>
                     <option value="approved" {{ old('status') == 'approved' ? 'selected' : '' }}>Approved</option>
                     <option value="rejected" {{ old('status') == 'rejected' ? 'selected' : '' }}>Rejected</option>
                 </select>
                 @error('status')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
+                <p class="text-sm text-gray-500 mt-1">Leave as default to auto-approve this job listing</p>
             </div>
 
             <!-- Action Buttons -->
