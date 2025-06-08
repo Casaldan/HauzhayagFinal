@@ -46,8 +46,13 @@
                         <label class="block text-sm font-medium text-gray-700">Class Year</label>
                         <select name="class_year" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
                             <option value="">Select Class Year</option>
-                            <option value="2025" {{ $user->class_year === '2025' ? 'selected' : '' }}>Class of 2025</option>
-                            <option value="2026" {{ $user->class_year === '2026' ? 'selected' : '' }}>Class of 2026</option>
+                            @php
+                                $currentYear = date('Y');
+                                $startYear = 2009;
+                            @endphp
+                            @for($year = $currentYear; $year >= $startYear; $year--)
+                                <option value="{{ $year }}" {{ $user->class_year == $year ? 'selected' : '' }}>Class of {{ $year }}</option>
+                            @endfor
                         </select>
                     </div>
                     <div class="flex justify-between items-center pt-4">

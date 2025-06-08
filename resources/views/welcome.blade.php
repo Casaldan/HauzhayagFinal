@@ -6,6 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Hauz Hayag</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('image/logohauzhayag.jpg') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('image/logohauzhayag.jpg') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('image/logohauzhayag.jpg') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('image/logohauzhayag.jpg') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('image/logohauzhayag.jpg') }}">
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('image/logohauzhayag.jpg') }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('image/logohauzhayag.jpg') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('image/logohauzhayag.jpg') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('image/logohauzhayag.jpg') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('image/logohauzhayag.jpg') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('image/logohauzhayag.jpg') }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('image/logohauzhayag.jpg') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('image/logohauzhayag.jpg') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('image/logohauzhayag.jpg') }}">
+    <meta name="msapplication-TileImage" content="{{ asset('image/logohauzhayag.jpg') }}">
+    <meta name="msapplication-TileColor" content="#00A4B8">
+    <meta name="theme-color" content="#00A4B8">
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -288,7 +308,7 @@
             <h2 class="text-3xl font-bold text-center mb-12 text-primary animate-bounce-in">Scholarship & Programs</h2>
   <div class="grid md:grid-cols-3 gap-8">
       <!-- Scholarship 1 -->
-                <div class="bg-white shadow-lg p-6 rounded-xl flex flex-col border-t-4 border-primary hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in-left" style="animation-delay: 0.1s">
+                <div class="bg-white shadow-lg p-6 rounded-xl flex flex-col border-t-4 border-primary hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out transform animate-bounce-in-left" style="animation-delay: 0.1s">
                     <div class="text-primary text-2xl mb-4"><i class="fas fa-users"></i></div>
           <h3 class="text-xl font-semibold mb-2">Community-based Scholarship</h3>
           <p class="text-gray-600 mb-4">Open to all qualified students who demonstrate academic excellence and financial need.</p>
@@ -297,14 +317,14 @@
               <li>Monthly allowance</li>
               <li>Mentorship program</li>
           </ul>
-                    <button class="flex items-center justify-center gap-2 bg-primary text-white py-2 px-6 rounded-lg hover:bg-blue-400 mt-auto transition mb-2 font-semibold shadow" onclick="openScholarshipModal('community_based')">
+                    <button class="flex items-center justify-center gap-2 bg-primary text-white py-2 px-6 rounded-lg hover:bg-blue-400 hover:shadow-lg transform hover:scale-105 mt-auto transition-all duration-300 ease-in-out mb-2 font-semibold shadow" onclick="openScholarshipModal('community_based')">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"></path></svg>
                         Apply Now
                     </button>
       </div>
 
       <!-- Scholarship 2 -->
-                <div class="bg-white shadow-lg p-6 rounded-xl flex flex-col border-t-4 border-primary hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in" style="animation-delay: 0.2s">
+                <div class="bg-white shadow-lg p-6 rounded-xl flex flex-col border-t-4 border-primary hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out transform animate-bounce-in" style="animation-delay: 0.2s">
                     <div class="text-primary text-2xl mb-4"><i class="fas fa-female"></i></div>
           <h3 class="text-xl font-semibold mb-2">In-house Scholarship for Girls</h3>
           <p class="text-gray-600 mb-4">Exclusive program designed to empower young women through education and leadership.</p>
@@ -313,15 +333,15 @@
               <li>Leadership training</li>
               <li>Career guidance</li>
           </ul>
-                    <button class="flex items-center justify-center gap-2 bg-primary text-white py-2 px-6 rounded-lg hover:bg-blue-400 mt-auto transition mb-2 font-semibold shadow" onclick="openScholarshipModal('in_house')">
+                    <button class="flex items-center justify-center gap-2 bg-primary text-white py-2 px-6 rounded-lg hover:bg-blue-400 hover:shadow-lg transform hover:scale-105 mt-auto transition-all duration-300 ease-in-out mb-2 font-semibold shadow" onclick="openScholarshipModal('in_house')">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"></path></svg>
                         Apply Now
                     </button>
       </div>
 
       <!-- Scholarship 3 -->
-                <div class="bg-white shadow-lg p-6 rounded-xl flex flex-col border-t-4 border-primary hover:animate-elevate hover:animate-rotate-3d transition-all duration-300 animate-bounce-in-right" style="animation-delay: 0.3s">
-                    <div class="text-primary text-2xl mb-4"><i class="fas fa-female"></i></div>
+                <div class="bg-white shadow-lg p-6 rounded-xl flex flex-col border-t-4 border-primary hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out transform animate-bounce-in-right" style="animation-delay: 0.3s">
+                    <div class="text-primary text-2xl mb-4"><i class="fas fa-utensils"></i></div>
           <h3 class="text-xl font-semibold mb-2">Feeding Program</h3>
           <p class="text-gray-600 mb-4">A feeding program for less fortunate children living nearby area.</p>
           <ul class="list-disc list-inside text-gray-600 mb-6">

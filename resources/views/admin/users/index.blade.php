@@ -114,8 +114,13 @@
         <div class="relative">
             <select name="class_year" class="appearance-none pl-3 pr-10 py-2 border border-gray-300 bg-white rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary text-sm user-filter-dropdown">
                 <option value="">All Class Years</option>
-                <option value="2025" {{ request('class_year') == '2025' ? 'selected' : '' }}>Class of 2025</option>
-                <option value="2026" {{ request('class_year') == '2026' ? 'selected' : '' }}>Class of 2026</option>
+                @php
+                    $currentYear = date('Y');
+                    $startYear = 2009;
+                @endphp
+                @for($year = $currentYear; $year >= $startYear; $year--)
+                    <option value="{{ $year }}" {{ request('class_year') == $year ? 'selected' : '' }}>Class of {{ $year }}</option>
+                @endfor
             </select>
             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
