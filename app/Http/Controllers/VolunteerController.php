@@ -55,22 +55,8 @@ class VolunteerController extends Controller
                 ->take(5)
                 ->get();
 
-            // Get volunteer applications by email (since volunteers might not be registered users)
-            $user = auth()->user();
-            $pendingApplications = \App\Models\VolunteerEventApplication::where('email', $user->email)
-                ->where('status', 'pending')
-                ->with('event')
-                ->latest()
-                ->get();
-
-            $approvedApplications = \App\Models\VolunteerEventApplication::where('email', $user->email)
-                ->where('status', 'approved')
-                ->with('event')
-                ->latest()
-                ->get();
-
             return view('volunteers.volunteerdashboard', compact(
-                'events', 'allJobs', 'hoursThisMonth', 'totalHours', 'recentActivities', 'pendingApplications', 'approvedApplications'
+                'events', 'allJobs', 'hoursThisMonth', 'totalHours', 'recentActivities'
             ));
         } catch (\Exception $e) {
             \Log::error('Volunteer Dashboard Error: ' . $e->getMessage());
@@ -78,19 +64,7 @@ class VolunteerController extends Controller
         }
     }
 
-    public function jobPost()
-    {
-        // Fetch all approved job listings
-        $jobs = JobListing::where('status', 'approved')
-            ->where(function($query) {
-                $query->whereNull('expires_at')
-                      ->orWhere('expires_at', '>', now());
-            })
-            ->orderBy('created_at', 'desc')
-            ->get();
 
-        return view('volunteers.volunteer_job_post', compact('jobs'));
-    }
 
     /**
      * Store a newly created volunteer in the database.
@@ -103,12 +77,15 @@ class VolunteerController extends Controller
         // Validate the request data
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:volunteers',
-            'phone' => 'required|string|max:20',
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:volunteers', 'regex:/@gmail\./i'],
+            'phone' => ['required', 'string', 'regex:/^\d{11}$/'],
             'skills' => 'nullable|array',
             'status' => 'required|in:Active,Pending,Inactive',
             'notes' => 'nullable|string',
             'start_date' => 'required|date',
+        ], [
+            'email.regex' => 'Email must be a Gmail address (must contain @gmail).',
+            'phone.regex' => 'Phone number must be exactly 11 digits.'
         ]);
 
         if ($validator->fails()) {
@@ -175,7 +152,7 @@ class VolunteerController extends Controller
     public function viewCalendar()
     {
         // Logic for viewing calendar
-        return view('volunteers.calendar');
+        return view('volunteer.calendar');
     }
 
     public function addJobOffer(Request $request)
@@ -185,58 +162,7 @@ class VolunteerController extends Controller
         return back()->with('success', 'Job offer added successfully');
     }
 
-    public function storeJobPost(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'location' => 'required|string|max:255',
-            'type' => 'required|string|in:Full-time,Part-time,Contract,Temporary,Internship',
-            'employment_type' => 'required|string|in:Paid,Unpaid',
-            'hours_per_week' => 'nullable|numeric',
-            'category' => 'required|string|max:255',
-            'start_date' => 'nullable|date',
-            'end_date' => 'nullable|date|after_or_equal:start_date',
-            'requirements' => 'nullable|string',
-            'benefits' => 'nullable|string',
-            'contact_email' => 'required|email|max:255',
-            'contact_phone' => 'nullable|string|max:20',
-            'salary_min' => 'nullable|numeric',
-            'salary_max' => 'nullable|numeric|greater_than_field:salary_min',
-            'contact_person' => 'required|string|max:255',
-            'expires_at' => 'nullable|date|after_or_equal:today',
-        ]);
 
-        $job = JobListing::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'company' => Auth::user()->name, // Assuming the logged-in user is the company/poster
-            'company_name' => Auth::user()->name, // Assuming the logged-in user is the company/poster
-            'location' => $request->location,
-            'type' => $request->type,
-            'employment_type' => $request->employment_type,
-            'hours_per_week' => $request->hours_per_week,
-            'status' => 'pending', // Jobs posted by volunteers might need admin approval
-            'category' => $request->category,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
-            'requirements' => $request->requirements,
-            'benefits' => $request->benefits,
-            'contact_email' => $request->contact_email,
-            'contact_phone' => $request->contact_phone,
-            'salary_min' => $request->salary_min,
-            'salary_max' => $request->salary_max,
-            'role' => $request->title, // Using title as a default for role if not provided
-            'qualifications' => $request->requirements, // Using requirements as a default for qualifications if not provided
-            'contact_person' => $request->contact_person,
-            'expires_at' => $request->expires_at,
-            'is_admin_posted' => false, // Mark as not admin posted
-            'posted_by' => Auth::id(), // Record the user who posted it
-        ]);
-
-        // Redirect or return a response
-        return redirect()->route('volunteer.dashboard')->with('success', 'Job post submitted successfully for review.');
-    }
 
     /**
      * Remove the specified volunteer from storage.
@@ -255,6 +181,27 @@ class VolunteerController extends Controller
         }
     }
 
+    public function jobs()
+    {
+        // Fetch all approved job listings for volunteers to view
+        $jobs = JobListing::where('status', 'approved')
+            ->latest()
+            ->get();
+
+        // Get unique companies and locations for filtering
+        $companies = JobListing::where('status', 'approved')
+            ->whereNotNull('company_name')
+            ->distinct()
+            ->pluck('company_name');
+
+        $locations = JobListing::where('status', 'approved')
+            ->whereNotNull('location')
+            ->distinct()
+            ->pluck('location');
+
+        return view('volunteer.jobs', compact('jobs', 'companies', 'locations'));
+    }
+
     public function events()
     {
         $events = \App\Models\Event::where('status', 'active')
@@ -262,7 +209,7 @@ class VolunteerController extends Controller
             ->where('end_date', '>', now())
             ->orderBy('start_date', 'asc')
             ->get();
-        return view('volunteers.events', compact('events'));
+        return view('volunteer.events', compact('events'));
     }
 
     public function showEvent($id)
@@ -276,57 +223,5 @@ class VolunteerController extends Controller
         return view('volunteers.event_application_form', compact('event'));
     }
 
-    public function createJob()
-    {
-        return view('volunteers.job_create');
-    }
 
-    public function storeJob(Request $request)
-    {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'company_name' => 'nullable|string|max:255',
-            'role' => 'nullable|string|max:255',
-            'description' => 'required|string',
-            'location' => 'required|string|max:255',
-            'employment_type' => 'nullable|string|max:255',
-            'type' => 'nullable|string|max:255',
-            'category' => 'required|string|max:255',
-            'start_date' => 'nullable|date',
-            'end_date' => 'nullable|date',
-            'requirements' => 'nullable|string',
-            'benefits' => 'nullable|string',
-            'contact_email' => 'required|email|max:255',
-            'contact_phone' => 'nullable|string|max:255',
-            'contact_person' => 'required|string|max:255',
-            'qualifications' => 'required|string',
-            'salary_min' => 'nullable|numeric|min:0',
-            'salary_max' => 'nullable|numeric|min:0',
-            'expires_at' => 'nullable|date',
-        ]);
-
-        // Set default values for volunteer-created jobs
-        $validated['status'] = 'pending'; // Needs admin approval
-        $validated['is_admin_posted'] = false;
-        $validated['posted_by'] = auth()->id();
-        $validated['type'] = $validated['employment_type'] ?? 'full-time';
-
-        $job = JobListing::create($validated);
-
-        return redirect()->route('volunteer.dashboard')->with('success', 'Job listing submitted successfully! It will be reviewed by an administrator before being published.');
-    }
-
-    public function jobListings()
-    {
-        $adminJobs = \App\Models\JobListing::where('is_admin_posted', true)
-            ->where('status', 'approved')
-            ->orderBy('created_at', 'desc')
-            ->get();
-
-        $myJobs = \App\Models\JobListing::where('posted_by', auth()->id())
-            ->orderBy('created_at', 'desc')
-            ->get();
-
-        return view('volunteers.job_listings', compact('adminJobs', 'myJobs'));
-    }
 }

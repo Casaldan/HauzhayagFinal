@@ -54,14 +54,17 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'regex:/@gmail\./i'],
             'password' => 'required|string|min:8',
             'role' => 'required|string|in:admin,student,volunteer',  // Updated roles
             'status' => 'required|string|in:active,inactive',
             'class_year' => 'nullable|string',  // Add class_year validation
             'profile_picture' => 'nullable|image|max:1024',
-            'phone_number' => 'nullable|string|max:20', // Add phone_number validation
+            'phone_number' => ['nullable', 'string', 'regex:/^\d{11}$/'], // Add phone_number validation
             'scholarship_type' => 'nullable|string|in:home_based,in_house', // Add scholarship_type validation
+        ], [
+            'email.regex' => 'Email must be a Gmail address (must contain @gmail).',
+            'phone_number.regex' => 'Phone number must be exactly 11 digits.'
         ]);
 
         $user = new User();
@@ -93,13 +96,16 @@ class UserController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id, 'regex:/@gmail\./i'],
             'role' => 'required|in:admin,student,volunteer',
             'status' => 'required|in:active,inactive',
             'class_year' => 'nullable|string',  // Add this line
             'password' => 'nullable|string|min:8',
-            'phone_number' => 'nullable|string|max:20', // Add phone_number validation
+            'phone_number' => ['nullable', 'string', 'regex:/^\d{11}$/'], // Add phone_number validation
             'scholarship_type' => 'nullable|string|in:home_based,in_house', // Add scholarship_type validation
+        ], [
+            'email.regex' => 'Email must be a Gmail address (must contain @gmail).',
+            'phone_number.regex' => 'Phone number must be exactly 11 digits.'
         ]);
 
         if (isset($validated['password'])) {

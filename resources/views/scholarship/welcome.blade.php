@@ -58,8 +58,9 @@
                     <!-- Phone Number -->
                     <div class="space-y-2">
                         <label for="phone_number" class="block text-sm font-medium text-gray-700">Phone Number</label>
-                        <input type="tel" name="phone_number" id="phone_number" value="{{ old('phone_number') }}" required 
-                            class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <input type="tel" name="phone_number" id="phone_number" value="{{ old('phone_number') }}" required
+                            class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                            placeholder="09123456789" maxlength="11" pattern="[0-9]{11}" inputmode="numeric">
                         @error('phone_number')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
@@ -118,5 +119,94 @@
             </div>
         </div>
     </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const phoneInput = document.getElementById('phone_number');
+        const emailInput = document.getElementById('email');
+        const form = document.querySelector('form');
+
+        // Phone number validation
+        if (phoneInput) {
+            // Prevent non-numeric input
+            phoneInput.addEventListener('keypress', function(e) {
+                // Allow only digits (0-9)
+                if (!/[0-9]/.test(e.key) && !['Backspace', 'Delete', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                    e.preventDefault();
+                }
+            });
+
+            phoneInput.addEventListener('input', function(e) {
+                // Remove any non-digit characters
+                let value = e.target.value.replace(/\D/g, '');
+
+                // Limit to 11 digits
+                if (value.length > 11) {
+                    value = value.slice(0, 11);
+                }
+
+                e.target.value = value;
+            });
+
+            phoneInput.addEventListener('blur', function(e) {
+                const phone = e.target.value.replace(/\D/g, '');
+                if (phone.length !== 11) {
+                    alert('Phone number must be exactly 11 digits.');
+                    e.target.focus();
+                }
+            });
+
+            // Prevent paste of non-numeric content
+            phoneInput.addEventListener('paste', function(e) {
+                e.preventDefault();
+                let paste = (e.clipboardData || window.clipboardData).getData('text');
+                let numericOnly = paste.replace(/\D/g, '');
+                if (numericOnly.length <= 11) {
+                    e.target.value = numericOnly;
+                }
+            });
+        }
+
+        // Email validation
+        if (emailInput) {
+            emailInput.addEventListener('blur', function(e) {
+                const email = e.target.value;
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                const gmailRegex = /@gmail\./i;
+
+                if (!emailRegex.test(email)) {
+                    alert('Please enter a valid email address.');
+                    e.target.focus();
+                } else if (!gmailRegex.test(email)) {
+                    alert('Email must be a valid email address (must contain @gmail).');
+                    e.target.focus();
+                }
+            });
+        }
+
+        // Form submission validation
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                const phone = phoneInput.value.replace(/\D/g, '');
+                const email = emailInput.value;
+                const gmailRegex = /@gmail\./i;
+
+                if (phone.length !== 11) {
+                    e.preventDefault();
+                    alert('Phone number must be exactly 11 digits.');
+                    phoneInput.focus();
+                    return;
+                }
+
+                if (!gmailRegex.test(email)) {
+                    e.preventDefault();
+                    alert('Email must be a valid email address (must contain @gmail).');
+                    emailInput.focus();
+                    return;
+                }
+            });
+        }
+    });
+    </script>
 </body>
-</html> 
+</html>

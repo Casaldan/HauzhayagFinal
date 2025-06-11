@@ -13,10 +13,13 @@ class VolunteerApplicationController extends Controller
         $validated = $request->validate([
             'event_id' => 'required|exists:events,id',
             'full_name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'phone_number' => 'required|string|max:20',
+            'email' => ['required', 'email', 'max:255', 'regex:/@gmail\./i'],
+            'phone_number' => ['required', 'string', 'regex:/^\d{11}$/'],
             'address' => 'required|string',
             'reason' => 'required|string',
+        ], [
+            'email.regex' => 'Email must be a Gmail address (must contain @gmail).',
+            'phone_number.regex' => 'Phone number must be exactly 11 digits.'
         ]);
 
         $application = VolunteerApplication::create($validated);

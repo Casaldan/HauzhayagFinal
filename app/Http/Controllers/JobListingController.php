@@ -79,6 +79,12 @@ class JobListingController extends Controller
 
     public function create()
     {
+        // Check if this is an admin request (from admin routes)
+        if (request()->is('admin/*')) {
+            return view('admin.jobs.create');
+        }
+
+        // Default to volunteer job creation view
         return view('jobs.create');
     }
 
@@ -95,17 +101,21 @@ class JobListingController extends Controller
             'salary_min' => 'nullable|numeric|min:0',
             'salary_max' => 'nullable|numeric|min:0|gt:salary_min',
             'contact_person' => 'required|string|max:255',
-            'contact_email' => 'required|email|max:255',
-            'contact_phone' => 'nullable|string|max:255',
+            'contact_email' => ['required', 'email', 'max:255', 'regex:/@gmail\./i'],
+            'contact_phone' => ['nullable', 'string', 'regex:/^\d{11}$/'],
             'expires_at' => 'nullable|date',
             'category' => 'required|string|max:255',
+        ], [
+            'contact_email.regex' => 'Contact email must be a valid email address (must contain @gmail).',
+            'contact_phone.regex' => 'Contact phone number must be exactly 11 digits.'
         ]);
 
         $validated['status'] = 'pending';
         $validated['is_admin_posted'] = false;
+        $validated['posted_by'] = auth()->id();
         $validated['type'] = $validated['employment_type'] ?? null;
         $validated['location'] = trim($validated['location']);
-        
+
         JobListing::create($validated);
         
         return redirect()->route('volunteer.dashboard')
@@ -124,19 +134,25 @@ class JobListingController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'company_name' => 'required|string|max:255',
+            'role' => 'nullable|string|max:255',
             'location' => 'nullable|string|max:255',
             'employment_type' => 'nullable|string|max:255',
             'qualifications' => 'nullable|string',
-            'minimum_salary' => 'nullable|numeric|min:0',
-            'maximum_salary' => 'nullable|numeric|min:0',
+            'salary_min' => 'nullable|numeric|min:0',
+            'salary_max' => 'nullable|numeric|min:0|gte:salary_min',
             'contact_person' => 'nullable|string|max:255',
-            'contact_email' => 'nullable|email|max:255',
-            'contact_phone' => 'nullable|string|max:255',
-            'expiry_date' => 'nullable|date|after:today',
+            'contact_email' => ['nullable', 'email', 'max:255', 'regex:/@gmail\./i'],
+            'contact_phone' => ['nullable', 'string', 'regex:/^\d{11}$/'],
+            'expires_at' => 'nullable|date|after:today',
             'category' => 'nullable|string|max:255',
+            'status' => 'nullable|string|in:pending,approved,rejected',
+        ], [
+            'contact_email.regex' => 'Contact email must be a valid email address (must contain @gmail).',
+            'contact_phone.regex' => 'Contact phone number must be exactly 11 digits.'
         ]);
 
-        $validated['status'] = 'approved'; // Admin jobs are auto-approved
+        // Set default status if not provided
+        $validated['status'] = $validated['status'] ?? 'approved'; // Admin jobs are auto-approved by default
         $validated['is_admin_posted'] = true;
         $validated['posted_by'] = auth()->id();
 
@@ -178,12 +194,15 @@ class JobListingController extends Controller
             'end_date' => 'nullable|date|after_or_equal:start_date',
             'requirements' => 'nullable|string',
             'benefits' => 'nullable|string',
-            'contact_email' => 'required|email|max:255',
-            'contact_phone' => 'nullable|string|max:255',
+            'contact_email' => ['required', 'email', 'max:255', 'regex:/@gmail\./i'],
+            'contact_phone' => ['nullable', 'string', 'regex:/^\d{11}$/'],
             'contact_person' => 'required|string|max:255',
             'salary_min' => 'nullable|numeric|min:0',
             'salary_max' => 'nullable|numeric|min:0|gte:salary_min',
             'expires_at' => 'nullable|date',
+        ], [
+            'contact_email.regex' => 'Contact email must be a valid email address (must contain @gmail).',
+            'contact_phone.regex' => 'Contact phone number must be exactly 11 digits.'
         ]);
 
         $validated['location'] = trim($validated['location']);

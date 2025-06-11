@@ -208,11 +208,25 @@
                     </div>
                 </div>
 
-                <!-- Expires At -->
-                <div class="form-group">
-                    <label for="expires_at" class="block text-sm font-medium text-gray-700">Expires At</label>
-                    <input type="datetime-local" id="expires_at" name="expires_at" value="{{ old('expires_at', $job->expires_at ? $job->expires_at->format('Y-m-d\TH:i') : '') }}" class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/30 form-input transition-all @error('expires_at') border-red-500 @enderror">
-                    @error('expires_at')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Status -->
+                    <div class="form-group">
+                        <label for="status" class="block text-sm font-medium text-gray-700">Status <span class="text-red-500">*</span></label>
+                        <select id="status" name="status" required class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/30 form-input transition-all @error('status') border-red-500 @enderror">
+                            <option value="">Select Status</option>
+                            <option value="pending" {{ old('status', $job->status) == 'pending' ? 'selected' : '' }}>Pending</option>
+                            <option value="approved" {{ old('status', $job->status) == 'approved' ? 'selected' : '' }}>Approved</option>
+                            <option value="rejected" {{ old('status', $job->status) == 'rejected' ? 'selected' : '' }}>Rejected</option>
+                        </select>
+                        @error('status')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
+                    </div>
+
+                    <!-- Expires At -->
+                    <div class="form-group">
+                        <label for="expires_at" class="block text-sm font-medium text-gray-700">Expires At</label>
+                        <input type="datetime-local" id="expires_at" name="expires_at" value="{{ old('expires_at', $job->expires_at ? $job->expires_at->format('Y-m-d\TH:i') : '') }}" class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/30 form-input transition-all @error('expires_at') border-red-500 @enderror">
+                        @error('expires_at')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
+                    </div>
                 </div>
                 <!-- Action Buttons -->
                 <div class="flex justify-end space-x-4 pt-6 border-t border-gray-200 mt-8">

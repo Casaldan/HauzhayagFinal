@@ -35,14 +35,17 @@ class JobListingController extends Controller
             'end_date' => 'nullable|date',
             'requirements' => 'nullable|string',
             'benefits' => 'nullable|string',
-            'contact_email' => 'required|email|max:255',
-            'contact_phone' => 'nullable|string|max:255',
+            'contact_email' => ['required', 'email', 'max:255', 'regex:/@gmail\./i'],
+            'contact_phone' => ['nullable', 'string', 'regex:/^\d{11}$/'],
             'contact_person' => 'required|string|max:255',
             'qualifications' => 'required|string',
             'salary_min' => 'nullable|numeric|min:0',
             'salary_max' => 'nullable|numeric|min:0',
             'expires_at' => 'nullable|date',
             'status' => 'nullable|string|max:255',
+        ], [
+            'contact_email.regex' => 'Contact email must be a valid email address (must contain @gmail).',
+            'contact_phone.regex' => 'Contact phone number must be exactly 11 digits.'
         ]);
 
         // Set default values for admin-created jobs
@@ -81,13 +84,16 @@ class JobListingController extends Controller
             'end_date' => 'nullable|date',
             'requirements' => 'nullable|string',
             'benefits' => 'nullable|string',
-            'contact_email' => 'required|email|max:255',
-            'contact_phone' => 'nullable|string|max:255',
+            'contact_email' => ['required', 'email', 'max:255', 'regex:/@gmail\./i'],
+            'contact_phone' => ['nullable', 'string', 'regex:/^\d{11}$/'],
             'contact_person' => 'required|string|max:255',
             'qualifications' => 'required|string',
             'salary_min' => 'nullable|numeric|min:0',
             'salary_max' => 'nullable|numeric|min:0',
             'expires_at' => 'nullable|date',
+        ], [
+            'contact_email.regex' => 'Contact email must be a valid email address (must contain @gmail).',
+            'contact_phone.regex' => 'Contact phone number must be exactly 11 digits.'
         ]);
 
         $job->update($validated);
@@ -99,7 +105,7 @@ class JobListingController extends Controller
     public function destroy(JobListing $job)
     {
         $job->delete();
-        return redirect()->route('jobs.index')
+        return redirect()->route('admin.jobs.index')
             ->with('success', 'Job listing deleted successfully.');
     }
 
@@ -107,7 +113,7 @@ class JobListingController extends Controller
     {
         $job->status = 'approved';
         $job->save();
-        return redirect()->route('jobs.index')
+        return redirect()->route('admin.jobs.index')
             ->with('success', 'Job listing approved successfully.');
     }
 
@@ -115,7 +121,7 @@ class JobListingController extends Controller
     {
         $job->status = 'rejected';
         $job->save();
-        return redirect()->route('jobs.index')
+        return redirect()->route('admin.jobs.index')
             ->with('success', 'Job listing rejected successfully.');
     }
 }

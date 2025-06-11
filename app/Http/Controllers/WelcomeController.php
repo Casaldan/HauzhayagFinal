@@ -19,14 +19,13 @@ class WelcomeController extends Controller
             ->take(6)
             ->get();
 
-        // Get all approved job listings (both admin-posted and volunteer-posted)
+        // Get ALL approved jobs (both admin and volunteer posted) for display on homepage
         $jobs = JobListing::where('status', 'approved')
             ->where(function($query) {
                 $query->whereNull('expires_at')
                       ->orWhere('expires_at', '>', now());
             })
             ->orderBy('created_at', 'desc')
-            ->take(6)
             ->get();
 
         return view('welcome', compact('events', 'jobs'));

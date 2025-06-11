@@ -41,11 +41,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/volunteers/{volunteer}/approve', [App\Http\Controllers\AdminController::class, 'approveVolunteer'])->name('admin.volunteers.approve');
     Route::post('/admin/volunteers/{volunteer}/reject', [App\Http\Controllers\AdminController::class, 'rejectVolunteer'])->name('admin.volunteers.reject');
 
-    // Volunteer event list and details
-    Route::get('/volunteer/events', [\App\Http\Controllers\VolunteerController::class, 'events'])->name('volunteer.events');
-    Route::get('/volunteer/events/{id}', [\App\Http\Controllers\VolunteerController::class, 'showEvent'])->name('volunteer.events.show');
-    Route::get('/volunteer/events/{event}/apply', [\App\Http\Controllers\VolunteerController::class, 'showApplicationForm'])->name('volunteer.events.apply');
-    Route::post('/volunteer/events/apply', [\App\Http\Controllers\VolunteerEventApplicationController::class, 'store'])->name('volunteer.events.apply.store');
+
 
     // Volunteer application tracking
     Route::get('/volunteer/success', [\App\Http\Controllers\VolunteerApplicationController::class, 'showSuccess'])->name('volunteer.success');
@@ -123,12 +119,17 @@ Route::middleware(['auth'])->group(function () {
     
     // New routes for volunteer dashboard and job post
     Route::get('/volunteer/dashboard', [VolunteerController::class, 'dashboard'])->name('volunteer.dashboard');
-    Route::get('/volunteer/job-post', [VolunteerController::class, 'jobPost'])->name('volunteer.job-post');
-    // Route to handle volunteer job post submission
-    Route::post('/volunteer/job-post', [VolunteerController::class, 'storeJobPost'])->name('volunteer.jobs.store');
-    Route::get('/volunteer/jobs/create', [\App\Http\Controllers\VolunteerController::class, 'createJob'])->name('volunteer.jobs.create');
-    Route::post('/volunteer/jobs', [\App\Http\Controllers\VolunteerController::class, 'storeJob'])->name('volunteer.jobs.store');
-    Route::get('/volunteer/jobs/listings', [\App\Http\Controllers\VolunteerController::class, 'jobListings'])->name('volunteer.jobs.listings');
+    Route::get('/volunteer/jobs', [VolunteerController::class, 'jobs'])->name('volunteer.jobs');
+    Route::get('/volunteer/calendar', [VolunteerController::class, 'viewCalendar'])->name('volunteer.calendar');
+    Route::get('/volunteer/events', [VolunteerController::class, 'events'])->name('volunteer.events');
+    Route::get('/volunteer/events/{id}', [VolunteerController::class, 'showEvent'])->name('volunteer.events.show');
+    Route::get('/volunteer/events/{event}/apply', [VolunteerController::class, 'showApplicationForm'])->name('volunteer.events.apply');
+    Route::post('/volunteer/events/apply', [\App\Http\Controllers\VolunteerEventApplicationController::class, 'store'])->name('volunteer.events.apply.store');
+
+    // Volunteer job posting routes
+    Route::get('/volunteer/jobs/create', [\App\Http\Controllers\JobListingController::class, 'create'])->name('volunteer.jobs.create');
+    Route::post('/volunteer/jobs', [\App\Http\Controllers\JobListingController::class, 'store'])->name('volunteer.jobs.store');
+
 });
 
 // Student Applications Route with auth
@@ -155,6 +156,9 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     // Admin Volunteer Management
     Route::get('/volunteers', [App\Http\Controllers\AdminController::class, 'volunteerIndex'])->name('admin.volunteers.index');
+    Route::get('/volunteers/{volunteer}/edit', [App\Http\Controllers\AdminController::class, 'editVolunteer'])->name('admin.volunteers.edit');
+    Route::put('/volunteers/{volunteer}', [App\Http\Controllers\AdminController::class, 'updateVolunteer'])->name('admin.volunteers.update');
+    Route::delete('/volunteers/{volunteer}', [App\Http\Controllers\AdminController::class, 'destroyVolunteer'])->name('admin.volunteers.destroy');
     Route::get('/volunteers/event-applications', [App\Http\Controllers\AdminController::class, 'getVolunteerEventApplications'])->name('admin.volunteers.event-applications');
 
     // Admin Volunteer Applications Management
@@ -175,11 +179,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
-// Test route for volunteer event registration
-Route::get('/test-volunteer-events', function () {
-    $events = \App\Models\Event::all();
-    return view('test.volunteer-events', compact('events'));
-})->name('test.volunteer.events');
+
 
 // Public Job Listing Routes
 Route::get('/jobs', [JobListingController::class, 'index'])->name('jobs.index');
@@ -187,14 +187,15 @@ Route::get('/jobs/{job}', [JobListingController::class, 'show'])->name('jobs.sho
 
 // Admin Job Management Routes
 Route::middleware(['auth'])->prefix('admin')->group(function () {
-    Route::get('/jobs', [JobListingController::class, 'adminIndex'])->name('admin.jobs.index');
-    Route::get('/jobs/create', [JobListingController::class, 'create'])->name('admin.jobs.create');
-    Route::post('/jobs', [JobListingController::class, 'adminStore'])->name('admin.jobs.store');
-    Route::get('/jobs/{job}/edit', [JobListingController::class, 'edit'])->name('admin.jobs.edit');
-    Route::put('/jobs/{job}', [JobListingController::class, 'update'])->name('admin.jobs.update');
-    Route::delete('/jobs/{job}', [JobListingController::class, 'destroy'])->name('admin.jobs.destroy');
-    Route::post('/jobs/{job}/approve', [JobListingController::class, 'approve'])->name('admin.jobs.approve');
-    Route::post('/jobs/{job}/reject', [JobListingController::class, 'reject'])->name('admin.jobs.reject');
+    Route::get('/jobs', [App\Http\Controllers\Admin\JobListingController::class, 'index'])->name('admin.jobs.index');
+    Route::get('/jobs/create', [App\Http\Controllers\Admin\JobListingController::class, 'create'])->name('admin.jobs.create');
+    Route::post('/jobs', [App\Http\Controllers\Admin\JobListingController::class, 'store'])->name('admin.jobs.store');
+    Route::get('/jobs/{job}', [App\Http\Controllers\Admin\JobListingController::class, 'show'])->name('admin.jobs.show');
+    Route::get('/jobs/{job}/edit', [App\Http\Controllers\Admin\JobListingController::class, 'edit'])->name('admin.jobs.edit');
+    Route::put('/jobs/{job}', [App\Http\Controllers\Admin\JobListingController::class, 'update'])->name('admin.jobs.update');
+    Route::delete('/jobs/{job}', [App\Http\Controllers\Admin\JobListingController::class, 'destroy'])->name('admin.jobs.destroy');
+    Route::post('/jobs/{job}/approve', [App\Http\Controllers\Admin\JobListingController::class, 'approve'])->name('admin.jobs.approve');
+    Route::post('/jobs/{job}/reject', [App\Http\Controllers\Admin\JobListingController::class, 'reject'])->name('admin.jobs.reject');
 });
 
 // API route for job details (for modal)
@@ -212,12 +213,12 @@ Route::get('/scholarship/track/{tracking_code}', [App\Http\Controllers\Scholarsh
 // New route for students to view job listings
 Route::get('/jobs/listings', [JobListingController::class, 'index'])->name('jobs.listings');
 
-// Volunteer event application routes
-Route::post('/volunteer/event-registration', [App\Http\Controllers\VolunteerEventApplicationController::class, 'store']);
-Route::get('/admin/volunteer-applications', [App\Http\Controllers\VolunteerEventApplicationController::class, 'index'])->name('admin.volunteer-applications.index');
-Route::patch('/admin/volunteer-applications/{application}/status', [App\Http\Controllers\VolunteerEventApplicationController::class, 'updateStatus'])->name('admin.volunteer-applications.update-status');
+
 
 // Volunteer event application tracking routes
 Route::get('/volunteer/track-application', [App\Http\Controllers\VolunteerEventApplicationController::class, 'showTrackForm'])->name('volunteer.event-application.track.form');
 Route::post('/volunteer/track-application', [App\Http\Controllers\VolunteerEventApplicationController::class, 'track'])->name('volunteer.event-application.track');
 Route::get('/volunteer/application/{tracking_code}', [App\Http\Controllers\VolunteerEventApplicationController::class, 'showByTrackingCode'])->name('volunteer.event-application.show');
+
+// Public volunteer event registration route (for homepage)
+Route::post('/volunteer/event-registration', [App\Http\Controllers\VolunteerEventApplicationController::class, 'store'])->name('volunteer.event-registration');

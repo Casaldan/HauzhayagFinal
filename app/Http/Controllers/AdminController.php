@@ -150,6 +150,48 @@ class AdminController extends Controller
         return back()->with('success', 'Volunteer application rejected successfully.');
     }
 
+    public function editVolunteer(Volunteer $volunteer)
+    {
+        return view('admin.volunteers.edit', compact('volunteer'));
+    }
+
+    public function updateVolunteer(Request $request, Volunteer $volunteer)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:volunteers,email,' . $volunteer->id,
+            'phone' => 'required|string|max:20',
+            'skills' => 'nullable|string',
+            'status' => 'required|in:Active,Pending,Inactive',
+            'notes' => 'nullable|string',
+            'start_date' => 'required|date',
+        ]);
+
+        // Handle skills as JSON if it's an array
+        if (is_array($validated['skills'])) {
+            $validated['skills'] = json_encode($validated['skills']);
+        }
+
+        $volunteer->update($validated);
+
+        return redirect()->route('admin.volunteers.index')
+            ->with('success', 'Volunteer updated successfully.');
+    }
+
+    public function destroyVolunteer(Volunteer $volunteer)
+    {
+        try {
+            $volunteerName = $volunteer->name;
+            $volunteer->delete();
+
+            return redirect()->route('admin.volunteers.index')
+                ->with('success', "Volunteer '{$volunteerName}' has been deleted successfully.");
+        } catch (\Exception $e) {
+            return redirect()->route('admin.volunteers.index')
+                ->with('error', 'Failed to delete volunteer. Please try again.');
+        }
+    }
+
     private function updateCompletedEvents()
     {
         // Update status of completed events

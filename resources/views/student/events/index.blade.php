@@ -135,12 +135,12 @@
 
                                 <!-- Action Button -->
                                 <div class="flex justify-end">
-                                    <button class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition-all duration-300 hover-scale flex items-center">
+                                  <!-- <button class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition-all duration-300 hover-scale flex items-center">
                                         <span>Register Now</span>
                                         <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                         </svg>
-                                    </button>
+                                    </button> -->
                                 </div>
                             </div>
                         </div>

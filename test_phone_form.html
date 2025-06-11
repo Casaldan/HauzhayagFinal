@@ -37,11 +37,11 @@
                 </div>
                 <div>
                     <label for="volunteer_email" class="block text-sm font-medium mb-1">Gmail</label>
-                    <input type="email" id="volunteer_email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                    <input type="email" id="volunteer_email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required placeholder="example@gmail.com">
                 </div>
                 <div>
                     <label for="volunteer_phone" class="block text-sm font-medium mb-1">Phone Number</label>
-                    <input type="tel" id="volunteer_phone" name="phone_number" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                    <input type="tel" id="volunteer_phone" name="phone_number" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required placeholder="09123456789" maxlength="11" pattern="[0-9]{11}" inputmode="numeric">
                 </div>
                 <div>
                     <label for="application_reason" class="block text-sm font-medium mb-1">Why would you apply for this event?</label>
@@ -70,8 +70,92 @@
             document.getElementById('eventRegistrationForm').reset();
         }
 
+        // Add validation
+        document.addEventListener('DOMContentLoaded', function() {
+            const phoneInput = document.getElementById('volunteer_phone');
+            const emailInput = document.getElementById('volunteer_email');
+
+            // Phone number validation
+            if (phoneInput) {
+                // Prevent non-numeric input
+                phoneInput.addEventListener('keypress', function(e) {
+                    // Allow only digits (0-9)
+                    if (!/[0-9]/.test(e.key) && !['Backspace', 'Delete', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                        e.preventDefault();
+                    }
+                });
+
+                phoneInput.addEventListener('input', function(e) {
+                    // Remove any non-digit characters
+                    let value = e.target.value.replace(/\D/g, '');
+
+                    // Limit to 11 digits
+                    if (value.length > 11) {
+                        value = value.slice(0, 11);
+                    }
+
+                    e.target.value = value;
+                });
+
+                phoneInput.addEventListener('blur', function(e) {
+                    const phone = e.target.value.replace(/\D/g, '');
+                    if (phone.length !== 11) {
+                        alert('Phone number must be exactly 11 digits.');
+                        e.target.focus();
+                    }
+                });
+
+                // Prevent paste of non-numeric content
+                phoneInput.addEventListener('paste', function(e) {
+                    e.preventDefault();
+                    let paste = (e.clipboardData || window.clipboardData).getData('text');
+                    let numericOnly = paste.replace(/\D/g, '');
+                    if (numericOnly.length <= 11) {
+                        e.target.value = numericOnly;
+                    }
+                });
+            }
+
+            // Email validation
+            if (emailInput) {
+                emailInput.addEventListener('blur', function(e) {
+                    const email = e.target.value;
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    const gmailRegex = /@gmail\./i;
+
+                    if (!emailRegex.test(email)) {
+                        alert('Please enter a valid email address.');
+                        e.target.focus();
+                    } else if (!gmailRegex.test(email)) {
+                        alert('Email must be a Gmail address (must contain @gmail).');
+                        e.target.focus();
+                    }
+                });
+            }
+        });
+
         function submitEventRegistration(event) {
             event.preventDefault();
+
+            // Validate before submission
+            const phoneInput = document.getElementById('volunteer_phone');
+            const emailInput = document.getElementById('volunteer_email');
+
+            const phone = phoneInput.value.replace(/\D/g, '');
+            const email = emailInput.value;
+            const gmailRegex = /@gmail\./i;
+
+            if (phone.length !== 11) {
+                alert('Phone number must be exactly 11 digits.');
+                phoneInput.focus();
+                return;
+            }
+
+            if (!gmailRegex.test(email)) {
+                alert('Email must be a Gmail address (must contain @gmail).');
+                emailInput.focus();
+                return;
+            }
 
             const formData = new FormData(event.target);
             const data = {
@@ -83,12 +167,12 @@
             };
 
             console.log('Form data:', data);
-            alert('Form submitted successfully! Check console for data.\n\nData collected:\n' + 
+            alert('Form submitted successfully! Check console for data.\n\nData collected:\n' +
                   'Full Name: ' + data.full_name + '\n' +
                   'Email: ' + data.email + '\n' +
                   'Phone: ' + data.phone_number + '\n' +
                   'Reason: ' + data.application_reason);
-            
+
             closeEventRegistrationModal();
         }
     </script>

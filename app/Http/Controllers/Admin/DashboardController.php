@@ -12,32 +12,28 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        // Get basic statistics
         $totalUsers = User::count();
-        $activeStudents = User::where('role', 'student')->where('status', 'active')->count();
-
-        // Get recent events (last 5 completed or ongoing events)
-        $recentEvents = Event::where(function($query) {
-                $query->where('end_date', '<=', Carbon::now())
-                    ->orWhere(function($q) {
-                        $q->where('start_date', '<=', Carbon::now())
-                          ->where('end_date', '>=', Carbon::now());
-                    });
+        $activeStudents = User::where('role', 'student')->count();
+        $pendingApplicants = User::where('role', 'student')->where('status', 'pending')->count();
+        $activeEvents = Event::where('status', 'active')
+            ->orWhere(function($query) {
+                $query->where('start_date', '<=', Carbon::now())
+                      ->where('end_date', '>=', Carbon::now());
             })
-            ->orderBy('end_date', 'desc')
-            ->take(5)
-            ->get();
+            ->count();
 
-        // Get upcoming events (next 5 events that haven't started)
-        $upcomingEvents = Event::where('start_date', '>', Carbon::now())
-            ->orderBy('start_date', 'asc')
+        // Get recent events (last 5 events)
+        $recentEvents = Event::orderBy('created_at', 'desc')
             ->take(5)
             ->get();
 
         return view('admin.dashboard', compact(
             'totalUsers',
             'activeStudents',
-            'recentEvents',
-            'upcomingEvents'
+            'pendingApplicants',
+            'activeEvents',
+            'recentEvents'
         ));
     }
 }

@@ -95,6 +95,77 @@
         .fc-daygrid-event {
             margin-top: 2px;
         }
+
+        /* Professional Dashboard Styles */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-card {
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .stat-card:hover::before {
+            left: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .fade-in-delay-1 { animation-delay: 0.1s; }
+        .fade-in-delay-2 { animation-delay: 0.2s; }
+        .fade-in-delay-3 { animation-delay: 0.3s; }
+        .fade-in-delay-4 { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hover-lift {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .dashboard-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
     </style>
 </head>
 <body class="bg-gray-100 font-['Inter']">
@@ -103,27 +174,48 @@
         <x-sidebar role="student" currentRoute="{{ request()->route()->getName() ?? 'dashboard' }}" />
 
         <!-- Main Content -->
-        <div class="flex-1 ml-64 overflow-y-auto">
-            <div class="p-8">
-                <!-- Header -->
-                <div class="bg-white p-6 flex justify-between items-center shadow-sm rounded-lg mb-8">
-                    <div>
-                        <h2 class="text-2xl font-bold flex items-center text-gray-800">
-                            <svg class="w-7 h-7 mr-3 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
-                            </svg>
-                            Student Dashboard
-                        </h2>
-                        <p class="text-gray-600 mt-1">Welcome back, {{ Auth::user()->name }}! Here's your academic overview.</p>
-                    </div>
-                    <div class="flex items-center space-x-3">
-                        <span class="text-gray-600 font-medium">Student</span>
-                        <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+        <div class="flex-1 lg:ml-64 overflow-y-auto">
+            <!-- Mobile header spacer -->
+            <div class="lg:hidden h-16"></div>
+
+            <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+                <!-- Enhanced Header -->
+                <div class="dashboard-gradient text-white p-6 lg:p-8 mb-8">
+                    <div class="max-w-7xl mx-auto">
+                        <!-- Breadcrumb -->
+                        <nav class="text-sm mb-4 opacity-90">
+                            <ol class="flex items-center space-x-2">
+                                <li><a href="{{ route('student.dashboard') }}" class="hover:text-blue-200 transition-colors">Dashboard</a></li>
+                                <li><svg class="w-4 h-4 mx-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></li>
+                                <li class="text-blue-200">Student Overview</li>
+                            </ol>
+                        </nav>
+
+                        <!-- Header Content -->
+                        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center space-y-4 lg:space-y-0">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-16 h-16 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h1 class="text-3xl lg:text-4xl font-bold mb-2">Student Dashboard</h1>
+                                    <p class="text-blue-100 text-lg">Welcome back, {{ Auth::user()->name }}! Here's your academic overview.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-3">
+                                <span class="text-blue-100 font-medium">Student</span>
+                                <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center text-white font-bold text-lg backdrop-blur-sm border border-white border-opacity-20">
+                                    {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="max-w-7xl mx-auto px-4 lg:px-8 -mt-16 relative z-10">
 
                 <!-- Notifications -->
                 @if(isset($notifications) && $notifications->count() > 0)
@@ -172,17 +264,17 @@
                 @endif
 
                 <!-- Stats Overview -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mb-6 lg:mb-8">
                     <!-- Upcoming Events -->
-                    <div class="bg-white rounded-xl shadow-lg p-6 card-hover border-l-4 border-green-500">
+                    <div class="bg-white rounded-xl shadow-lg p-4 lg:p-6 card-hover border-l-4 border-green-500">
                         <div class="flex justify-between items-center">
                             <div>
-                                <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Upcoming Events</p>
-                                <p class="text-3xl font-bold text-gray-800 mt-2">{{ isset($eventCount) ? $eventCount : 0 }}</p>
-                                <p class="text-sm text-green-600 mt-1">Available to join</p>
+                                <p class="text-xs lg:text-sm font-semibold text-gray-500 uppercase tracking-wide">Upcoming Events</p>
+                                <p class="text-2xl lg:text-3xl font-bold text-gray-800 mt-2">{{ isset($eventCount) ? $eventCount : 0 }}</p>
+                                <p class="text-xs lg:text-sm text-green-600 mt-1">Available to join</p>
                             </div>
-                            <div class="rounded-full bg-green-100 p-4">
-                                <svg class="h-8 w-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="rounded-full bg-green-100 p-3 lg:p-4">
+                                <svg class="h-6 w-6 lg:h-8 lg:w-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                           d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                 </svg>
@@ -191,15 +283,15 @@
                     </div>
 
                     <!-- Available Jobs -->
-                    <div class="bg-white rounded-xl shadow-lg p-6 card-hover border-l-4 border-purple-500">
+                    <div class="bg-white rounded-xl shadow-lg p-4 lg:p-6 card-hover border-l-4 border-purple-500">
                         <div class="flex justify-between items-center">
                             <div>
-                                <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Available Jobs</p>
-                                <p class="text-3xl font-bold text-gray-800 mt-2">{{ isset($jobCount) ? $jobCount : 0 }}</p>
-                                <p class="text-sm text-purple-600 mt-1">Open positions</p>
+                                <p class="text-xs lg:text-sm font-semibold text-gray-500 uppercase tracking-wide">Available Jobs</p>
+                                <p class="text-2xl lg:text-3xl font-bold text-gray-800 mt-2">{{ isset($jobCount) ? $jobCount : 0 }}</p>
+                                <p class="text-xs lg:text-sm text-purple-600 mt-1">Open positions</p>
                             </div>
-                            <div class="rounded-full bg-purple-100 p-4">
-                                <svg class="h-8 w-8 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="rounded-full bg-purple-100 p-3 lg:p-4">
+                                <svg class="h-6 w-6 lg:h-8 lg:w-8 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                           d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2M8 6v10a2 2 0 002 2h4a2 2 0 002-2V6"/>
                                 </svg>

@@ -510,7 +510,7 @@
                         <!-- Phone -->
                         <div>
                             <label for="volunteer-phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
-                            <input type="tel" name="phone" id="volunteer-phone" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#2C5F6E] focus:ring-[#2C5F6E] sm:text-sm" required>
+                            <input type="tel" name="phone" id="volunteer-phone" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#2C5F6E] focus:ring-[#2C5F6E] sm:text-sm" placeholder="09123456789" maxlength="11" pattern="[0-9]{11}" inputmode="numeric" required>
                         </div>
                         
                         <!-- Skills -->
@@ -667,22 +667,47 @@
 
         // Phone number validation
         const phoneInput = document.getElementById('volunteer-phone');
+
+        // Prevent non-numeric input
+        phoneInput.addEventListener('keypress', function(e) {
+            // Allow only digits (0-9)
+            if (!/[0-9]/.test(e.key) && !['Backspace', 'Delete', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                e.preventDefault();
+            }
+        });
+
         phoneInput.addEventListener('input', function(e) {
             // Remove any non-digit characters
             let value = e.target.value.replace(/\D/g, '');
-            
-            // Format as (XXX) XXX-XXXX
-            if (value.length > 0) {
-                if (value.length <= 3) {
-                    value = `(${value}`;
-                } else if (value.length <= 6) {
-                    value = `(${value.slice(0, 3)}) ${value.slice(3)}`;
-                } else {
-                    value = `(${value.slice(0, 3)}) ${value.slice(3, 6)}-${value.slice(6, 10)}`;
-                }
+
+            // Limit to 11 digits
+            if (value.length > 11) {
+                value = value.slice(0, 11);
             }
-            
+
             e.target.value = value;
+        });
+
+        // Phone number validation on blur
+        phoneInput.addEventListener('blur', function(e) {
+            const phone = e.target.value.replace(/\D/g, '');
+            if (phone.length !== 11) {
+                errorMessage.textContent = 'Phone number must be exactly 11 digits.';
+                errorMessage.classList.remove('hidden');
+                e.target.focus();
+            } else {
+                errorMessage.classList.add('hidden');
+            }
+        });
+
+        // Prevent paste of non-numeric content
+        phoneInput.addEventListener('paste', function(e) {
+            e.preventDefault();
+            let paste = (e.clipboardData || window.clipboardData).getData('text');
+            let numericOnly = paste.replace(/\D/g, '');
+            if (numericOnly.length <= 11) {
+                e.target.value = numericOnly;
+            }
         });
 
         // Email validation
@@ -690,9 +715,14 @@
         emailInput.addEventListener('blur', function(e) {
             const email = e.target.value;
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            
+            const gmailRegex = /@gmail\./i;
+
             if (!emailRegex.test(email)) {
                 errorMessage.textContent = 'Please enter a valid email address.';
+                errorMessage.classList.remove('hidden');
+                e.target.focus();
+            } else if (!gmailRegex.test(email)) {
+                errorMessage.textContent = 'Email must be a Gmail address (must contain @gmail).';
                 errorMessage.classList.remove('hidden');
                 e.target.focus();
             } else {

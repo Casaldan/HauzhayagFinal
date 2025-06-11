@@ -164,6 +164,143 @@
         .hover-rotate:hover {
             transform: rotate(5deg);
         }
+
+        /* Enhanced professional card shadows */
+        .shadow-3xl {
+            box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Professional gradient overlays */
+        .gradient-overlay {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+        }
+
+        /* Enhanced card hover effects */
+        .card-professional {
+            position: relative;
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-professional:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow:
+                0 25px 50px -12px rgba(0, 0, 0, 0.25),
+                0 0 0 1px rgba(59, 130, 246, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        }
+
+        /* Professional button effects */
+        .btn-professional {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-professional::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-professional:hover::before {
+            left: 100%;
+        }
+
+        /* Enhanced text gradients */
+        .text-gradient {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Professional loading animation */
+        .loading-shimmer {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        /* Modal Animations */
+        .modal-content {
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Form Field Animations */
+        .form-group {
+            position: relative;
+        }
+
+        .form-group input:focus + .absolute svg,
+        .form-group textarea:focus + .absolute svg {
+            color: #14b8a6;
+            transform: scale(1.1);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 15px -3px rgba(20, 184, 166, 0.1), 0 4px 6px -2px rgba(20, 184, 166, 0.05);
+        }
+
+        /* Enhanced backdrop blur */
+        .backdrop-blur-sm {
+            backdrop-filter: blur(4px);
+        }
+
+        /* Button hover effects */
+        .btn-hover {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-hover:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn-hover:active {
+            transform: translateY(0);
+        }
+
+        /* Fade-in animation for dropdown */
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 
@@ -171,7 +308,7 @@
     <header class="bg-gradient-to-r from-white/95 to-neutral/95 backdrop-blur-md shadow-xl fixed w-full top-0 z-50 animate-slide-down border-b border-primary/10">
         <div class="max-w-7xl mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
-            <div class="flex items-center space-x-4 group">
+                <div class="flex items-center space-x-6 group">
                     <div class="relative">
                         <img src="{{ asset('image/logohauzhayag.jpg') }}"
                              alt="Hauz Hayag Logo"
@@ -182,10 +319,11 @@
                         <h1 class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Hauz Hayag</h1>
                         <p class="text-sm text-gray-600 font-medium">Scholarship Foundation</p>
                     </div>
-                    <button id="mobileMenuButton" class="md:hidden text-gray-600 hover:text-primary p-2 rounded-lg hover:bg-primary/5 transition-all duration-300">
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
                 </div>
+
+                <button id="mobileMenuButton" class="md:hidden text-gray-600 hover:text-primary p-2 rounded-lg hover:bg-primary/5 transition-all duration-300">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
 
                 <!-- Desktop Navigation -->
                 <nav class="hidden lg:flex items-center space-x-1">
@@ -213,7 +351,7 @@
                         <i class="fas fa-search text-lg"></i>
                         <span class="font-medium">Track Application</span>
                     </a>
-                    <a href="/login" class="flex items-center space-x-2 bg-gradient-to-r from-primary to-secondary text-white px-6 py-3 rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 font-medium ml-4">
+                    <a href="/login" class="flex items-center space-x-2 bg-gradient-to-r from-primary to-secondary text-white px-6 py-3 rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 font-medium ml-8">
                         <i class="fas fa-sign-in-alt text-lg"></i>
                         <span>Login</span>
                     </a>
@@ -303,157 +441,343 @@
     <p>Testing component rendering.</p>
 </x-test> -->
 
-        <!-- Scholarships Section with scroll animations -->
-        <section id="scholarships" class="max-w-7xl mx-auto py-16 px-4 bg-gradient-to-br from-blue-50 via-white to-blue-50 rounded-3xl shadow-lg my-12">
-            <h2 class="text-3xl font-bold text-center mb-12 text-primary animate-bounce-in">Scholarship & Programs</h2>
-  <div class="grid md:grid-cols-3 gap-8">
-      <!-- Scholarship 1 -->
-                <div class="bg-white shadow-lg p-6 rounded-xl flex flex-col border-t-4 border-primary hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out transform animate-bounce-in-left" style="animation-delay: 0.1s">
-                    <div class="text-primary text-2xl mb-4"><i class="fas fa-users"></i></div>
-          <h3 class="text-xl font-semibold mb-2">Community-based Scholarship</h3>
-          <p class="text-gray-600 mb-4">Open to all qualified students who demonstrate academic excellence and financial need.</p>
-          <ul class="list-disc list-inside text-gray-600 mb-6">
-              <li>Full tuition coverage</li>
-              <li>Monthly allowance</li>
-              <li>Mentorship program</li>
-          </ul>
-                    <button class="flex items-center justify-center gap-2 bg-primary text-white py-2 px-6 rounded-lg hover:bg-blue-400 hover:shadow-lg transform hover:scale-105 mt-auto transition-all duration-300 ease-in-out mb-2 font-semibold shadow" onclick="openScholarshipModal('community_based')">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"></path></svg>
-                        Apply Now
-                    </button>
-      </div>
+        <!-- Scholarships Section with enhanced professional design -->
+        <section id="scholarships" class="max-w-7xl mx-auto py-20 px-4 bg-gradient-to-br from-blue-50 via-white to-indigo-50 rounded-3xl shadow-2xl my-16 relative overflow-hidden">
+            <!-- Background decoration -->
+            <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-full -translate-y-32 translate-x-32"></div>
+            <div class="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-secondary/10 to-primary/10 rounded-full translate-y-24 -translate-x-24"></div>
 
-      <!-- Scholarship 2 -->
-                <div class="bg-white shadow-lg p-6 rounded-xl flex flex-col border-t-4 border-primary hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out transform animate-bounce-in" style="animation-delay: 0.2s">
-                    <div class="text-primary text-2xl mb-4"><i class="fas fa-female"></i></div>
-          <h3 class="text-xl font-semibold mb-2">In-house Scholarship for Girls</h3>
-          <p class="text-gray-600 mb-4">Exclusive program designed to empower young women through education and leadership.</p>
-          <ul class="list-disc list-inside text-gray-600 mb-6">
-              <li>Full tuition and housing</li>
-              <li>Leadership training</li>
-              <li>Career guidance</li>
-          </ul>
-                    <button class="flex items-center justify-center gap-2 bg-primary text-white py-2 px-6 rounded-lg hover:bg-blue-400 hover:shadow-lg transform hover:scale-105 mt-auto transition-all duration-300 ease-in-out mb-2 font-semibold shadow" onclick="openScholarshipModal('in_house')">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"></path></svg>
-                        Apply Now
-                    </button>
-      </div>
+            <div class="relative z-10">
+                <h2 class="text-4xl font-bold text-center mb-4 text-primary animate-bounce-in">Scholarship & Programs</h2>
+                <p class="text-center text-gray-600 mb-16 text-lg">Empowering futures through education and community support</p>
 
-      <!-- Scholarship 3 -->
-                <div class="bg-white shadow-lg p-6 rounded-xl flex flex-col border-t-4 border-primary hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out transform animate-bounce-in-right" style="animation-delay: 0.3s">
-                    <div class="text-primary text-2xl mb-4"><i class="fas fa-utensils"></i></div>
-          <h3 class="text-xl font-semibold mb-2">Feeding Program</h3>
-          <p class="text-gray-600 mb-4">A feeding program for less fortunate children living nearby area.</p>
-          <ul class="list-disc list-inside text-gray-600 mb-6">
-              <li>Food Every Sunday</li>
-              <li>Parent's Orientation about Food Consumption</li>
-              <li>Free Check-up</li>
-          </ul>
-      </div>
-  </div>
-</section>
+                <div class="grid md:grid-cols-3 gap-10">
+                    <!-- Scholarship 1 - Enhanced Design -->
+                    <div class="group relative bg-gradient-to-br from-white to-blue-50/50 shadow-2xl p-8 rounded-2xl flex flex-col border border-blue-100 hover:shadow-3xl hover:scale-105 transition-all duration-500 ease-in-out transform animate-bounce-in-left overflow-hidden" style="animation-delay: 0.1s">
+                        <!-- Card decoration -->
+                        <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full -translate-y-10 translate-x-10"></div>
 
-        <!-- Job Offers Section with enhanced animations -->
-<section id="job-offers" class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-12 animate-bounce-in">Job Opportunities</h2>
-        <div class="grid md:grid-cols-3 gap-8">
-            @forelse($jobs as $index => $job)
-                <div class="bg-neutral shadow-md rounded-lg p-6 flex flex-col hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out animate-bounce-in-left transform" style="animation-delay: {{ ($index * 0.1) + 0.1 }}s">
-                    @if($job->employment_type)
-                        <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full mb-2">{{ ucfirst($job->employment_type) }}</span>
-                    @elseif($job->type)
-                        <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full mb-2">{{ ucfirst($job->type) }}</span>
-                    @endif
-                    <h3 class="mt-4 font-semibold text-lg">{{ $job->title }}</h3>
-                    <p class="text-gray-600">{{ Str::limit($job->description, 60) }}</p>
-                    <p class="text-sm text-gray-500 mt-2">
-                        {{ $job->company_name ?? $job->company ?? 'Company Not Specified' }}
-                        @if($job->location)
-                            | {{ $job->location }}
-                        @endif
-                    </p>
-                    <button class="mt-auto bg-primary text-white w-full py-2 px-6 rounded-lg hover:bg-blue-700 hover:shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out" onclick="openJobDetailsModal({{ $job->id }})">View Details</button>
+                        <!-- Icon with enhanced styling -->
+                        <div class="relative z-10 flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary to-blue-600 text-white text-2xl mb-6 rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-users"></i>
+                        </div>
+
+                        <!-- Content -->
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800 group-hover:text-primary transition-colors duration-300">Community-based Scholarship</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">Open to all qualified students who demonstrate academic excellence and financial need.</p>
+
+                        <!-- Features list with enhanced styling -->
+                        <div class="space-y-3 mb-8 flex-grow">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+                                <span class="text-gray-700 font-medium">Full tuition coverage</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+                                <span class="text-gray-700 font-medium">Monthly allowance</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+                                <span class="text-gray-700 font-medium">Mentorship program</span>
+                            </div>
+                        </div>
+
+                        <!-- Enhanced button -->
+                        <button class="group/btn relative overflow-hidden bg-gradient-to-r from-primary to-blue-600 text-white py-4 px-8 rounded-xl hover:from-blue-600 hover:to-primary shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-in-out font-semibold text-lg" onclick="openScholarshipModal('community_based')">
+                            <span class="relative z-10 flex items-center justify-center gap-3">
+                                <svg class="w-5 h-5 group-hover/btn:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"></path></svg>
+                                Apply Now
+                            </span>
+                            <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-primary opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                        </button>
+                    </div>
+
+                    <!-- Scholarship 2 - Enhanced Design -->
+                    <div class="group relative bg-gradient-to-br from-white to-pink-50/50 shadow-2xl p-8 rounded-2xl flex flex-col border border-pink-100 hover:shadow-3xl hover:scale-105 transition-all duration-500 ease-in-out transform animate-bounce-in overflow-hidden" style="animation-delay: 0.2s">
+                        <!-- Card decoration -->
+                        <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-pink-300/20 to-purple-300/20 rounded-full -translate-y-10 translate-x-10"></div>
+
+                        <!-- Icon with enhanced styling -->
+                        <div class="relative z-10 flex items-center justify-center w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-600 text-white text-2xl mb-6 rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-female"></i>
+                        </div>
+
+                        <!-- Content -->
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800 group-hover:text-pink-600 transition-colors duration-300">In-house Scholarship for Girls</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">Exclusive program designed to empower young women through education and leadership.</p>
+
+                        <!-- Features list with enhanced styling -->
+                        <div class="space-y-3 mb-8 flex-grow">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full"></div>
+                                <span class="text-gray-700 font-medium">Full tuition and housing</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full"></div>
+                                <span class="text-gray-700 font-medium">Leadership training</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full"></div>
+                                <span class="text-gray-700 font-medium">Career guidance</span>
+                            </div>
+                        </div>
+
+                        <!-- Enhanced button -->
+                        <button class="group/btn relative overflow-hidden bg-gradient-to-r from-pink-500 to-purple-600 text-white py-4 px-8 rounded-xl hover:from-purple-600 hover:to-pink-500 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-in-out font-semibold text-lg" onclick="openScholarshipModal('in_house')">
+                            <span class="relative z-10 flex items-center justify-center gap-3">
+                                <svg class="w-5 h-5 group-hover/btn:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"></path></svg>
+                                Apply Now
+                            </span>
+                            <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-500 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                        </button>
+                    </div>
+
+                    <!-- Scholarship 3 - Enhanced Design -->
+                    <div class="group relative bg-gradient-to-br from-white to-green-50/50 shadow-2xl p-8 rounded-2xl flex flex-col border border-green-100 hover:shadow-3xl hover:scale-105 transition-all duration-500 ease-in-out transform animate-bounce-in-right overflow-hidden" style="animation-delay: 0.3s">
+                        <!-- Card decoration -->
+                        <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-green-300/20 to-emerald-300/20 rounded-full -translate-y-10 translate-x-10"></div>
+
+                        <!-- Icon with enhanced styling -->
+                        <div class="relative z-10 flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 text-white text-2xl mb-6 rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+
+                        <!-- Content -->
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800 group-hover:text-green-600 transition-colors duration-300">Feeding Program</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">A feeding program for less fortunate children living nearby area.</p>
+
+                        <!-- Features list with enhanced styling -->
+                        <div class="space-y-3 mb-8 flex-grow">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full"></div>
+                                <span class="text-gray-700 font-medium">Food Every Sunday</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full"></div>
+                                <span class="text-gray-700 font-medium">Parent's Orientation about Food Consumption</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full"></div>
+                                <span class="text-gray-700 font-medium">Free Check-up</span>
+                            </div>
+                        </div>
+
+                        <!-- Info badge instead of button for feeding program -->
+                        <div class="bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 py-4 px-8 rounded-xl text-center font-semibold text-lg border border-green-200">
+                            <i class="fas fa-info-circle mr-2"></i>
+                            Community Program
+                        </div>
+                    </div>
                 </div>
-            @empty
-                <div class="col-span-full text-center py-12">
-                    <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2M8 6v10a2 2 0 002 2h4a2 2 0 002-2V6"/>
-                    </svg>
-                    <h3 class="text-xl font-medium text-gray-500">No job opportunities available at the moment</h3>
-                    <p class="text-gray-400 mt-2">Check back later for new opportunities!</p>
-                </div>
-            @endforelse
+            </div>
+        </section>
+
+        <!-- Job Offers Section with enhanced professional design -->
+<section id="job-offers" class="bg-gradient-to-br from-gray-50 to-blue-50/30 py-20 relative overflow-hidden">
+    <!-- Background decorations -->
+    <div class="absolute top-0 left-0 w-72 h-72 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-full -translate-y-36 -translate-x-36"></div>
+    <div class="absolute bottom-0 right-0 w-64 h-64 bg-gradient-to-tl from-secondary/5 to-primary/5 rounded-full translate-y-32 translate-x-32"></div>
+
+    <div class="max-w-7xl mx-auto px-4 relative z-10">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold mb-4 text-primary animate-bounce-in">Job Opportunities</h2>
+            <p class="text-gray-600 text-lg mb-2">Discover all available job opportunities from our community and partners</p>
+            <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
         </div>
+
         @if($jobs->count() > 0)
-            <div class="text-center mt-8">
-                <a href="{{ route('jobs.index') }}" class="inline-flex items-center px-6 py-3 bg-primary text-white rounded-lg hover:bg-blue-700 hover:shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out">
-                    View All Jobs
-                    <svg class="w-4 h-4 ml-2 transition-transform duration-300 ease-in-out group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                    </svg>
-                </a>
+            <div id="jobsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                @foreach($jobs as $index => $job)
+                    <div class="group job-card bg-white shadow-xl rounded-2xl p-6 flex flex-col hover:shadow-2xl hover:scale-105 transition-all duration-500 ease-in-out animate-bounce-in-left transform border border-gray-100 relative overflow-hidden" style="animation-delay: {{ ($index * 0.05) + 0.1 }}s">
+                        <!-- Card decoration -->
+                        <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-full -translate-y-8 translate-x-8"></div>
+
+                        <!-- Badges with enhanced styling -->
+                        <div class="flex justify-between items-start mb-4 relative z-10">
+                            @if($job->employment_type)
+                                <span class="bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 text-xs px-3 py-2 rounded-full font-semibold border border-green-200 shadow-sm">{{ ucfirst($job->employment_type) }}</span>
+                            @elseif($job->type)
+                                <span class="bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 text-xs px-3 py-2 rounded-full font-semibold border border-green-200 shadow-sm">{{ ucfirst($job->type) }}</span>
+                            @endif
+
+                            @if($job->is_admin_posted)
+                                <span class="bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 text-xs px-3 py-2 rounded-full font-semibold border border-blue-200 shadow-sm">
+                                    <i class="fas fa-shield-alt mr-1"></i>Admin
+                                </span>
+                            @else
+                                <span class="bg-gradient-to-r from-purple-100 to-pink-100 text-purple-800 text-xs px-3 py-2 rounded-full font-semibold border border-purple-200 shadow-sm">
+                                    <i class="fas fa-users mr-1"></i>Community
+                                </span>
+                            @endif
+                        </div>
+
+                        <!-- Job icon -->
+                        <div class="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-primary to-blue-600 text-white rounded-xl mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                            <i class="fas fa-briefcase text-lg"></i>
+                        </div>
+
+                        <!-- Content with enhanced typography -->
+                        <h3 class="font-bold text-xl mb-3 line-clamp-2 text-gray-800 group-hover:text-primary transition-colors duration-300">{{ $job->title }}</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-3 leading-relaxed">{{ Str::limit($job->description, 80) }}</p>
+
+                        <!-- Company info with enhanced styling -->
+                        <div class="mb-6 flex-grow">
+                            <div class="flex items-center space-x-2 mb-2">
+                                <div class="w-2 h-2 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+                                <span class="font-semibold text-gray-700 text-sm">{{ $job->company_name ?? $job->company ?? 'Company Not Specified' }}</span>
+                            </div>
+                            @if($job->location)
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
+                                    <span class="text-gray-500 text-sm">{{ $job->location }}</span>
+                                </div>
+                            @endif
+                        </div>
+
+                        <!-- Enhanced button -->
+                        <button class="group/btn relative overflow-hidden bg-gradient-to-r from-primary to-blue-600 text-white w-full py-3 px-4 rounded-xl hover:from-blue-600 hover:to-primary shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-in-out font-semibold" onclick="openJobDetailsModal({{ $job->id }})">
+                            <span class="relative z-10 flex items-center justify-center gap-2">
+                                <span>View Details</span>
+                                <i class="fas fa-arrow-right group-hover/btn:translate-x-1 transition-transform duration-300"></i>
+                            </span>
+                            <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-primary opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                        </button>
+                    </div>
+                @endforeach
+            </div>
+
+            @if($jobs->count() > 12)
+                <div class="text-center mt-12">
+                    <div class="inline-flex items-center space-x-2 bg-white px-6 py-3 rounded-full shadow-lg border border-gray-200">
+                        <i class="fas fa-briefcase text-primary"></i>
+                        <span class="text-gray-700 font-medium">Showing {{ $jobs->count() }} job opportunities</span>
+                    </div>
+                </div>
+            @endif
+        @else
+            <div class="text-center py-16">
+                <div class="bg-white rounded-2xl shadow-xl p-12 max-w-md mx-auto border border-gray-100">
+                    <div class="w-20 h-20 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2M8 6v10a2 2 0 002 2h4a2 2 0 002-2V6"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-700 mb-3">No Job Opportunities</h3>
+                    <p class="text-gray-500 mb-6">No job opportunities are available at the moment. Check back later for new opportunities!</p>
+                    <div class="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+                </div>
             </div>
         @endif
+
     </div>
 </section>
 
         <!-- Events Section with enhanced animations -->
-<section id="events" class="py-16 bg-neutral">
-    <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-12 animate-bounce-in">Upcoming Events</h2>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            @forelse($events as $event)
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out transform animate-bounce-in-left" style="animation-delay: 0.1s">
-                <div class="relative h-48 overflow-hidden bg-primary/10">
+<section id="events" class="py-20 bg-gradient-to-br from-indigo-50 via-white to-purple-50 relative overflow-hidden">
+    <!-- Background decorations -->
+    <div class="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-indigo-100/50 to-purple-100/50 rounded-full -translate-y-40 translate-x-40"></div>
+    <div class="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-purple-100/50 to-indigo-100/50 rounded-full translate-y-32 -translate-x-32"></div>
+
+    <div class="max-w-7xl mx-auto px-4 relative z-10">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold mb-4 text-primary animate-bounce-in">Upcoming Events</h2>
+            <p class="text-gray-600 text-lg mb-2">Join our community events and make a difference</p>
+            <div class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-600 mx-auto rounded-full"></div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+            @forelse($events as $index => $event)
+            <div class="group bg-white rounded-2xl shadow-2xl overflow-hidden hover:shadow-3xl hover:scale-105 transition-all duration-500 ease-in-out transform animate-bounce-in-left border border-gray-100 relative" style="animation-delay: {{ ($index * 0.1) + 0.1 }}s">
+                <!-- Enhanced header with gradient -->
+                <div class="relative h-56 overflow-hidden bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500">
+                    <!-- Decorative pattern -->
+                    <div class="absolute inset-0 bg-black/20"></div>
+                    <div class="absolute top-4 right-4 w-12 h-12 bg-white/20 rounded-full backdrop-blur-sm"></div>
+                    <div class="absolute bottom-4 left-4 w-8 h-8 bg-white/20 rounded-full backdrop-blur-sm"></div>
+
+                    <!-- Event icon -->
                     <div class="absolute inset-0 flex items-center justify-center">
-                        <svg class="w-20 h-20 text-primary/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                        </svg>
+                        <div class="w-20 h-20 bg-white/20 rounded-2xl backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Date badge -->
+                    <div class="absolute top-4 left-4 bg-white/95 backdrop-blur-sm rounded-xl px-3 py-2 shadow-lg">
+                        <div class="text-center">
+                            <div class="text-xs font-semibold text-gray-600 uppercase">
+                                {{ \Carbon\Carbon::parse($event->start_date)->format('M') }}
+                            </div>
+                            <div class="text-lg font-bold text-gray-800">
+                                {{ \Carbon\Carbon::parse($event->start_date)->format('d') }}
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ $event->title }}</h3>
-                    <div class="flex items-center text-gray-600 mb-2">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                        </svg>
-                        <span class="text-sm">
-                            {{ \Carbon\Carbon::parse($event->start_date)->format('M d, Y - h:i A') }}
-                        </span>
+
+                <!-- Content with enhanced styling -->
+                <div class="p-8">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4 group-hover:text-indigo-600 transition-colors duration-300 line-clamp-2">{{ $event->title }}</h3>
+
+                    <!-- Event details with enhanced icons -->
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-lg flex items-center justify-center">
+                                <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <span class="text-sm font-medium text-gray-700">
+                                {{ \Carbon\Carbon::parse($event->start_date)->format('M d, Y - h:i A') }}
+                            </span>
+                        </div>
+
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-gradient-to-br from-purple-100 to-pink-100 rounded-lg flex items-center justify-center">
+                                <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                            </div>
+                            <span class="text-sm font-medium text-gray-700">{{ $event->location }}</span>
+                        </div>
                     </div>
-                    <div class="flex items-center text-gray-600 mb-4">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                        </svg>
-                        <span class="text-sm">{{ $event->location }}</span>
-                    </div>
-                    <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ $event->description }}</p>
-                    <div class="flex justify-end">
-                        <button onclick="openEventRegistrationModal('{{ $event->id }}')"
-                                class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-700 hover:shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out text-sm font-medium flex items-center">
-                            Register Now
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+                    <p class="text-gray-600 text-sm mb-8 line-clamp-3 leading-relaxed">{{ $event->description }}</p>
+
+                    <!-- Enhanced register button -->
+                    <button onclick="openEventRegistrationModal('{{ $event->id }}')"
+                            class="group/btn relative overflow-hidden w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6 py-4 rounded-xl hover:from-purple-600 hover:to-indigo-500 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-in-out font-semibold">
+                        <span class="relative z-10 flex items-center justify-center gap-3">
+                            <span>Register Now</span>
+                            <svg class="w-5 h-5 group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                             </svg>
-                        </button>
-                    </div>
+                        </span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-indigo-500 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                    </button>
                 </div>
             </div>
             @empty
-            <div class="col-span-full text-center py-12">
-                <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                </svg>
-                <h3 class="text-xl font-medium text-gray-500">No upcoming events at the moment</h3>
-                <p class="text-gray-400 mt-2">Check back later for new events!</p>
+            <div class="col-span-full text-center py-16">
+                <div class="bg-white rounded-2xl shadow-xl p-12 max-w-md mx-auto border border-gray-100">
+                    <div class="w-20 h-20 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-700 mb-3">No Upcoming Events</h3>
+                    <p class="text-gray-500 mb-6">No events are scheduled at the moment. Check back later for exciting new events!</p>
+                    <div class="w-16 h-1 bg-gradient-to-r from-indigo-500 to-purple-600 mx-auto rounded-full"></div>
+                </div>
             </div>
             @endforelse
         </div>
@@ -581,127 +905,192 @@
             </div>
         </section>
 
-        <!-- Track Application Section -->
-        <section id="track-application" class="py-20 bg-gradient-to-b from-white to-neutral">
-            <div class="max-w-4xl mx-auto px-4">
-                <h2 class="text-4xl font-extrabold text-center text-primary mb-8 tracking-tight animate-bounce-in">Track Your Application</h2>
-                <p class="text-center text-gray-600 mb-12">Enter your tracking code to check your application status</p>
+        <!-- Track Application Section with enhanced professional design -->
+        <section id="track-application" class="py-20 bg-gradient-to-br from-slate-50 via-white to-gray-50 relative overflow-hidden">
+            <!-- Background decorations -->
+            <div class="absolute top-0 right-0 w-72 h-72 bg-gradient-to-bl from-slate-100/40 to-gray-100/40 rounded-full -translate-y-36 translate-x-36"></div>
+            <div class="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-gray-100/40 to-slate-100/40 rounded-full translate-y-32 -translate-x-32"></div>
 
-                <!-- Application Type Tabs -->
-                <div class="flex justify-center mb-8">
-                    <div class="bg-white rounded-xl p-1 shadow-lg">
-                        <button onclick="switchTrackingTab('scholarship')" id="scholarshipTab" class="px-6 py-3 rounded-lg font-medium transition-all duration-300 bg-primary text-white">
+            <div class="max-w-4xl mx-auto px-4 relative z-10">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold mb-4 text-primary animate-bounce-in">Track Your Application</h2>
+                    <p class="text-gray-600 text-lg mb-2">Enter your tracking code to check your application status</p>
+                    <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+                </div>
+
+                <!-- Enhanced Application Type Tabs -->
+                <div class="flex justify-center mb-12">
+                    <div class="bg-white rounded-2xl p-2 shadow-xl border border-gray-100">
+                        <button onclick="switchTrackingTab('scholarship')" id="scholarshipTab" class="px-8 py-4 rounded-xl font-semibold transition-all duration-300 bg-gradient-to-r from-primary to-blue-600 text-white shadow-lg">
+                            <i class="fas fa-graduation-cap mr-2"></i>
                             Scholarship Application
                         </button>
-                        <button onclick="switchTrackingTab('volunteer')" id="volunteerTab" class="px-6 py-3 rounded-lg font-medium transition-all duration-300 text-gray-600 hover:text-primary">
+                        <button onclick="switchTrackingTab('volunteer')" id="volunteerTab" class="px-8 py-4 rounded-xl font-semibold transition-all duration-300 text-gray-600 hover:text-primary hover:bg-gray-50">
+                            <i class="fas fa-hands-helping mr-2"></i>
                             Volunteer Application
                         </button>
                     </div>
                 </div>
 
-                <!-- Scholarship Tracking Form -->
-                <div id="scholarshipTracking" class="bg-white/90 p-10 rounded-3xl shadow-2xl border border-primary/20 animate-fade-in">
-                    <div class="text-center mb-6">
-                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Track Scholarship Application</h3>
-                        <p class="text-gray-600">Enter your 8-digit scholarship tracking code</p>
+                <!-- Enhanced Scholarship Tracking Form -->
+                <div id="scholarshipTracking" class="bg-white/95 backdrop-blur-sm p-12 rounded-3xl shadow-2xl border border-primary/20 animate-fade-in relative overflow-hidden">
+                    <!-- Card decoration -->
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-full -translate-y-16 translate-x-16"></div>
+
+                    <div class="text-center mb-8 relative z-10">
+                        <div class="w-16 h-16 bg-gradient-to-br from-primary to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                            <i class="fas fa-search text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-3">Track Scholarship Application</h3>
+                        <p class="text-gray-600 text-lg">Enter your 8-digit scholarship tracking code</p>
                     </div>
-                    <form method="POST" action="{{ route('scholarship.track') }}" class="space-y-8">
+
+                    <form method="POST" action="{{ route('scholarship.track') }}" class="space-y-8 relative z-10">
                         @csrf
                         <div>
-                            <label for="scholarship_tracking_code" class="block text-base font-semibold mb-2 text-gray-700">Tracking Code</label>
-                            <input type="text" name="tracking_code" id="scholarship_tracking_code"
-                                class="w-full px-5 py-3 border-2 border-primary/30 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-colors text-lg placeholder-gray-400 shadow-sm text-center font-mono"
-                                placeholder="Enter your 8-digit tracking code"
-                                maxlength="8"
-                                required>
+                            <label for="scholarship_tracking_code" class="block text-lg font-semibold mb-4 text-gray-700">Tracking Code</label>
+                            <div class="relative">
+                                <input type="text" name="tracking_code" id="scholarship_tracking_code"
+                                    class="w-full px-6 py-4 border-2 border-primary/30 rounded-2xl focus:ring-4 focus:ring-primary/20 focus:border-primary transition-all text-xl placeholder-gray-400 shadow-lg text-center font-mono bg-gray-50 hover:bg-white"
+                                    placeholder="Enter your 8-digit tracking code"
+                                    maxlength="8"
+                                    required>
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-4">
+                                    <i class="fas fa-hashtag text-gray-400"></i>
+                                </div>
+                            </div>
                         </div>
+
                         @if(session('error'))
-                            <div class="flex items-center bg-red-50 border-l-4 border-red-400 p-4 rounded-xl shadow animate-fade-in">
-                                <svg class="h-6 w-6 text-red-400 mr-3" viewBox="0 0 20 20" fill="currentColor">
+                            <div class="flex items-center bg-red-50 border-l-4 border-red-400 p-6 rounded-2xl shadow-lg animate-fade-in">
+                                <svg class="h-8 w-8 text-red-400 mr-4" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
                                 </svg>
-                                <span class="text-base text-red-700">{{ session('error') }}</span>
+                                <span class="text-lg text-red-700 font-medium">{{ session('error') }}</span>
                             </div>
                         @endif
+
                         <div class="flex justify-center">
                             <button type="submit"
-                                class="inline-flex items-center px-8 py-3 border border-transparent text-lg font-semibold rounded-xl shadow-md text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all gap-2 group">
-                                <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                class="group/btn relative overflow-hidden inline-flex items-center px-10 py-4 border border-transparent text-xl font-bold rounded-2xl shadow-xl text-white bg-gradient-to-r from-primary to-blue-600 hover:from-blue-600 hover:to-primary focus:outline-none focus:ring-4 focus:ring-primary/30 transition-all gap-3">
+                                <svg class="w-7 h-7 group-hover/btn:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                                 </svg>
-                                Track Scholarship
+                                <span>Track Scholarship</span>
+                                <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-primary opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
                             </button>
                         </div>
                     </form>
                 </div>
 
-                <!-- Volunteer Event Tracking Form -->
-                <div id="volunteerTracking" class="bg-white/90 p-10 rounded-3xl shadow-2xl border border-primary/20 animate-fade-in hidden">
-                    <div class="text-center mb-6">
-                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Track Volunteer Application</h3>
-                        <p class="text-gray-600">Enter your 8-digit volunteer event tracking code</p>
+                <!-- Enhanced Volunteer Event Tracking Form -->
+                <div id="volunteerTracking" class="bg-white/95 backdrop-blur-sm p-12 rounded-3xl shadow-2xl border border-primary/20 animate-fade-in hidden relative overflow-hidden">
+                    <!-- Card decoration -->
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-100/50 to-teal-100/50 rounded-full -translate-y-16 translate-x-16"></div>
+
+                    <div class="text-center mb-8 relative z-10">
+                        <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                            <i class="fas fa-hands-helping text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-3">Track Volunteer Application</h3>
+                        <p class="text-gray-600 text-lg">Enter your 8-digit volunteer event tracking code</p>
                     </div>
-                    <form method="POST" action="{{ route('volunteer.event-application.track') }}" class="space-y-8">
+
+                    <form method="POST" action="{{ route('volunteer.event-application.track') }}" class="space-y-8 relative z-10">
                         @csrf
                         <div>
-                            <label for="volunteer_tracking_code" class="block text-base font-semibold mb-2 text-gray-700">Tracking Code</label>
-                            <input type="text" name="tracking_code" id="volunteer_tracking_code"
-                                class="w-full px-5 py-3 border-2 border-primary/30 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-colors text-lg placeholder-gray-400 shadow-sm text-center font-mono"
-                                placeholder="Enter your 8-digit tracking code"
-                                maxlength="8"
-                                required>
+                            <label for="volunteer_tracking_code" class="block text-lg font-semibold mb-4 text-gray-700">Tracking Code</label>
+                            <div class="relative">
+                                <input type="text" name="tracking_code" id="volunteer_tracking_code"
+                                    class="w-full px-6 py-4 border-2 border-green-300 rounded-2xl focus:ring-4 focus:ring-green-200 focus:border-green-500 transition-all text-xl placeholder-gray-400 shadow-lg text-center font-mono bg-gray-50 hover:bg-white"
+                                    placeholder="Enter your 8-digit tracking code"
+                                    maxlength="8"
+                                    required>
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-4">
+                                    <i class="fas fa-hashtag text-gray-400"></i>
+                                </div>
+                            </div>
                         </div>
+
                         <div class="flex justify-center">
                             <button type="submit"
-                                class="inline-flex items-center px-8 py-3 border border-transparent text-lg font-semibold rounded-xl shadow-md text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all gap-2 group">
-                                <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                class="group/btn relative overflow-hidden inline-flex items-center px-10 py-4 border border-transparent text-xl font-bold rounded-2xl shadow-xl text-white bg-gradient-to-r from-green-500 to-teal-600 hover:from-teal-600 hover:to-green-500 focus:outline-none focus:ring-4 focus:ring-green-300 transition-all gap-3">
+                                <svg class="w-7 h-7 group-hover/btn:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                                 </svg>
-                                Track Volunteer Application
+                                <span>Track Volunteer Application</span>
+                                <div class="absolute inset-0 bg-gradient-to-r from-teal-600 to-green-500 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
                             </button>
                         </div>
                     </form>
                 </div>
 
-                <!-- Quick Links -->
-                <div class="mt-8 text-center">
-                    <p class="text-gray-600 mb-4">Don't have a tracking code?</p>
-                    <div class="flex flex-wrap justify-center gap-4">
-                        <a href="#scholarships" class="inline-flex items-center px-4 py-2 bg-white text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300">
-                            <i class="fas fa-graduation-cap mr-2"></i>
-                            Apply for Scholarship
+                <!-- Enhanced Quick Links -->
+                <div class="mt-12 text-center">
+                    <p class="text-gray-600 mb-6 text-lg">Don't have a tracking code?</p>
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <a href="#scholarships" class="group inline-flex items-center px-6 py-3 bg-white text-primary border-2 border-primary rounded-xl hover:bg-primary hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                            <i class="fas fa-graduation-cap mr-3 group-hover:scale-110 transition-transform"></i>
+                            <span class="font-semibold">Apply for Scholarship</span>
                         </a>
-                        <a href="#events" class="inline-flex items-center px-4 py-2 bg-white text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300">
-                            <i class="fas fa-hands-helping mr-2"></i>
-                            Volunteer for Events
+                        <a href="#events" class="group inline-flex items-center px-6 py-3 bg-white text-green-600 border-2 border-green-600 rounded-xl hover:bg-green-600 hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                            <i class="fas fa-hands-helping mr-3 group-hover:scale-110 transition-transform"></i>
+                            <span class="font-semibold">Volunteer for Events</span>
                         </a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- About Us Section -->
-        <section id="about-us" class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-12 animate-bounce-in">About Us</h2>
+        <!-- About Us Section with enhanced professional design -->
+        <section id="about-us" class="bg-gradient-to-br from-gray-50 to-blue-50/30 py-20 relative overflow-hidden">
+    <!-- Background decorations -->
+    <div class="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-blue-100/30 to-indigo-100/30 rounded-full -translate-y-48 -translate-x-48"></div>
+    <div class="absolute bottom-0 right-0 w-80 h-80 bg-gradient-to-tl from-indigo-100/30 to-blue-100/30 rounded-full translate-y-40 translate-x-40"></div>
 
-                <!-- Vision and Mission -->
-                <div class="grid md:grid-cols-2 gap-8 mb-16">
-                    <div class="bg-primary/5 p-8 rounded-xl hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out transform animate-bounce-in-left" style="animation-delay: 0.1s">
-                        <div class="text-primary text-4xl mb-4">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                        <h3 class="text-2xl font-semibold mb-4">Our Vision</h3>
-                        <p class="text-gray-700 leading-relaxed">To create a world where every student has access to quality education and career opportunities, regardless of their background or circumstances.</p>
-                    </div>
-                    <div class="bg-primary/5 p-8 rounded-xl hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out transform animate-bounce-in-right" style="animation-delay: 0.2s">
-                        <div class="text-primary text-4xl mb-4">
-                            <i class="fas fa-bullseye"></i>
-                        </div>
-                        <h3 class="text-2xl font-semibold mb-4">Our Mission</h3>
-                        <p class="text-gray-700 leading-relaxed">To empower students through comprehensive scholarship programs, guidance, and development, creating a lasting impact on their lives and communities.</p>
-                    </div>
+    <div class="max-w-7xl mx-auto px-4 relative z-10">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold mb-4 text-primary animate-bounce-in">About Us</h2>
+            <p class="text-gray-600 text-lg mb-2">Empowering communities through education and opportunity</p>
+            <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+        </div>
+
+        <!-- Vision and Mission with enhanced design -->
+        <div class="grid md:grid-cols-2 gap-10 mb-20">
+            <!-- Vision Card -->
+            <div class="group relative bg-white p-10 rounded-2xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500 ease-in-out transform animate-bounce-in-left border border-gray-100 overflow-hidden" style="animation-delay: 0.1s">
+                <!-- Card decoration -->
+                <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-blue-100/50 to-indigo-100/50 rounded-full -translate-y-12 translate-x-12"></div>
+
+                <!-- Icon with enhanced styling -->
+                <div class="relative z-10 flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 text-white text-3xl mb-6 rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-eye"></i>
                 </div>
+
+                <h3 class="text-3xl font-bold mb-6 text-gray-800 group-hover:text-blue-600 transition-colors duration-300">Our Vision</h3>
+                <p class="text-gray-700 leading-relaxed text-lg">To create a world where every student has access to quality education and career opportunities, regardless of their background or circumstances.</p>
+
+                <!-- Decorative element -->
+                <div class="mt-6 w-16 h-1 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full"></div>
+            </div>
+
+            <!-- Mission Card -->
+            <div class="group relative bg-white p-10 rounded-2xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500 ease-in-out transform animate-bounce-in-right border border-gray-100 overflow-hidden" style="animation-delay: 0.2s">
+                <!-- Card decoration -->
+                <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-indigo-100/50 to-purple-100/50 rounded-full -translate-y-12 translate-x-12"></div>
+
+                <!-- Icon with enhanced styling -->
+                <div class="relative z-10 flex items-center justify-center w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-600 text-white text-3xl mb-6 rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+
+                <h3 class="text-3xl font-bold mb-6 text-gray-800 group-hover:text-indigo-600 transition-colors duration-300">Our Mission</h3>
+                <p class="text-gray-700 leading-relaxed text-lg">To empower students through comprehensive scholarship programs, guidance, and development, creating a lasting impact on their lives and communities.</p>
+
+                <!-- Decorative element -->
+                <div class="mt-6 w-16 h-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full"></div>
+            </div>
+        </div>
 
                 <!-- Impact Slider -->
                 <div class="relative overflow-hidden rounded-2xl shadow-xl animate-on-scroll">
@@ -806,48 +1195,121 @@
     </main>
 
     <!-- Job Details Modal -->
-    <div id="jobDetailsModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden">
-        <div class="bg-white p-6 md:p-10 rounded-xl shadow-lg w-full max-w-lg mx-2 relative">
-            <button onclick="closeJobDetailsModal()" class="absolute top-2 right-3 text-gray-400 hover:text-black text-2xl font-bold">&times;</button>
-            <h2 class="text-2xl font-bold mb-4 text-primary text-center">Job Details</h2>
+    <div id="jobDetailsModal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex justify-center items-center z-50 hidden p-4">
+        <div class="bg-white p-4 lg:p-6 rounded-xl shadow-2xl w-full max-w-2xl mx-auto relative transform transition-all duration-300 scale-95 modal-content max-h-[90vh] overflow-y-auto">
+            <!-- Close Button -->
+            <button onclick="closeJobDetailsModal()" class="absolute top-3 right-3 w-6 h-6 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:text-gray-700 transition-all duration-200">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+
+            <!-- Header -->
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m-8 0V6a2 2 0 00-2 2v6"/>
+                    </svg>
+                </div>
+                <h2 class="text-xl font-semibold text-gray-800">Job Details</h2>
+            </div>
+
             <div id="jobDetailsContent" class="space-y-4">
                 <div class="text-center text-gray-500">Loading...</div>
-            </div>
-            <div class="mt-6 text-center">
-                <a href="/jobs" class="inline-flex items-center px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition">
-                    View All Jobs
-                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                    </svg>
-                </a>
             </div>
         </div>
     </div>
 
     <!-- Event Registration Modal -->
-    <div id="eventRegistrationModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden">
-        <div class="bg-white p-6 md:p-10 rounded-xl shadow-lg w-full max-w-lg mx-2 relative">
-            <button onclick="closeEventRegistrationModal()" class="absolute top-2 right-3 text-gray-400 hover:text-black text-2xl font-bold">&times;</button>
-            <h2 class="text-2xl font-bold mb-4 text-primary text-center">Event Registration</h2>
+    <div id="eventRegistrationModal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex justify-center items-center z-50 hidden p-4">
+        <div class="bg-white p-4 lg:p-6 rounded-xl shadow-2xl w-full max-w-lg mx-auto relative transform transition-all duration-300 scale-95 modal-content max-h-[90vh] overflow-y-auto">
+            <!-- Close Button -->
+            <button onclick="closeEventRegistrationModal()" class="absolute top-3 right-3 w-6 h-6 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:text-gray-700 transition-all duration-200">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+
+            <!-- Header -->
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-gradient-to-r from-teal-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                </div>
+                <h2 class="text-lg font-semibold text-gray-800 mb-1">Event Registration</h2>
+                <p class="text-xs text-gray-600">Join us for an amazing experience!</p>
+            </div>
+
+            <!-- Form -->
             <form id="eventRegistrationForm" class="space-y-4" onsubmit="submitEventRegistration(event)">
                 <input type="hidden" id="event_id" name="event_id">
-                <div>
-                    <label for="volunteer_full_name" class="block text-sm font-medium mb-1">Full Name</label>
-                    <input type="text" id="volunteer_full_name" name="full_name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+
+                <!-- Full Name -->
+                <div class="form-group">
+                    <label for="volunteer_full_name" class="block text-xs font-medium text-gray-700 mb-2">Full Name</label>
+                    <div class="relative">
+                        <input type="text" id="volunteer_full_name" name="full_name"
+                               class="w-full px-3 py-2 pl-8 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-100 focus:border-teal-400 transition-all duration-300 bg-gray-50 hover:bg-white text-sm"
+                               placeholder="Enter your full name" required>
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-2">
+                            <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label for="volunteer_email" class="block text-sm font-medium mb-1">Gmail</label>
-                    <input type="email" id="volunteer_email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="volunteer_email" class="block text-xs font-medium text-gray-700 mb-2">Email Address</label>
+                    <div class="relative">
+                        <input type="email" id="volunteer_email" name="email"
+                               class="w-full px-3 py-2 pl-8 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-100 focus:border-teal-400 transition-all duration-300 bg-gray-50 hover:bg-white text-sm"
+                               placeholder="your.email@gmail.com" required>
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-2">
+                            <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label for="volunteer_phone" class="block text-sm font-medium mb-1">Phone Number</label>
-                    <input type="tel" id="volunteer_phone" name="phone_number" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+
+                <!-- Phone Number -->
+                <div class="form-group">
+                    <label for="volunteer_phone" class="block text-xs font-medium text-gray-700 mb-2">Phone Number</label>
+                    <div class="relative">
+                        <input type="tel" id="volunteer_phone" name="phone_number"
+                               class="w-full px-3 py-2 pl-8 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-100 focus:border-teal-400 transition-all duration-300 bg-gray-50 hover:bg-white text-sm"
+                               placeholder="09123456789" maxlength="11" pattern="[0-9]{11}" inputmode="numeric" required>
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-2">
+                            <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label for="application_reason" class="block text-sm font-medium mb-1">Why would you apply for this event?</label>
-                    <textarea id="application_reason" name="application_reason" rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Please explain why you want to participate in this event..." required></textarea>
+
+                <!-- Application Reason -->
+                <div class="form-group">
+                    <label for="application_reason" class="block text-xs font-medium text-gray-700 mb-2">Why would you like to participate?</label>
+                    <div class="relative">
+                        <textarea id="application_reason" name="application_reason" rows="3"
+                                  class="w-full px-3 py-2 pl-8 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-100 focus:border-teal-400 transition-all duration-300 bg-gray-50 hover:bg-white resize-none text-sm"
+                                  placeholder="Tell us why you're interested in this event..." required></textarea>
+                        <div class="absolute top-2 left-0 flex items-center pl-2">
+                            <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
-                <button type="submit" class="w-full bg-primary text-white py-2 rounded-lg hover:bg-blue-700 hover:shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out">
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white py-2.5 rounded-lg font-medium text-sm shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300 flex items-center justify-center">
+                    <svg class="w-3 h-3 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
                     Register Now
                 </button>
             </form>
@@ -855,10 +1317,25 @@
     </div>
 
     <!-- Scholarship Application Modal -->
-    <div id="scholarshipApplicationModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden" onclick="backgroundCloseDonationModal(event)">
-        <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-lg relative" onclick="event.stopPropagation()">
-            <button onclick="closeScholarshipModal()" class="absolute top-2 right-3 text-gray-400 hover:text-black text-xl font-bold">&times;</button>
-            <h2 class="text-2xl font-bold mb-4 text-primary text-center">Scholarship Application</h2>
+    <div id="scholarshipApplicationModal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex justify-center items-center z-50 hidden p-4" onclick="backgroundCloseDonationModal(event)">
+        <div class="bg-white p-4 lg:p-6 rounded-xl shadow-2xl w-full max-w-lg mx-auto relative transform transition-all duration-300 scale-95 modal-content max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
+            <!-- Close Button -->
+            <button onclick="closeScholarshipModal()" class="absolute top-3 right-3 w-6 h-6 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:text-gray-700 transition-all duration-200">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+
+            <!-- Header -->
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+                    </svg>
+                </div>
+                <h2 class="text-lg font-semibold text-gray-800">Scholarship Application</h2>
+            </div>
 
             @if ($errors->scholarship->any())
                 <div class="mb-4 p-4 bg-red-100 text-red-700 rounded-lg border border-red-300">
@@ -874,24 +1351,24 @@
             <form action="/scholarship/apply" method="POST" enctype="multipart/form-data" class="space-y-4">
                 @csrf
                 <div>
-                    <label for="welcome_full_name" class="block text-sm font-medium mb-1">Full Name</label>
-                    <input type="text" id="welcome_full_name" name="full_name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" value="{{ old('full_name') }}" required>
+                    <label for="welcome_full_name" class="block text-xs font-medium mb-1 text-gray-700">Full Name</label>
+                    <input type="text" id="welcome_full_name" name="full_name" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-sm" value="{{ old('full_name') }}" required>
                 </div>
                 <div>
-                    <label for="welcome_email" class="block text-sm font-medium mb-1">Email</label>
-                    <input type="email" id="welcome_email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" value="{{ old('email') }}" required>
+                    <label for="welcome_email" class="block text-xs font-medium mb-1 text-gray-700">Email Address</label>
+                    <input type="email" id="welcome_email" name="email" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-sm" value="{{ old('email') }}" placeholder="example@gmail.com" required>
                 </div>
                 <div>
-                    <label for="welcome_phone_number" class="block text-sm font-medium mb-1">Phone Number</label>
-                    <input type="tel" id="welcome_phone_number" name="phone_number" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" value="{{ old('phone_number') }}">
+                    <label for="welcome_phone_number" class="block text-xs font-medium mb-1 text-gray-700">Phone Number</label>
+                    <input type="tel" id="welcome_phone_number" name="phone_number" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-sm" value="{{ old('phone_number') }}" placeholder="09123456789" maxlength="11" pattern="[0-9]{11}" inputmode="numeric" required>
                 </div>
                 <!-- Hidden field for scholarship type - will be set dynamically -->
                 <input type="hidden" name="scholarship_type" id="welcome_scholarship_type_hidden" value="community_based">
                 <div>
-                    <label for="welcome_transcript" class="block text-sm font-medium mb-1">Upload Transcript (PDF, JPG, PNG - Max 5MB)</label>
-                    <input type="file" id="welcome_transcript" name="transcript" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20" required accept=".pdf,.jpg,.jpeg,.png">
+                    <label for="welcome_transcript" class="block text-xs font-medium mb-1 text-gray-700">Upload Transcript (PDF, JPG, PNG - Max 5MB)</label>
+                    <input type="file" id="welcome_transcript" name="transcript" class="w-full text-xs text-gray-500 file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-medium file:bg-primary/10 file:text-primary hover:file:bg-primary/20" required accept=".pdf,.jpg,.jpeg,.png">
                 </div>
-                <button type="submit" class="w-full bg-primary text-white py-2 rounded-lg hover:bg-blue-400 transition">
+                <button type="submit" class="w-full bg-primary text-white py-2 rounded-lg hover:bg-blue-400 transition-colors duration-200 text-sm font-medium">
                     Submit Application
                 </button>
             </form>
@@ -899,50 +1376,138 @@
     </div>
 
           <!-- Login Modal -->
-    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden">
-        <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-sm mx-2 relative">
-            <button onclick="closeLoginModal()" class="absolute top-2 right-3 text-gray-400 hover:text-black text-xl font-bold">&times;</button>
-            <h2 class="text-2xl font-bold mb-4 text-primary text-center">Login</h2>
+    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex justify-center items-center z-50 hidden">
+        <div class="bg-white p-6 rounded-xl shadow-2xl w-full max-w-sm mx-4 relative transform transition-all duration-300 scale-95 modal-content">
+            <!-- Close Button -->
+            <button onclick="closeLoginModal()" class="absolute top-3 right-3 w-6 h-6 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:text-gray-700 transition-all duration-200">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+
+            <!-- Header -->
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                    </svg>
+                </div>
+                <h2 class="text-lg font-semibold text-gray-800 mb-1">Welcome Back</h2>
+                <p class="text-xs text-gray-600">Sign in to your account</p>
+            </div>
+
+            <!-- Form -->
             <form id="loginForm" class="space-y-4" onsubmit="handleLogin(event)">
-                <div>
-                    <label for="loginEmail" class="text-sm font-medium">Email</label>
-                    <input type="email" id="loginEmail" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="loginEmail" class="block text-xs font-medium text-gray-700 mb-2">Email Address</label>
+                    <div class="relative">
+                        <input type="email" id="loginEmail" name="email"
+                               class="w-full px-3 py-2 pl-8 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400 transition-all duration-300 bg-gray-50 hover:bg-white text-sm"
+                               placeholder="your.email@example.com" required>
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-2">
+                            <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label for="loginPassword" class="text-sm font-medium">Password</label>
-                    <input type="password" id="loginPassword" name="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="loginPassword" class="block text-xs font-medium text-gray-700 mb-2">Password</label>
+                    <div class="relative">
+                        <input type="password" id="loginPassword" name="password"
+                               class="w-full px-3 py-2 pl-8 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400 transition-all duration-300 bg-gray-50 hover:bg-white text-sm"
+                               placeholder="Enter your password" required>
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-2">
+                            <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
-                <button type="submit" class="w-full bg-primary text-white py-2 rounded-lg hover:bg-blue-400 transition">
-                    Login
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white py-2.5 rounded-lg font-medium text-sm shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300 flex items-center justify-center">
+                    <svg class="w-3 h-3 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+                    </svg>
+                    Sign In
                 </button>
-                <div id="loginError" class="text-red-500 text-sm text-center hidden"></div>
+
+                <div id="loginError" class="text-red-500 text-xs text-center hidden"></div>
             </form>
-            <!-- <div class="text-center mt-4">
-                <span class="text-gray-600">No account?</span>
-                <button class="text-primary font-semibold hover:underline ml-1" onclick="switchToRegister()">Register here</button>
-            </div> -->
         </div>
     </div>
 
     <!-- Donation Modal -->
-    <div id="donationModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden" onclick="backgroundCloseDonationModal(event)">
-        <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-sm relative" onclick="event.stopPropagation()">
-            <button onclick="closeDonationModal()" class="absolute top-2 right-3 text-gray-400 hover:text-black text-xl font-bold">&times;</button>
-            <h2 class="text-2xl font-bold mb-4 text-primary text-center">Make a Donation</h2>
+    <div id="donationModal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex justify-center items-center z-50 hidden" onclick="backgroundCloseDonationModal(event)">
+        <div class="bg-white p-6 rounded-xl shadow-2xl w-full max-w-sm mx-4 relative transform transition-all duration-300 scale-95 modal-content" onclick="event.stopPropagation()">
+            <!-- Close Button -->
+            <button onclick="closeDonationModal()" class="absolute top-3 right-3 w-6 h-6 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:text-gray-700 transition-all duration-200">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+
+            <!-- Header -->
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                    </svg>
+                </div>
+                <h2 class="text-lg font-semibold text-gray-800 mb-1">Make a Donation</h2>
+                <p class="text-xs text-gray-600">Support our mission</p>
+            </div>
+
+            <!-- Form -->
             <form id="donationForm" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium mb-1">Amount</label>
-                    <input type="number" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                <!-- Amount -->
+                <div class="form-group">
+                    <label class="block text-xs font-medium text-gray-700 mb-2">Amount</label>
+                    <div class="relative">
+                        <input type="number" class="w-full px-3 py-2 pl-8 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-100 focus:border-green-400 transition-all duration-300 bg-gray-50 hover:bg-white text-sm" placeholder="0.00" required>
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-2">
+                            <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium mb-1">Name</label>
-                    <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
-        </div>
-        <div>
-                    <label class="block text-sm font-medium mb-1">Email</label>
-                    <input type="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+
+                <!-- Name -->
+                <div class="form-group">
+                    <label class="block text-xs font-medium text-gray-700 mb-2">Full Name</label>
+                    <div class="relative">
+                        <input type="text" class="w-full px-3 py-2 pl-8 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-100 focus:border-green-400 transition-all duration-300 bg-gray-50 hover:bg-white text-sm" placeholder="Your full name" required>
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-2">
+                            <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
-                <button type="submit" class="w-full bg-primary text-white py-2 rounded-lg hover:bg-blue-400 transition">
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label class="block text-xs font-medium text-gray-700 mb-2">Email Address</label>
+                    <div class="relative">
+                        <input type="email" class="w-full px-3 py-2 pl-8 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-100 focus:border-green-400 transition-all duration-300 bg-gray-50 hover:bg-white text-sm" placeholder="your.email@example.com" required>
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-2">
+                            <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white py-2.5 rounded-lg font-medium text-sm shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300 flex items-center justify-center">
+                    <svg class="w-3 h-3 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                    </svg>
                     Donate Now
                 </button>
             </form>
@@ -950,35 +1515,95 @@
     </div>
 
     <!-- Registration Modal -->
-    <div id="registrationModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden">
-        <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md mx-2 relative">
-            <button onclick="closeRegistrationModal()" class="absolute top-2 right-3 text-gray-400 hover:text-black text-xl font-bold">&times;</button>
-            <h2 class="text-2xl font-bold mb-4 text-primary text-center">Create Account</h2>
+    <div id="registrationModal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex justify-center items-center z-50 hidden">
+        <div class="bg-white p-6 rounded-xl shadow-2xl w-full max-w-md mx-4 relative transform transition-all duration-300 scale-95 modal-content">
+            <!-- Close Button -->
+            <button onclick="closeRegistrationModal()" class="absolute top-3 right-3 w-6 h-6 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:text-gray-700 transition-all duration-200">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+
+            <!-- Header -->
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+                    </svg>
+                </div>
+                <h2 class="text-lg font-semibold text-gray-800 mb-1">Create Account</h2>
+                <p class="text-xs text-gray-600">Join our community today</p>
+            </div>
+
+            <!-- Form -->
             <form id="registrationForm" class="space-y-4" onsubmit="handleRegister(event)">
-                <div>
-                    <label class="block text-sm font-medium mb-1">Full Name</label>
-                    <input type="text" name="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                <!-- Full Name -->
+                <div class="form-group">
+                    <label class="block text-xs font-medium text-gray-700 mb-2">Full Name</label>
+                    <div class="relative">
+                        <input type="text" name="name" class="w-full px-3 py-2 pl-8 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-100 focus:border-purple-400 transition-all duration-300 bg-gray-50 hover:bg-white text-sm" placeholder="Enter your full name" required>
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-2">
+                            <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium mb-1">Email</label>
-                    <input type="email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label class="block text-xs font-medium text-gray-700 mb-2">Email Address</label>
+                    <div class="relative">
+                        <input type="email" name="email" class="w-full px-3 py-2 pl-8 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-100 focus:border-purple-400 transition-all duration-300 bg-gray-50 hover:bg-white text-sm" placeholder="your.email@example.com" required>
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-2">
+                            <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium mb-1">Password</label>
-                    <input type="password" name="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label class="block text-xs font-medium text-gray-700 mb-2">Password</label>
+                    <div class="relative">
+                        <input type="password" name="password" class="w-full px-3 py-2 pl-8 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-100 focus:border-purple-400 transition-all duration-300 bg-gray-50 hover:bg-white text-sm" placeholder="Create a password" required>
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-2">
+                            <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium mb-1">Confirm Password</label>
-                    <input type="password" name="password_confirmation" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+
+                <!-- Confirm Password -->
+                <div class="form-group">
+                    <label class="block text-xs font-medium text-gray-700 mb-2">Confirm Password</label>
+                    <div class="relative">
+                        <input type="password" name="password_confirmation" class="w-full px-3 py-2 pl-8 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-100 focus:border-purple-400 transition-all duration-300 bg-gray-50 hover:bg-white text-sm" placeholder="Confirm your password" required>
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-2">
+                            <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
-                <button type="submit" class="w-full bg-primary text-white py-2 rounded-lg hover:bg-blue-400 transition">
-                    Register
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white py-2.5 rounded-lg font-medium text-sm shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300 flex items-center justify-center">
+                    <svg class="w-3 h-3 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+                    </svg>
+                    Create Account
                 </button>
-                <div id="registerError" class="text-red-500 text-sm text-center hidden"></div>
+
+                <div id="registerError" class="text-red-500 text-xs text-center hidden"></div>
             </form>
+
+            <!-- Footer -->
             <div class="text-center mt-4">
-                <span class="text-gray-600">Already have an account?</span>
-                <button class="text-primary font-semibold hover:underline ml-1" onclick="switchToLogin()">Login here</button>
+                <span class="text-xs text-gray-600">Already have an account?</span>
+                <button class="text-xs text-purple-600 font-medium hover:underline ml-1" onclick="switchToLogin()">Sign in here</button>
             </div>
         </div>
     </div>
@@ -1051,53 +1676,75 @@
                     .then(response => response.json())
                     .then(job => {
                         content.innerHTML = `
-                            <div class="space-y-4">
-                                <div>
-                                    <h3 class="font-semibold text-gray-700">Job Title</h3>
-                                    <p class="text-gray-600">${job.title || 'Not specified'}</p>
+                            <div class="bg-white rounded-xl border border-gray-200 p-6">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="flex-1">
+                                        <h3 class="text-lg font-semibold text-gray-900 mb-2">${job.title}</h3>
+                                        <p class="text-gray-600 font-medium">${job.company_name || job.company || 'Company Not Specified'}</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="px-3 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
+                                            ${job.employment_type || job.type || 'Full-time'}
+                                        </span>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h3 class="font-semibold text-gray-700">Company</h3>
-                                    <p class="text-gray-600">${job.company_name || job.company || 'Not specified'}</p>
+
+                                <div class="space-y-3 mb-4">
+                                    ${job.location ? `
+                                        <div class="flex items-center text-gray-600">
+                                            <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                            </svg>
+                                            <span class="text-sm">${job.location}</span>
+                                        </div>
+                                    ` : ''}
+
+                                    ${job.salary_min && job.salary_max ? `
+                                        <div class="flex items-center text-gray-600">
+                                            <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                                            </svg>
+                                            <span class="text-sm">₱${parseFloat(job.salary_min).toLocaleString()} - ₱${parseFloat(job.salary_max).toLocaleString()}</span>
+                                        </div>
+                                    ` : ''}
+
+                                    <div class="flex items-center text-gray-600">
+                                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                        </svg>
+                                        <span class="text-sm">Posted ${new Date(job.created_at).toLocaleDateString()}</span>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h3 class="font-semibold text-gray-700">Location</h3>
-                                    <p class="text-gray-600">${job.location || 'Not specified'}</p>
+
+                                <div class="border-t border-gray-200 pt-4">
+                                    <h4 class="font-semibold text-gray-800 mb-2">Description</h4>
+                                    <p class="text-gray-600 text-sm leading-relaxed">${job.description || 'No description available.'}</p>
                                 </div>
-                                ${job.employment_type || job.type ? `
-                                <div>
-                                    <h3 class="font-semibold text-gray-700">Employment Type</h3>
-                                    <p class="text-gray-600">${job.employment_type || job.type}</p>
-                                </div>
-                                ` : ''}
-                                <div>
-                                    <h3 class="font-semibold text-gray-700">Description</h3>
-                                    <p class="text-gray-600">${job.description || 'No description available'}</p>
-                                </div>
+
                                 ${job.qualifications ? `
-                                <div>
-                                    <h3 class="font-semibold text-gray-700">Qualifications</h3>
-                                    <p class="text-gray-600">${job.qualifications}</p>
-                                </div>
+                                    <div class="border-t border-gray-200 pt-4 mt-4">
+                                        <h4 class="font-semibold text-gray-800 mb-2">Qualifications</h4>
+                                        <p class="text-gray-600 text-sm leading-relaxed">${job.qualifications}</p>
+                                    </div>
                                 ` : ''}
-                                ${job.contact_person ? `
-                                <div>
-                                    <h3 class="font-semibold text-gray-700">Contact Person</h3>
-                                    <p class="text-gray-600">${job.contact_person}</p>
-                                </div>
+
+                                ${job.contact_person || job.contact_email || job.contact_phone ? `
+                                    <div class="border-t border-gray-200 pt-4 mt-4">
+                                        <h4 class="font-semibold text-gray-800 mb-2">Contact Information</h4>
+                                        <div class="space-y-1">
+                                            ${job.contact_person ? `<p class="text-gray-600 text-sm"><span class="font-medium">Person:</span> ${job.contact_person}</p>` : ''}
+                                            ${job.contact_email ? `<p class="text-gray-600 text-sm"><span class="font-medium">Email:</span> ${job.contact_email}</p>` : ''}
+                                            ${job.contact_phone ? `<p class="text-gray-600 text-sm"><span class="font-medium">Phone:</span> ${job.contact_phone}</p>` : ''}
+                                        </div>
+                                    </div>
                                 ` : ''}
-                                ${job.contact_email ? `
-                                <div>
-                                    <h3 class="font-semibold text-gray-700">Contact Email</h3>
-                                    <p class="text-gray-600">${job.contact_email}</p>
+
+                                <div class="border-t border-gray-200 pt-4 mt-4 flex justify-end">
+                                    <button onclick="closeJobDetailsModal()" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-sm font-medium">
+                                        Close
+                                    </button>
                                 </div>
-                                ` : ''}
-                                ${job.contact_phone ? `
-                                <div>
-                                    <h3 class="font-semibold text-gray-700">Contact Phone</h3>
-                                    <p class="text-gray-600">${job.contact_phone}</p>
-                                </div>
-                                ` : ''}
                             </div>
                         `;
                     })
@@ -1364,21 +2011,243 @@
         // Auto-advance hero slides every 5 seconds
         setInterval(nextHeroSlide, 5000);
 
-        // Event registration functions
+        // Enhanced Event registration functions
         function openEventRegistrationModal(eventId) {
             document.getElementById('event_id').value = eventId;
-            document.getElementById('eventRegistrationModal').classList.remove('hidden');
+            const modal = document.getElementById('eventRegistrationModal');
+            const modalContent = modal.querySelector('.modal-content');
+
+            modal.classList.remove('hidden');
+
+            // Add entrance animation
+            setTimeout(() => {
+                modalContent.style.transform = 'scale(1)';
+                modalContent.style.opacity = '1';
+            }, 10);
+
+            // Add form field animations
+            const inputs = modal.querySelectorAll('input, textarea');
+            inputs.forEach((input, index) => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('focused');
+                });
+
+                input.addEventListener('blur', function() {
+                    this.parentElement.classList.remove('focused');
+                });
+
+                input.addEventListener('input', function() {
+                    if (this.value.trim()) {
+                        this.classList.add('border-teal-300', 'bg-white');
+                        this.classList.remove('border-gray-200', 'bg-gray-50');
+                    } else {
+                        this.classList.remove('border-teal-300', 'bg-white');
+                        this.classList.add('border-gray-200', 'bg-gray-50');
+                    }
+                });
+            });
         }
 
         function closeEventRegistrationModal() {
-            document.getElementById('eventRegistrationModal').classList.add('hidden');
-            document.getElementById('eventRegistrationForm').reset();
+            const modal = document.getElementById('eventRegistrationModal');
+            const modalContent = modal.querySelector('.modal-content');
+
+            // Add exit animation
+            modalContent.style.transform = 'scale(0.95)';
+            modalContent.style.opacity = '0';
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                // Reset form
+                document.getElementById('eventRegistrationForm').reset();
+            }, 300);
         }
+
+        // Add validation for event registration form and scholarship modal
+        document.addEventListener('DOMContentLoaded', function() {
+            const eventPhoneInput = document.getElementById('volunteer_phone');
+            const eventEmailInput = document.getElementById('volunteer_email');
+            const scholarshipPhoneInput = document.getElementById('welcome_phone_number');
+            const scholarshipEmailInput = document.getElementById('welcome_email');
+
+            // Event registration phone number validation
+            if (eventPhoneInput) {
+                // Prevent non-numeric input
+                eventPhoneInput.addEventListener('keypress', function(e) {
+                    // Allow only digits (0-9)
+                    if (!/[0-9]/.test(e.key) && !['Backspace', 'Delete', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                        e.preventDefault();
+                    }
+                });
+
+                eventPhoneInput.addEventListener('input', function(e) {
+                    // Remove any non-digit characters
+                    let value = e.target.value.replace(/\D/g, '');
+
+                    // Limit to 11 digits
+                    if (value.length > 11) {
+                        value = value.slice(0, 11);
+                    }
+
+                    e.target.value = value;
+                });
+
+                eventPhoneInput.addEventListener('blur', function(e) {
+                    const phone = e.target.value.replace(/\D/g, '');
+                    if (phone.length !== 11) {
+                        alert('Phone number must be exactly 11 digits.');
+                        e.target.focus();
+                    }
+                });
+
+                // Prevent paste of non-numeric content
+                eventPhoneInput.addEventListener('paste', function(e) {
+                    e.preventDefault();
+                    let paste = (e.clipboardData || window.clipboardData).getData('text');
+                    let numericOnly = paste.replace(/\D/g, '');
+                    if (numericOnly.length <= 11) {
+                        e.target.value = numericOnly;
+                    }
+                });
+            }
+
+            // Event registration email validation
+            if (eventEmailInput) {
+                eventEmailInput.addEventListener('blur', function(e) {
+                    const email = e.target.value;
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    const gmailRegex = /@gmail\./i;
+
+                    if (!emailRegex.test(email)) {
+                        alert('Please enter a valid email address.');
+                        e.target.focus();
+                    } else if (!gmailRegex.test(email)) {
+                        alert('Email must be a Gmail address (must contain @gmail).');
+                        e.target.focus();
+                    }
+                });
+            }
+
+            // Scholarship modal phone number validation
+            if (scholarshipPhoneInput) {
+                // Prevent non-numeric input
+                scholarshipPhoneInput.addEventListener('keypress', function(e) {
+                    // Allow only digits (0-9)
+                    if (!/[0-9]/.test(e.key) && !['Backspace', 'Delete', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                        e.preventDefault();
+                    }
+                });
+
+                scholarshipPhoneInput.addEventListener('input', function(e) {
+                    // Remove any non-digit characters
+                    let value = e.target.value.replace(/\D/g, '');
+
+                    // Limit to 11 digits
+                    if (value.length > 11) {
+                        value = value.slice(0, 11);
+                    }
+
+                    e.target.value = value;
+                });
+
+                scholarshipPhoneInput.addEventListener('blur', function(e) {
+                    const phone = e.target.value.replace(/\D/g, '');
+                    if (phone.length !== 11) {
+                        alert('Phone number must be exactly 11 digits.');
+                        e.target.focus();
+                    }
+                });
+
+                // Prevent paste of non-numeric content
+                scholarshipPhoneInput.addEventListener('paste', function(e) {
+                    e.preventDefault();
+                    let paste = (e.clipboardData || window.clipboardData).getData('text');
+                    let numericOnly = paste.replace(/\D/g, '');
+                    if (numericOnly.length <= 11) {
+                        e.target.value = numericOnly;
+                    }
+                });
+            }
+
+            // Scholarship modal email validation
+            if (scholarshipEmailInput) {
+                scholarshipEmailInput.addEventListener('blur', function(e) {
+                    const email = e.target.value;
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    const gmailRegex = /@gmail\./i;
+
+                    if (!emailRegex.test(email)) {
+                        alert('Please enter a valid email address.');
+                        e.target.focus();
+                    } else if (!gmailRegex.test(email)) {
+                        alert('Email must be a valid email address (must contain @gmail).');
+                        e.target.focus();
+                    }
+                });
+            }
+
+            // Scholarship form submission validation
+            const scholarshipForm = document.querySelector('#scholarshipApplicationModal form');
+            if (scholarshipForm) {
+                scholarshipForm.addEventListener('submit', function(e) {
+                    const phone = scholarshipPhoneInput.value.replace(/\D/g, '');
+                    const email = scholarshipEmailInput.value;
+                    const gmailRegex = /@gmail\./i;
+
+                    if (phone.length !== 11) {
+                        e.preventDefault();
+                        alert('Phone number must be exactly 11 digits.');
+                        scholarshipPhoneInput.focus();
+                        return;
+                    }
+
+                    if (!gmailRegex.test(email)) {
+                        e.preventDefault();
+                        alert('Email must be a valid email address (must contain @gmail).');
+                        scholarshipEmailInput.focus();
+                        return;
+                    }
+                });
+            }
+        });
 
         function submitEventRegistration(event) {
             event.preventDefault();
 
-            const formData = new FormData(event.target);
+            // Validate before submission
+            const phoneInput = document.getElementById('volunteer_phone');
+            const emailInput = document.getElementById('volunteer_email');
+
+            const phone = phoneInput.value.replace(/\D/g, '');
+            const email = emailInput.value;
+            const gmailRegex = /@gmail\./i;
+
+            if (phone.length !== 11) {
+                alert('Phone number must be exactly 11 digits.');
+                phoneInput.focus();
+                return;
+            }
+
+            if (!gmailRegex.test(email)) {
+                alert('Email must be a Gmail address (must contain @gmail).');
+                emailInput.focus();
+                return;
+            }
+
+            const form = event.target;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnContent = submitBtn.innerHTML;
+
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `
+                <svg class="w-5 h-5 mr-2 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                </svg>
+                Submitting...
+            `;
+
+            const formData = new FormData(form);
             const data = {
                 event_id: formData.get('event_id'),
                 full_name: formData.get('full_name'),
@@ -1399,15 +2268,31 @@
             .then(response => response.json())
             .then(result => {
                 if (result.success) {
-                    alert('Registration submitted successfully! You will be notified about the status.');
-                    closeEventRegistrationModal();
+                    // Show success animation
+                    submitBtn.innerHTML = `
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Success!
+                    `;
+
+                    setTimeout(() => {
+                        alert('Registration submitted successfully! You will be notified about the status.');
+                        closeEventRegistrationModal();
+                    }, 1000);
                 } else {
                     alert('Error: ' + result.message);
+                    // Reset button
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalBtnContent;
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
                 alert('An error occurred. Please try again.');
+                // Reset button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnContent;
             });
         }
 
@@ -1558,6 +2443,10 @@
                 });
             });
         });
+
+
+
+
     </script>
 </body>
 </html>
