@@ -200,11 +200,13 @@
                     <div class="bg-gradient-to-r from-gray-50 to-slate-50 rounded-xl p-6 border border-gray-200">
                         <div class="flex items-start space-x-4">
                             <div class="flex items-center h-5 mt-1">
-                                <input type="checkbox" required class="h-5 w-5 rounded border-2 border-gray-300 text-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300">
+                                <input type="checkbox" id="terms" name="terms" required class="h-5 w-5 rounded border-2 border-gray-300 text-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300">
                             </div>
                             <div class="flex-1">
-                                <label class="block text-sm font-semibold text-gray-900 mb-2">Terms and Conditions</label>
-                                <p class="text-sm text-gray-600 leading-relaxed">I certify that all information provided in this application is true, complete, and accurate to the best of my knowledge. I understand that providing false information may result in the rejection of my application or revocation of any scholarship awarded. I also agree to the terms and conditions of the scholarship program.</p>
+                                <label for="terms" class="block text-sm font-semibold text-gray-900 mb-2">Terms and Conditions</label>
+                                <p class="text-sm text-gray-600 leading-relaxed">
+                                    I agree to the <button type="button" onclick="openTermsModal()" class="text-primary hover:underline font-medium">Terms and Conditions</button> and <button type="button" onclick="openPrivacyModal()" class="text-primary hover:underline font-medium">Privacy Policy</button>. I certify that all information provided in this application is true, complete, and accurate to the best of my knowledge. I understand that providing false information may result in the rejection of my application or revocation of any scholarship awarded. I also understand that my personal information will be used for scholarship application processing and communication purposes only.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -297,6 +299,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Terms checkbox validation
+    const termsCheckbox = document.getElementById('terms');
+
     form.addEventListener('submit', function(e) {
         // Validate before submission
         const phone = phoneInput.value.replace(/\D/g, '');
@@ -317,6 +322,13 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
+        if (!termsCheckbox.checked) {
+            e.preventDefault();
+            alert('You must agree to the Terms and Conditions to submit your application.');
+            termsCheckbox.focus();
+            return;
+        }
+
         // Show loading state
         submitBtn.disabled = true;
         submitIcon.classList.add('hidden');
@@ -327,6 +339,171 @@ document.addEventListener('DOMContentLoaded', function() {
         submitBtn.classList.remove('hover:scale-105');
         submitBtn.classList.add('opacity-75');
     });
+
+    // Modal functions
+    function openTermsModal() {
+        document.getElementById('termsModal').classList.remove('hidden');
+    }
+
+    function closeTermsModal() {
+        document.getElementById('termsModal').classList.add('hidden');
+    }
+
+    function openPrivacyModal() {
+        document.getElementById('privacyModal').classList.remove('hidden');
+    }
+
+    function closePrivacyModal() {
+        document.getElementById('privacyModal').classList.add('hidden');
+    }
+
+    // Close modals when clicking outside
+    document.addEventListener('click', function(event) {
+        const termsModal = document.getElementById('termsModal');
+        const privacyModal = document.getElementById('privacyModal');
+
+        if (event.target === termsModal) {
+            closeTermsModal();
+        }
+        if (event.target === privacyModal) {
+            closePrivacyModal();
+        }
+    });
+
+    // Close modals when pressing Escape key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeTermsModal();
+            closePrivacyModal();
+        }
+    });
 });
 </script>
+
+<!-- Terms and Conditions Modal -->
+<div id="termsModal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex justify-center items-center z-50 hidden">
+    <div class="bg-white p-6 rounded-xl shadow-2xl w-full max-w-2xl mx-4 relative transform transition-all duration-300 scale-95 modal-content max-h-[80vh] overflow-y-auto">
+        <!-- Close Button -->
+        <button onclick="closeTermsModal()" class="absolute top-3 right-3 w-6 h-6 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:text-gray-700 transition-all duration-200">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+        </button>
+
+        <!-- Header -->
+        <div class="text-center mb-6">
+            <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+            </div>
+            <h2 class="text-xl font-semibold text-gray-800 mb-1">Terms and Conditions</h2>
+            <p class="text-sm text-gray-600">Scholarship Application Agreement</p>
+        </div>
+
+        <!-- Content -->
+        <div class="space-y-4 text-sm text-gray-700 leading-relaxed">
+            <div>
+                <h3 class="font-semibold text-gray-800 mb-2">1. Application Process</h3>
+                <p>By submitting this scholarship application, you agree to provide accurate and complete information. Any false or misleading information may result in disqualification from the scholarship program.</p>
+            </div>
+
+            <div>
+                <h3 class="font-semibold text-gray-800 mb-2">2. Eligibility Requirements</h3>
+                <p>Applicants must meet all specified eligibility criteria for the scholarship program. The organization reserves the right to verify all information provided in the application.</p>
+            </div>
+
+            <div>
+                <h3 class="font-semibold text-gray-800 mb-2">3. Selection Process</h3>
+                <p>Scholarship recipients will be selected based on merit, need, and other criteria as determined by the scholarship committee. The decision of the selection committee is final.</p>
+            </div>
+
+            <div>
+                <h3 class="font-semibold text-gray-800 mb-2">4. Use of Information</h3>
+                <p>Information provided in this application will be used solely for scholarship evaluation and administration purposes. Personal information will be kept confidential and secure.</p>
+            </div>
+
+            <div>
+                <h3 class="font-semibold text-gray-800 mb-2">5. Obligations of Recipients</h3>
+                <p>Scholarship recipients may be required to maintain certain academic standards, participate in program activities, or fulfill other obligations as specified in the scholarship agreement.</p>
+            </div>
+
+            <div>
+                <h3 class="font-semibold text-gray-800 mb-2">6. Modification of Terms</h3>
+                <p>The organization reserves the right to modify these terms and conditions at any time. Applicants will be notified of any significant changes.</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="flex justify-end mt-6 pt-4 border-t border-gray-200">
+            <button onclick="closeTermsModal()" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-400 transition-colors duration-200 text-sm font-medium">
+                I Understand
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Privacy Policy Modal -->
+<div id="privacyModal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex justify-center items-center z-50 hidden">
+    <div class="bg-white p-6 rounded-xl shadow-2xl w-full max-w-2xl mx-4 relative transform transition-all duration-300 scale-95 modal-content max-h-[80vh] overflow-y-auto">
+        <!-- Close Button -->
+        <button onclick="closePrivacyModal()" class="absolute top-3 right-3 w-6 h-6 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:text-gray-700 transition-all duration-200">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+        </button>
+
+        <!-- Header -->
+        <div class="text-center mb-6">
+            <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+            </div>
+            <h2 class="text-xl font-semibold text-gray-800 mb-1">Privacy Policy</h2>
+            <p class="text-sm text-gray-600">How we protect your information</p>
+        </div>
+
+        <!-- Content -->
+        <div class="space-y-4 text-sm text-gray-700 leading-relaxed">
+            <div>
+                <h3 class="font-semibold text-gray-800 mb-2">Information We Collect</h3>
+                <p>We collect personal information that you provide when applying for scholarships, including your name, email address, phone number, academic records, and other relevant documentation.</p>
+            </div>
+
+            <div>
+                <h3 class="font-semibold text-gray-800 mb-2">How We Use Your Information</h3>
+                <p>Your information is used exclusively for scholarship application processing, evaluation, communication regarding your application status, and program administration.</p>
+            </div>
+
+            <div>
+                <h3 class="font-semibold text-gray-800 mb-2">Information Security</h3>
+                <p>We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.</p>
+            </div>
+
+            <div>
+                <h3 class="font-semibold text-gray-800 mb-2">Information Sharing</h3>
+                <p>We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as necessary for scholarship program administration.</p>
+            </div>
+
+            <div>
+                <h3 class="font-semibold text-gray-800 mb-2">Data Retention</h3>
+                <p>We retain your information for as long as necessary to fulfill the purposes for which it was collected and to comply with legal requirements.</p>
+            </div>
+
+            <div>
+                <h3 class="font-semibold text-gray-800 mb-2">Your Rights</h3>
+                <p>You have the right to access, update, or request deletion of your personal information. Contact us if you wish to exercise these rights.</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="flex justify-end mt-6 pt-4 border-t border-gray-200">
+            <button onclick="closePrivacyModal()" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-400 transition-colors duration-200 text-sm font-medium">
+                I Understand
+            </button>
+        </div>
+    </div>
+</div>
+
 @endsection

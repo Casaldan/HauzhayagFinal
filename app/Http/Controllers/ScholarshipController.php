@@ -31,9 +31,12 @@ class ScholarshipController extends Controller
             'phone_number' => ['nullable', 'string', 'regex:/^\d{11}$/'],
             'scholarship_type' => 'required|string|in:community_based,in_house',
             'transcript' => 'required|file|mimes:jpg,jpeg,png|max:5120', // Max 5MB example
+            'terms' => 'required|accepted', // Terms and conditions must be accepted
         ], [
             'email.regex' => 'Email must be a valid email address (must contain @gmail).',
-            'phone_number.regex' => 'Phone number must be exactly 11 digits.'
+            'phone_number.regex' => 'Phone number must be exactly 11 digits.',
+            'terms.required' => 'You must agree to the Terms and Conditions.',
+            'terms.accepted' => 'You must agree to the Terms and Conditions.'
         ]);
 
         // 2. Handle File Upload
