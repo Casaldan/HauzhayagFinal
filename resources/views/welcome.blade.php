@@ -1305,6 +1305,34 @@
                     </div>
                 </div>
 
+                <!-- Terms and Conditions -->
+                <div class="form-group">
+                    <div class="bg-gradient-to-r from-gray-50 to-slate-50 rounded-lg p-4 border border-gray-200">
+                        <div class="flex items-start space-x-3">
+                            <div class="flex items-center h-5 mt-1">
+                                <input type="checkbox" id="event_terms_agreement" name="terms_agreement" required
+                                       class="h-4 w-4 rounded border-2 border-gray-300 text-teal-500 focus:ring-2 focus:ring-teal-100 focus:border-teal-400 transition-all duration-300">
+                            </div>
+                            <div class="flex-1">
+                                <label for="event_terms_agreement" class="block text-xs font-semibold text-gray-800 mb-2 cursor-pointer">
+                                    I agree to the Terms and Conditions <span class="text-red-500">*</span>
+                                </label>
+                                <div class="text-xs text-gray-600 leading-relaxed">
+                                    <p class="mb-2">By checking this box, I acknowledge that:</p>
+                                    <ul class="list-disc list-inside space-y-1 ml-2">
+                                        <li>All information provided is accurate and complete</li>
+                                        <li>I understand the event requirements and guidelines</li>
+                                        <li>I agree to comply with all event policies and procedures</li>
+                                        <li>I consent to the processing of my personal data for event registration purposes</li>
+                                        <li>False information may result in registration rejection or event exclusion</li>
+                                        <li>I understand that event details may be subject to change</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Submit Button -->
                 <button type="submit" class="w-full bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white py-2.5 rounded-lg font-medium text-sm shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300 flex items-center justify-center">
                     <svg class="w-3 h-3 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -2217,6 +2245,7 @@
             // Validate before submission
             const phoneInput = document.getElementById('volunteer_phone');
             const emailInput = document.getElementById('volunteer_email');
+            const termsCheckbox = document.getElementById('event_terms_agreement');
 
             const phone = phoneInput.value.replace(/\D/g, '');
             const email = emailInput.value;
@@ -2231,6 +2260,12 @@
             if (!gmailRegex.test(email)) {
                 alert('Email must be a Gmail address (must contain @gmail).');
                 emailInput.focus();
+                return;
+            }
+
+            if (!termsCheckbox.checked) {
+                alert('You must agree to the Terms and Conditions to submit your registration.');
+                termsCheckbox.focus();
                 return;
             }
 
@@ -2253,7 +2288,8 @@
                 full_name: formData.get('full_name'),
                 email: formData.get('email'),
                 phone_number: formData.get('phone_number'),
-                application_reason: formData.get('application_reason')
+                application_reason: formData.get('application_reason'),
+                terms_agreement: formData.get('terms_agreement') ? true : false
             };
 
             // Send to backend

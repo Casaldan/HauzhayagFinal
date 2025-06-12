@@ -247,6 +247,32 @@
                 <textarea id="applicationReason" name="application_reason" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="Tell us why you're interested in volunteering for this event..."></textarea>
             </div>
 
+            <!-- Terms and Conditions -->
+            <div class="bg-gradient-to-r from-gray-50 to-slate-50 rounded-lg p-4 border border-gray-200">
+                <div class="flex items-start space-x-3">
+                    <div class="flex items-center h-5 mt-1">
+                        <input type="checkbox" id="volunteer_terms_agreement" name="terms_agreement" required
+                               class="h-4 w-4 rounded border-2 border-gray-300 text-green-500 focus:ring-2 focus:ring-green-100 focus:border-green-400 transition-all duration-300">
+                    </div>
+                    <div class="flex-1">
+                        <label for="volunteer_terms_agreement" class="block text-sm font-semibold text-gray-800 mb-2 cursor-pointer">
+                            I agree to the Terms and Conditions <span class="text-red-500">*</span>
+                        </label>
+                        <div class="text-xs text-gray-600 leading-relaxed">
+                            <p class="mb-2">By checking this box, I acknowledge that:</p>
+                            <ul class="list-disc list-inside space-y-1 ml-2">
+                                <li>All information provided is accurate and complete</li>
+                                <li>I understand the volunteer requirements and responsibilities</li>
+                                <li>I agree to comply with all event policies and volunteer guidelines</li>
+                                <li>I consent to the processing of my personal data for volunteer registration purposes</li>
+                                <li>False information may result in application rejection or volunteer exclusion</li>
+                                <li>I understand that volunteer assignments may be subject to change</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="flex justify-end space-x-4 pt-4">
                 <button type="button" onclick="closeRegistrationModal()" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
                     Cancel
@@ -336,6 +362,14 @@
 
         document.getElementById('registrationForm').addEventListener('submit', function(e) {
             e.preventDefault();
+
+            // Validate terms and conditions
+            const termsCheckbox = document.getElementById('volunteer_terms_agreement');
+            if (!termsCheckbox.checked) {
+                alert('You must agree to the Terms and Conditions to submit your application.');
+                termsCheckbox.focus();
+                return;
+            }
 
             const formData = new FormData(this);
             const data = Object.fromEntries(formData);
