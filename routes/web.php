@@ -23,6 +23,10 @@ use App\Http\Controllers\JobListingController;
 
 //login Routes
 
+// Admin login routes
+Route::get('/admin/login', [AdminController::class, 'showLoginForm'])->name('admin.login.form');
+Route::post('/admin/login', [AdminController::class, 'login'])->name('admin.login');
+
 // Admin Protected Routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
@@ -75,6 +79,7 @@ Route::middleware(['auth', \App\Http\Middleware\RedirectIfNotStudent::class])->p
     Route::get('/dashboard', [App\Http\Controllers\Student\DashboardController::class, 'index'])->name('student.dashboard');
     Route::get('/events', [App\Http\Controllers\Student\DashboardController::class, 'eventsIndex'])->name('student.events.index');
     Route::get('/jobs', [App\Http\Controllers\Student\DashboardController::class, 'jobsIndex'])->name('student.jobs.index');
+    Route::get('/jobs/{job}', [App\Http\Controllers\Student\DashboardController::class, 'showJob'])->name('student.jobs.show');
 });
 
 // Other routes...
@@ -125,6 +130,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/volunteer/events/{id}', [VolunteerController::class, 'showEvent'])->name('volunteer.events.show');
     Route::get('/volunteer/events/{event}/apply', [VolunteerController::class, 'showApplicationForm'])->name('volunteer.events.apply');
     Route::post('/volunteer/events/apply', [\App\Http\Controllers\VolunteerEventApplicationController::class, 'store'])->name('volunteer.events.apply.store');
+    Route::post('/volunteer/events/apply-auto', [\App\Http\Controllers\VolunteerEventApplicationController::class, 'storeAuto'])->name('volunteer.events.apply.auto');
 
     // Volunteer job posting routes
     Route::get('/volunteer/jobs/create', [\App\Http\Controllers\JobListingController::class, 'create'])->name('volunteer.jobs.create');
@@ -146,13 +152,21 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/students', [App\Http\Controllers\Admin\StudentController::class, 'index'])
         ->middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])
         ->name('admin.students.index.shortcut');
-    Route::post('/students/{tracking_code}/approve', [App\Http\Controllers\Admin\StudentController::class, 'approve'])->name('admin.students.approve');
-    Route::post('/students/{tracking_code}/reject', [App\Http\Controllers\Admin\StudentController::class, 'reject'])->name('admin.students.reject');
+    Route::post('/students/{tracking_code}/approve', [App\Http\Controllers\Admin\StudentController::class, 'approve'])
+        ->middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])
+        ->name('admin.students.approve');
+    Route::post('/students/{tracking_code}/reject', [App\Http\Controllers\Admin\StudentController::class, 'reject'])
+        ->middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])
+        ->name('admin.students.reject');
     // Delete student application
-    Route::delete('/students/{tracking_code}', [App\Http\Controllers\Admin\StudentController::class, 'destroy'])->name('admin.students.destroy');
+    Route::delete('/students/{tracking_code}', [App\Http\Controllers\Admin\StudentController::class, 'destroy'])
+        ->middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])
+        ->name('admin.students.destroy');
 
     // Delete student user
-    Route::delete('/students/user/{id}', [App\Http\Controllers\Admin\StudentController::class, 'destroyUser'])->name('admin.students.destroyUser');
+    Route::delete('/students/user/{id}', [App\Http\Controllers\Admin\StudentController::class, 'destroyUser'])
+        ->middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])
+        ->name('admin.students.destroyUser');
 
     // Admin Volunteer Management
     Route::get('/volunteers', [App\Http\Controllers\AdminController::class, 'volunteerIndex'])->name('admin.volunteers.index');

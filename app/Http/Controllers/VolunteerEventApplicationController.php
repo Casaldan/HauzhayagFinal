@@ -152,18 +152,23 @@ class VolunteerEventApplicationController extends Controller
 
             // Create user account if it doesn't exist
             if (!$existingUser) {
-                \App\Models\User::create([
+                $newUser = \App\Models\User::create([
                     'name' => $application->full_name,
                     'email' => $application->email,
                     'password' => Hash::make('volunteer123'), // Default password
                     'role' => 'volunteer',
+                    'status' => 'active', // Explicitly set status to active
+                    'phone_number' => $application->phone_number, // Add phone number
                     'email_verified_at' => now(),
                 ]);
 
                 // Log the user creation for debugging
                 Log::info('New user created from event application', [
+                    'user_id' => $newUser->id,
                     'application_id' => $application->id,
-                    'email' => $application->email
+                    'email' => $application->email,
+                    'role' => 'volunteer',
+                    'status' => 'active'
                 ]);
             }
         }
@@ -205,5 +210,78 @@ class VolunteerEventApplicationController extends Controller
             ->firstOrFail();
 
         return view('volunteer.event-application-status', compact('application'));
+    }
+
+    public function storeAuto(Request $request): JsonResponse
+    {
+        $request->validate([
+            'event_id' => 'required|exists:events,id'
+        ]);
+
+        try {
+            $user = auth()->user();
+
+            // Check if user already applied for this event
+            $existingApplication = VolunteerEventApplication::where('event_id', $request->event_id)
+                ->where('email', $user->email)
+                ->first();
+
+            if ($existingApplication) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'You have already applied for this event. Your tracking code is: ' . $existingApplication->tracking_code
+                ]);
+            }
+
+            // Generate unique tracking code with current year prefix
+            $currentYear = date('Y');
+            do {
+                $trackingCode = $currentYear . strtoupper(Str::random(6));
+            } while (VolunteerEventApplication::where('tracking_code', $trackingCode)->exists());
+
+            // Create application using existing user data
+            $application = VolunteerEventApplication::create([
+                'event_id' => $request->event_id,
+                'full_name' => $user->name,
+                'email' => $user->email,
+                'phone_number' => $user->phone_number ?? 'N/A',
+                'application_reason' => 'Automatic application using existing volunteer account',
+                'tracking_code' => $trackingCode,
+                'status' => 'pending'
+            ]);
+
+            // Send confirmation email
+            try {
+                Mail::to($application->email)->send(new VolunteerEventApplicationConfirmation($application));
+                Log::info('Auto volunteer application confirmation email sent', [
+                    'application_id' => $application->id,
+                    'user_id' => $user->id,
+                    'email' => $application->email,
+                    'tracking_code' => $trackingCode
+                ]);
+            } catch (\Exception $e) {
+                Log::error('Failed to send auto volunteer application confirmation email: ' . $e->getMessage(), [
+                    'application_id' => $application->id,
+                    'user_id' => $user->id,
+                    'email' => $application->email,
+                    'tracking_code' => $trackingCode
+                ]);
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Application submitted successfully using your existing account information!',
+                'tracking_code' => $trackingCode
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Failed to create auto volunteer application: ' . $e->getMessage(), [
+                'user_id' => auth()->id(),
+                'event_id' => $request->event_id
+            ]);
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to submit application. Please try again.'
+            ], 500);
+        }
     }
 }

@@ -209,7 +209,17 @@ class VolunteerController extends Controller
             ->where('end_date', '>', now())
             ->orderBy('start_date', 'asc')
             ->get();
-        return view('volunteer.events', compact('events'));
+
+        // Get user's existing applications for these events
+        $userApplications = [];
+        if (auth()->check()) {
+            $userApplications = \App\Models\VolunteerEventApplication::where('email', auth()->user()->email)
+                ->whereIn('event_id', $events->pluck('id'))
+                ->pluck('event_id')
+                ->toArray();
+        }
+
+        return view('volunteer.events', compact('events', 'userApplications'));
     }
 
     public function showEvent($id)

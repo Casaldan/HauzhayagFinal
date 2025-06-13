@@ -24,7 +24,8 @@ class User extends Authenticatable
         'notes',
         'start_date',
         'transcript_path',
-        'scholarship_type'
+        'scholarship_type',
+        'is_admin'
     ];
 
     protected $hidden = [
@@ -35,6 +36,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'is_admin' => 'boolean',
     ];
 
     public function hasRole($role)

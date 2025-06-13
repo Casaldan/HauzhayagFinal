@@ -132,13 +132,30 @@
                                         </div>
                                     @endif
 
-                                    <a href="{{ route('volunteer.events.show', $event->id) }}" class="w-full px-4 py-2 bg-primary text-white rounded-lg hover:bg-opacity-90 transition-all duration-300 hover-scale flex items-center justify-center">
-                                        <span>View Details</span>
-                                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                                        </svg>
-                                    </a>
+                                    <div class="flex space-x-2">
+                                        <a href="{{ route('volunteer.events.show', $event->id) }}" class="flex-1 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-all duration-300 hover-scale flex items-center justify-center">
+                                            <span>View Details</span>
+                                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                            </svg>
+                                        </a>
+                                        @if(in_array($event->id, $userApplications ?? []))
+                                            <button disabled class="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg cursor-not-allowed flex items-center justify-center">
+                                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                                </svg>
+                                                <span>Applied</span>
+                                            </button>
+                                        @else
+                                            <button onclick="applyToEvent({{ $event->id }}, '{{ $event->title }}')" class="flex-1 px-4 py-2 bg-primary text-white rounded-lg hover:bg-opacity-90 transition-all duration-300 hover-scale flex items-center justify-center">
+                                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                                </svg>
+                                                <span>Apply Now</span>
+                                            </button>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         @endforeach
@@ -156,7 +173,58 @@
         </div>
     </div>
 
+
+
     <script>
+        // Automatic application function using existing user data
+        function applyToEvent(eventId, eventTitle) {
+            // Show loading state
+            const button = event.target.closest('button');
+            const originalText = button.innerHTML;
+            button.innerHTML = '<svg class="w-4 h-4 mr-2 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg><span>Applying...</span>';
+            button.disabled = true;
+
+            // Automatically apply using existing user account information
+            fetch('/volunteer/events/apply-auto', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: JSON.stringify({
+                    event_id: eventId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Show success message with tracking code
+                    alert('Application submitted successfully!\n\nEvent: ' + eventTitle + '\nYour tracking code is: ' + data.tracking_code + '\n\nYou can use this code to track your application status.');
+
+                    // Update button to show applied state
+                    button.innerHTML = '<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Applied</span>';
+                    button.classList.remove('bg-primary', 'hover:bg-opacity-90');
+                    button.classList.add('bg-green-600', 'hover:bg-green-700');
+                    button.disabled = true;
+                } else {
+                    // Show error message
+                    alert(data.message || 'Failed to submit application. Please try again.');
+
+                    // Restore button
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while submitting your application. Please try again.');
+
+                // Restore button
+                button.innerHTML = originalText;
+                button.disabled = false;
+            });
+        }
+
         // Add smooth animations on page load
         document.addEventListener('DOMContentLoaded', function() {
             // Animate cards on load

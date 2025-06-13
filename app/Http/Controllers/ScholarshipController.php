@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail; // If sending email
 use Illuminate\Support\Str; // For random strings
 use Illuminate\Support\Facades\Hash; // For hashing password
 use App\Mail\TrackingCodeMail; // Make sure Mailable is imported
+use App\Mail\ScholarshipApplicationStatusUpdate; // Import the new mailable
 use Illuminate\Support\Facades\Log; // For logging errors
 use Carbon\Carbon;
 
@@ -163,6 +164,27 @@ class ScholarshipController extends Controller
                     'phone_number' => $application->phone_number,
                     'scholarship_type' => $application->scholarship_type ?? 'general',
                     'transcript_path' => $application->transcript_path,
+                ]);
+            }
+        }
+
+        // Send status update email if status changed
+        if ($oldStatus !== $request->status) {
+            try {
+                Mail::to($application->email)->send(new ScholarshipApplicationStatusUpdate($application));
+                Log::info('Scholarship application status update email sent', [
+                    'application_id' => $application->id,
+                    'email' => $application->email,
+                    'old_status' => $oldStatus,
+                    'new_status' => $request->status,
+                    'tracking_code' => $application->tracking_code
+                ]);
+            } catch (\Exception $e) {
+                Log::error('Failed to send scholarship application status update email: ' . $e->getMessage(), [
+                    'application_id' => $application->id,
+                    'email' => $application->email,
+                    'status' => $request->status,
+                    'tracking_code' => $application->tracking_code
                 ]);
             }
         }

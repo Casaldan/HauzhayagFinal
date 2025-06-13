@@ -105,4 +105,20 @@ class DashboardController extends Controller
 
         return view('student.jobs.index', compact('jobs', 'companies', 'locations'));
     }
+
+    /**
+     * Display a specific job listing for students.
+     *
+     * @param  \App\Models\JobListing  $job
+     * @return \Illuminate\View\View
+     */
+    public function showJob(JobListing $job)
+    {
+        // Only show approved jobs to students
+        if ($job->status !== 'approved') {
+            abort(404);
+        }
+
+        return view('student.jobs.show', compact('job'));
+    }
 }

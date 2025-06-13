@@ -905,6 +905,260 @@
             </div>
         </section>
 
+        <!-- About Us Section with enhanced professional design -->
+        <section id="about-us" class="bg-gradient-to-br from-gray-50 to-blue-50/30 py-20 relative overflow-hidden">
+    <!-- Background decorations -->
+    <div class="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-blue-100/30 to-indigo-100/30 rounded-full -translate-y-48 -translate-x-48"></div>
+    <div class="absolute bottom-0 right-0 w-80 h-80 bg-gradient-to-tl from-indigo-100/30 to-blue-100/30 rounded-full translate-y-40 translate-x-40"></div>
+
+    <div class="max-w-7xl mx-auto px-4 relative z-10">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold mb-4 text-primary animate-bounce-in">About Us</h2>
+            <p class="text-gray-600 text-lg mb-2">Empowering communities through education and opportunity</p>
+            <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+        </div>
+
+        <!-- Mission and Goals Section -->
+        <div class="mb-20">
+            <!-- Mission Card -->
+            <div class="group relative bg-white p-10 rounded-2xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500 ease-in-out transform animate-bounce-in border border-gray-100 overflow-hidden mb-12" style="animation-delay: 0.1s">
+                <!-- Card decoration -->
+                <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-100/50 to-indigo-100/50 rounded-full -translate-y-16 translate-x-16"></div>
+
+                <!-- Icon with enhanced styling -->
+                <div class="relative z-10 flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 text-white text-3xl mb-6 rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-300 mx-auto">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+
+                <div class="text-center">
+                    <h3 class="text-4xl font-bold mb-6 text-gray-800 group-hover:text-blue-600 transition-colors duration-300">MISSION</h3>
+                    <p class="text-gray-700 leading-relaxed text-lg max-w-4xl mx-auto">
+                        We commit ourselves as all our efforts and resources to effectively facilitate various means of developing and
+                        empowering the educational programs and services to foster sustainable them to rise above material, physical and cultural
+                        barriers and to achieve spiritual excellence in accordance with God's plan for man.
+                    </p>
+                    <!-- Decorative element -->
+                    <div class="mt-6 w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full mx-auto"></div>
+                </div>
+            </div>
+
+            <!-- Goals Section -->
+            <div class="text-center mb-12">
+                <h3 class="text-4xl font-bold mb-8 text-gray-800">GOALS</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Goal 1 -->
+                    <div class="group relative bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-500 ease-in-out transform border border-gray-100" style="animation-delay: 0.1s">
+                        <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 text-white text-2xl mb-6 rounded-xl shadow-lg group-hover:scale-110 transition-transform duration-300 mx-auto">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold mb-4 mx-auto">1</div>
+                            <p class="text-gray-700 leading-relaxed text-sm">
+                                To promote the integral development of indigent, abandoned, orphaned and marginalized youngsters.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Goal 2 -->
+                    <div class="group relative bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-500 ease-in-out transform border border-gray-100" style="animation-delay: 0.2s">
+                        <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 text-white text-2xl mb-6 rounded-xl shadow-lg group-hover:scale-110 transition-transform duration-300 mx-auto">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold mb-4 mx-auto">2</div>
+                            <p class="text-gray-700 leading-relaxed text-sm">
+                                To promote the integrity of God's creation especially on the issues dealing with the congregational, personal and social
+                                transformation of the environment.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Goal 3 -->
+                    <div class="group relative bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-500 ease-in-out transform border border-gray-100" style="animation-delay: 0.3s">
+                        <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 text-white text-2xl mb-6 rounded-xl shadow-lg group-hover:scale-110 transition-transform duration-300 mx-auto">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold mb-4 mx-auto">3</div>
+                            <p class="text-gray-700 leading-relaxed text-sm">
+                                To produce graduates at least ten (10) beneficiaries of the Hauz Hayag programs, projects and activities in a decade.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Core Values Section -->
+        <div class="mb-20">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 text-primary animate-bounce-in">Hauz Hayag Core Values</h2>
+                <p class="text-gray-600 text-lg mb-2">The principles that guide our mission and vision</p>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Spirituality -->
+                <div class="group relative bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-500 ease-in-out transform border border-gray-100 overflow-hidden" style="animation-delay: 0.1s">
+                    <!-- Card decoration -->
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-purple-100/50 to-indigo-100/50 rounded-full -translate-y-10 translate-x-10"></div>
+
+                    <!-- Icon -->
+                    <div class="relative z-10 flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-600 text-white text-2xl mb-6 rounded-xl shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-praying-hands"></i>
+                    </div>
+
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800 group-hover:text-purple-600 transition-colors duration-300">SPIRITUALITY</h3>
+                    <p class="text-gray-700 leading-relaxed text-sm">
+                        We live with the presence of our God and we have integrity and compassion in making to the clients we are working with and to the community.
+                    </p>
+
+                    <!-- Decorative element -->
+                    <div class="mt-6 w-12 h-1 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-full"></div>
+                </div>
+
+                <!-- Commitment -->
+                <div class="group relative bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-500 ease-in-out transform border border-gray-100 overflow-hidden" style="animation-delay: 0.2s">
+                    <!-- Card decoration -->
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-pink-100/50 to-rose-100/50 rounded-full -translate-y-10 translate-x-10"></div>
+
+                    <!-- Icon -->
+                    <div class="relative z-10 flex items-center justify-center w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-600 text-white text-2xl mb-6 rounded-xl shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800 group-hover:text-pink-600 transition-colors duration-300">COMMITMENT</h3>
+                    <p class="text-gray-700 leading-relaxed text-sm">
+                        We have integrity and compassion in making to the clients we are working with and to the community.
+                    </p>
+
+                    <!-- Decorative element -->
+                    <div class="mt-6 w-12 h-1 bg-gradient-to-r from-pink-500 to-rose-600 rounded-full"></div>
+                </div>
+
+                <!-- Trustworthy -->
+                <div class="group relative bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-500 ease-in-out transform border border-gray-100 overflow-hidden" style="animation-delay: 0.3s">
+                    <!-- Card decoration -->
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-100/50 to-cyan-100/50 rounded-full -translate-y-10 translate-x-10"></div>
+
+                    <!-- Icon -->
+                    <div class="relative z-10 flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-600 text-white text-2xl mb-6 rounded-xl shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800 group-hover:text-blue-600 transition-colors duration-300">TRUSTWORTHY</h3>
+                    <p class="text-gray-700 leading-relaxed text-sm">
+                        We live up to our promises to our clients and we are honest in our services to the community.
+                    </p>
+
+                    <!-- Decorative element -->
+                    <div class="mt-6 w-12 h-1 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-full"></div>
+                </div>
+
+                <!-- Teamwork -->
+                <div class="group relative bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-500 ease-in-out transform border border-gray-100 overflow-hidden" style="animation-delay: 0.4s">
+                    <!-- Card decoration -->
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-green-100/50 to-emerald-100/50 rounded-full -translate-y-10 translate-x-10"></div>
+
+                    <!-- Icon -->
+                    <div class="relative z-10 flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 text-white text-2xl mb-6 rounded-xl shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-users"></i>
+                    </div>
+
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800 group-hover:text-green-600 transition-colors duration-300">TEAMWORK</h3>
+                    <p class="text-gray-700 leading-relaxed text-sm">
+                        We recognize and contribute and collaborate with each other in academic and social mission and goals.
+                    </p>
+
+                    <!-- Decorative element -->
+                    <div class="mt-6 w-12 h-1 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full"></div>
+                </div>
+
+                <!-- Empowerment -->
+                <div class="group relative bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-500 ease-in-out transform border border-gray-100 overflow-hidden md:col-span-2 lg:col-span-1" style="animation-delay: 0.5s">
+                    <!-- Card decoration -->
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-orange-100/50 to-yellow-100/50 rounded-full -translate-y-10 translate-x-10"></div>
+
+                    <!-- Icon -->
+                    <div class="relative z-10 flex items-center justify-center w-16 h-16 bg-gradient-to-br from-orange-500 to-yellow-600 text-white text-2xl mb-6 rounded-xl shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800 group-hover:text-orange-600 transition-colors duration-300">EMPOWERMENT</h3>
+                    <p class="text-gray-700 leading-relaxed text-sm">
+                        We foster an environment where all are empowered to become their best potential.
+                    </p>
+
+                    <!-- Decorative element -->
+                    <div class="mt-6 w-12 h-1 bg-gradient-to-r from-orange-500 to-yellow-600 rounded-full"></div>
+                </div>
+            </div>
+        </div>
+
+                <!-- Impact Slider -->
+                <div class="relative overflow-hidden rounded-2xl shadow-xl animate-on-scroll">
+                    <div id="impactSlides" class="flex transition-transform duration-500 ease-in-out">
+                        <!-- Slide 1 -->
+                        <div class="min-w-full">
+                            <div class="relative h-96">
+                                <img src="{{ asset('image/feeding2.jpg') }}" alt="Description 1" class="w-full h-full object-cover"
+                                     alt="Hauz Hayag feeding"
+                                     class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                                    <div class="text-center text-white p-8">
+                                        <h3 class="text-3xl font-bold mb-4">Feeding program</h3>
+                                        <p class="text-xl">The mission is to reduce hunger and support the health of individuals, especially children and those in need. This is done by providing regular access to nutritious meals.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 2 -->
+                        <div class="min-w-full">
+                            <div class="relative h-96">
+                                <img src="{{ asset('image/education.jpg') }}" alt="Description 1" class="w-full h-full object-cover"
+                                     alt="Hauz Hayag Education"
+                                     class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                                    <div class="text-center text-white p-8">
+                                        <h3 class="text-3xl font-bold mb-4">Education</h3>
+                                        <p class="text-xl">The goal is to equip individuals with knowledge, skills, and values for a better future. It aims to help them lead successful and meaningful lives.
+</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 3 -->
+                        <div class="min-w-full">
+                            <div class="relative h-96">
+                                <img src="{{ asset('image/growth.jpg') }}" alt="Description 1" class="w-full h-full object-cover"
+                                     alt="Award Ceremony"
+                                     class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                                    <div class="text-center text-white p-8">
+                                        <h3 class="text-3xl font-bold mb-4">Growth of Knowledge</h3>
+                                        <p class="text-xl">The aim is to develop the ability to read, understand, and use information effectively. This empowers individuals to make wise decisions and actively participate in society.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slider Controls -->
+                    <button onclick="prevImpactSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 text-primary p-3 rounded-full shadow-lg hover:bg-white transition z-10">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button onclick="nextImpactSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 text-primary p-3 rounded-full shadow-lg hover:bg-white transition z-10">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <!-- Dots -->
+                    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+                        <button class="w-3 h-3 rounded-full bg-white/80 hover:bg-white transition" onclick="goToImpactSlide(0)"></button>
+                        <button class="w-3 h-3 rounded-full bg-white/80 hover:bg-white transition" onclick="goToImpactSlide(1)"></button>
+                        <button class="w-3 h-3 rounded-full bg-white/80 hover:bg-white transition" onclick="goToImpactSlide(2)"></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Track Application Section with enhanced professional design -->
         <section id="track-application" class="py-20 bg-gradient-to-br from-slate-50 via-white to-gray-50 relative overflow-hidden">
             <!-- Background decorations -->
@@ -1037,120 +1291,6 @@
                             <i class="fas fa-hands-helping mr-3 group-hover:scale-110 transition-transform"></i>
                             <span class="font-semibold">Volunteer for Events</span>
                         </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Us Section with enhanced professional design -->
-        <section id="about-us" class="bg-gradient-to-br from-gray-50 to-blue-50/30 py-20 relative overflow-hidden">
-    <!-- Background decorations -->
-    <div class="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-blue-100/30 to-indigo-100/30 rounded-full -translate-y-48 -translate-x-48"></div>
-    <div class="absolute bottom-0 right-0 w-80 h-80 bg-gradient-to-tl from-indigo-100/30 to-blue-100/30 rounded-full translate-y-40 translate-x-40"></div>
-
-    <div class="max-w-7xl mx-auto px-4 relative z-10">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold mb-4 text-primary animate-bounce-in">About Us</h2>
-            <p class="text-gray-600 text-lg mb-2">Empowering communities through education and opportunity</p>
-            <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
-        </div>
-
-        <!-- Vision and Mission with enhanced design -->
-        <div class="grid md:grid-cols-2 gap-10 mb-20">
-            <!-- Vision Card -->
-            <div class="group relative bg-white p-10 rounded-2xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500 ease-in-out transform animate-bounce-in-left border border-gray-100 overflow-hidden" style="animation-delay: 0.1s">
-                <!-- Card decoration -->
-                <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-blue-100/50 to-indigo-100/50 rounded-full -translate-y-12 translate-x-12"></div>
-
-                <!-- Icon with enhanced styling -->
-                <div class="relative z-10 flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 text-white text-3xl mb-6 rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    <i class="fas fa-eye"></i>
-                </div>
-
-                <h3 class="text-3xl font-bold mb-6 text-gray-800 group-hover:text-blue-600 transition-colors duration-300">Our Vision</h3>
-                <p class="text-gray-700 leading-relaxed text-lg">To create a world where every student has access to quality education and career opportunities, regardless of their background or circumstances.</p>
-
-                <!-- Decorative element -->
-                <div class="mt-6 w-16 h-1 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full"></div>
-            </div>
-
-            <!-- Mission Card -->
-            <div class="group relative bg-white p-10 rounded-2xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500 ease-in-out transform animate-bounce-in-right border border-gray-100 overflow-hidden" style="animation-delay: 0.2s">
-                <!-- Card decoration -->
-                <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-indigo-100/50 to-purple-100/50 rounded-full -translate-y-12 translate-x-12"></div>
-
-                <!-- Icon with enhanced styling -->
-                <div class="relative z-10 flex items-center justify-center w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-600 text-white text-3xl mb-6 rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    <i class="fas fa-bullseye"></i>
-                </div>
-
-                <h3 class="text-3xl font-bold mb-6 text-gray-800 group-hover:text-indigo-600 transition-colors duration-300">Our Mission</h3>
-                <p class="text-gray-700 leading-relaxed text-lg">To empower students through comprehensive scholarship programs, guidance, and development, creating a lasting impact on their lives and communities.</p>
-
-                <!-- Decorative element -->
-                <div class="mt-6 w-16 h-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full"></div>
-            </div>
-        </div>
-
-                <!-- Impact Slider -->
-                <div class="relative overflow-hidden rounded-2xl shadow-xl animate-on-scroll">
-                    <div id="impactSlides" class="flex transition-transform duration-500 ease-in-out">
-                        <!-- Slide 1 -->
-                        <div class="min-w-full">
-                            <div class="relative h-96">
-                                <img src="{{ asset('image/feeding2.jpg') }}" alt="Description 1" class="w-full h-full object-cover"
-                                     alt="Hauz Hayag feeding"
-                                     class="w-full h-full object-cover">
-                                <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-                                    <div class="text-center text-white p-8">
-                                        <h3 class="text-3xl font-bold mb-4">Feeding program</h3>
-                                        <p class="text-xl">The mission is to reduce hunger and support the health of individuals, especially children and those in need. This is done by providing regular access to nutritious meals.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Slide 2 -->
-                        <div class="min-w-full">
-                            <div class="relative h-96">
-                                <img src="{{ asset('image/education.jpg') }}" alt="Description 1" class="w-full h-full object-cover"
-                                     alt="Hauz Hayag Education"
-                                     class="w-full h-full object-cover">
-                                <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-                                    <div class="text-center text-white p-8">
-                                        <h3 class="text-3xl font-bold mb-4">Education</h3>
-                                        <p class="text-xl">The goal is to equip individuals with knowledge, skills, and values for a better future. It aims to help them lead successful and meaningful lives.
-</p>
-                                    </div>  
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Slide 3 -->
-                        <div class="min-w-full">
-                            <div class="relative h-96">
-                                <img src="{{ asset('image/growth.jpg') }}" alt="Description 1" class="w-full h-full object-cover"
-                                     alt="Award Ceremony"
-                                     class="w-full h-full object-cover">
-                                <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-                                    <div class="text-center text-white p-8">
-                                        <h3 class="text-3xl font-bold mb-4">Growth of Knowledge</h3>
-                                        <p class="text-xl">The aim is to develop the ability to read, understand, and use information effectively. This empowers individuals to make wise decisions and actively participate in society.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Slider Controls -->
-                    <button onclick="prevImpactSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 text-primary p-3 rounded-full shadow-lg hover:bg-white transition z-10">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button onclick="nextImpactSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 text-primary p-3 rounded-full shadow-lg hover:bg-white transition z-10">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                    <!-- Dots -->
-                    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
-                        <button class="w-3 h-3 rounded-full bg-white/80 hover:bg-white transition" onclick="goToImpactSlide(0)"></button>
-                        <button class="w-3 h-3 rounded-full bg-white/80 hover:bg-white transition" onclick="goToImpactSlide(1)"></button>
-                        <button class="w-3 h-3 rounded-full bg-white/80 hover:bg-white transition" onclick="goToImpactSlide(2)"></button>
                     </div>
                 </div>
             </div>
@@ -2646,6 +2786,45 @@
                 input.addEventListener('input', function(e) {
                     e.target.value = e.target.value.toUpperCase();
                 });
+            });
+
+            // Counter animation for statistics
+            const counters = document.querySelectorAll('.counter');
+            const animateCounter = (counter) => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const increment = target / 100;
+                let current = 0;
+
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += increment;
+                        counter.textContent = Math.ceil(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+
+                updateCounter();
+            };
+
+            // Intersection Observer for counter animation
+            const counterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        if (!counter.classList.contains('animated')) {
+                            counter.classList.add('animated');
+                            animateCounter(counter);
+                        }
+                    }
+                });
+            }, {
+                threshold: 0.5
+            });
+
+            counters.forEach(counter => {
+                counterObserver.observe(counter);
             });
         });
 

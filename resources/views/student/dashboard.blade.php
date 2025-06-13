@@ -470,7 +470,7 @@
                                 <span class="px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
                                     {{ ucfirst($job->status) }}
                                 </span>
-                                <a href="{{ route('jobs.show', $job->id) }}" class="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition-all duration-300 text-sm font-medium hover-scale">
+                                <a href="{{ route('student.jobs.show', $job->id) }}" class="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition-all duration-300 text-sm font-medium hover-scale">
                                     View Details
                                 </a>
                             </div>

@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\ScholarshipApplication;
 use App\Models\User;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
+use App\Mail\ScholarshipApplicationStatusUpdate;
 
 class StudentController extends Controller
 {
@@ -17,13 +20,24 @@ class StudentController extends Controller
      */
     public function index()
     {
+        // Only show pending applications in the Applicants section
         $applications = ScholarshipApplication::where('status', 'pending')->latest()->get();
-        $students = User::where('role', 'student')->latest()->get();
+
+        // Get approved applications to find corresponding students
+        $approvedApplications = ScholarshipApplication::where('status', 'approved')->get();
+        $approvedEmails = $approvedApplications->pluck('email')->toArray();
+
+        // Only show students who have approved scholarship applications
+        $students = User::where('role', 'student')
+                       ->where('status', 'active')
+                       ->whereIn('email', $approvedEmails)
+                       ->latest()
+                       ->get();
 
         // Get counts for display
         $pendingApplicationsCount = ScholarshipApplication::where('status', 'pending')->count();
-        $approvedApplicationsCount = User::where('role', 'student')->where('status', 'active')->count();
-        $activeStudentsCount = User::where('role', 'student')->count();
+        $approvedApplicationsCount = ScholarshipApplication::where('status', 'approved')->count();
+        $activeStudentsCount = $students->count();
 
         return view('admin.students.index', compact('applications', 'students', 'pendingApplicationsCount', 'approvedApplicationsCount', 'activeStudentsCount'));
     }
@@ -63,11 +77,27 @@ class StudentController extends Controller
         }
 
         // Update application status
+        $oldStatus = $application->status;
         $application->status = 'approved';
         $application->save();
 
-        // Send email with credentials to the new student
-        // TODO: Implement email sending with credentials
+        // Send status update email
+        try {
+            Mail::to($application->email)->send(new ScholarshipApplicationStatusUpdate($application));
+            Log::info('Scholarship application approval email sent', [
+                'application_id' => $application->id,
+                'email' => $application->email,
+                'old_status' => $oldStatus,
+                'new_status' => 'approved',
+                'tracking_code' => $application->tracking_code
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Failed to send scholarship application approval email: ' . $e->getMessage(), [
+                'application_id' => $application->id,
+                'email' => $application->email,
+                'tracking_code' => $application->tracking_code
+            ]);
+        }
 
         return redirect()->route('admin.students.index.shortcut')->with('success', 'Application approved and student account created successfully');
     }
@@ -81,10 +111,29 @@ class StudentController extends Controller
     public function reject($tracking_code)
     {
         $application = ScholarshipApplication::where('tracking_code', $tracking_code)->firstOrFail();
-        $application->status = 'rejected';
+        $oldStatus = $application->status;
+        $application->status = 'declined';
         $application->save();
 
-        return redirect()->back()->with('success', 'Application rejected successfully');
+        // Send status update email
+        try {
+            Mail::to($application->email)->send(new ScholarshipApplicationStatusUpdate($application));
+            Log::info('Scholarship application rejection email sent', [
+                'application_id' => $application->id,
+                'email' => $application->email,
+                'old_status' => $oldStatus,
+                'new_status' => 'declined',
+                'tracking_code' => $application->tracking_code
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Failed to send scholarship application rejection email: ' . $e->getMessage(), [
+                'application_id' => $application->id,
+                'email' => $application->email,
+                'tracking_code' => $application->tracking_code
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Application declined successfully');
     }
 
     /**

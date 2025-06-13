@@ -29,7 +29,7 @@ class AdminController extends Controller
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            
+
             if (!$user->is_admin) {
                 Auth::logout();
                 return back()->withErrors([

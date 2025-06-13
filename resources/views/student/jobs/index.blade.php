@@ -244,7 +244,7 @@
 
                                 <!-- Action Button -->
                                 <div class="mt-6 flex justify-end">
-                                    <a href="{{ route('jobs.show', $job->id) }}" class="bg-purple-500 text-white px-6 py-2 rounded-lg hover:bg-purple-600 transition-all duration-300 hover-scale flex items-center">
+                                    <a href="{{ route('student.jobs.show', $job->id) }}" class="bg-purple-500 text-white px-6 py-2 rounded-lg hover:bg-purple-600 transition-all duration-300 hover-scale flex items-center">
                                         <span>View Details</span>
                                         <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
