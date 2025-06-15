@@ -360,7 +360,7 @@
                         </svg>
                     </div>
                     <div>
-                        <h3 class="text-2xl font-bold gradient-text">Live Activity</h3>
+                        <h3 class="text-2xl font-bold gradient-text">Recent Activities</h3>
                         <p class="text-gray-600">Real-time system updates</p>
                     </div>
                 </div>
@@ -429,14 +429,14 @@
                 </div>
 
                 <div class="mt-8 pt-6 border-t border-gray-100">
-                    <button class="w-full bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white py-3 px-6 rounded-xl transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105 hover-lift">
+                    <!-- <button class="w-full bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white py-3 px-6 rounded-xl transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105 hover-lift">
                         <span class="flex items-center justify-center space-x-2">
                             <span>View All Activity</span>
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                             </svg>
                         </span>
-                    </button>
+                    </button> -->
                 </div>
             </div>
         </div>

@@ -192,10 +192,18 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
-// Legal document pages
-Route::get('/terms-scholarship', function () {
+ // Legal document pages
+ Route::get('/terms-scholarship', function () {
     return view('legal.terms-scholarship');
-})->name('terms.scholarship');
+ })->name('terms.scholarship');
+
+// Route::get('/terms-community-scholarship', function () {
+//     return view('legal.terms-scholarship');
+// })->name('terms.community');
+
+// Route::get('/terms-residential-scholarship', function () {
+//     return view('legal.terms-scholarship');
+// })->name('terms.residential');
 
 Route::get('/terms-volunteer', function () {
     return view('legal.terms-volunteer');

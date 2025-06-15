@@ -60,10 +60,6 @@
                     <p class="mb-3">We collect information that you provide directly to us, including:</p>
                     <ul class="list-disc list-inside space-y-2 ml-4">
                         <li><strong>Personal Information:</strong> Name, email address, phone number, address</li>
-                        <li><strong>Academic Information:</strong> School details, academic records, transcripts</li>
-                        <li><strong>Financial Information:</strong> Family income details for scholarship eligibility</li>
-                        <li><strong>Volunteer Information:</strong> Skills, availability, emergency contacts</li>
-                        <li><strong>Application Materials:</strong> Essays, documents, and supporting materials</li>
                     </ul>
                 </div>
 
@@ -107,10 +103,9 @@
                     <h3 class="text-lg font-semibold text-gray-800 mb-3">5. Data Retention</h3>
                     <p class="mb-3">We retain your information for different periods depending on the purpose:</p>
                     <ul class="list-disc list-inside space-y-2 ml-4">
-                        <li><strong>Scholarship Applications:</strong> 7 years for successful applicants, 3 years for unsuccessful</li>
-                        <li><strong>Volunteer Records:</strong> Duration of volunteer service plus 2 years</li>
-                        <li><strong>Financial Records:</strong> As required by applicable laws and regulations</li>
-                        <li><strong>Communication Records:</strong> 3 years from last contact</li>
+                        <li><strong>Scholarship Applications:</strong> 10 years for successful applicants.</li>
+                        <li><strong>Volunteer Records:</strong> Duration of volunteer service. </li>
+                        <li><strong>Communication Records:</strong> The account being made will always be functional, and the the medium of coomunication.</li>
                     </ul>
                 </div>
 
@@ -133,7 +128,6 @@
                         <li>Essential cookies for website functionality</li>
                         <li>Analytics tools to understand website usage</li>
                         <li>Session cookies to maintain your login status</li>
-                        <li>You can control cookie settings through your browser</li>
                     </ul>
                 </div>
 
@@ -153,8 +147,8 @@
                     <div class="bg-gray-50 p-4 rounded-lg">
                         <p class="font-medium">Hauz Hayag Scholarship and Training Program Inc</p>
                         <p class="text-sm text-gray-600">Privacy Officer</p>
-                        <p class="text-sm text-gray-600">Cebu City, Philippines</p>
-                        <p class="text-sm text-gray-600">Email: hauzhayag15@gmail.com</p>
+                        <p class="text-sm text-gray-600">Carlock Street, San Nicolas Proper, Cebu City, Philippines</p>
+                        <p class="text-sm text-gray-600">Email: hauzhayag143@gmail.com</p>
                         <p class="text-sm text-gray-600 mt-2">
                             <strong>Subject Line:</strong> Privacy Policy Inquiry
                         </p>

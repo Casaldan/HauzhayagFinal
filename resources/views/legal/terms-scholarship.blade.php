@@ -50,7 +50,7 @@
             <!-- Organization Info -->
             <div class="mb-8 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
                 <h2 class="text-lg font-semibold text-blue-900 mb-2">Hauz Hayag Scholarship and Training Program Inc</h2>
-                <p class="text-sm text-blue-700">These terms and conditions govern your application for the Residential Scholarship for Girls program.</p>
+                <p class="text-sm text-blue-700">These terms and conditions govern your application for the Community Based Scholarship and the Residential Scholarship for Girls program.</p>
             </div>
 
             <!-- Terms Content -->
@@ -61,29 +61,91 @@
                     <ul class="list-disc list-inside space-y-2 ml-4">
                         <li>All information provided is accurate, complete, and truthful</li>
                         <li>Any false or misleading information may result in disqualification</li>
-                        <li>You meet the eligibility requirements for the Residential Scholarship for Girls</li>
+                        <li>You meet the eligibility requirements for the scholarship either the Community Based Scholarship or the Residential Scholarship for Girls</li>
                         <li>You understand this is a competitive selection process</li>
                     </ul>
                 </div>
 
                 <div>
                     <h3 class="text-lg font-semibold text-gray-800 mb-3">2. Eligibility Requirements</h3>
-                    <p class="mb-3">To be eligible for the scholarship, applicants must:</p>
-                    <ul class="list-disc list-inside space-y-2 ml-4">
-                        <li>Be female students pursuing higher education</li>
-                        <li>Demonstrate financial need</li>
-                        <li>Maintain satisfactory academic performance</li>
-                        <li>Commit to the residential program requirements</li>
-                        <li>Be willing to participate in community service activities</li>
-                    </ul>
+
+                    <!-- Community Based Scholarship Requirements -->
+                    <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                        <h4 class="text-md font-semibold text-green-900 mb-3">Community Based Scholarship</h4>
+                        <p class="text-sm text-green-700 mb-3">To be eligible for the Community Based Scholarship, applicants must meet the following requirements:</p>
+                        <ul class="list-disc list-inside space-y-2 ml-4 text-sm text-green-800">
+                            <li><strong>Open to all genders</strong> - Everyone can apply for this scholarship regardless of any gender. Both male and female students are welcome.</li>
+                            <li><strong>Open to all areas around Cebu</strong> - This scholarship is available for students from all areas around Cebu</li>
+                            <li><strong>For those who want to pursue education</strong> - Open to students at any grade level who are committed to their educational journey</li>
+                            <li>Demonstrate genuine financial need - Students whose families are too poor to pay for their children's education</li>
+                            <li><strong>Live with their families in the community</strong> - Students remain in their home communities with their families</li>
+                            <li>Be willing to attend regular meetings regarding the organization's plans and programs</li>
+                            <li>Maintain satisfactory academic performance and school attendance</li>
+                            <li>Show dedication to educational advancement and community involvement</li>
+                        </ul>
+                    </div>
+
+                    <!-- Residential Scholarship Requirements -->
+                    <div class="mb-6 p-4 bg-pink-50 border border-pink-200 rounded-lg">
+                        <h4 class="text-md font-semibold text-pink-900 mb-3">Residential Scholarship for Girls</h4>
+                        <p class="text-sm text-pink-700 mb-3">The residential scholarship caters only for girls who wanted to pursue college. This is open for girls from Mindanao and Visayas. To be eligible, applicants must meet the following requirements:</p>
+                        <ul class="list-disc list-inside space-y-2 ml-4 text-sm text-pink-800">
+                            <li><strong>Female applicants only</strong> - This scholarship is exclusively for girls and young women</li>
+                            <li><strong>College-level education</strong> - Must be pursuing or planning to pursue college/university education</li>
+                            <li><strong>From Visayas and Mindanao regions</strong> - Open specifically for girls from these regions of the Philippines</li>
+                            <li>Demonstrate exceptional academic potential and commitment to education</li>
+                            <li>Show genuine financial need and inability to afford college education</li>
+                            <li>Be willing to live at the Hauz Hayag residential center during studies</li>
+                            <li>Commit to following residential program rules and guidelines</li>
+                            <li>Participate actively in community and educational activities</li>
+                            <li>Maintain excellent academic performance throughout the program</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-3">3. Selection Process</h3>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">3. Scholarship Coverage & Support</h3>
+
+                    <!-- Community Based Scholarship Coverage -->
+                    <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                        <h4 class="text-md font-semibold text-green-900 mb-3">Community Based Scholarship</h4>
+                        <p class="text-sm text-green-700 mb-3">The students live with their families in the community. However, their parents are too poor to pay for their children's education – the essential school attendance. Through the COMMUNITY BASED SCHOLARS pillar, we finance all necessary school materials, compulsory uniforms, and school and travel expenses. What's more, during school hours, our HAYAG girls give these children tutoring every Saturday in the project house, and even daily during the holidays. The children are very interested in the material they are learning. They feel that they are being given a chance at a better life, one that they can take a step closer to with the help of Hauz HAYAG.</p>
+                        <ul class="list-disc list-inside space-y-2 ml-4 text-sm text-green-800">
+                            <li><strong>All necessary school materials</strong> - Complete coverage of required educational supplies</li>
+                            <li><strong>Compulsory uniforms</strong> - Full provision of required school uniforms</li>
+                            <li><strong>School expenses</strong> - Coverage of essential school-related costs</li>
+                            <li><strong>Travel expenses</strong> - Transportation support for school attendance</li>
+                            <li><strong>Tutoring support</strong> - HAYAG girls provide tutoring every Saturday in the project house</li>
+                            <li><strong>Holiday tutoring</strong> - Daily tutoring sessions during school holidays</li>
+                            <li>Educational guidance and mentorship throughout the program</li>
+                        </ul>
+                    </div>
+
+                    <!-- Residential Scholarship Coverage -->
+                    <div class="mb-6 p-4 bg-pink-50 border border-pink-200 rounded-lg">
+                        <h4 class="text-md font-semibold text-pink-900 mb-3">Residential Scholarship for Girls</h4>
+                        <p class="text-sm text-pink-700 mb-3">The Residential Scholarship for Girls provides comprehensive support including:</p>
+                        <ul class="list-disc list-inside space-y-2 ml-4 text-sm text-pink-800">
+                            <li><strong>Full residential accommodation</strong> - Housing at the Hauz Hayag center</li>
+                            <li><strong>Complete college tuition coverage</strong> - Full payment of university fees</li>
+                            <li><strong>Educational materials and supplies</strong> - All necessary books and school materials</li>
+                            <li><strong>Living expenses</strong> - Food, utilities, and daily necessities</li>
+                            <li><strong>Academic support and tutoring</strong> - Educational guidance and mentorship</li>
+                            <li><strong>Personal development programs</strong> - Life skills and leadership training</li>
+                            <li><strong>Career guidance and counseling</strong> - Professional development support</li>
+                            <li>Safe and supportive living environment with other scholarship recipients</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">4. Selection Process</h3>
                     <p class="mb-3">The selection process includes:</p>
                     <ul class="list-disc list-inside space-y-2 ml-4">
                         <li>Review of application materials and supporting documents</li>
                         <li>Verification of academic records and financial information</li>
+                        <li>Assessment of community involvement and commitment</li>
+                        <li>Evaluation of family financial need and circumstances</li>
                         <li>Possible interviews with selection committee</li>
                         <li>Background checks as deemed necessary</li>
                     </ul>
@@ -101,29 +163,65 @@
                 </div>
 
                 <div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-3">5. Scholarship Obligations</h3>
-                    <p class="mb-3">If selected, scholarship recipients must:</p>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">6. Scholarship Obligations</h3>
+
+                    <!-- Community Based Scholarship Obligations -->
+                    <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                        <h4 class="text-md font-semibold text-green-900 mb-3">Community Based Scholarship Recipients Must:</h4>
+                        <ul class="list-disc list-inside space-y-2 ml-4 text-sm text-green-800">
+                            <li><strong>Attend regular meetings</strong> regarding the organization's plans and programs</li>
+                            <li>Maintain minimum academic standards and consistent school attendance</li>
+                            <li>Participate in tutoring sessions provided by HAYAG girls every Saturday</li>
+                            <li>Attend daily tutoring sessions during school holidays when available</li>
+                            <li>Use scholarship funds responsibly for educational purposes only</li>
+                            <li>Provide regular progress reports and academic updates</li>
+                            <li>Engage positively with the local community and educational initiatives</li>
+                            <li>Represent the organization positively in the community and academic institutions</li>
+                            <li>Show appreciation and commitment to the educational opportunity provided</li>
+                        </ul>
+                    </div>
+
+                    <!-- Residential Scholarship Obligations -->
+                    <div class="mb-6 p-4 bg-pink-50 border border-pink-200 rounded-lg">
+                        <h4 class="text-md font-semibold text-pink-900 mb-3">Residential Scholarship Recipients Must:</h4>
+                        <ul class="list-disc list-inside space-y-2 ml-4 text-sm text-pink-800">
+                            <li><strong>Live at the Hauz Hayag center</strong> throughout their college journey</li>
+                            <li>Maintain excellent academic performance and meet program standards</li>
+                            <li>Follow all residential rules, guidelines, and curfew requirements</li>
+                            <li>Participate in community service activities and program events</li>
+                            <li>Contribute positively to the residential community environment</li>
+                            <li>Attend mandatory meetings, workshops, and development sessions</li>
+                            <li>Serve as mentors and role models for younger students</li>
+                            <li>Represent the organization with dignity and excellence</li>
+                            <li>Complete the full program duration and graduate successfully</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">7. Program Philosophy</h3>
+                    <p class="mb-3">Both scholarship programs are founded on the belief that:</p>
                     <ul class="list-disc list-inside space-y-2 ml-4">
-                        <li>Maintain minimum academic standards as specified</li>
-                        <li>Participate in required program activities and community service</li>
-                        <li>Follow residential program rules and guidelines</li>
-                        <li>Provide regular progress reports and updates</li>
-                        <li>Represent the organization positively in the community</li>
+                        <li>Education is the key to breaking the cycle of poverty</li>
+                        <li>Every student deserves access to quality educational opportunities</li>
+                        <li>Community support and family connections are vital for student success</li>
+                        <li>Investing in education creates positive generational change</li>
+                        <li>Students thrive when given proper support and encouragement</li>
                     </ul>
                 </div>
 
                 <div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-3">6. Modification of Terms</h3>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">8. Modification of Terms</h3>
                     <p>Hauz Hayag Scholarship and Training Program Inc reserves the right to modify these terms and conditions at any time. Applicants will be notified of any significant changes that may affect their application or scholarship status.</p>
                 </div>
 
                 <div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-3">7. Contact Information</h3>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">9. Contact Information</h3>
                     <p class="mb-3">For questions about these terms or the scholarship program, please contact:</p>
                     <div class="bg-gray-50 p-4 rounded-lg">
                         <p class="font-medium">Hauz Hayag Scholarship and Training Program Inc</p>
-                        <p class="text-sm text-gray-600">Cebu City, Philippines</p>
-                        <p class="text-sm text-gray-600">Email: hauzhayag15@gmail.com</p>
+                        <p class="text-sm text-gray-600">Carlock Street, San Nicolas Proper, Cebu City, Philippines</p>
+                        <p class="text-sm text-gray-600">Email: hauzhayag143@gmail.com</p>
                     </div>
                 </div>
             </div>
