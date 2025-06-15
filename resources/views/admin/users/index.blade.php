@@ -184,7 +184,7 @@
 
         <!-- Enhanced Search and Filter Tools -->
         <div class="glass-card rounded-2xl p-6 mb-8">
-            <form id="user-search-form" method="GET" class="flex flex-col lg:flex-row gap-4">
+            <form id="user-search-form" method="GET" action="{{ route('users.index') }}" class="flex flex-col lg:flex-row gap-4">
                 <!-- Search Input -->
                 <div class="relative flex-grow">
                     <input
@@ -236,9 +236,17 @@
                     </div>
                 </div>
 
+                <!-- Filter Button -->
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-xl transition-all duration-300 font-medium flex items-center space-x-2 min-w-fit">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+                    </svg>
+                    <span>Filter</span>
+                </button>
+
                 <!-- Clear Filters Button -->
                 @if(request()->hasAny(['search', 'role', 'class_year']))
-                    <a href="{{ route('admin.users.index') }}" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-3 rounded-xl transition-all duration-300 font-medium flex items-center space-x-2 min-w-fit">
+                    <a href="{{ route('users.index') }}" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-3 rounded-xl transition-all duration-300 font-medium flex items-center space-x-2 min-w-fit">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                         </svg>
@@ -407,6 +415,19 @@
         const searchInput = document.getElementById('user-search-input');
         const searchForm = document.getElementById('user-search-form');
 
+        console.log('Page loaded');
+        console.log('Search form found:', searchForm);
+        console.log('Search input found:', searchInput);
+        console.log('Current URL:', window.location.href);
+        console.log('Form action:', searchForm ? searchForm.action : 'No form');
+
+        // Log all filter dropdowns
+        const filterDropdowns = document.querySelectorAll('.user-filter-dropdown');
+        console.log('Filter dropdowns found:', filterDropdowns.length);
+        filterDropdowns.forEach((dropdown, index) => {
+            console.log(`Dropdown ${index}:`, dropdown.name, '=', dropdown.value);
+        });
+
         // Submit form on Enter in search
         searchInput.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
@@ -418,7 +439,14 @@
         // Auto-submit on filter changes
         document.querySelectorAll('.user-filter-dropdown').forEach(function(dropdown) {
             dropdown.addEventListener('change', function() {
-                searchForm.submit();
+                console.log('Filter changed:', this.name, '=', this.value);
+                console.log('Form action:', searchForm.action);
+                console.log('Form method:', searchForm.method);
+
+                // Add a small delay to ensure the value is set
+                setTimeout(function() {
+                    searchForm.submit();
+                }, 100);
             });
         });
 

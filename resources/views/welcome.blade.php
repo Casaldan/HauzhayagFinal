@@ -317,7 +317,7 @@
                     </div>
                     <div>
                         <h1 class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Hauz Hayag</h1>
-                        <p class="text-sm text-gray-600 font-medium">Scholarship Foundation</p>
+                        <p class="text-sm text-gray-600 font-medium"></p>
                     </div>
                 </div>
 
@@ -351,7 +351,7 @@
                         <i class="fas fa-search text-lg"></i>
                         <span class="font-medium">Track Application</span>
                     </a>
-                    <a href="/login" class="flex items-center space-x-2 bg-gradient-to-r from-primary to-secondary text-white px-6 py-3 rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 font-medium ml-8">
+                    <a href="{{ route('login') }}" class="flex items-center space-x-2 bg-gradient-to-r from-primary to-primary text-white px-6 py-3 rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 font-medium ml-8">
                         <i class="fas fa-sign-in-alt text-lg"></i>
                         <span>Login</span>
                     </a>
@@ -387,7 +387,7 @@
                 </a>
                 </div>
                 <div class="px-4 pb-4 space-y-3">
-                    <a href="/login" class="w-full bg-gradient-to-r from-primary to-secondary text-white px-4 py-3 rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg font-medium flex items-center justify-center space-x-2">
+                    <a href="{{ route('login') }}" class="w-full bg-gradient-to-r from-primary to-secondary text-white px-4 py-3 rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg font-medium flex items-center justify-center space-x-2">
                         <i class="fas fa-sign-in-alt text-lg"></i>
                         <span>Login</span>
                     </a>
@@ -400,24 +400,18 @@
         <!-- Hero Section with enhanced animations -->
         <section id="home" class="relative h-screen">
             <div class="absolute inset-0 overflow-hidden">
-                <div id="heroSlides" class="flex h-full transition-transform duration-700 ease-in-out">
+                <div id="heroSlides" class="flex h-full">
                     <!-- Slide 1 -->
                     <div class="min-w-full h-full">
-                        <img src="{{ asset('image/feedingprogram.jpg') }}" alt="Description 1" class="w-full h-full object-cover"
-                             alt="Students Learning"
-                             class="w-full h-full object-cover">
+                        <img src="{{ asset('image/feedingprogram.jpg') }}" alt="Students Learning" class="w-full h-full object-cover">
                     </div>
                     <!-- Slide 2 -->
                     <div class="min-w-full h-full">
-                        <img src="{{ asset('image/firedrill.jpg') }}" alt="Description 1" class="w-full h-full object-cover"
-                             alt="Community Support"
-                             class="w-full h-full object-cover">
+                        <img src="{{ asset('image/firedrill.jpg') }}" alt="Community Support" class="w-full h-full object-cover">
                     </div>
                     <!-- Slide 3 -->
                     <div class="min-w-full h-full">
-                        <img src="{{ asset('image/goods.jpg') }}" alt="Description 1" class="w-full h-full object-cover"
-                             alt="Education Success"
-                             class="w-full h-full object-cover">
+                        <img src="{{ asset('image/goods.jpg') }}" alt="Education Success" class="w-full h-full object-cover">
                     </div>
                 </div>
                 <div class="absolute inset-0 bg-black/40 animate-fade-in"></div>
@@ -470,7 +464,7 @@
                         <div class="space-y-3 mb-8 flex-grow">
                             <div class="flex items-center space-x-3">
                                 <div class="w-2 h-2 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
-                                <span class="text-gray-700 font-medium">Full tuition coverage</span>
+                                <span class="text-gray-700 font-medium">50% tuition coverage</span>
                             </div>
                             <div class="flex items-center space-x-3">
                                 <div class="w-2 h-2 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
@@ -503,7 +497,7 @@
                         </div>
 
                         <!-- Content -->
-                        <h3 class="text-2xl font-bold mb-3 text-gray-800 group-hover:text-pink-600 transition-colors duration-300">In-house Scholarship for Girls</h3>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800 group-hover:text-pink-600 transition-colors duration-300">Residential Scholarship for Girls</h3>
                         <p class="text-gray-600 mb-6 leading-relaxed">Exclusive program designed to empower young women through education and leadership.</p>
 
                         <!-- Features list with enhanced styling -->
@@ -543,7 +537,7 @@
                         </div>
 
                         <!-- Content -->
-                        <h3 class="text-2xl font-bold mb-3 text-gray-800 group-hover:text-green-600 transition-colors duration-300">Feeding Program</h3>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800 group-hover:text-green-600 transition-colors duration-300">Street Children Care</h3>
                         <p class="text-gray-600 mb-6 leading-relaxed">A feeding program for less fortunate children living nearby area.</p>
 
                         <!-- Features list with enhanced styling -->
@@ -942,49 +936,79 @@
                 </div>
             </div>
 
-            <!-- Goals Section -->
-            <div class="text-center mb-12">
-                <h3 class="text-4xl font-bold mb-8 text-gray-800">GOALS</h3>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <!-- Goal 1 -->
-                    <div class="group relative bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-500 ease-in-out transform border border-gray-100" style="animation-delay: 0.1s">
-                        <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 text-white text-2xl mb-6 rounded-xl shadow-lg group-hover:scale-110 transition-transform duration-300 mx-auto">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <div class="text-center">
-                            <div class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold mb-4 mx-auto">1</div>
+            <!-- Vision Card -->
+            <div class="group relative bg-white p-10 rounded-2xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500 ease-in-out transform animate-bounce-in border border-gray-100 overflow-hidden mb-12" style="animation-delay: 0.2s">
+                <!-- Card decoration -->
+                <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-100/50 to-indigo-100/50 rounded-full -translate-y-16 translate-x-16"></div>
+
+                <!-- Icon with enhanced styling -->
+                <div class="relative z-10 flex items-center justify-center w-20 h-20 bg-gradient-to-br from-purple-500 to-indigo-600 text-white text-3xl mb-6 rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-300 mx-auto">
+                    <i class="fas fa-eye"></i>
+                </div>
+
+                <div class="text-center">
+                    <h3 class="text-4xl font-bold mb-6 text-gray-800 group-hover:text-purple-600 transition-colors duration-300">VISION</h3>
+                    <p class="text-gray-700 leading-relaxed text-lg max-w-4xl mx-auto">
+                        To be a leading organization in empowering marginalized communities through comprehensive educational programs,
+                        sustainable development initiatives, and spiritual guidance, creating lasting positive change that transforms
+                        lives and builds stronger, more resilient communities across the Philippines.
+                    </p>
+                    <!-- Decorative element -->
+                    <div class="mt-6 w-24 h-1 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-full mx-auto"></div>
+                </div>
+            </div>
+
+            <!-- Goals Card -->
+            <div class="group relative bg-white p-10 rounded-2xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500 ease-in-out transform animate-bounce-in border border-gray-100 overflow-hidden mb-12" style="animation-delay: 0.3s">
+                <!-- Card decoration -->
+                <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-100/50 to-emerald-100/50 rounded-full -translate-y-16 translate-x-16"></div>
+
+                <!-- Icon with enhanced styling -->
+                <div class="relative z-10 flex items-center justify-center w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 text-white text-3xl mb-6 rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-300 mx-auto">
+                    <i class="fas fa-target"></i>
+                </div>
+
+                <div class="text-center">
+                    <h3 class="text-4xl font-bold mb-6 text-gray-800 group-hover:text-green-600 transition-colors duration-300">GOALS</h3>
+
+                    <!-- Goals Grid -->
+                    <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                        <!-- Goal 1 -->
+                        <div class="group/goal relative bg-gray-50 p-6 rounded-xl border border-gray-200 hover:border-green-300 hover:bg-white transition-all duration-300">
+                            <div class="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 text-white text-lg mb-4 rounded-lg shadow-md group-hover/goal:scale-110 transition-transform duration-300 mx-auto">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center text-sm font-bold mb-4 mx-auto">1</div>
                             <p class="text-gray-700 leading-relaxed text-sm">
                                 To promote the integral development of indigent, abandoned, orphaned and marginalized youngsters.
                             </p>
                         </div>
-                    </div>
 
-                    <!-- Goal 2 -->
-                    <div class="group relative bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-500 ease-in-out transform border border-gray-100" style="animation-delay: 0.2s">
-                        <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 text-white text-2xl mb-6 rounded-xl shadow-lg group-hover:scale-110 transition-transform duration-300 mx-auto">
-                            <i class="fas fa-heart"></i>
-                        </div>
-                        <div class="text-center">
-                            <div class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold mb-4 mx-auto">2</div>
+                        <!-- Goal 2 -->
+                        <div class="group/goal relative bg-gray-50 p-6 rounded-xl border border-gray-200 hover:border-green-300 hover:bg-white transition-all duration-300">
+                            <div class="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 text-white text-lg mb-4 rounded-lg shadow-md group-hover/goal:scale-110 transition-transform duration-300 mx-auto">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center text-sm font-bold mb-4 mx-auto">2</div>
                             <p class="text-gray-700 leading-relaxed text-sm">
-                                To promote the integrity of God's creation especially on the issues dealing with the congregational, personal and social
-                                transformation of the environment.
+                                To promote the integrity of God's creation especially on the issues dealing with the congregational, personal and social transformation of the environment.
                             </p>
                         </div>
-                    </div>
 
-                    <!-- Goal 3 -->
-                    <div class="group relative bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-500 ease-in-out transform border border-gray-100" style="animation-delay: 0.3s">
-                        <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 text-white text-2xl mb-6 rounded-xl shadow-lg group-hover:scale-110 transition-transform duration-300 mx-auto">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="text-center">
-                            <div class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold mb-4 mx-auto">3</div>
+                        <!-- Goal 3 -->
+                        <div class="group/goal relative bg-gray-50 p-6 rounded-xl border border-gray-200 hover:border-green-300 hover:bg-white transition-all duration-300">
+                            <div class="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 text-white text-lg mb-4 rounded-lg shadow-md group-hover/goal:scale-110 transition-transform duration-300 mx-auto">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center text-sm font-bold mb-4 mx-auto">3</div>
                             <p class="text-gray-700 leading-relaxed text-sm">
                                 To produce graduates at least ten (10) beneficiaries of the Hauz Hayag programs, projects and activities in a decade.
                             </p>
                         </div>
                     </div>
+
+                    <!-- Decorative element -->
+                    <div class="mt-6 w-24 h-1 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full mx-auto"></div>
                 </div>
             </div>
         </div>
@@ -1095,72 +1119,8 @@
             </div>
         </div>
 
-                <!-- Impact Slider -->
-                <div class="relative overflow-hidden rounded-2xl shadow-xl animate-on-scroll">
-                    <div id="impactSlides" class="flex transition-transform duration-500 ease-in-out">
-                        <!-- Slide 1 -->
-                        <div class="min-w-full">
-                            <div class="relative h-96">
-                                <img src="{{ asset('image/feeding2.jpg') }}" alt="Description 1" class="w-full h-full object-cover"
-                                     alt="Hauz Hayag feeding"
-                                     class="w-full h-full object-cover">
-                                <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-                                    <div class="text-center text-white p-8">
-                                        <h3 class="text-3xl font-bold mb-4">Feeding program</h3>
-                                        <p class="text-xl">The mission is to reduce hunger and support the health of individuals, especially children and those in need. This is done by providing regular access to nutritious meals.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Slide 2 -->
-                        <div class="min-w-full">
-                            <div class="relative h-96">
-                                <img src="{{ asset('image/education.jpg') }}" alt="Description 1" class="w-full h-full object-cover"
-                                     alt="Hauz Hayag Education"
-                                     class="w-full h-full object-cover">
-                                <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-                                    <div class="text-center text-white p-8">
-                                        <h3 class="text-3xl font-bold mb-4">Education</h3>
-                                        <p class="text-xl">The goal is to equip individuals with knowledge, skills, and values for a better future. It aims to help them lead successful and meaningful lives.
-</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Slide 3 -->
-                        <div class="min-w-full">
-                            <div class="relative h-96">
-                                <img src="{{ asset('image/growth.jpg') }}" alt="Description 1" class="w-full h-full object-cover"
-                                     alt="Award Ceremony"
-                                     class="w-full h-full object-cover">
-                                <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-                                    <div class="text-center text-white p-8">
-                                        <h3 class="text-3xl font-bold mb-4">Growth of Knowledge</h3>
-                                        <p class="text-xl">The aim is to develop the ability to read, understand, and use information effectively. This empowers individuals to make wise decisions and actively participate in society.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Slider Controls -->
-                    <button onclick="prevImpactSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 text-primary p-3 rounded-full shadow-lg hover:bg-white transition z-10">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button onclick="nextImpactSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 text-primary p-3 rounded-full shadow-lg hover:bg-white transition z-10">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                    <!-- Dots -->
-                    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
-                        <button class="w-3 h-3 rounded-full bg-white/80 hover:bg-white transition" onclick="goToImpactSlide(0)"></button>
-                        <button class="w-3 h-3 rounded-full bg-white/80 hover:bg-white transition" onclick="goToImpactSlide(1)"></button>
-                        <button class="w-3 h-3 rounded-full bg-white/80 hover:bg-white transition" onclick="goToImpactSlide(2)"></button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Track Application Section with enhanced professional design -->
-        <section id="track-application" class="py-20 bg-gradient-to-br from-slate-50 via-white to-gray-50 relative overflow-hidden">
+        <section id="track-application" class="py-12 bg-gradient-to-br from-slate-50 via-white to-gray-50 relative overflow-hidden">
             <!-- Background decorations -->
             <div class="absolute top-0 right-0 w-72 h-72 bg-gradient-to-bl from-slate-100/40 to-gray-100/40 rounded-full -translate-y-36 translate-x-36"></div>
             <div class="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-gray-100/40 to-slate-100/40 rounded-full translate-y-32 -translate-x-32"></div>
@@ -1300,7 +1260,7 @@
             <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
               <!-- About Section -->
               <div>
-                <h2 class="text-lg font-semibold mb-4">Hauz Hayag Scholarship</h2>
+                <h2 class="text-lg font-semibold mb-4">Hauz Hayag Scholarship and Training Program Inc</h2>
                 <p class="text-sm leading-relaxed">
                   Supporting education through scholarship and nourishment. Hauz Hayag believes in empowering the youth for a brighter future.
                 </p>
@@ -1312,10 +1272,7 @@
                 <ul class="space-y-2 text-sm">
                   <li><a href="#home" class="hover:underline">Home</a></li>
                   <li><a href="#scholarships" class="hover:underline">Programs</a></li>
-                  <li><a href="#about-us" class="hover:underline">About Us</a></li>
-                  <li><button class="hover:underline text-left" onclick="handleLoginClick()">Login</button></li>
-                  <li><button class="hover:underline text-left" onclick="handleLoginClick()">Logins</button></li>
-                </ul>
+                  <li><a href="#about-us" class="hover:underline">About Us</a></li>                </ul>
               </div>
 
               <!-- Contact Info -->
@@ -1324,12 +1281,12 @@
                 <p class="text-sm">📍 Carlock Street, San Nicolas Proper, Cebu City, Philippines</p>
                 <p class="text-sm">📧 hauzhayag143@gmail.com</p>
                 <p class="text-sm">📞 (032) 384 6594</p>
-                <p class="text-sm">🌐 hayag-project.com</p>
+                <p class="text-sm">🌐 <a href="https://www.hayag-project.com/?fbclid=IwY2xjawK7hdhleHRuA2FlbQIxMABicmlkETFlb2l4d3RjU0szbkdGcDB1AR6M3X6DyPm0O0IXAQzESl6Ou3T8MpEIPHYsifFwfvxi_YJQv_sEkdQi73T4OQ_aem_wgT4PQyVdfilaQakFyVSjA" target="_blank" class="text-primary hover:underline">hayag-project.com</a></p>
               </div>
             </div>
 
             <div class="border-t mt-10 pt-4 text-center text-sm text-gray-500">
-              &copy; 2025 Hauz Hayag Scholarship. All rights reserved.
+              &copy; 2025 Hauz Hayag Scholarship and Training Program Inc. All rights reserved.
             </div>
           </footer>
     </main>
@@ -1455,18 +1412,18 @@
                             </div>
                             <div class="flex-1">
                                 <label for="event_terms_agreement" class="block text-xs font-semibold text-gray-800 mb-2 cursor-pointer">
-                                    I agree to the Terms and Conditions <span class="text-red-500">*</span>
+                                By checking this box,I agree to the <a href="{{ route('terms.volunteer') }}" target="_blank" class="text-teal-600 hover:underline font-medium">Terms and Conditions</a> and <a href="{{ route('privacy.policy') }}" target="_blank" class="text-teal-600 hover:underline font-medium">Privacy Policy</a> <span class="text-red-500">*</span>
                                 </label>
                                 <div class="text-xs text-gray-600 leading-relaxed">
-                                    <p class="mb-2">By checking this box, I acknowledge that:</p>
+                                    <!-- <p class="mb-2">By checking this box, I acknowledge that:</p>
                                     <ul class="list-disc list-inside space-y-1 ml-2">
                                         <li>All information provided is accurate and complete</li>
                                         <li>I understand the event requirements and guidelines</li>
                                         <li>I agree to comply with all event policies and procedures</li>
                                         <li>I consent to the processing of my personal data for event registration purposes</li>
                                         <li>False information may result in registration rejection or event exclusion</li>
-                                        <li>I understand that event details may be subject to change</li>
-                                    </ul>
+                                        <li>I understand that event details may be subject to change</li> -->
+                                    </ul> 
                                 </div>
                             </div>
                         </div>
@@ -1533,7 +1490,7 @@
                 <!-- Hidden field for scholarship type - will be set dynamically -->
                 <input type="hidden" name="scholarship_type" id="welcome_scholarship_type_hidden" value="community_based">
                 <div>
-                    <label for="welcome_transcript" class="block text-xs font-medium mb-1 text-gray-700">Upload Transcript (PDF, JPG, PNG - Max 5MB)</label>
+                    <label for="welcome_transcript" class="block text-xs font-medium mb-1 text-gray-700">Upload Sketch From your House to Hauz Hayag (JPG, PNG - Max 5MB)</label>
                     <input type="file" id="welcome_transcript" name="transcript" class="w-full text-xs text-gray-500 file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-medium file:bg-primary/10 file:text-primary hover:file:bg-primary/20" required accept=".pdf,.jpg,.jpeg,.png">
                 </div>
 
@@ -1541,7 +1498,7 @@
                 <div class="flex items-start space-x-2">
                     <input type="checkbox" id="welcome_terms" name="terms" class="mt-1 h-3 w-3 text-primary focus:ring-primary border-gray-300 rounded" required>
                     <label for="welcome_terms" class="text-xs text-gray-600 leading-relaxed">
-                        I agree to the <button type="button" onclick="openTermsModal()" class="text-primary hover:underline font-medium">Terms and Conditions</button> and <button type="button" onclick="openPrivacyModal()" class="text-primary hover:underline font-medium">Privacy Policy</button>. I understand that my personal information will be used for scholarship application processing and communication purposes only.
+                       By checking this box, I agree to the <a href="{{ route('terms.scholarship') }}" target="_blank" class="text-primary hover:underline font-medium">Terms and Conditions</a> and <a href="{{ route('privacy.policy') }}" target="_blank" class="text-primary hover:underline font-medium">Privacy Policy</a>.
                     </label>
                 </div>
 
@@ -1785,131 +1742,9 @@
         </div>
     </div>
 
-    <!-- Terms and Conditions Modal -->
-    <div id="termsModal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex justify-center items-center z-50 hidden">
-        <div class="bg-white p-6 rounded-xl shadow-2xl w-full max-w-2xl mx-4 relative transform transition-all duration-300 scale-95 modal-content max-h-[80vh] overflow-y-auto">
-            <!-- Close Button -->
-            <button onclick="closeTermsModal()" class="absolute top-3 right-3 w-6 h-6 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:text-gray-700 transition-all duration-200">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                </svg>
-            </button>
 
-            <!-- Header -->
-            <div class="text-center mb-6">
-                <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                    </svg>
-                </div>
-                <h2 class="text-xl font-semibold text-gray-800 mb-1">Terms and Conditions</h2>
-                <p class="text-sm text-gray-600">Scholarship Application Agreement</p>
-            </div>
 
-            <!-- Content -->
-            <div class="space-y-4 text-sm text-gray-700 leading-relaxed">
-                <div>
-                    <h3 class="font-semibold text-gray-800 mb-2">1. Application Process</h3>
-                    <p>By submitting this scholarship application, you agree to provide accurate and complete information. Any false or misleading information may result in disqualification from the scholarship program.</p>
-                </div>
 
-                <div>
-                    <h3 class="font-semibold text-gray-800 mb-2">2. Eligibility Requirements</h3>
-                    <p>Applicants must meet all specified eligibility criteria for the scholarship program. The organization reserves the right to verify all information provided in the application.</p>
-                </div>
-
-                <div>
-                    <h3 class="font-semibold text-gray-800 mb-2">3. Selection Process</h3>
-                    <p>Scholarship recipients will be selected based on merit, need, and other criteria as determined by the scholarship committee. The decision of the selection committee is final.</p>
-                </div>
-
-                <div>
-                    <h3 class="font-semibold text-gray-800 mb-2">4. Use of Information</h3>
-                    <p>Information provided in this application will be used solely for scholarship evaluation and administration purposes. Personal information will be kept confidential and secure.</p>
-                </div>
-
-                <div>
-                    <h3 class="font-semibold text-gray-800 mb-2">5. Obligations of Recipients</h3>
-                    <p>Scholarship recipients may be required to maintain certain academic standards, participate in program activities, or fulfill other obligations as specified in the scholarship agreement.</p>
-                </div>
-
-                <div>
-                    <h3 class="font-semibold text-gray-800 mb-2">6. Modification of Terms</h3>
-                    <p>The organization reserves the right to modify these terms and conditions at any time. Applicants will be notified of any significant changes.</p>
-                </div>
-            </div>
-
-            <!-- Footer -->
-            <div class="flex justify-end mt-6 pt-4 border-t border-gray-200">
-                <button onclick="closeTermsModal()" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-400 transition-colors duration-200 text-sm font-medium">
-                    I Understand
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Privacy Policy Modal -->
-    <div id="privacyModal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex justify-center items-center z-50 hidden">
-        <div class="bg-white p-6 rounded-xl shadow-2xl w-full max-w-2xl mx-4 relative transform transition-all duration-300 scale-95 modal-content max-h-[80vh] overflow-y-auto">
-            <!-- Close Button -->
-            <button onclick="closePrivacyModal()" class="absolute top-3 right-3 w-6 h-6 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:text-gray-700 transition-all duration-200">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                </svg>
-            </button>
-
-            <!-- Header -->
-            <div class="text-center mb-6">
-                <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-                    </svg>
-                </div>
-                <h2 class="text-xl font-semibold text-gray-800 mb-1">Privacy Policy</h2>
-                <p class="text-sm text-gray-600">How we protect your information</p>
-            </div>
-
-            <!-- Content -->
-            <div class="space-y-4 text-sm text-gray-700 leading-relaxed">
-                <div>
-                    <h3 class="font-semibold text-gray-800 mb-2">Information We Collect</h3>
-                    <p>We collect personal information that you provide when applying for scholarships, including your name, email address, phone number, academic records, and other relevant documentation.</p>
-                </div>
-
-                <div>
-                    <h3 class="font-semibold text-gray-800 mb-2">How We Use Your Information</h3>
-                    <p>Your information is used exclusively for scholarship application processing, evaluation, communication regarding your application status, and program administration.</p>
-                </div>
-
-                <div>
-                    <h3 class="font-semibold text-gray-800 mb-2">Information Security</h3>
-                    <p>We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.</p>
-                </div>
-
-                <div>
-                    <h3 class="font-semibold text-gray-800 mb-2">Information Sharing</h3>
-                    <p>We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as necessary for scholarship program administration.</p>
-                </div>
-
-                <div>
-                    <h3 class="font-semibold text-gray-800 mb-2">Data Retention</h3>
-                    <p>We retain your information for as long as necessary to fulfill the purposes for which it was collected and to comply with legal requirements.</p>
-                </div>
-
-                <div>
-                    <h3 class="font-semibold text-gray-800 mb-2">Your Rights</h3>
-                    <p>You have the right to access, update, or request deletion of your personal information. Contact us if you wish to exercise these rights.</p>
-                </div>
-            </div>
-
-            <!-- Footer -->
-            <div class="flex justify-end mt-6 pt-4 border-t border-gray-200">
-                <button onclick="closePrivacyModal()" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-400 transition-colors duration-200 text-sm font-medium">
-                    I Understand
-                </button>
-            </div>
-        </div>
-    </div>
 
     <script>
         // Mobile menu toggle
@@ -1951,7 +1786,7 @@
             // Update modal title based on scholarship type
             const modalTitle = document.querySelector('#scholarshipApplicationModal h2');
             if (scholarshipType === 'in_house') {
-                modalTitle.textContent = 'In-House Scholarship Application';
+                modalTitle.textContent = 'Residential Scholarship Application';
             } else {
                 modalTitle.textContent = 'Community-Based Scholarship Application';
             }
@@ -2072,21 +1907,7 @@
             document.getElementById('eventRegistrationModal').classList.add('hidden');
         }
 
-        function openTermsModal() {
-            document.getElementById('termsModal').classList.remove('hidden');
-        }
 
-        function closeTermsModal() {
-            document.getElementById('termsModal').classList.add('hidden');
-        }
-
-        function openPrivacyModal() {
-            document.getElementById('privacyModal').classList.remove('hidden');
-        }
-
-        function closePrivacyModal() {
-            document.getElementById('privacyModal').classList.add('hidden');
-        }
 
         // Close modals when clicking outside
         document.addEventListener('click', function(event) {
@@ -2095,8 +1916,6 @@
             const scholarshipModal = document.getElementById('scholarshipApplicationModal');
             const jobDetailsModal = document.getElementById('jobDetailsModal');
             const eventModal = document.getElementById('eventRegistrationModal');
-            const termsModal = document.getElementById('termsModal');
-            const privacyModal = document.getElementById('privacyModal');
 
             if (event.target === loginModal) {
                 closeLoginModal();
@@ -2113,12 +1932,6 @@
             if (event.target === eventModal) {
                 closeEventModal();
             }
-            if (event.target === termsModal) {
-                closeTermsModal();
-            }
-            if (event.target === privacyModal) {
-                closePrivacyModal();
-            }
         });
 
         // Close modals when pressing Escape key
@@ -2129,8 +1942,6 @@
                 closeScholarshipModal();
                 closeJobDetailsModal();
                 closeEventModal();
-                closeTermsModal();
-                closePrivacyModal();
             }
         });
 
@@ -2321,15 +2132,19 @@
         // Auto-advance impact slides
         setInterval(nextImpactSlide, 5000);
 
-        // Hero Slider functionality
+        // Hero Slider functionality - Enhanced and Fixed
         let currentHeroSlide = 0;
-        const heroSlides = document.getElementById('heroSlides');
+        let heroSlides;
         const totalHeroSlides = 3;
+        let heroSliderInterval;
 
         function showHeroSlide(index) {
-            heroSlides.style.transform = `translateX(-${index * 100}%)`;
-            heroSlides.style.transition = 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
-            currentHeroSlide = index;
+            console.log('Showing hero slide:', index); // Debug log
+            if (heroSlides) {
+                heroSlides.style.transform = `translateX(-${index * 100}%)`;
+                heroSlides.style.transition = 'transform 0.5s ease-in-out';
+                currentHeroSlide = index;
+            }
         }
 
         function nextHeroSlide() {
@@ -2337,8 +2152,49 @@
             showHeroSlide(currentHeroSlide);
         }
 
-        // Auto-advance hero slides every 5 seconds
-        setInterval(nextHeroSlide, 5000);
+        // Initialize hero slider when DOM is ready
+        function initHeroSlider() {
+            console.log('Initializing hero slider...'); // Debug log
+            heroSlides = document.getElementById('heroSlides');
+            console.log('Hero slides element:', heroSlides); // Debug log
+
+            if (heroSlides) {
+                console.log('Hero slider found, starting...'); // Debug log
+                // Clear any existing interval
+                if (heroSliderInterval) {
+                    clearInterval(heroSliderInterval);
+                }
+
+                // Start the slider
+                showHeroSlide(0);
+
+                // Auto-advance every 2 seconds
+                heroSliderInterval = setInterval(nextHeroSlide, 2000);
+                console.log('Hero slider interval set for 2 seconds'); // Debug log
+            } else {
+                console.error('Hero slides element not found!'); // Debug log
+            }
+        }
+
+        // Initialize hero slider on page load - Multiple approaches for reliability
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM Content Loaded - initializing hero slider');
+            initHeroSlider();
+        });
+
+        // Backup initialization
+        window.addEventListener('load', function() {
+            console.log('Window loaded - backup hero slider initialization');
+            if (!heroSliderInterval) {
+                initHeroSlider();
+            }
+        });
+
+        // Immediate initialization if DOM is already ready
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            console.log('DOM already ready - immediate hero slider initialization');
+            setTimeout(initHeroSlider, 100);
+        }
 
         // Enhanced Event registration functions
         function openEventRegistrationModal(eventId) {
@@ -2674,12 +2530,7 @@
             currentImpactSlide = index;
         }
 
-        // Enhanced hero slider animations
-        function showHeroSlide(index) {
-            heroSlides.style.transform = `translateX(-${index * 100}%)`;
-            heroSlides.style.transition = 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
-            currentHeroSlide = index;
-        }
+
 
         async function handleLogin(event) {
             event.preventDefault();

@@ -69,7 +69,7 @@
         <p>We appreciate your interest in our scholarship program and will notify you of any updates to your application status.</p>
         
         <p>Best regards,<br>
-        The Scholarship Team</p>
+        <strong>Hauz Hayag Scholarship and Training Program Inc</strong></p>
         
         <div class="footer">
             <p>This is an automated message. Please do not reply to this email.</p>

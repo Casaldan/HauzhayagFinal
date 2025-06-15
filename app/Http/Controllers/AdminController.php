@@ -91,7 +91,23 @@ class AdminController extends Controller
 
     public function volunteerIndex()
     {
-        $volunteers = Volunteer::latest()->paginate(10);
+        $query = Volunteer::query();
+
+        // Filter by status if specified
+        if (request('status') && request('status') !== '') {
+            $query->where('status', request('status'));
+        }
+
+        // Search functionality
+        if (request('search') && request('search') !== '') {
+            $query->where(function($q) {
+                $search = request('search');
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%");
+            });
+        }
+
+        $volunteers = $query->latest()->paginate(10);
         $totalVolunteersCount = Volunteer::count();
         $activeVolunteersCount = Volunteer::where('status', 'Active')->count();
         $inactiveVolunteersCount = Volunteer::where('status', 'Inactive')->count();
@@ -138,17 +154,52 @@ class AdminController extends Controller
 
     public function approveVolunteer(Volunteer $volunteer)
     {
-        $volunteer->status = 'Approved';
+        $volunteer->status = 'Active'; // Use 'Active' to match the enum in migration
         $volunteer->save();
-        return back()->with('success', 'Volunteer application approved successfully.');
+
+        // Check if a user with this email already exists
+        $user = \App\Models\User::where('email', $volunteer->email)->first();
+
+        if ($user) {
+            // If user exists, update their role to 'volunteer' and ensure they're active
+            $user->role = 'volunteer';
+            $user->status = 'active';
+            $user->phone_number = $volunteer->phone; // Update phone number
+            $user->save();
+        } else {
+            // If user does not exist, create a new volunteer user (similar to student process)
+            $user = \App\Models\User::create([
+                'name' => $volunteer->name,
+                'email' => $volunteer->email,
+                'password' => bcrypt(\Illuminate\Support\Str::random(10)), // Generate random password like students
+                'role' => 'volunteer',
+                'status' => 'active',
+                'phone_number' => $volunteer->phone,
+                'email_verified_at' => now(),
+            ]);
+        }
+
+        // Log the user creation/update for debugging
+        \Log::info('User account created/updated from volunteer approval', [
+            'user_id' => $user->id,
+            'volunteer_id' => $volunteer->id,
+            'email' => $volunteer->email,
+            'role' => 'volunteer',
+            'status' => 'active',
+            'action' => $user->wasRecentlyCreated ? 'created' : 'updated'
+        ]);
+
+        return back()->with('success', 'Volunteer approved successfully and user account created. They can now be managed in User Management.');
     }
 
     public function rejectVolunteer(Volunteer $volunteer)
     {
-        $volunteer->status = 'Rejected';
+        $volunteer->status = 'Inactive'; // Use 'Inactive' instead of 'Rejected' to match enum
         $volunteer->save();
         return back()->with('success', 'Volunteer application rejected successfully.');
     }
+
+
 
     public function editVolunteer(Volunteer $volunteer)
     {

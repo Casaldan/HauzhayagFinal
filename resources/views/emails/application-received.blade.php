@@ -51,7 +51,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Hauz Hayag Scholarship</h1>
+            <h1>Hauz Hayag Scholarship and Training Program Inc</h1>
         </div>
         
         <p>Dear {{ $name }},</p>
@@ -69,7 +69,7 @@
         <p>We appreciate your interest in our scholarship program and will notify you of any updates to your application status.</p>
         
         <p>Best regards,<br>
-        The Hauz Hayag Scholarship Team</p>
+        Hauz Hayag Scholarship and Training Program Inc </p>
         
         <div class="footer">
             <p>This is an automated message. Please do not reply to this email.</p>

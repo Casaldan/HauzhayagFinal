@@ -256,7 +256,7 @@
                     </div>
                     <div class="flex-1">
                         <label for="volunteer_terms_agreement" class="block text-sm font-semibold text-gray-800 mb-2 cursor-pointer">
-                            I agree to the Terms and Conditions <span class="text-red-500">*</span>
+                            I agree to the <a href="{{ route('terms.volunteer') }}" target="_blank" class="text-green-600 hover:underline font-medium">Terms and Conditions</a> and <a href="{{ route('privacy.policy') }}" target="_blank" class="text-green-600 hover:underline font-medium">Privacy Policy</a> <span class="text-red-500">*</span>
                         </label>
                         <div class="text-xs text-gray-600 leading-relaxed">
                             <p class="mb-2">By checking this box, I acknowledge that:</p>

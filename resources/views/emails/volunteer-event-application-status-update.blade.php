@@ -132,7 +132,7 @@
                     <li>If you have any questions, please don't hesitate to contact us</li>
                 </ul>
                 
-                <p>A volunteer account has been created for you. You can now log in to access volunteer resources and updates.</p>
+                <p>A volunteer account will be created for you. You can now log in to access volunteer resources and updates.</p>
             </div>
         @elseif($application->status === 'rejected')
             <div style="background-color: white; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #EF4444;">
@@ -159,7 +159,7 @@
         
         <div class="footer">
             <p>Best regards,<br>
-            <strong>The Hauz Hayag Team</strong></p>
+            <strong>Hauz Hayag Scholarship and Training Program Inc</strong></p>
             
             <p><em>This is an automated message. Please keep this email and your tracking code for your records.</em></p>
         </div>

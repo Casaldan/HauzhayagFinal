@@ -161,7 +161,7 @@
                     
                     <p><strong>Next Steps:</strong></p>
                     <ul>
-                        <li>A student account has been created for you with access to our student portal</li>
+                        <li>A student account will be created for you with access to our student portal</li>
                         <li>You will receive additional information about scholarship benefits and requirements</li>
                         <li>Please keep this email and your tracking code for your records</li>
                         <li>If you have any questions, please don't hesitate to contact us</li>
@@ -181,7 +181,7 @@
                         <li>Explore other financial aid options available to you</li>
                     </ul>
                     
-                    <p>Thank you for your understanding and continued interest in the Hauz Hayag Foundation.</p>
+                    <p>Thank you for your understanding and continued interest in the Hauz Hayag Scholarship and Training Program Inc</p>
                 </div>
             @endif
             
@@ -196,7 +196,7 @@
             
             <div class="footer">
                 <p>Best regards,<br>
-                <strong>The Hauz Hayag Foundation Team</strong></p>
+                <strong>Hauz Hayag Scholarship and Training Program Inc</strong></p>
                 
                 <p><em>This is an automated message. Please keep this email and your tracking code for your records.</em></p>
             </div>

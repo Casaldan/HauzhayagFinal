@@ -96,7 +96,7 @@
 
         <div class="footer">
             <p>Best regards,<br>
-            <strong>The Hauz Hayag Team</strong></p>
+            <strong>Hauz Hayag Scholarship and Training Program Inc</strong></p>
 
             <p><em>Please keep this email and your tracking code for your records.</em></p>
         </div>

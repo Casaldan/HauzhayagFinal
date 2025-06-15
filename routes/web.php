@@ -40,10 +40,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('jobs/{job}/approve', [\App\Http\Controllers\Admin\JobListingController::class, 'approve'])->name('jobs.approve');
     Route::post('jobs/{job}/reject', [\App\Http\Controllers\Admin\JobListingController::class, 'reject'])->name('jobs.reject');
 
-    // Admin Volunteer Management Routes
-    Route::get('/admin/volunteers', [App\Http\Controllers\AdminController::class, 'volunteerIndex'])->name('admin.volunteers.index');
-    Route::post('/admin/volunteers/{volunteer}/approve', [App\Http\Controllers\AdminController::class, 'approveVolunteer'])->name('admin.volunteers.approve');
-    Route::post('/admin/volunteers/{volunteer}/reject', [App\Http\Controllers\AdminController::class, 'rejectVolunteer'])->name('admin.volunteers.reject');
+    // Admin Volunteer Management Routes (moved to admin prefix group below)
 
 
 
@@ -170,6 +167,8 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     // Admin Volunteer Management
     Route::get('/volunteers', [App\Http\Controllers\AdminController::class, 'volunteerIndex'])->name('admin.volunteers.index');
+    Route::post('/volunteers/{volunteer}/approve', [App\Http\Controllers\AdminController::class, 'approveVolunteer'])->name('admin.volunteers.approve');
+    Route::post('/volunteers/{volunteer}/reject', [App\Http\Controllers\AdminController::class, 'rejectVolunteer'])->name('admin.volunteers.reject');
     Route::get('/volunteers/{volunteer}/edit', [App\Http\Controllers\AdminController::class, 'editVolunteer'])->name('admin.volunteers.edit');
     Route::put('/volunteers/{volunteer}', [App\Http\Controllers\AdminController::class, 'updateVolunteer'])->name('admin.volunteers.update');
     Route::delete('/volunteers/{volunteer}', [App\Http\Controllers\AdminController::class, 'destroyVolunteer'])->name('admin.volunteers.destroy');
@@ -192,6 +191,19 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 });
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+
+// Legal document pages
+Route::get('/terms-scholarship', function () {
+    return view('legal.terms-scholarship');
+})->name('terms.scholarship');
+
+Route::get('/terms-volunteer', function () {
+    return view('legal.terms-volunteer');
+})->name('terms.volunteer');
+
+Route::get('/privacy-policy', function () {
+    return view('legal.privacy-policy');
+})->name('privacy.policy');
 
 
 
@@ -236,3 +248,47 @@ Route::get('/volunteer/application/{tracking_code}', [App\Http\Controllers\Volun
 
 // Public volunteer event registration route (for homepage)
 Route::post('/volunteer/event-registration', [App\Http\Controllers\VolunteerEventApplicationController::class, 'store'])->name('volunteer.event-registration');
+
+// Email test routes (for development only - remove in production)
+Route::get('/test-email', function () {
+    try {
+        $testApplication = new \App\Models\ScholarshipApplication([
+            'full_name' => 'Test Student',
+            'email' => 'test@example.com',
+            'tracking_code' => 'TEST123456',
+            'status' => 'pending'
+        ]);
+
+        \Illuminate\Support\Facades\Mail::to('hauzhayag15@gmail.com')->send(new \App\Mail\TrackingCodeMail($testApplication));
+
+        return 'Scholarship email sent successfully! Check hauzhayag15@gmail.com';
+    } catch (\Exception $e) {
+        return 'Email failed: ' . $e->getMessage();
+    }
+});
+
+Route::get('/test-volunteer-email', function () {
+    try {
+        $event = \App\Models\Event::first();
+        if (!$event) {
+            return 'No events found. Please create an event first.';
+        }
+
+        $testApplication = new \App\Models\VolunteerEventApplication([
+            'full_name' => 'Test Volunteer',
+            'email' => 'test@example.com',
+            'tracking_code' => 'VOL123456',
+            'status' => 'pending',
+            'event_id' => $event->id
+        ]);
+        $testApplication->event = $event;
+
+        \Illuminate\Support\Facades\Mail::to('hauzhayag15@gmail.com')->send(new \App\Mail\VolunteerEventApplicationConfirmation($testApplication));
+
+        return 'Volunteer event email sent successfully! Check hauzhayag15@gmail.com';
+    } catch (\Exception $e) {
+        return 'Email failed: ' . $e->getMessage();
+    }
+});
+
+

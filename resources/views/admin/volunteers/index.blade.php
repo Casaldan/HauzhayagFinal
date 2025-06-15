@@ -229,9 +229,9 @@
                     <div class="relative">
                         <select name="status" class="appearance-none pl-4 pr-10 py-3 border border-gray-200 bg-white rounded-xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm volunteer-filter-dropdown shadow-sm transition-all duration-300 min-w-[140px]">
                             <option value="">All Statuses</option>
-                            <option value="active" {{ request('status') == 'active' ? 'selected' : '' }}>Active</option>
-                            <option value="inactive" {{ request('status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
-                            <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+                            <option value="Active" {{ request('status') == 'Active' ? 'selected' : '' }}>Active</option>
+                            <option value="Inactive" {{ request('status') == 'Inactive' ? 'selected' : '' }}>Inactive</option>
+                            <option value="Pending" {{ request('status') == 'Pending' ? 'selected' : '' }}>Pending</option>
                         </select>
                         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-400">
                             <svg class="fill-current h-4 w-4" viewBox="0 0 20 20">
@@ -289,15 +289,15 @@
                                     </td>
                                     <td class="px-6 py-6">
                                         <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border
-                                            @if($volunteer->status == 'active') bg-green-100 text-green-800 border-green-200
-                                            @elseif($volunteer->status == 'inactive') bg-red-100 text-red-800 border-red-200
+                                            @if($volunteer->status == 'Active') bg-green-100 text-green-800 border-green-200
+                                            @elseif($volunteer->status == 'Inactive') bg-red-100 text-red-800 border-red-200
                                             @else bg-yellow-100 text-yellow-800 border-yellow-200
                                             @endif">
-                                            @if($volunteer->status == 'active')
+                                            @if($volunteer->status == 'Active')
                                                 <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                                                 </svg>
-                                            @elseif($volunteer->status == 'inactive')
+                                            @elseif($volunteer->status == 'Inactive')
                                                 <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
                                                 </svg>
@@ -306,7 +306,7 @@
                                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
                                                 </svg>
                                             @endif
-                                            {{ ucfirst($volunteer->status) }}
+                                            {{ $volunteer->status }}
                                         </span>
                                     </td>
                                     <td class="px-6 py-6 text-sm text-gray-600">
@@ -323,7 +323,7 @@
                                     </td>
                                     <td class="px-6 py-6">
                                         <div class="flex items-center space-x-2">
-                                            @if($volunteer->status == 'pending')
+                                            @if($volunteer->status == 'Pending')
                                                 <form action="{{ route('admin.volunteers.approve', $volunteer) }}" method="POST" class="inline-block">
                                                     @csrf
                                                     <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-xl transition-all duration-300 font-medium shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2">
