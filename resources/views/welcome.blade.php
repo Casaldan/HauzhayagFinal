@@ -476,14 +476,25 @@
                             </div>
                         </div>
 
-                        <!-- Enhanced button -->
-                        <button class="group/btn relative overflow-hidden bg-gradient-to-r from-primary to-blue-600 text-white py-4 px-8 rounded-xl hover:from-blue-600 hover:to-primary shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-in-out font-semibold text-lg" onclick="openScholarshipModal('community_based')">
-                            <span class="relative z-10 flex items-center justify-center gap-3">
-                                <svg class="w-5 h-5 group-hover/btn:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"></path></svg>
-                                Apply Now
-                            </span>
-                            <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-primary opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                        </button>
+                        <!-- Buttons container -->
+                        <div class="space-y-3">
+                            <!-- Apply Now button -->
+                            <button class="group/btn relative overflow-hidden bg-gradient-to-r from-primary to-blue-600 text-white py-4 px-8 rounded-xl hover:from-blue-600 hover:to-primary shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-in-out font-semibold text-lg w-full" onclick="openScholarshipModal('community_based')">
+                                <span class="relative z-10 flex items-center justify-center gap-3">
+                                    <svg class="w-5 h-5 group-hover/btn:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"></path></svg>
+                                    Apply Now
+                                </span>
+                                <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-primary opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                            </button>
+
+                            <!-- Eligibility button -->
+                            <button class="group/btn relative overflow-hidden bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 py-3 px-6 rounded-xl hover:from-gray-200 hover:to-gray-300 shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out font-medium text-base w-full border border-gray-300" onclick="openEligibilityModal('community_based')">
+                                <span class="relative z-10 flex items-center justify-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    Check Eligibility
+                                </span>
+                            </button>
+                        </div>
                     </div>
 
                     <!-- Scholarship 2 - Enhanced Design -->
@@ -516,14 +527,25 @@
                             </div>
                         </div>
 
-                        <!-- Enhanced button -->
-                        <button class="group/btn relative overflow-hidden bg-gradient-to-r from-pink-500 to-purple-600 text-white py-4 px-8 rounded-xl hover:from-purple-600 hover:to-pink-500 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-in-out font-semibold text-lg" onclick="openScholarshipModal('in_house')">
-                            <span class="relative z-10 flex items-center justify-center gap-3">
-                                <svg class="w-5 h-5 group-hover/btn:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"></path></svg>
-                                Apply Now
-                            </span>
-                            <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-500 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                        </button>
+                        <!-- Buttons container -->
+                        <div class="space-y-3">
+                            <!-- Apply Now button -->
+                            <button class="group/btn relative overflow-hidden bg-gradient-to-r from-pink-500 to-purple-600 text-white py-4 px-8 rounded-xl hover:from-purple-600 hover:to-pink-500 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-in-out font-semibold text-lg w-full" onclick="openScholarshipModal('in_house')">
+                                <span class="relative z-10 flex items-center justify-center gap-3">
+                                    <svg class="w-5 h-5 group-hover/btn:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"></path></svg>
+                                    Apply Now
+                                </span>
+                                <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-500 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                            </button>
+
+                            <!-- Eligibility button -->
+                            <button class="group/btn relative overflow-hidden bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 py-3 px-6 rounded-xl hover:from-gray-200 hover:to-gray-300 shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out font-medium text-base w-full border border-gray-300" onclick="openEligibilityModal('in_house')">
+                                <span class="relative z-10 flex items-center justify-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    Check Eligibility
+                                </span>
+                            </button>
+                        </div>
                     </div>
 
                     <!-- Scholarship 3 - Enhanced Design -->
@@ -810,12 +832,12 @@
                                 </div>
                             </div>
                             <div class="w-full md:w-1/2 flex flex-col justify-center mt-4 md:mt-0">
-                                <p class="text-lg md:text-2xl text-gray-700 font-medium leading-relaxed">Growing up in a low-income family with eight siblings was 
-                                    extremely difficult, as we struggled to meet even our basic needs. 
-                                    Sacrifices were part of our daily life, and the future often felt uncertain. 
-                                    Being accepted into the Hauz Hayag Scholarship and Training Program 
-                                    was a life-changing blessing that opened doors to new opportunities. 
-                                    Now, as a researcher and graduate student, I work hard to uplift my 
+                                <p class="text-lg md:text-2xl text-gray-700 font-medium leading-relaxed">Growing up in a low-income family with eight siblings was
+                                    extremely difficult, as we struggled to meet even our basic needs.
+                                    Sacrifices were part of our daily life, and the future often felt uncertain.
+                                    Being accepted into the Hauz Hayag Scholarship and Training Program
+                                    was a life-changing blessing that opened doors to new opportunities.
+                                    Now, as a researcher and graduate student, I work hard to uplift my
                                     family and contribute positively to society.</p>
                             </div>
                         </div>
@@ -840,13 +862,13 @@
                                 </div>
                             </div>
                             <div class="w-full md:w-1/2 flex flex-col justify-center mt-4 md:mt-0">
-                                <p class="text-lg md:text-2xl text-gray-700 font-medium leading-relaxed">I'm inspired to work at Hayag because I've seen 
-                                    how it brings real change to people's 
-                                    lives through scholarships and feeding programs. 
-                                    Over the past nine years, I've witnessed many families, 
-                                    including my own, receive the support they need my daughter 
-                                    even got to go to college. The benefits and financial help make 
-                                    working here even more meaningful. It's more than just a job and it's a 
+                                <p class="text-lg md:text-2xl text-gray-700 font-medium leading-relaxed">I'm inspired to work at Hayag because I've seen
+                                    how it brings real change to people's
+                                    lives through scholarships and feeding programs.
+                                    Over the past nine years, I've witnessed many families,
+                                    including my own, receive the support they need my daughter
+                                    even got to go to college. The benefits and financial help make
+                                    working here even more meaningful. It's more than just a job and it's a
                                     place where I've grown and found purpose by helping others.</p>
                             </div>
                         </div>
@@ -873,11 +895,11 @@
                                 </div>
                             </div>
                             <div class="w-full md:w-1/2 flex flex-col justify-center mt-4 md:mt-0">
-                                <p class="text-lg md:text-2xl text-gray-700 font-medium leading-relaxed">As a child from a less privileged background, 
-                                    I often felt trapped by poverty and unsure of my purpose. But Hauz Hayag 
-                                    became the light that helped me escape hopelessness and believe in myself again. 
-                                    Through their support, I started to rebuild my dreams and see my worth. 
-                                    I'm grateful for the kind souls behind Hayag who helped me thrive, 
+                                <p class="text-lg md:text-2xl text-gray-700 font-medium leading-relaxed">As a child from a less privileged background,
+                                    I often felt trapped by poverty and unsure of my purpose. But Hauz Hayag
+                                    became the light that helped me escape hopelessness and believe in myself again.
+                                    Through their support, I started to rebuild my dreams and see my worth.
+                                    I'm grateful for the kind souls behind Hayag who helped me thrive,
                                     and I know the younger me would be proud of how far I've come.</p>
                             </div>
                         </div>
@@ -1423,7 +1445,7 @@
                                         <li>I consent to the processing of my personal data for event registration purposes</li>
                                         <li>False information may result in registration rejection or event exclusion</li>
                                         <li>I understand that event details may be subject to change</li> -->
-                                    </ul> 
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -1490,7 +1512,7 @@
                 <!-- Hidden field for scholarship type - will be set dynamically -->
                 <input type="hidden" name="scholarship_type" id="welcome_scholarship_type_hidden" value="community_based">
                 <div>
-                    <label for="welcome_transcript" class="block text-xs font-medium mb-1 text-gray-700">Upload Sketch From your House to Hauz Hayag (JPG, PNG - Max 5MB)</label>
+                    <label for="welcome_transcript" class="block text-xs font-medium mb-1 text-gray-700">Upload your Latest Grade Slip (JPG, PNG - Max 5MB)</label>
                     <input type="file" id="welcome_transcript" name="transcript" class="w-full text-xs text-gray-500 file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-medium file:bg-primary/10 file:text-primary hover:file:bg-primary/20" required accept=".pdf,.jpg,.jpeg,.png">
                 </div>
 
@@ -1746,6 +1768,43 @@
 
 
 
+    <!-- Eligibility Modal -->
+    <div id="eligibilityModal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex justify-center items-center z-50 hidden p-4">
+        <div class="bg-white p-4 lg:p-6 rounded-xl shadow-2xl w-full max-w-2xl mx-auto relative transform transition-all duration-300 scale-95 modal-content max-h-[90vh] overflow-y-auto">
+            <!-- Close Button -->
+            <button onclick="closeEligibilityModal()" class="absolute top-3 right-3 w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:text-gray-700 transition-all duration-200">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Scholarship Eligibility</h2>
+                <p class="text-gray-600">Review the requirements and benefits for this scholarship program</p>
+            </div>
+
+            <!-- Modal Content -->
+            <div id="eligibilityContent" class="mb-6">
+                <!-- Content will be dynamically populated by JavaScript -->
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-200">
+                <button onclick="closeEligibilityModal()" class="flex-1 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-200 font-medium">
+                    Close
+                </button>
+                <button onclick="closeEligibilityModal(); openScholarshipModal(document.querySelector('#eligibilityModal h2').textContent.includes('Residential') ? 'in_house' : 'community_based');" class="flex-1 px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-200 font-medium">
+                    Apply Now
+                </button>
+            </div>
+        </div>
+    </div>
     <script>
         // Mobile menu toggle
         const mobileMenuButton = document.getElementById('mobileMenuButton');
@@ -1796,6 +1855,85 @@
 
         function closeScholarshipModal() {
             document.getElementById('scholarshipApplicationModal').classList.add('hidden');
+        }
+
+        function openEligibilityModal(scholarshipType = 'community_based') {
+            // Update modal content based on scholarship type
+            const modalTitle = document.querySelector('#eligibilityModal h2');
+            const modalContent = document.querySelector('#eligibilityContent');
+
+            if (scholarshipType === 'in_house') {
+                modalTitle.textContent = 'Residential Scholarship for Girls - Eligibility Requirements';
+                modalContent.innerHTML = `
+                    <div class="space-y-6">
+                        <div class="bg-pink-50 border border-pink-200 rounded-lg p-4">
+                            <h3 class="font-semibold text-pink-800 mb-2">Gender Requirement</h3>
+                            <p class="text-pink-700 text-sm">This scholarship is exclusively for female students only.</p>
+                        </div>
+
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                            <h3 class="font-semibold text-blue-800 mb-2">Education Level</h3>
+                            <p class="text-blue-700 text-sm">Must be pursuing college education or planning to enroll in college.</p>
+                        </div>
+
+                        <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                            <h3 class="font-semibold text-purple-800 mb-2">Geographic Eligibility</h3>
+                            <p class="text-purple-700 text-sm">Open to girls from Mindanao and Visayas regions.</p>
+                        </div>
+
+                        <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                            <h3 class="font-semibold text-green-800 mb-2">Program Benefits</h3>
+                            <ul class="text-green-700 text-sm space-y-1">
+                                <li>• Full tuition coverage</li>
+                                <li>• Housing at Hauz Hayag center</li>
+                                <li>• Leadership training programs</li>
+                                <li>• Career guidance and mentorship</li>
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            } else {
+                modalTitle.textContent = 'Community-Based Scholarship - Eligibility Requirements';
+                modalContent.innerHTML = `
+                    <div class="space-y-6">
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                            <h3 class="font-semibold text-blue-800 mb-2">Gender & Location</h3>
+                            <p class="text-blue-700 text-sm">Open to all genders and all areas in Cebu.</p>
+                        </div>
+
+                        <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                            <h3 class="font-semibold text-green-800 mb-2">Living Arrangement</h3>
+                            <p class="text-green-700 text-sm">Students live with their families while receiving support for school materials, uniforms, and educational expenses.</p>
+                        </div>
+
+                        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                            <h3 class="font-semibold text-yellow-800 mb-2">Requirements</h3>
+                            <ul class="text-yellow-700 text-sm space-y-1">
+                                <li>• Regular attendance at organizational meetings</li>
+                                <li>• Participation in Saturday tutoring sessions</li>
+                                <li>• Commitment to community involvement</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+                            <h3 class="font-semibold text-indigo-800 mb-2">Support Provided</h3>
+                            <ul class="text-indigo-700 text-sm space-y-1">
+                                <li>• School materials and supplies</li>
+                                <li>• School uniforms</li>
+                                <li>• Educational expenses coverage</li>
+                                <li>• Saturday tutoring by HAYAG girls</li>
+                                <li>• Daily holiday tutoring sessions</li>
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            }
+
+            document.getElementById('eligibilityModal').classList.remove('hidden');
+        }
+
+        function closeEligibilityModal() {
+            document.getElementById('eligibilityModal').classList.add('hidden');
         }
 
         function openJobDetailsModal(jobId) {
@@ -1916,6 +2054,7 @@
             const scholarshipModal = document.getElementById('scholarshipApplicationModal');
             const jobDetailsModal = document.getElementById('jobDetailsModal');
             const eventModal = document.getElementById('eventRegistrationModal');
+            const eligibilityModal = document.getElementById('eligibilityModal');
 
             if (event.target === loginModal) {
                 closeLoginModal();
@@ -1932,6 +2071,9 @@
             if (event.target === eventModal) {
                 closeEventModal();
             }
+            if (event.target === eligibilityModal) {
+                closeEligibilityModal();
+            }
         });
 
         // Close modals when pressing Escape key
@@ -1942,6 +2084,7 @@
                 closeScholarshipModal();
                 closeJobDetailsModal();
                 closeEventModal();
+                closeEligibilityModal();
             }
         });
 
@@ -1955,13 +2098,13 @@
         function showSlide(index) {
             // Update slide position
             slidesContainer.style.transform = `translateX(-${index * 100}%)`;
-           
+
             // Update dots
             dots.forEach((dot, i) => {
                 dot.classList.toggle('bg-primary', i === index);
                 dot.classList.toggle('bg-gray-300', i !== index);
             });
-           
+
             currentSlide = index;
         }
 
@@ -2029,11 +2172,11 @@
         function handleTrackingSubmit(event) {
             event.preventDefault();
             const trackingCode = document.querySelector('input[name="tracking_code"]').value;
-            
+
             // Show a demo tracking result
             const trackingResult = document.getElementById('trackingResult');
             const statusMessage = document.getElementById('statusMessage');
-            
+
             trackingResult.classList.remove('hidden');
             statusMessage.textContent = 'Demo Status: Application is under review';
             trackingResult.className = 'mt-4 p-4 rounded-lg bg-yellow-50 text-yellow-700';
@@ -2071,9 +2214,9 @@
         // Registration form submission
         document.getElementById('registrationForm').addEventListener('submit', function(e) {
             e.preventDefault();
-           
+
             const formData = new FormData(this);
-           
+
             fetch('/register', {
                 method: 'POST',
                 body: formData,
@@ -2514,12 +2657,12 @@
         function showSlide(index) {
             slidesContainer.style.transform = `translateX(-${index * 100}%)`;
             slidesContainer.style.transition = 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
-           
+
             dots.forEach((dot, i) => {
                 dot.classList.toggle('bg-primary', i === index);
                 dot.classList.toggle('bg-gray-300', i !== index);
             });
-           
+
             currentSlide = index;
         }
 

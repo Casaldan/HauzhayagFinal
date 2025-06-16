@@ -105,7 +105,7 @@
                     <ul class="list-disc list-inside space-y-2 ml-4">
                         <li><strong>Scholarship Applications:</strong> 10 years for successful applicants.</li>
                         <li><strong>Volunteer Records:</strong> Duration of volunteer service. </li>
-                        <li><strong>Communication Records:</strong> The account being made will always be functional, and the the medium of coomunication.</li>
+                        <li><strong>Communication Records:</strong> The account being made will always be functional, and serves as medium of communication.</li>
                     </ul>
                 </div>
 

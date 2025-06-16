@@ -4,7 +4,7 @@
 <style>
     /* Professional Dashboard Styles */
     .dashboard-gradient {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: #007cba;
     }
 
     .glass-card {
@@ -67,10 +67,7 @@
     }
 
     .gradient-text {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: #007cba;
     }
 
     .hover-lift {
@@ -136,7 +133,7 @@
             <!-- Total Users Card -->
             <div class="stat-card glass-card p-6 rounded-2xl fade-in fade-in-delay-1">
                 <div class="flex items-center justify-between mb-4">
-                    <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
                         </svg>
@@ -158,7 +155,7 @@
             <!-- Pending Applicants Card -->
             <div class="stat-card glass-card p-6 rounded-2xl fade-in fade-in-delay-2">
                 <div class="flex items-center justify-between mb-4">
-                    <div class="w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-500 rounded-xl flex items-center justify-center shadow-lg">
+                    <div class="w-12 h-12 bg-amber-500 rounded-xl flex items-center justify-center shadow-lg">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
@@ -180,7 +177,7 @@
             <!-- Active Students Card -->
             <div class="stat-card glass-card p-6 rounded-2xl fade-in fade-in-delay-3">
                 <div class="flex items-center justify-between mb-4">
-                    <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-green-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <div class="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center shadow-lg">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
@@ -202,7 +199,7 @@
             <!-- Active Events Card -->
             <div class="stat-card glass-card p-6 rounded-2xl fade-in fade-in-delay-4">
                 <div class="flex items-center justify-between mb-4">
-                    <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <div class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center shadow-lg">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                         </svg>
@@ -225,7 +222,7 @@
         <!-- Quick Actions Section -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
             <a href="/events" class="hover-lift glass-card p-4 rounded-xl text-center group">
-                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg mx-auto mb-3 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div class="w-10 h-10 bg-blue-600 rounded-lg mx-auto mb-3 flex items-center justify-center group-hover:scale-110 transition-transform">
                     <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                     </svg>
@@ -234,7 +231,7 @@
             </a>
 
             <a href="/users" class="hover-lift glass-card p-4 rounded-xl text-center group">
-                <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-lg mx-auto mb-3 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div class="w-10 h-10 bg-green-600 rounded-lg mx-auto mb-3 flex items-center justify-center group-hover:scale-110 transition-transform">
                     <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
                     </svg>
@@ -243,7 +240,7 @@
             </a>
 
             <a href="/students" class="hover-lift glass-card p-4 rounded-xl text-center group">
-                <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg mx-auto mb-3 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div class="w-10 h-10 bg-purple-600 rounded-lg mx-auto mb-3 flex items-center justify-center group-hover:scale-110 transition-transform">
                     <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                     </svg>
@@ -252,7 +249,7 @@
             </a>
 
             <a href="{{ route('admin.volunteers.index') }}" class="hover-lift glass-card p-4 rounded-xl text-center group">
-                <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg mx-auto mb-3 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div class="w-10 h-10 bg-orange-600 rounded-lg mx-auto mb-3 flex items-center justify-center group-hover:scale-110 transition-transform">
                     <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 515.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                     </svg>
@@ -261,7 +258,7 @@
             </a>
 
             <a href="{{ route('admin.jobs.index') }}" class="hover-lift glass-card p-4 rounded-xl text-center group">
-                <div class="w-10 h-10 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-lg mx-auto mb-3 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div class="w-10 h-10 bg-teal-600 rounded-lg mx-auto mb-3 flex items-center justify-center group-hover:scale-110 transition-transform">
                     <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2M8 6v10a2 2 0 002 2h4a2 2 0 002-2V6"/>
                     </svg>
@@ -276,7 +273,7 @@
             <div class="lg:col-span-2 glass-card rounded-2xl p-8 fade-in" style="animation-delay: 0.5s;">
                 <div class="flex justify-between items-center mb-8">
                     <div class="flex items-center space-x-4">
-                        <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
+                        <div class="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
                             <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                             </svg>
@@ -286,7 +283,7 @@
                             <p class="text-gray-600">Latest event activities</p>
                         </div>
                     </div>
-                    <a href="{{ route('events.index') }}" class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105 hover-lift">
+                    <a href="{{ route('events.index') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105 hover-lift">
                         <span class="flex items-center space-x-2">
                             <span>View All</span>
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -302,7 +299,7 @@
                         <div class="flex items-start justify-between">
                             <div class="flex-1">
                                 <div class="flex items-center space-x-3 mb-3">
-                                    <div class="w-4 h-4 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full pulse-dot"></div>
+                                    <div class="w-4 h-4 bg-blue-600 rounded-full pulse-dot"></div>
                                     <h4 class="font-bold text-gray-900 text-lg">{{ $event->title }}</h4>
                                 </div>
                                 <div class="flex items-center space-x-6 text-sm text-gray-600 mb-4">
@@ -325,7 +322,7 @@
                                 </div>
                             </div>
                             <div class="flex flex-col items-end space-y-2">
-                                <span class="inline-flex items-center px-4 py-2 rounded-xl text-sm font-bold shadow-sm {{ $event->status === 'completed' ? 'bg-gradient-to-r from-green-100 to-emerald-100 text-green-800' : ($event->status === 'active' ? 'bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800' : 'bg-gradient-to-r from-yellow-100 to-amber-100 text-yellow-800') }}">
+                                <span class="inline-flex items-center px-4 py-2 rounded-xl text-sm font-bold shadow-sm {{ $event->status === 'completed' ? 'bg-green-100 text-green-800' : ($event->status === 'active' ? 'bg-blue-100 text-blue-800' : 'bg-yellow-100 text-yellow-800') }}">
                                     {{ ucfirst($event->status) }}
                                 </span>
                             </div>
@@ -333,14 +330,14 @@
                     </div>
                     @empty
                     <div class="text-center py-16">
-                        <div class="w-20 h-20 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <div class="w-20 h-20 bg-gray-200 rounded-2xl flex items-center justify-center mx-auto mb-6">
                             <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                             </svg>
                         </div>
                         <h3 class="text-xl font-bold text-gray-500 mb-3">No Recent Events</h3>
                         <p class="text-gray-400 mb-6">Events will appear here once created</p>
-                        <a href="{{ route('events.index') }}" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105">
+                        <a href="{{ route('events.index') }}" class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
                             </svg>
@@ -354,7 +351,7 @@
             <!-- Enhanced Activity Feed -->
             <div class="glass-card rounded-2xl p-8 fade-in" style="animation-delay: 0.6s;">
                 <div class="flex items-center space-x-4 mb-8">
-                    <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <div class="w-14 h-14 bg-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                         </svg>
@@ -373,8 +370,8 @@
                     @endphp
 
                     @forelse($recentUsers as $user)
-                    <div class="flex items-start space-x-4 p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl border border-green-100 hover-lift">
-                        <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                    <div class="flex items-start space-x-4 p-4 bg-green-50 rounded-2xl border border-green-100 hover-lift">
+                        <div class="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                             </svg>
@@ -395,8 +392,8 @@
                     @endforelse
 
                     @forelse($recentEvents as $event)
-                    <div class="flex items-start space-x-4 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl border border-blue-100 hover-lift">
-                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                    <div class="flex items-start space-x-4 p-4 bg-blue-50 rounded-2xl border border-blue-100 hover-lift">
+                        <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                             </svg>
@@ -417,7 +414,7 @@
 
                     @if($recentUsers->isEmpty() && $recentEvents->isEmpty())
                     <div class="text-center py-8">
-                        <div class="w-16 h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <div class="w-16 h-16 bg-gray-200 rounded-2xl flex items-center justify-center mx-auto mb-4">
                             <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                             </svg>
@@ -444,7 +441,7 @@
         <!-- Recent Registrations -->
         <div class="glass-card rounded-2xl p-8 fade-in mb-8" style="animation-delay: 0.7s;">
             <div class="flex items-center space-x-4 mb-6">
-                <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                <div class="w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
                     </svg>
@@ -461,8 +458,8 @@
                 @endphp
 
                 @forelse($latestUsers as $user)
-                <div class="flex items-center space-x-3 p-3 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl hover-lift">
-                    <div class="w-10 h-10 bg-gradient-to-br from-{{ $user->role === 'student' ? 'blue' : ($user->role === 'volunteer' ? 'purple' : 'green') }}-500 to-{{ $user->role === 'student' ? 'indigo' : ($user->role === 'volunteer' ? 'pink' : 'emerald') }}-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">
+                <div class="flex items-center space-x-3 p-3 bg-indigo-50 rounded-xl hover-lift">
+                    <div class="w-10 h-10 bg-{{ $user->role === 'student' ? 'blue' : ($user->role === 'volunteer' ? 'purple' : 'green') }}-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">
                         {{ strtoupper(substr($user->name, 0, 2)) }}
                     </div>
                     <div class="flex-1">
@@ -477,7 +474,7 @@
                 </div>
                 @empty
                 <div class="text-center py-8">
-                    <div class="w-16 h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <div class="w-16 h-16 bg-gray-200 rounded-2xl flex items-center justify-center mx-auto mb-4">
                         <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                         </svg>

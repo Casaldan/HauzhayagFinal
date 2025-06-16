@@ -50,178 +50,123 @@
             <!-- Organization Info -->
             <div class="mb-8 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
                 <h2 class="text-lg font-semibold text-blue-900 mb-2">Hauz Hayag Scholarship and Training Program Inc</h2>
-                <p class="text-sm text-blue-700">These terms and conditions govern your application for the Community Based Scholarship and the Residential Scholarship for Girls program.</p>
+                <p class="text-sm text-blue-700">These terms and conditions govern your use of the Hauz Hayag Volunteer & Scholarship Management System and your application for our scholarship programs.</p>
+                <div class="mt-4 text-xs text-blue-600">
+                    <p><strong>Effective Date:</strong> January 1, 2025</p>
+                    <p><strong>Last Updated:</strong> June 16, 2025</p>
+                </div>
             </div>
 
             <!-- Terms Content -->
             <div class="space-y-6 text-gray-700 leading-relaxed">
+                <div class="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                    <p class="text-sm text-yellow-800">
+                        <strong>Agreement Notice:</strong> By accessing or using our website or system, you agree to comply with these Terms. If you do not agree, please do not use the Platform.
+                    </p>
+                </div>
+
                 <div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-3">1. Application Process</h3>
-                    <p class="mb-3">By submitting this scholarship application, you acknowledge that:</p>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">1. Purpose of the System</h3>
+                    <p class="mb-3">The Hauz Hayag Volunteer & Scholarship Management System was created to:</p>
                     <ul class="list-disc list-inside space-y-2 ml-4">
-                        <li>All information provided is accurate, complete, and truthful</li>
-                        <li>Any false or misleading information may result in disqualification</li>
-                        <li>You meet the eligibility requirements for the scholarship either the Community Based Scholarship or the Residential Scholarship for Girls</li>
-                        <li>You understand this is a competitive selection process</li>
+                        <li>Facilitate fair and transparent <strong>scholarship application and monitoring</strong></li>
+                        <li>Enable <strong>volunteer participation and event tracking</strong></li>
+                        <li>Provide a curated list of <strong>job and career opportunities</strong></li>
+                        <li>Ensure secure and organized <strong>administrative oversight</strong></li>
+                    </ul>
+                    <p class="mt-3 text-sm text-gray-600">The system is managed solely by the authorized personnel of Hauz Hayag, who have the right to monitor, update, or restrict access based on the Terms set forth herein.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">2. Organizational Rights and Responsibilities</h3>
+
+                    <div class="mb-4">
+                        <h4 class="text-md font-semibold text-gray-700 mb-2">2.1 Data Management</h4>
+                        <ul class="list-disc list-inside space-y-2 ml-4 text-sm">
+                            <li>The organization <strong>collects, stores, and manages user-submitted data</strong> (e.g., application forms, images, resumes) solely for operational purposes.</li>
+                            <li>All information is kept confidential and is used only for scholarship processing, volunteer coordination, or job matching.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="text-md font-semibold text-gray-700 mb-2">2.2 Approval and Oversight</h4>
+                        <ul class="list-disc list-inside space-y-2 ml-4 text-sm">
+                            <li>Hauz Hayag reserves the <strong>exclusive right to approve or reject</strong> scholarship applications, volunteer sign-ups, and job postings.</li>
+                            <li>Admins can modify or remove any content or account that violates the Terms or poses a risk to the integrity of the platform.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="text-md font-semibold text-gray-700 mb-2">2.3 Service Availability</h4>
+                        <ul class="list-disc list-inside space-y-2 ml-4 text-sm">
+                            <li>We aim to keep the platform accessible 24/7, but we do not guarantee uninterrupted service. Scheduled maintenance or technical issues may result in downtime.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="text-md font-semibold text-gray-700 mb-2">2.4 Modifications</h4>
+                        <ul class="list-disc list-inside space-y-2 ml-4 text-sm">
+                            <li>We reserve the right to update or modify system features, event schedules, scholarship policies, or these Terms at any time. Users will be notified of significant changes.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">3. User Obligations and Behavior</h3>
+                    <p class="mb-3">By using the platform, you agree to:</p>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li>Provide <strong>accurate and truthful information</strong> when applying for scholarships or volunteering</li>
+                        <li><strong>Respect deadlines</strong> and required documentation</li>
+                        <li>Not upload offensive, harmful, or fraudulent content</li>
+                        <li>Not use the platform for unauthorized commercial purposes or illegal activities</li>
+                    </ul>
+                    <p class="mt-3 text-sm text-gray-600">Any violations may result in suspension or permanent removal from the system.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">4. Content Ownership and Permissions</h3>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li>Users retain ownership of uploaded materials (e.g., IDs, house photos)</li>
+                        <li>By submitting content, users grant Hauz Hayag a <strong>non-exclusive, royalty-free license</strong> to use it strictly for administrative processing</li>
+                        <li>The organization does <strong>not distribute user data to third parties</strong> without consent</li>
                     </ul>
                 </div>
 
                 <div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-3">2. Eligibility Requirements</h3>
-
-                    <!-- Community Based Scholarship Requirements -->
-                    <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-                        <h4 class="text-md font-semibold text-green-900 mb-3">Community Based Scholarship</h4>
-                        <p class="text-sm text-green-700 mb-3">To be eligible for the Community Based Scholarship, applicants must meet the following requirements:</p>
-                        <ul class="list-disc list-inside space-y-2 ml-4 text-sm text-green-800">
-                            <li><strong>Open to all genders</strong> - Everyone can apply for this scholarship regardless of any gender. Both male and female students are welcome.</li>
-                            <li><strong>Open to all areas around Cebu</strong> - This scholarship is available for students from all areas around Cebu</li>
-                            <li><strong>For those who want to pursue education</strong> - Open to students at any grade level who are committed to their educational journey</li>
-                            <li>Demonstrate genuine financial need - Students whose families are too poor to pay for their children's education</li>
-                            <li><strong>Live with their families in the community</strong> - Students remain in their home communities with their families</li>
-                            <li>Be willing to attend regular meetings regarding the organization's plans and programs</li>
-                            <li>Maintain satisfactory academic performance and school attendance</li>
-                            <li>Show dedication to educational advancement and community involvement</li>
-                        </ul>
-                    </div>
-
-                    <!-- Residential Scholarship Requirements -->
-                    <div class="mb-6 p-4 bg-pink-50 border border-pink-200 rounded-lg">
-                        <h4 class="text-md font-semibold text-pink-900 mb-3">Residential Scholarship for Girls</h4>
-                        <p class="text-sm text-pink-700 mb-3">The residential scholarship caters only for girls who wanted to pursue college. This is open for girls from Mindanao and Visayas. To be eligible, applicants must meet the following requirements:</p>
-                        <ul class="list-disc list-inside space-y-2 ml-4 text-sm text-pink-800">
-                            <li><strong>Female applicants only</strong> - This scholarship is exclusively for girls and young women</li>
-                            <li><strong>College-level education</strong> - Must be pursuing or planning to pursue college/university education</li>
-                            <li><strong>From Visayas and Mindanao regions</strong> - Open specifically for girls from these regions of the Philippines</li>
-                            <li>Demonstrate exceptional academic potential and commitment to education</li>
-                            <li>Show genuine financial need and inability to afford college education</li>
-                            <li>Be willing to live at the Hauz Hayag residential center during studies</li>
-                            <li>Commit to following residential program rules and guidelines</li>
-                            <li>Participate actively in community and educational activities</li>
-                            <li>Maintain excellent academic performance throughout the program</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-3">3. Scholarship Coverage & Support</h3>
-
-                    <!-- Community Based Scholarship Coverage -->
-                    <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-                        <h4 class="text-md font-semibold text-green-900 mb-3">Community Based Scholarship</h4>
-                        <p class="text-sm text-green-700 mb-3">The students live with their families in the community. However, their parents are too poor to pay for their children's education – the essential school attendance. Through the COMMUNITY BASED SCHOLARS pillar, we finance all necessary school materials, compulsory uniforms, and school and travel expenses. What's more, during school hours, our HAYAG girls give these children tutoring every Saturday in the project house, and even daily during the holidays. The children are very interested in the material they are learning. They feel that they are being given a chance at a better life, one that they can take a step closer to with the help of Hauz HAYAG.</p>
-                        <ul class="list-disc list-inside space-y-2 ml-4 text-sm text-green-800">
-                            <li><strong>All necessary school materials</strong> - Complete coverage of required educational supplies</li>
-                            <li><strong>Compulsory uniforms</strong> - Full provision of required school uniforms</li>
-                            <li><strong>School expenses</strong> - Coverage of essential school-related costs</li>
-                            <li><strong>Travel expenses</strong> - Transportation support for school attendance</li>
-                            <li><strong>Tutoring support</strong> - HAYAG girls provide tutoring every Saturday in the project house</li>
-                            <li><strong>Holiday tutoring</strong> - Daily tutoring sessions during school holidays</li>
-                            <li>Educational guidance and mentorship throughout the program</li>
-                        </ul>
-                    </div>
-
-                    <!-- Residential Scholarship Coverage -->
-                    <div class="mb-6 p-4 bg-pink-50 border border-pink-200 rounded-lg">
-                        <h4 class="text-md font-semibold text-pink-900 mb-3">Residential Scholarship for Girls</h4>
-                        <p class="text-sm text-pink-700 mb-3">The Residential Scholarship for Girls provides comprehensive support including:</p>
-                        <ul class="list-disc list-inside space-y-2 ml-4 text-sm text-pink-800">
-                            <li><strong>Full residential accommodation</strong> - Housing at the Hauz Hayag center</li>
-                            <li><strong>Complete college tuition coverage</strong> - Full payment of university fees</li>
-                            <li><strong>Educational materials and supplies</strong> - All necessary books and school materials</li>
-                            <li><strong>Living expenses</strong> - Food, utilities, and daily necessities</li>
-                            <li><strong>Academic support and tutoring</strong> - Educational guidance and mentorship</li>
-                            <li><strong>Personal development programs</strong> - Life skills and leadership training</li>
-                            <li><strong>Career guidance and counseling</strong> - Professional development support</li>
-                            <li>Safe and supportive living environment with other scholarship recipients</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-3">4. Selection Process</h3>
-                    <p class="mb-3">The selection process includes:</p>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">5. Disclaimers</h3>
                     <ul class="list-disc list-inside space-y-2 ml-4">
-                        <li>Review of application materials and supporting documents</li>
-                        <li>Verification of academic records and financial information</li>
-                        <li>Assessment of community involvement and commitment</li>
-                        <li>Evaluation of family financial need and circumstances</li>
-                        <li>Possible interviews with selection committee</li>
-                        <li>Background checks as deemed necessary</li>
+                        <li>Hauz Hayag <strong>does not guarantee acceptance</strong> into the scholarship or volunteer program by mere submission</li>
+                        <li>Job postings are either sourced or user-submitted and <strong>do not constitute endorsements</strong> unless explicitly stated</li>
+                        <li>The organization is not liable for:
+                            <ul class="list-disc list-inside space-y-1 ml-6 mt-2 text-sm">
+                                <li>Missed deadlines due to user negligence</li>
+                                <li>External job offer outcomes</li>
+                                <li>Data loss due to technical failure beyond our control</li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
 
                 <div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-3">4. Privacy and Data Protection</h3>
-                    <p class="mb-3">Your personal information will be:</p>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">6. Account Deactivation</h3>
+                    <p class="mb-3">We reserve the right to:</p>
                     <ul class="list-disc list-inside space-y-2 ml-4">
-                        <li>Used solely for scholarship application processing and communication</li>
-                        <li>Kept confidential and secure</li>
-                        <li>Shared only with authorized personnel involved in the selection process</li>
-                        <li>Retained according to our data retention policies</li>
+                        <li>Suspend or remove accounts that are inactive, fraudulent, or violate our policies</li>
+                        <li>Deny access to users who repeatedly breach terms or endanger the community's integrity</li>
                     </ul>
                 </div>
 
                 <div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-3">6. Scholarship Obligations</h3>
-
-                    <!-- Community Based Scholarship Obligations -->
-                    <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-                        <h4 class="text-md font-semibold text-green-900 mb-3">Community Based Scholarship Recipients Must:</h4>
-                        <ul class="list-disc list-inside space-y-2 ml-4 text-sm text-green-800">
-                            <li><strong>Attend regular meetings</strong> regarding the organization's plans and programs</li>
-                            <li>Maintain minimum academic standards and consistent school attendance</li>
-                            <li>Participate in tutoring sessions provided by HAYAG girls every Saturday</li>
-                            <li>Attend daily tutoring sessions during school holidays when available</li>
-                            <li>Use scholarship funds responsibly for educational purposes only</li>
-                            <li>Provide regular progress reports and academic updates</li>
-                            <li>Engage positively with the local community and educational initiatives</li>
-                            <li>Represent the organization positively in the community and academic institutions</li>
-                            <li>Show appreciation and commitment to the educational opportunity provided</li>
-                        </ul>
-                    </div>
-
-                    <!-- Residential Scholarship Obligations -->
-                    <div class="mb-6 p-4 bg-pink-50 border border-pink-200 rounded-lg">
-                        <h4 class="text-md font-semibold text-pink-900 mb-3">Residential Scholarship Recipients Must:</h4>
-                        <ul class="list-disc list-inside space-y-2 ml-4 text-sm text-pink-800">
-                            <li><strong>Live at the Hauz Hayag center</strong> throughout their college journey</li>
-                            <li>Maintain excellent academic performance and meet program standards</li>
-                            <li>Follow all residential rules, guidelines, and curfew requirements</li>
-                            <li>Participate in community service activities and program events</li>
-                            <li>Contribute positively to the residential community environment</li>
-                            <li>Attend mandatory meetings, workshops, and development sessions</li>
-                            <li>Serve as mentors and role models for younger students</li>
-                            <li>Represent the organization with dignity and excellence</li>
-                            <li>Complete the full program duration and graduate successfully</li>
-                        </ul>
-                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">7. Governing Law</h3>
+                    <p class="mb-3">These Terms are governed by the laws of the <strong>Republic of the Philippines</strong>. Any legal matters shall be resolved under the jurisdiction of the appropriate courts in <strong>Cebu City</strong>.</p>
                 </div>
 
                 <div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-3">7. Program Philosophy</h3>
-                    <p class="mb-3">Both scholarship programs are founded on the belief that:</p>
-                    <ul class="list-disc list-inside space-y-2 ml-4">
-                        <li>Education is the key to breaking the cycle of poverty</li>
-                        <li>Every student deserves access to quality educational opportunities</li>
-                        <li>Community support and family connections are vital for student success</li>
-                        <li>Investing in education creates positive generational change</li>
-                        <li>Students thrive when given proper support and encouragement</li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-3">8. Modification of Terms</h3>
-                    <p>Hauz Hayag Scholarship and Training Program Inc reserves the right to modify these terms and conditions at any time. Applicants will be notified of any significant changes that may affect their application or scholarship status.</p>
-                </div>
-
-                <div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-3">9. Contact Information</h3>
-                    <p class="mb-3">For questions about these terms or the scholarship program, please contact:</p>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">8. Contact Information</h3>
+                    <p class="mb-3">For questions, feedback, or reporting a violation:</p>
                     <div class="bg-gray-50 p-4 rounded-lg">
                         <p class="font-medium">Hauz Hayag Scholarship and Training Program Inc</p>
-                        <p class="text-sm text-gray-600">Carlock Street, San Nicolas Proper, Cebu City, Philippines</p>
-                        <p class="text-sm text-gray-600">Email: hauzhayag143@gmail.com</p>
+                        <p class="text-sm text-gray-600">📍 <strong>Hauz Hayag Center</strong>, Carlock Street, San Nicolas Proper, Cebu City, Philippines</p>
+                        <p class="text-sm text-gray-600">📧 <strong>hauzhayag.info@gmail.com</strong></p>
                     </div>
                 </div>
             </div>
