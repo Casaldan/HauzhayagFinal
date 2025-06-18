@@ -22,7 +22,7 @@
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        background: rgba(0, 124, 186, 0.1);
         transition: left 0.5s;
     }
 
@@ -62,23 +62,20 @@
         box-shadow: 0 10px 25px rgba(0,0,0,0.15);
     }
 
-    .gradient-text {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+    .primary-text {
+        color: #007cba;
     }
 
-    .dashboard-gradient {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    .dashboard-primary {
+        background: #007cba;
     }
 </style>
 @endpush
 
 @section('content')
-<div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+<div class="min-h-screen bg-gray-50">
     <!-- Enhanced Header -->
-    <div class="dashboard-gradient text-white p-6 lg:p-8 mb-8">
+    <div class="dashboard-primary text-white p-6 lg:p-8 mb-8">
         <div class="max-w-7xl mx-auto">
             <!-- Breadcrumb -->
             <nav class="text-sm mb-4 opacity-90">
@@ -122,10 +119,10 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-sm font-medium text-gray-600 mb-1">Total Users</p>
-                        <p class="text-3xl font-bold gradient-text">{{ count($users) }}</p>
+                        <p class="text-3xl font-bold primary-text">{{ count($users) }}</p>
                         <p class="text-xs text-gray-500 mt-1">All registered users</p>
                     </div>
-                    <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <div class="w-14 h-14 bg-primary rounded-2xl flex items-center justify-center shadow-lg">
                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                         </svg>
@@ -141,7 +138,7 @@
                         <p class="text-3xl font-bold text-green-600">{{ $users->where('status', 'active')->count() }}</p>
                         <p class="text-xs text-gray-500 mt-1">Currently active</p>
                     </div>
-                    <div class="w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <div class="w-14 h-14 bg-green-600 rounded-2xl flex items-center justify-center shadow-lg">
                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
@@ -157,7 +154,7 @@
                         <p class="text-3xl font-bold text-purple-600">{{ $users->where('role', 'admin')->count() }}</p>
                         <p class="text-xs text-gray-500 mt-1">System administrators</p>
                     </div>
-                    <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <div class="w-14 h-14 bg-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                         </svg>
@@ -173,7 +170,7 @@
                         <p class="text-3xl font-bold text-yellow-600">{{ $users->where('role', 'volunteer')->count() }}</p>
                         <p class="text-xs text-gray-500 mt-1">Active volunteers</p>
                     </div>
-                    <div class="w-14 h-14 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <div class="w-14 h-14 bg-yellow-600 rounded-2xl flex items-center justify-center shadow-lg">
                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
                         </svg>
@@ -258,14 +255,14 @@
 
         <!-- Enhanced Users Table -->
         <div class="glass-card rounded-2xl overflow-hidden shadow-xl">
-            <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4 border-b border-gray-200">
+            <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
                 <h3 class="text-lg font-semibold text-gray-800">User Directory</h3>
                 <p class="text-sm text-gray-600">Manage all user accounts and permissions</p>
             </div>
 
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gradient-to-r from-gray-50 to-gray-100">
+                    <thead class="bg-gray-50">
                         <tr>
                             <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">User</th>
                             <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Role</th>
@@ -282,7 +279,7 @@
                                         @if($user->profile_picture)
                                             <img src="{{ Storage::url($user->profile_picture) }}" alt="{{ $user->name }}" class="w-12 h-12 rounded-full object-cover shadow-lg border-2 border-white">
                                         @else
-                                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                                            <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white font-bold text-lg shadow-lg">
                                                 {{ strtoupper(substr($user->name, 0, 1)) }}
                                             </div>
                                         @endif
@@ -374,7 +371,7 @@
                                         </div>
                                         <h3 class="text-lg font-semibold text-gray-900 mb-2">No users found</h3>
                                         <p class="text-gray-600 mb-6">No users match your current search criteria.</p>
-                                        <a href="{{ route('users.create') }}" class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-3 rounded-xl transition-all duration-300 font-medium shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2">
+                                        <a href="{{ route('users.create') }}" class="bg-primary hover:bg-secondary text-white px-6 py-3 rounded-xl transition-all duration-300 font-medium shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2">
                                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                                             </svg>

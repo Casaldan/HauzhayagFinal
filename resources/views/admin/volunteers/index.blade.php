@@ -22,7 +22,7 @@
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        background: rgba(0, 124, 186, 0.1);
         transition: left 0.5s;
     }
 
@@ -62,23 +62,20 @@
         box-shadow: 0 10px 25px rgba(0,0,0,0.15);
     }
 
-    .gradient-text {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+    .primary-text {
+        color: #007cba;
     }
 
-    .dashboard-gradient {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    .dashboard-primary {
+        background: #007cba;
     }
 </style>
 @endpush
 
 @section('content')
-<div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+<div class="min-h-screen bg-gray-50">
     <!-- Enhanced Header -->
-    <div class="dashboard-gradient text-white p-6 lg:p-8 mb-8">
+    <div class="dashboard-primary text-white p-6 lg:p-8 mb-8">
         <div class="max-w-7xl mx-auto">
             <!-- Breadcrumb -->
             <nav class="text-sm mb-4 opacity-90">
@@ -118,7 +115,7 @@
 
         <!-- Enhanced Tab Navigation -->
         <div class="glass-card rounded-2xl mb-8 overflow-hidden">
-            <nav class="flex bg-gradient-to-r from-gray-50 to-gray-100" aria-label="Tabs">
+            <nav class="flex bg-gray-50" aria-label="Tabs">
                 <button onclick="showTab('volunteers')" id="volunteers-tab" class="tab-button flex-1 border-b-4 border-blue-500 text-blue-600 py-4 px-6 text-sm font-semibold transition-all duration-300 ease-in-out flex items-center justify-center space-x-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
@@ -143,10 +140,10 @@
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-sm font-medium text-gray-600 mb-1">Total Volunteers</p>
-                            <p class="text-3xl font-bold gradient-text">{{ $totalVolunteersCount ?? $volunteers->total() }}</p>
+                            <p class="text-3xl font-bold primary-text">{{ $totalVolunteersCount ?? $volunteers->total() }}</p>
                             <p class="text-xs text-gray-500 mt-1">All volunteers</p>
                         </div>
-                        <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+                        <div class="w-14 h-14 bg-primary rounded-2xl flex items-center justify-center shadow-lg">
                             <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
                             </svg>
@@ -162,7 +159,7 @@
                             <p class="text-3xl font-bold text-green-600">{{ $activeVolunteersCount ?? $volunteers->where('status', 'active')->count() }}</p>
                             <p class="text-xs text-gray-500 mt-1">Currently active</p>
                         </div>
-                        <div class="w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center shadow-lg">
+                        <div class="w-14 h-14 bg-green-600 rounded-2xl flex items-center justify-center shadow-lg">
                             <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
@@ -178,7 +175,7 @@
                             <p class="text-3xl font-bold text-red-600">{{ $inactiveVolunteersCount ?? $volunteers->where('status', 'inactive')->count() }}</p>
                             <p class="text-xs text-gray-500 mt-1">Not active</p>
                         </div>
-                        <div class="w-14 h-14 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center shadow-lg">
+                        <div class="w-14 h-14 bg-red-600 rounded-2xl flex items-center justify-center shadow-lg">
                             <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
                             </svg>
@@ -194,7 +191,7 @@
                             <p class="text-3xl font-bold text-yellow-600">{{ $totalPendingCount ?? ($pendingVolunteersCount + $pendingEventApplicationsCount) ?? $volunteers->where('status', 'pending')->count() }}</p>
                             <p class="text-xs text-gray-500 mt-1">Awaiting approval</p>
                         </div>
-                        <div class="w-14 h-14 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-2xl flex items-center justify-center shadow-lg">
+                        <div class="w-14 h-14 bg-yellow-600 rounded-2xl flex items-center justify-center shadow-lg">
                             <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
@@ -254,14 +251,14 @@
 
             <!-- Enhanced Volunteers Table -->
             <div class="glass-card rounded-2xl overflow-hidden shadow-xl">
-                <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4 border-b border-gray-200">
+                <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
                     <h3 class="text-lg font-semibold text-gray-800">Volunteer Directory</h3>
                     <p class="text-sm text-gray-600">Manage all volunteer accounts and permissions</p>
                 </div>
 
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gradient-to-r from-gray-50 to-gray-100">
+                        <thead class="bg-gray-50">
                             <tr>
                                 <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Volunteer</th>
                                 <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Status</th>
@@ -277,7 +274,7 @@
                                             @if($volunteer->profile_picture)
                                                 <img src="{{ Storage::url($volunteer->profile_picture) }}" alt="{{ $volunteer->name }}" class="w-12 h-12 rounded-full object-cover shadow-lg border-2 border-white">
                                             @else
-                                                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                                                <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white font-bold text-lg shadow-lg">
                                                     {{ strtoupper(substr($volunteer->name, 0, 1)) }}
                                                 </div>
                                             @endif
