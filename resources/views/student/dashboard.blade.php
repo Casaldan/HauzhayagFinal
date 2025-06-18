@@ -22,8 +22,8 @@
     <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('image/logohauzhayag.jpg') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('image/logohauzhayag.jpg') }}">
     <meta name="msapplication-TileImage" content="{{ asset('image/logohauzhayag.jpg') }}">
-    <meta name="msapplication-TileColor" content="#3A5F6B">
-    <meta name="theme-color" content="#3A5F6B">
+    <meta name="msapplication-TileColor" content="#007cba">
+    <meta name="theme-color" content="#007cba">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -31,8 +31,8 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#3A5F6B',
-                        secondary: '#2C5F6E',
+                        primary: '#007cba',
+                        secondary: '#005a8a',
                         neutral: '#f8fafc'
                     }
                 }
@@ -59,23 +59,23 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
 
-        /* Gradient backgrounds */
-        .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        /* Primary color backgrounds */
+        .primary-bg {
+            background: #007cba;
         }
 
-        .gradient-bg-2 {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        .primary-bg-light {
+            background: #e6f3fa;
         }
 
-        .gradient-bg-3 {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        .secondary-bg {
+            background: #005a8a;
         }
 
         /* Calendar styling */
         .fc-event {
-            background-color: #3490dc;
-            border-color: #2779bd;
+            background-color: #007cba;
+            border-color: #005a8a;
             color: #ffffff;
             border-radius: 4px;
             padding: 2px 4px;
@@ -116,7 +116,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: rgba(0, 124, 186, 0.1);
             transition: left 0.5s;
         }
 
@@ -156,15 +156,12 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
 
-        .gradient-text {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .primary-text {
+            color: #007cba;
         }
 
-        .dashboard-gradient {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .dashboard-primary {
+            background: #007cba;
         }
     </style>
 </head>
@@ -178,9 +175,9 @@
             <!-- Mobile header spacer -->
             <div class="lg:hidden h-16"></div>
 
-            <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+            <div class="min-h-screen bg-gray-50">
                 <!-- Enhanced Header -->
-                <div class="dashboard-gradient text-white p-6 lg:p-8 mb-8">
+                <div class="dashboard-primary text-white p-6 lg:p-8 mb-8">
                     <div class="max-w-7xl mx-auto">
                         <!-- Breadcrumb -->
                         <nav class="text-sm mb-4 opacity-90">
@@ -229,14 +226,14 @@
                         </h2>
                         <form method="POST" action="{{ route('notifications.markAllAsRead') }}">
                             @csrf
-                            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-all duration-300 hover-scale">
+                            <button type="submit" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-all duration-300 hover-scale">
                                 Mark all as read
                             </button>
                         </form>
                     </div>
                     <div class="space-y-4">
                         @foreach($notifications as $notification)
-                        <div class="border border-gray-200 rounded-xl p-4 card-hover bg-gradient-to-r from-blue-50 to-indigo-50">
+                        <div class="border border-gray-200 rounded-xl p-4 card-hover bg-blue-50">
                             <div class="flex justify-between items-start">
                                 <div>
                                     <h3 class="text-lg font-semibold text-gray-900">{{ $notification->data['title'] }}</h3>
@@ -361,7 +358,7 @@
                         </svg>
                         Latest Events
                     </h2>
-                    <a href="{{ route('student.events.index') }}" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-all duration-300 hover-scale flex items-center">
+                    <a href="{{ route('student.events.index') }}" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-all duration-300 hover-scale flex items-center">
                         <span>View All Events</span>
                         <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -370,7 +367,7 @@
                 </div>
                 <div class="grid gap-4">
                     @forelse(($upcomingEvents ?? []) as $event)
-                    <div class="border border-gray-200 rounded-xl p-6 card-hover bg-gradient-to-r from-green-50 to-emerald-50">
+                    <div class="border border-gray-200 rounded-xl p-6 card-hover bg-green-50">
                         <div class="flex justify-between items-start">
                             <div class="flex-1">
                                 <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ $event->title }}</h3>
@@ -393,7 +390,7 @@
                                 <span class="px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
                                     {{ ucfirst($event->status) }}
                                 </span>
-                                <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-all duration-300 text-sm font-medium hover-scale">
+                                <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-all duration-300 text-sm font-medium hover-scale">
                                     View Details
                                 </button>
                             </div>
@@ -420,7 +417,7 @@
                         </svg>
                         Latest Job Listings
                     </h2>
-                    <a href="{{ route('student.jobs.index') }}" class="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition-all duration-300 hover-scale flex items-center">
+                    <a href="{{ route('student.jobs.index') }}" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-all duration-300 hover-scale flex items-center">
                         <span>View All Jobs</span>
                         <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -429,7 +426,7 @@
                 </div>
                 <div class="grid gap-4">
                     @forelse(($latestJobs ?? []) as $job)
-                    <div class="border border-gray-200 rounded-xl p-6 card-hover bg-gradient-to-r from-purple-50 to-indigo-50">
+                    <div class="border border-gray-200 rounded-xl p-6 card-hover bg-purple-50">
                         <div class="flex justify-between items-start">
                             <div class="flex-1">
                                 <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ $job->title }}</h3>
@@ -470,7 +467,7 @@
                                 <span class="px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
                                     {{ ucfirst($job->status) }}
                                 </span>
-                                <a href="{{ route('student.jobs.show', $job->id) }}" class="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition-all duration-300 text-sm font-medium hover-scale">
+                                <a href="{{ route('student.jobs.show', $job->id) }}" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-all duration-300 text-sm font-medium hover-scale">
                                     View Details
                                 </a>
                             </div>

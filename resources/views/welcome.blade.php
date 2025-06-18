@@ -316,7 +316,7 @@
                         <div class="absolute inset-0 bg-primary/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                     <div>
-                        <h1 class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Hauz Hayag</h1>
+                        <h1 class="text-2xl font-bold text-blue-600">Hauz Hayag</h1>
                         <p class="text-sm text-gray-600 font-medium"></p>
                     </div>
                 </div>
@@ -327,31 +327,31 @@
 
                 <!-- Desktop Navigation -->
                 <nav class="hidden lg:flex items-center space-x-1">
-                    <a href="#home" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 hover:text-primary hover:bg-primary/5 transition-all duration-300 ease-in-out transform hover:scale-105">
+                    <a href="#home" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 hover:text-blue-600 hover:bg-blue-600/10 transition-all duration-300 ease-in-out transform hover:scale-105">
                         <i class="fas fa-home text-lg"></i>
                         <span class="font-medium">Home</span>
                     </a>
-                    <a href="#scholarships" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 hover:text-primary hover:bg-primary/5 transition-all duration-300 ease-in-out transform hover:scale-105">
+                    <a href="#scholarships" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 hover:text-blue-600 hover:bg-blue-600/10 transition-all duration-300 ease-in-out transform hover:scale-105">
                         <i class="fas fa-graduation-cap text-lg"></i>
                         <span class="font-medium">Scholarships</span>
                     </a>
-                    <a href="#job-offers" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 hover:text-primary hover:bg-primary/5 transition-all duration-300 ease-in-out transform hover:scale-105">
+                    <a href="#job-offers" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 hover:text-blue-600 hover:bg-blue-600/10 transition-all duration-300 ease-in-out transform hover:scale-105">
                         <i class="fas fa-briefcase text-lg"></i>
                         <span class="font-medium">Job Offers</span>
                     </a>
-                    <a href="#events" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 hover:text-primary hover:bg-primary/5 transition-all duration-300 ease-in-out transform hover:scale-105">
+                    <a href="#events" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 hover:text-blue-600 hover:bg-blue-600/10 transition-all duration-300 ease-in-out transform hover:scale-105">
                         <i class="fas fa-calendar-alt text-lg"></i>
                         <span class="font-medium">Events</span>
                     </a>
-                    <a href="#about-us" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 hover:text-primary hover:bg-primary/5 transition-all duration-300 ease-in-out transform hover:scale-105">
+                    <a href="#about-us" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 hover:text-blue-600 hover:bg-blue-600/10 transition-all duration-300 ease-in-out transform hover:scale-105">
                         <i class="fas fa-info-circle text-lg"></i>
                         <span class="font-medium">About Us</span>
                     </a>
-                    <a href="#track-application" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 hover:text-primary hover:bg-primary/5 transition-all duration-300 ease-in-out transform hover:scale-105">
+                    <a href="#track-application" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 hover:text-blue-600 hover:bg-blue-600/10 transition-all duration-300 ease-in-out transform hover:scale-105">
                         <i class="fas fa-search text-lg"></i>
                         <span class="font-medium">Track Application</span>
                     </a>
-                    <a href="{{ route('login') }}" class="flex items-center space-x-2 bg-gradient-to-r from-primary to-primary text-white px-6 py-3 rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 font-medium ml-8">
+                    <a href="{{ route('login') }}" class="flex items-center space-x-2 bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 font-medium ml-8">
                         <i class="fas fa-sign-in-alt text-lg"></i>
                         <span>Login</span>
                     </a>
@@ -387,7 +387,7 @@
                 </a>
                 </div>
                 <div class="px-4 pb-4 space-y-3">
-                    <a href="{{ route('login') }}" class="w-full bg-gradient-to-r from-primary to-secondary text-white px-4 py-3 rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg font-medium flex items-center justify-center space-x-2">
+                    <a href="{{ route('login') }}" class="w-full bg-blue-600 text-white px-4 py-3 rounded-xl hover:bg-blue-700/90 transition-all duration-300 shadow-lg font-medium flex items-center justify-center space-x-2">
                         <i class="fas fa-sign-in-alt text-lg"></i>
                         <span>Login</span>
                     </a>
@@ -1867,8 +1867,15 @@
                 modalContent.innerHTML = `
                     <div class="space-y-6">
                         <div class="bg-pink-50 border border-pink-200 rounded-lg p-4">
-                            <h3 class="font-semibold text-pink-800 mb-2">Gender Requirement</h3>
-                            <p class="text-pink-700 text-sm">This scholarship is exclusively for female students only.</p>
+                            <h3 class="font-semibold text-pink-800 mb-2">Eligibility Requirements</h3>
+                            <ul class="text-pink-700 text-sm space-y-2">
+                                <li>• Female, 18 and above</li>
+                                <li>• Senior High School Graduate</li>
+                                <li>• Living below poverty threshold</li>
+                                <li>• Must be in GOOD HEALTH and of GOOD MORAL character</li>
+                                <li>• Preferably with GOOD SCHOLASTIC RECORD</li>
+                                <li>• Must come from depressed areas in Cebu Province and Provinces in Visayas and Mindanao</li>
+                            </ul>
                         </div>
 
                         <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
@@ -1897,8 +1904,15 @@
                 modalContent.innerHTML = `
                     <div class="space-y-6">
                         <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                            <h3 class="font-semibold text-blue-800 mb-2">Gender & Location</h3>
-                            <p class="text-blue-700 text-sm">Open to all genders and all areas in Cebu.</p>
+                            <h3 class="font-semibold text-blue-800 mb-2">Eligibility Requirements</h3>
+                            <ul class="text-blue-700 text-sm space-y-2">
+                                <li>• Applicants must be an identified resident within Cebu City, Philippines.</li>
+                                <li>• Applicants must be of ages 6 years old and above. Must be willing to pursue his/her studies.</li>
+                                <li>• Applicants must be of good moral character and preferably with good scholastic records as per school records.</li>
+                                <li>• Only those who are living below poverty threshold indigent, disadvantaged and marginalized are accepted into the Educational Assistance Program of Hauz Hayag.</li>
+                                <li>• Families with 2-4 children, only 1 scholar may be accepted. For families with 5 or more children, 1-3 scholars may be accepted depending on thorough assessment for qualification of scholarship.</li>
+                                <li>• Applicants must be enrolled in a public school.</li>
+                            </ul>
                         </div>
 
                         <div class="bg-green-50 border border-green-200 rounded-lg p-4">

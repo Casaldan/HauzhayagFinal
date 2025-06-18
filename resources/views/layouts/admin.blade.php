@@ -22,8 +22,8 @@
     <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('image/logohauzhayag.jpg') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('image/logohauzhayag.jpg') }}">
     <meta name="msapplication-TileImage" content="{{ asset('image/logohauzhayag.jpg') }}">
-    <meta name="msapplication-TileColor" content="#1B4B5A">
-    <meta name="theme-color" content="#1B4B5A">
+    <meta name="msapplication-TileColor" content="#007cba">
+    <meta name="theme-color" content="#007cba">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -31,8 +31,8 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#1B4B5A',
-                        secondary: '#2C5F6E',
+                        primary: '#007cba',
+                        secondary: '#005a8a',
                         neutral: '#f8fafc'
                     },
                     animation: {

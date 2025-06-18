@@ -11,8 +11,8 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#3A5F6B',
-                        secondary: '#2C5F6E',
+                        primary: '#007cba',
+                        secondary: '#005a8a',
                         neutral: '#f8fafc'
                     }
                 }
@@ -42,7 +42,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: rgba(0, 124, 186, 0.1);
             transition: left 0.5s;
         }
 
@@ -82,15 +82,12 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
 
-        .gradient-text {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .primary-text {
+            color: #007cba;
         }
 
-        .dashboard-gradient {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .dashboard-primary {
+            background: #007cba;
         }
     </style>
 </head>
@@ -103,9 +100,9 @@
             <!-- Mobile header spacer -->
             <div class="lg:hidden h-16"></div>
 
-            <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+            <div class="min-h-screen bg-gray-50">
                 <!-- Enhanced Header -->
-                <div class="dashboard-gradient text-white p-6 lg:p-8 mb-8">
+                <div class="dashboard-primary text-white p-6 lg:p-8 mb-8">
                     <div class="max-w-7xl mx-auto">
                         <!-- Breadcrumb -->
                         <nav class="text-sm mb-4 opacity-90">
@@ -142,18 +139,18 @@
 
                 <div class="max-w-7xl mx-auto px-4 lg:px-8 -mt-16 relative z-10">
 
-                    <!-- Enhanced Stats Cards -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <!-- Stats Overview -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mb-6 lg:mb-8">
                         <!-- Total Jobs -->
-                        <div class="glass-card stat-card fade-in fade-in-delay-1 rounded-2xl p-6 hover-lift">
-                            <div class="flex items-center justify-between">
+                        <div class="bg-white rounded-xl shadow-lg p-4 lg:p-6 card-hover border-l-4 border-blue-500">
+                            <div class="flex justify-between items-center">
                                 <div>
-                                    <p class="text-sm font-medium text-gray-600 mb-1">Total Jobs</p>
-                                    <p class="text-3xl font-bold text-purple-600">{{ $allJobs->count() }}</p>
-                                    <p class="text-xs text-gray-500 mt-1">Job opportunities</p>
+                                    <p class="text-xs lg:text-sm font-semibold text-gray-500 uppercase tracking-wide">Total Jobs</p>
+                                    <p class="text-2xl lg:text-3xl font-bold text-gray-800 mt-2">{{ $allJobs->count() }}</p>
+                                    <p class="text-xs lg:text-sm text-blue-600 mt-1">Job opportunities</p>
                                 </div>
-                                <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
-                                    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="rounded-full bg-blue-100 p-3 lg:p-4">
+                                    <svg class="h-6 w-6 lg:h-8 lg:w-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2M8 6v10a2 2 0 002 2h4a2 2 0 002-2V6"/>
                                     </svg>
                                 </div>
@@ -161,15 +158,15 @@
                         </div>
 
                         <!-- Total Events -->
-                        <div class="glass-card stat-card fade-in fade-in-delay-2 rounded-2xl p-6 hover-lift">
-                            <div class="flex items-center justify-between">
+                        <div class="bg-white rounded-xl shadow-lg p-4 lg:p-6 card-hover border-l-4 border-green-500">
+                            <div class="flex justify-between items-center">
                                 <div>
-                                    <p class="text-sm font-medium text-gray-600 mb-1">Total Events</p>
-                                    <p class="text-3xl font-bold gradient-text">{{ $events->count() }}</p>
-                                    <p class="text-xs text-gray-500 mt-1">Available events</p>
+                                    <p class="text-xs lg:text-sm font-semibold text-gray-500 uppercase tracking-wide">Total Events</p>
+                                    <p class="text-2xl lg:text-3xl font-bold text-gray-800 mt-2">{{ $events->count() }}</p>
+                                    <p class="text-xs lg:text-sm text-green-600 mt-1">Available events</p>
                                 </div>
-                                <div class="w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center shadow-lg">
-                                    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="rounded-full bg-green-100 p-3 lg:p-4">
+                                    <svg class="h-6 w-6 lg:h-8 lg:w-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                     </svg>
                                 </div>
@@ -177,188 +174,192 @@
                         </div>
                     </div>
 
-                    <!-- Enhanced Calendar and Events Section -->
+                    <!-- Calendar and Events Section -->
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
                         <!-- Calendar View -->
-                        <div class="lg:col-span-2 glass-card rounded-2xl overflow-hidden shadow-xl">
-                            <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4 border-b border-gray-200">
-                                <h3 class="text-lg font-semibold text-gray-800">Event Calendar</h3>
-                                <p class="text-sm text-gray-600">Interactive calendar view of all events</p>
-                            </div>
-                            <div class="p-6">
-                                <div class="flex items-center justify-between mb-6">
-                                    <div class="flex items-center space-x-2">
-                                        <button onclick="previousMonth()" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                                            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-                                            </svg>
-                                        </button>
-                                        <span id="currentMonth" class="text-sm font-medium text-gray-700 min-w-[120px] text-center"></span>
-                                        <button onclick="nextMonth()" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                                            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                                            </svg>
-                                        </button>
-                                    </div>
+                        <div class="lg:col-span-2 bg-white rounded-xl shadow-lg p-6 card-hover">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                                <svg class="w-6 h-6 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                                Event Calendar
+                            </h3>
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="flex items-center space-x-2">
+                                    <button onclick="previousMonth()" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                                        <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                                        </svg>
+                                    </button>
+                                    <span id="currentMonth" class="text-sm font-medium text-gray-700 min-w-[120px] text-center"></span>
+                                    <button onclick="nextMonth()" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                                        <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                        </svg>
+                                    </button>
                                 </div>
+                            </div>
 
-                                <!-- Calendar Grid -->
-                                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-4 border border-blue-200">
-                                    <div class="grid grid-cols-7 gap-1 text-center text-sm">
-                                        <!-- Day Headers -->
-                                        <div class="font-semibold text-gray-600 p-3">Sun</div>
-                                        <div class="font-semibold text-gray-600 p-3">Mon</div>
-                                        <div class="font-semibold text-gray-600 p-3">Tue</div>
-                                        <div class="font-semibold text-gray-600 p-3">Wed</div>
-                                        <div class="font-semibold text-gray-600 p-3">Thu</div>
-                                        <div class="font-semibold text-gray-600 p-3">Fri</div>
-                                        <div class="font-semibold text-gray-600 p-3">Sat</div>
+                            <!-- Calendar Grid -->
+                            <div class="bg-blue-50 rounded-xl p-4 border border-blue-200">
+                                <div class="grid grid-cols-7 gap-1 text-center text-sm">
+                                    <!-- Day Headers -->
+                                    <div class="font-semibold text-gray-600 p-3">Sun</div>
+                                    <div class="font-semibold text-gray-600 p-3">Mon</div>
+                                    <div class="font-semibold text-gray-600 p-3">Tue</div>
+                                    <div class="font-semibold text-gray-600 p-3">Wed</div>
+                                    <div class="font-semibold text-gray-600 p-3">Thu</div>
+                                    <div class="font-semibold text-gray-600 p-3">Fri</div>
+                                    <div class="font-semibold text-gray-600 p-3">Sat</div>
 
-                                        <!-- Calendar Days -->
-                                        <div id="calendarDays" class="contents">
-                                            <!-- Days will be populated by JavaScript -->
-                                        </div>
+                                    <!-- Calendar Days -->
+                                    <div id="calendarDays" class="contents">
+                                        <!-- Days will be populated by JavaScript -->
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Enhanced Upcoming Events -->
-                        <div class="glass-card rounded-2xl overflow-hidden shadow-xl">
-                            <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4 border-b border-gray-200">
-                                <h3 class="text-lg font-semibold text-gray-800">Upcoming Events</h3>
-                                <p class="text-sm text-gray-600">Next scheduled events</p>
-                            </div>
-                            <div class="p-6">
-                                <div class="space-y-4" id="upcoming-events">
-                                    @forelse($events as $event)
-                                        <div class="event-card p-4 border border-gray-200 rounded-xl hover:bg-gray-50 cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105" onclick="window.location.href='{{ route('volunteer.events') }}'">
-                                            <div class="flex items-start space-x-3">
-                                                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center text-white shadow-lg">
-                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                                    </svg>
-                                                </div>
-                                                <div class="flex-1">
-                                                    <h4 class="font-semibold text-gray-900 mb-1">{{ $event->title }}</h4>
-                                                    <div class="flex items-center text-sm text-gray-600 mb-1">
-                                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                                        </svg>
-                                                        {{ \Carbon\Carbon::parse($event->start_date)->format('M j, Y') }}
-                                                    </div>
-                                                    <div class="flex items-center text-sm text-gray-500">
-                                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                                        </svg>
-                                                        {{ $event->location }}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @empty
-                                        <div class="text-center py-8">
-                                            <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                                <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                                </svg>
-                                            </div>
-                                            <h3 class="text-lg font-semibold text-gray-900 mb-2">No upcoming events</h3>
-                                            <p class="text-gray-600">Events will appear here when scheduled</p>
-                                        </div>
-                                    @endforelse
-                                </div>
+                        <!-- Quick Event Overview -->
+                        <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                                <svg class="w-6 h-6 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                Quick Overview
+                            </h3>
+                            <div class="space-y-4">
+                                @if(isset($events) && $events->count() > 0)
+                                    @foreach($events->take(3) as $event)
+                                    <div class="p-3 border border-gray-200 rounded-lg hover:bg-green-50 cursor-pointer transition-all duration-300" onclick="window.location.href='{{ route('volunteer.events') }}'">
+                                        <h4 class="font-semibold text-gray-900 text-sm mb-1">{{ $event->title }}</h4>
+                                        <p class="text-xs text-gray-600 flex items-center mb-1">
+                                            <svg class="w-3 h-3 mr-1 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                            </svg>
+                                            {{ \Carbon\Carbon::parse($event->start_date)->format('M j, Y') }}
+                                        </p>
+                                        <p class="text-xs text-gray-500 flex items-center">
+                                            <svg class="w-3 h-3 mr-1 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                            </svg>
+                                            {{ $event->location }}
+                                        </p>
+                                    </div>
+                                    @endforeach
+                                @else
+                                    <div class="text-center py-6">
+                                        <svg class="w-10 h-10 text-gray-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                        </svg>
+                                        <h3 class="text-sm font-medium text-gray-500 mb-1">No upcoming events</h3>
+                                        <p class="text-xs text-gray-400">Check back later!</p>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
 
 
 
-                    <!-- Enhanced Job Listings Section -->
-                    <div class="glass-card rounded-2xl overflow-hidden shadow-xl mb-8">
-                        <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4 border-b border-gray-200">
-                            <div class="flex justify-between items-center">
-                                <div>
-                                    <h3 class="text-lg font-semibold text-gray-800">Job Listings</h3>
-                                    <p class="text-sm text-gray-600">Browse and manage job opportunities</p>
-                                </div>
-                                <div class="flex space-x-3">
-                                    <a href="{{ route('volunteer.jobs') }}" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-xl transition-all duration-300 font-medium shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2M8 6v10a2 2 0 002 2h4a2 2 0 002-2V6"/>
-                                        </svg>
-                                        <span>View Jobs</span>
-                                    </a>
-                                    <a href="{{ route('volunteer.jobs.create') }}" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-xl transition-all duration-300 font-medium shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-                                        </svg>
-                                        <span>Post Job</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                    <div class="grid gap-4">
-                        @forelse($allJobs as $job)
-                        <div class="border border-gray-200 rounded-xl p-6 card-hover @if($job->posted_by == auth()->id()) bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200 @else bg-gradient-to-r from-purple-50 to-pink-50 @endif">
-                            <div class="flex justify-between items-start">
-                                <div class="flex-1">
-                                    <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ $job->title }}</h3>
-                                    <p class="text-sm text-gray-600 flex items-center mb-3">
-                                        <svg class="w-4 h-4 mr-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <!-- Latest Job Listings -->
+            <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-semibold text-gray-800 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2M8 6v10a2 2 0 002 2h4a2 2 0 002-2V6"/>
+                        </svg>
+                        Latest Job Listings
+                    </h2>
+                    <div class="flex space-x-3">
+                        <a href="{{ route('volunteer.jobs') }}" class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-lg transition-all duration-300 hover-scale flex items-center">
+                            <span>View All Jobs</span>
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                        <a href="{{ route('volunteer.jobs.create') }}" class="bg-secondary hover:bg-primary text-white px-4 py-2 rounded-lg transition-all duration-300 hover-scale flex items-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                            </svg>
+                            <span>Post Job</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="grid gap-4">
+                    @forelse($allJobs as $job)
+                    <div class="border border-gray-200 rounded-xl p-6 card-hover @if($job->posted_by == auth()->id()) bg-blue-50 @else bg-purple-50 @endif">
+                        <div class="flex justify-between items-start">
+                            <div class="flex-1">
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ $job->title }}</h3>
+                                <div class="space-y-2 mb-3">
+                                    <p class="text-sm text-gray-600 flex items-center">
+                                        <svg class="w-4 h-4 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                                         </svg>
                                         {{ $job->company_name ?? $job->company }}
                                     </p>
-                                    <div class="flex flex-wrap gap-2 mb-4">
-                                        @if($job->employment_type)
-                                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800">
-                                                {{ $job->employment_type }}
-                                            </span>
-                                        @endif
-                                        @if($job->type)
-                                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
-                                                {{ $job->type }}
-                                            </span>
-                                        @endif
-                                        @if($job->salary)
-                                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-800">
-                                                {{ $job->salary }}
-                                            </span>
-                                        @endif
-                                        @if($job->posted_by == auth()->id())
-                                            <span class="px-3 py-1 text-xs font-semibold rounded-full
-                                                @if($job->status == 'pending') bg-yellow-100 text-yellow-800
-                                                @elseif($job->status == 'approved') bg-green-100 text-green-800
-                                                @elseif($job->status == 'rejected' || $job->status == 'declined') bg-red-100 text-red-800
-                                                @else bg-gray-100 text-gray-800 @endif">
-                                                {{ ucfirst($job->status) }}
-                                            </span>
-                                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-indigo-100 text-indigo-800">
-                                                My Job
-                                            </span>
-                                        @endif
-                                    </div>
+                                    @if($job->location)
+                                    <p class="text-sm text-gray-600 flex items-center">
+                                        <svg class="w-4 h-4 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                        </svg>
+                                        {{ $job->location }}
+                                    </p>
+                                    @endif
                                 </div>
-                                <a href="{{ route('jobs.show', $job) }}" class="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition-all duration-300 hover-scale text-sm font-medium">
+                                <div class="flex flex-wrap gap-2 mb-3">
+                                    @if($job->employment_type)
+                                        <span class="px-3 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800">
+                                            {{ $job->employment_type }}
+                                        </span>
+                                    @endif
+                                    @if($job->type)
+                                        <span class="px-3 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
+                                            {{ $job->type }}
+                                        </span>
+                                    @endif
+                                    @if($job->salary)
+                                        <span class="px-3 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-800">
+                                            {{ $job->salary }}
+                                        </span>
+                                    @endif
+                                    @if($job->posted_by == auth()->id())
+                                        <span class="px-3 py-1 text-xs font-semibold rounded-full
+                                            @if($job->status == 'pending') bg-yellow-100 text-yellow-800
+                                            @elseif($job->status == 'approved') bg-green-100 text-green-800
+                                            @elseif($job->status == 'rejected' || $job->status == 'declined') bg-red-100 text-red-800
+                                            @else bg-gray-100 text-gray-800 @endif">
+                                            {{ ucfirst($job->status) }}
+                                        </span>
+                                        <span class="px-3 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800">
+                                            My Job
+                                        </span>
+                                    @endif
+                                </div>
+                                @if($job->description)
+                                <p class="text-sm text-gray-600">{{ \Illuminate\Support\Str::limit($job->description, 120) }}</p>
+                                @endif
+                            </div>
+                            <div class="flex flex-col items-end space-y-2 ml-4">
+                                <span class="px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                                    {{ ucfirst($job->status ?? 'active') }}
+                                </span>
+                                <a href="{{ route('jobs.show', $job) }}" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-all duration-300 text-sm font-medium hover-scale">
                                     View Details
                                 </a>
                             </div>
                         </div>
-                        @empty
-                        <div class="text-center py-12">
-                            <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2M8 6v10a2 2 0 002 2h4a2 2 0 002-2V6"/>
-                            </svg>
-                            <h3 class="text-lg font-medium text-gray-500 mb-2">No job listings yet</h3>
-                            <p class="text-gray-400 mb-4">Start by creating your first job posting!</p>
-                            <a href="{{ route('volunteer.jobs') }}" class="bg-purple-500 text-white px-6 py-2 rounded-lg hover:bg-purple-600 transition-all duration-300 hover-scale">
-                                View Job Listings
-                            </a>
-                        </div>
-                        @endforelse
                     </div>
+                    @empty
+                    <div class="text-center py-12">
+                        <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2M8 6v10a2 2 0 002 2h4a2 2 0 002-2V6"/>
+                        </svg>
+                        <h3 class="text-lg font-medium text-gray-500 mb-2">No job listings available</h3>
+                        <p class="text-gray-400">Check back later for new opportunities!</p>
+                    </div>
+                    @endforelse
+                </div>
                 </div>
             </div>
         </div>
@@ -456,14 +457,14 @@
                 const dayEvents = events.filter(event => event.date.startsWith(dayDate));
 
                 if (dayEvents.length > 0) {
-                    dayElement.className += ' bg-green-100 text-green-800 font-semibold';
+                    dayElement.className += ' bg-blue-100 text-blue-800 font-semibold';
                     dayElement.title = dayEvents.map(e => e.title).join(', ');
                 }
 
                 // Highlight today
                 const today = new Date();
                 if (year === today.getFullYear() && month === today.getMonth() && day === today.getDate()) {
-                    dayElement.className += ' bg-blue-500 text-white font-bold';
+                    dayElement.className += ' bg-primary text-white font-bold';
                 }
 
                 calendarDays.appendChild(dayElement);

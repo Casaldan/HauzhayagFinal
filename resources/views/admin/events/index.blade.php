@@ -22,7 +22,7 @@
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        background: rgba(27, 75, 90, 0.1);
         transition: left 0.5s;
     }
 
@@ -62,15 +62,12 @@
         box-shadow: 0 10px 25px rgba(0,0,0,0.15);
     }
 
-    .gradient-text {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+    .primary-text {
+        color: #007cba;
     }
 
-    .dashboard-gradient {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    .dashboard-primary {
+        background: #007cba;
     }
 
     /* Enhanced FullCalendar Styles */
@@ -140,7 +137,7 @@
         padding: 8px 16px !important;
         font-weight: 600 !important;
         transition: all 0.2s ease-in-out !important;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        background: #007cba !important;
         color: white !important;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
         margin: 0 2px !important;
@@ -157,18 +154,15 @@
     }
 
     .fc-button-active {
-        background: linear-gradient(135deg, #5a67d8 0%, #667eea 100%) !important;
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
+        background: #005a8a !important;
+        box-shadow: 0 4px 12px rgba(0, 124, 186, 0.3) !important;
     }
 
     /* Calendar title */
     .fc-toolbar-title {
         font-size: 24px !important;
         font-weight: 700 !important;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        -webkit-background-clip: text !important;
-        -webkit-text-fill-color: transparent !important;
-        background-clip: text !important;
+        color: #007cba !important;
     }
 
     /* More link styling */
@@ -196,7 +190,7 @@
     }
 
     .fc-popover-header {
-        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+        background: #f8fafc !important;
         border-bottom: 1px solid #e2e8f0 !important;
         padding: 12px 16px !important;
         font-weight: 600 !important;
@@ -248,9 +242,9 @@
 @endpush
 
 @section('content')
-<div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+<div class="min-h-screen bg-gray-50">
     <!-- Enhanced Header -->
-    <div class="dashboard-gradient text-white p-6 lg:p-8 mb-8">
+    <div class="dashboard-primary text-white p-6 lg:p-8 mb-8">
         <div class="max-w-7xl mx-auto">
             <!-- Breadcrumb -->
             <nav class="text-sm mb-4 opacity-90">
@@ -290,7 +284,7 @@
 
         <!-- Enhanced Tab Navigation -->
         <div class="glass-card rounded-2xl mb-8 overflow-hidden">
-            <nav class="flex bg-gradient-to-r from-gray-50 to-gray-100" aria-label="Tabs">
+            <nav class="flex bg-gray-50" aria-label="Tabs">
                 <button onclick="showTab('events')" id="events-tab" class="tab-button flex-1 border-b-4 border-blue-500 text-blue-600 py-4 px-6 text-sm font-semibold transition-all duration-300 ease-in-out flex items-center justify-center space-x-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
@@ -315,10 +309,10 @@
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-sm font-medium text-gray-600 mb-1">Total Events</p>
-                            <p class="text-3xl font-bold gradient-text">{{ $totalEventsCount ?? $events->total() }}</p>
+                            <p class="text-3xl font-bold primary-text">{{ $totalEventsCount ?? $events->total() }}</p>
                             <p class="text-xs text-gray-500 mt-1">All events</p>
                         </div>
-                        <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+                        <div class="w-14 h-14 bg-primary rounded-2xl flex items-center justify-center shadow-lg">
                             <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                             </svg>
@@ -334,7 +328,7 @@
                             <p class="text-3xl font-bold text-green-600">{{ $activeEventsCount ?? 0 }}</p>
                             <p class="text-xs text-gray-500 mt-1">Currently active</p>
                         </div>
-                        <div class="w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center shadow-lg">
+                        <div class="w-14 h-14 bg-green-600 rounded-2xl flex items-center justify-center shadow-lg">
                             <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
@@ -350,7 +344,7 @@
                             <p class="text-3xl font-bold text-yellow-600">{{ $upcomingEventsCount ?? 0 }}</p>
                             <p class="text-xs text-gray-500 mt-1">Coming soon</p>
                         </div>
-                        <div class="w-14 h-14 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-2xl flex items-center justify-center shadow-lg">
+                        <div class="w-14 h-14 bg-yellow-600 rounded-2xl flex items-center justify-center shadow-lg">
                             <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
@@ -366,7 +360,7 @@
                             <p class="text-3xl font-bold text-gray-600">{{ $completedEventsCount ?? 0 }}</p>
                             <p class="text-xs text-gray-500 mt-1">Finished events</p>
                         </div>
-                        <div class="w-14 h-14 bg-gradient-to-br from-gray-500 to-gray-600 rounded-2xl flex items-center justify-center shadow-lg">
+                        <div class="w-14 h-14 bg-gray-600 rounded-2xl flex items-center justify-center shadow-lg">
                             <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
@@ -494,7 +488,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <!-- Calendar View -->
                 <div class="lg:col-span-2 glass-card rounded-2xl overflow-hidden shadow-xl">
-                    <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4 border-b border-gray-200">
+                    <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
                         <h3 class="text-lg font-semibold text-gray-800">Event Calendar</h3>
                         <p class="text-sm text-gray-600">Interactive calendar view of all events</p>
                     </div>
@@ -505,7 +499,7 @@
 
                 <!-- Enhanced Upcoming Events -->
                 <div class="glass-card rounded-2xl overflow-hidden shadow-xl">
-                    <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4 border-b border-gray-200">
+                    <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
                         <h3 class="text-lg font-semibold text-gray-800">Upcoming Events</h3>
                         <p class="text-sm text-gray-600">Next scheduled events</p>
                     </div>
@@ -514,7 +508,7 @@
                             @forelse($upcomingEvents ?? [] as $event)
                                 <div class="event-card p-4 border border-gray-200 rounded-xl hover:bg-gray-50 cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105" onclick="window.location.href='{{ route('events.show', $event) }}'">
                                     <div class="flex items-start space-x-3">
-                                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white shadow-lg">
+                                        <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white shadow-lg">
                                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                             </svg>
@@ -653,20 +647,20 @@
                     info.el.style.fontWeight = '600';
                     info.el.style.cursor = 'pointer';
 
-                    // Add gradient background based on event type
+                    // Add solid background based on event type
                     const eventType = info.event.extendedProps.type || 'default';
                     switch(eventType) {
                         case 'workshop':
-                            info.el.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                            info.el.style.background = '#007cba';
                             break;
                         case 'seminar':
-                            info.el.style.background = 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)';
+                            info.el.style.background = '#005a8a';
                             break;
                         case 'conference':
-                            info.el.style.background = 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)';
+                            info.el.style.background = '#007cba';
                             break;
                         default:
-                            info.el.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                            info.el.style.background = '#007cba';
                     }
                 },
                 dayCellDidMount: function(info) {
@@ -682,7 +676,7 @@
                     if (toolbar) {
                         toolbar.style.marginBottom = '20px';
                         toolbar.style.padding = '15px';
-                        toolbar.style.background = 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)';
+                        toolbar.style.background = '#f8fafc';
                         toolbar.style.borderRadius = '12px';
                         toolbar.style.border = '1px solid #e2e8f0';
                     }
@@ -695,7 +689,7 @@
                         button.style.padding = '8px 16px';
                         button.style.fontWeight = '600';
                         button.style.transition = 'all 0.2s ease-in-out';
-                        button.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                        button.style.background = '#007cba';
                         button.style.color = 'white';
                         button.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
 

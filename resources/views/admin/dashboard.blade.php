@@ -3,7 +3,7 @@
 @push('styles')
 <style>
     /* Professional Dashboard Styles */
-    .dashboard-gradient {
+    .dashboard-primary {
         background: #007cba;
     }
 
@@ -82,9 +82,9 @@
 @endpush
 
 @section('content')
-<div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+<div class="min-h-screen bg-gray-50">
     <!-- Enhanced Header -->
-    <div class="dashboard-gradient text-white p-6 lg:p-8 mb-8">
+    <div class="dashboard-primary text-white p-6 lg:p-8 mb-8">
         <div class="max-w-7xl mx-auto">
             <!-- Breadcrumb -->
             <nav class="text-sm mb-4 opacity-90">
@@ -619,7 +619,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* Print styles */
 @media print {
-    .dashboard-gradient,
+    .dashboard-primary,
     .glass-card {
         background: white !important;
         color: black !important;
