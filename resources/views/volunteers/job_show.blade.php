@@ -67,6 +67,14 @@
                             </svg>
                             Back to Dashboard
                         </a>
+                        @if($job->posted_by == auth()->id())
+                            <a href="{{ route('volunteer.dashboard') }}#job-listings" class="bg-secondary text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all duration-300 hover-scale flex items-center">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                                </svg>
+                                Back to Job Listings
+                            </a>
+                        @endif
                         <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
                             {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                         </div>
@@ -147,13 +155,53 @@
                         <div class="space-y-6">
                             <div>
                                 <h3 class="text-lg font-semibold text-gray-900 mb-4">Job Status</h3>
-                                <span class="px-4 py-2 text-sm font-semibold rounded-full
-                                    @if($job->status == 'pending') bg-yellow-100 text-yellow-800
-                                    @elseif($job->status == 'approved') bg-green-100 text-green-800
-                                    @elseif($job->status == 'rejected' || $job->status == 'declined') bg-red-100 text-red-800
-                                    @else bg-gray-100 text-gray-800 @endif">
-                                    {{ ucfirst($job->status) }}
-                                </span>
+                                <div class="space-y-3">
+                                    <span class="px-4 py-2 text-sm font-semibold rounded-full
+                                        @if($job->status == 'pending') bg-yellow-100 text-yellow-800
+                                        @elseif($job->status == 'approved') bg-green-100 text-green-800
+                                        @elseif($job->status == 'rejected' || $job->status == 'declined') bg-red-100 text-red-800
+                                        @else bg-gray-100 text-gray-800 @endif">
+                                        {{ ucfirst($job->status) }}
+                                    </span>
+
+                                    @if($job->status == 'pending')
+                                        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                                            <div class="flex items-start">
+                                                <svg class="w-5 h-5 text-yellow-600 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                                                </svg>
+                                                <div>
+                                                    <h4 class="text-sm font-medium text-yellow-800 mb-1">Awaiting Admin Review</h4>
+                                                    <p class="text-sm text-yellow-700">Your job posting is currently under review by our administrators. You'll be notified once it's approved and becomes visible to other users.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @elseif($job->status == 'approved')
+                                        <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                                            <div class="flex items-start">
+                                                <svg class="w-5 h-5 text-green-600 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                                </svg>
+                                                <div>
+                                                    <h4 class="text-sm font-medium text-green-800 mb-1">Job Approved</h4>
+                                                    <p class="text-sm text-green-700">Your job posting has been approved and is now visible to all users.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @elseif($job->status == 'rejected' || $job->status == 'declined')
+                                        <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                                            <div class="flex items-start">
+                                                <svg class="w-5 h-5 text-red-600 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                                                </svg>
+                                                <div>
+                                                    <h4 class="text-sm font-medium text-red-800 mb-1">Job Not Approved</h4>
+                                                    <p class="text-sm text-red-700">Your job posting was not approved. Please contact an administrator for more information.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
 
                             @if($job->salary_min || $job->salary_max)

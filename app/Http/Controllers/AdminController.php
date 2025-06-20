@@ -159,6 +159,8 @@ class AdminController extends Controller
 
         // Check if a user with this email already exists
         $user = \App\Models\User::where('email', $volunteer->email)->first();
+        $defaultPassword = 'volunteer123'; // Default password for new volunteers
+        $isNewUser = false;
 
         if ($user) {
             // If user exists, update their role to 'volunteer' and ensure they're active
@@ -166,17 +168,20 @@ class AdminController extends Controller
             $user->status = 'active';
             $user->phone_number = $volunteer->phone; // Update phone number
             $user->save();
+            $message = 'Volunteer approved successfully and existing user account updated. They can now be managed in User Management.';
         } else {
-            // If user does not exist, create a new volunteer user (similar to student process)
+            // If user does not exist, create a new volunteer user with default password
             $user = \App\Models\User::create([
                 'name' => $volunteer->name,
                 'email' => $volunteer->email,
-                'password' => bcrypt(\Illuminate\Support\Str::random(10)), // Generate random password like students
+                'password' => bcrypt($defaultPassword), // Use default password for easier management
                 'role' => 'volunteer',
                 'status' => 'active',
                 'phone_number' => $volunteer->phone,
                 'email_verified_at' => now(),
             ]);
+            $isNewUser = true;
+            $message = "Volunteer approved successfully and user account created with default password '{$defaultPassword}'. They can now be managed in User Management where you can change their password.";
         }
 
         // Log the user creation/update for debugging
@@ -186,10 +191,11 @@ class AdminController extends Controller
             'email' => $volunteer->email,
             'role' => 'volunteer',
             'status' => 'active',
-            'action' => $user->wasRecentlyCreated ? 'created' : 'updated'
+            'action' => $isNewUser ? 'created' : 'updated',
+            'default_password_used' => $isNewUser
         ]);
 
-        return back()->with('success', 'Volunteer approved successfully and user account created. They can now be managed in User Management.');
+        return back()->with('success', $message);
     }
 
     public function rejectVolunteer(Volunteer $volunteer)

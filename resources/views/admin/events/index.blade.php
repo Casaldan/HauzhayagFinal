@@ -320,7 +320,7 @@
                     </div>
                 </div>
 
-                <!-- Active Events -->
+                <!-- Active Events
                 <div class="glass-card stat-card fade-in fade-in-delay-2 rounded-2xl p-6 hover-lift">
                     <div class="flex items-center justify-between">
                         <div>
@@ -334,7 +334,7 @@
                             </svg>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Upcoming Events -->
                 <div class="glass-card stat-card fade-in fade-in-delay-3 rounded-2xl p-6 hover-lift">

@@ -262,7 +262,7 @@
 
 
             <!-- Latest Job Listings -->
-            <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <div id="job-listings" class="bg-white rounded-xl shadow-lg p-6 mb-8">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-xl font-semibold text-gray-800 flex items-center">
                         <svg class="w-6 h-6 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">

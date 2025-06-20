@@ -99,7 +99,6 @@
                         <ul class="list-disc list-inside space-y-2 ml-4">
                             <li>Personal identification information (name, address, contact details)</li>
                             <li>Educational background and academic records</li>
-                            <li>Financial information for scholarship assessment</li>
                             <li>Supporting documents and photographs</li>
                         </ul>
                     </div>
