@@ -305,7 +305,7 @@
 </head>
 
 <body class="bg-neutral font-sans">
-    <header class="bg-gradient-to-r from-white/95 to-neutral/95 backdrop-blur-md shadow-xl fixed w-full top-0 z-50 animate-slide-down border-b border-primary/10">
+    <header style="background-color: #667eea;" class="backdrop-blur-md shadow-xl fixed w-full top-0 z-50 animate-slide-down border-b border-primary/10">
         <div class="max-w-7xl mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-6 group">
@@ -316,38 +316,38 @@
                         <div class="absolute inset-0 bg-primary/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                     <div>
-                        <h1 class="text-2xl font-bold text-blue-600">Hauz Hayag</h1>
-                        <p class="text-sm text-gray-600 font-medium"></p>
+                        <h1 class="text-2xl font-bold text-white">Hauz Hayag</h1>
+                        <p class="text-sm text-white/80 font-medium"></p>
                     </div>
                 </div>
 
-                <button id="mobileMenuButton" class="md:hidden text-gray-600 hover:text-primary p-2 rounded-lg hover:bg-primary/5 transition-all duration-300">
+                <button id="mobileMenuButton" class="md:hidden text-white hover:text-white/80 p-2 rounded-lg hover:bg-white/10 transition-all duration-300">
                     <i class="fas fa-bars text-2xl"></i>
                 </button>
 
                 <!-- Desktop Navigation -->
                 <nav class="hidden lg:flex items-center space-x-1">
-                    <a href="#home" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 hover:text-blue-600 hover:bg-blue-600/10 transition-all duration-300 ease-in-out transform hover:scale-105">
+                    <a href="#home" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-white hover:text-white/90 hover:bg-white/10 transition-all duration-300 ease-in-out transform hover:scale-105">
                         <i class="fas fa-home text-lg"></i>
                         <span class="font-medium">Home</span>
                     </a>
-                    <a href="#scholarships" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 hover:text-blue-600 hover:bg-blue-600/10 transition-all duration-300 ease-in-out transform hover:scale-105">
+                    <a href="#scholarships" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-white hover:text-white/90 hover:bg-white/10 transition-all duration-300 ease-in-out transform hover:scale-105">
                         <i class="fas fa-graduation-cap text-lg"></i>
                         <span class="font-medium">Scholarships</span>
                     </a>
-                    <a href="#job-offers" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 hover:text-blue-600 hover:bg-blue-600/10 transition-all duration-300 ease-in-out transform hover:scale-105">
+                    <a href="#job-offers" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-white hover:text-white/90 hover:bg-white/10 transition-all duration-300 ease-in-out transform hover:scale-105">
                         <i class="fas fa-briefcase text-lg"></i>
                         <span class="font-medium">Job Offers</span>
                     </a>
-                    <a href="#events" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 hover:text-blue-600 hover:bg-blue-600/10 transition-all duration-300 ease-in-out transform hover:scale-105">
+                    <a href="#events" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-white hover:text-white/90 hover:bg-white/10 transition-all duration-300 ease-in-out transform hover:scale-105">
                         <i class="fas fa-calendar-alt text-lg"></i>
                         <span class="font-medium">Events</span>
                     </a>
-                    <a href="#about-us" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 hover:text-blue-600 hover:bg-blue-600/10 transition-all duration-300 ease-in-out transform hover:scale-105">
+                    <a href="#about-us" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-white hover:text-white/90 hover:bg-white/10 transition-all duration-300 ease-in-out transform hover:scale-105">
                         <i class="fas fa-info-circle text-lg"></i>
                         <span class="font-medium">About Us</span>
                     </a>
-                    <a href="#track-application" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-700 hover:text-blue-600 hover:bg-blue-600/10 transition-all duration-300 ease-in-out transform hover:scale-105">
+                    <a href="#track-application" class="nav-link flex items-center space-x-2 px-4 py-2 rounded-xl text-white hover:text-white/90 hover:bg-white/10 transition-all duration-300 ease-in-out transform hover:scale-105">
                         <i class="fas fa-search text-lg"></i>
                         <span class="font-medium">Track Application</span>
                     </a>
@@ -359,29 +359,29 @@
             </div>
 
             <!-- Mobile Navigation -->
-            <nav id="mobileMenu" class="lg:hidden hidden bg-white/95 backdrop-blur-md border-t border-primary/10 rounded-b-2xl shadow-xl">
+            <nav id="mobileMenu" class="lg:hidden hidden backdrop-blur-md border-t border-white/20 rounded-b-2xl shadow-xl" style="background-color: #667eea;">
                 <div class="px-4 pt-4 pb-3 space-y-2">
-                <a href="#home" class="flex items-center space-x-3 text-gray-700 hover:text-primary hover:bg-primary/5 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out">
+                <a href="#home" class="flex items-center space-x-3 text-white hover:text-white/90 hover:bg-white/10 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out">
                     <i class="fas fa-home text-lg"></i>
                     <span class="font-medium">Home</span>
                 </a>
-                <a href="#scholarships" class="flex items-center space-x-3 text-gray-700 hover:text-primary hover:bg-primary/5 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out">
+                <a href="#scholarships" class="flex items-center space-x-3 text-white hover:text-white/90 hover:bg-white/10 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out">
                     <i class="fas fa-graduation-cap text-lg"></i>
                     <span class="font-medium">Scholarships</span>
                 </a>
-                <a href="#job-offers" class="flex items-center space-x-3 text-gray-700 hover:text-primary hover:bg-primary/5 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out">
+                <a href="#job-offers" class="flex items-center space-x-3 text-white hover:text-white/90 hover:bg-white/10 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out">
                     <i class="fas fa-briefcase text-lg"></i>
                     <span class="font-medium">Job Offers</span>
                 </a>
-                <a href="#events" class="flex items-center space-x-3 text-gray-700 hover:text-primary hover:bg-primary/5 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out">
+                <a href="#events" class="flex items-center space-x-3 text-white hover:text-white/90 hover:bg-white/10 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out">
                     <i class="fas fa-calendar-alt text-lg"></i>
                     <span class="font-medium">Events</span>
                 </a>
-                <a href="#about-us" class="flex items-center space-x-3 text-gray-700 hover:text-primary hover:bg-primary/5 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out">
+                <a href="#about-us" class="flex items-center space-x-3 text-white hover:text-white/90 hover:bg-white/10 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out">
                     <i class="fas fa-info-circle text-lg"></i>
                     <span class="font-medium">About Us</span>
                 </a>
-                <a href="#track-application" class="flex items-center space-x-3 text-gray-700 hover:text-primary hover:bg-primary/5 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out">
+                <a href="#track-application" class="flex items-center space-x-3 text-white hover:text-white/90 hover:bg-white/10 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out">
                     <i class="fas fa-search text-lg"></i>
                     <span class="font-medium">Track Application</span>
                 </a>
@@ -1866,9 +1866,9 @@
                 modalTitle.textContent = 'Residential Scholarship for Girls - Eligibility Requirements';
                 modalContent.innerHTML = `
                     <div class="space-y-6">
-                        <div class="bg-pink-50 border border-pink-200 rounded-lg p-4">
-                            <h3 class="font-semibold text-pink-800 mb-2">Eligibility Requirements</h3>
-                            <ul class="text-pink-700 text-sm space-y-2">
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <h3 class="font-semibold text-gray-800 mb-2">Eligibility Requirements</h3>
+                            <ul class="text-gray-700 text-sm space-y-2">
                                 <li>• Female, 18 and above</li>
                                 <li>• Senior High School Graduate</li>
                                 <li>• Living below poverty threshold</li>
@@ -1878,19 +1878,19 @@
                             </ul>
                         </div>
 
-                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                            <h3 class="font-semibold text-blue-800 mb-2">Education Level</h3>
-                            <p class="text-blue-700 text-sm">Must be pursuing college education or planning to enroll in college.</p>
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <h3 class="font-semibold text-gray-800 mb-2">Education Level</h3>
+                            <p class="text-gray-700 text-sm">Must be pursuing college education or planning to enroll in college.</p>
                         </div>
 
-                        <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
-                            <h3 class="font-semibold text-purple-800 mb-2">Geographic Eligibility</h3>
-                            <p class="text-purple-700 text-sm">Open to girls from Mindanao and Visayas regions.</p>
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <h3 class="font-semibold text-gray-800 mb-2">Geographic Eligibility</h3>
+                            <p class="text-gray-700 text-sm">Open to girls from Mindanao and Visayas regions.</p>
                         </div>
 
-                        <div class="bg-green-50 border border-green-200 rounded-lg p-4">
-                            <h3 class="font-semibold text-green-800 mb-2">Program Benefits</h3>
-                            <ul class="text-green-700 text-sm space-y-1">
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <h3 class="font-semibold text-gray-800 mb-2">Program Benefits</h3>
+                            <ul class="text-gray-700 text-sm space-y-1">
                                 <li>• Full tuition coverage</li>
                                 <li>• Housing at Hauz Hayag center</li>
                                 <li>• Leadership training programs</li>
@@ -1903,9 +1903,9 @@
                 modalTitle.textContent = 'Community-Based Scholarship - Eligibility Requirements';
                 modalContent.innerHTML = `
                     <div class="space-y-6">
-                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                            <h3 class="font-semibold text-blue-800 mb-2">Eligibility Requirements</h3>
-                            <ul class="text-blue-700 text-sm space-y-2">
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <h3 class="font-semibold text-gray-800 mb-2">Eligibility Requirements</h3>
+                            <ul class="text-gray-700 text-sm space-y-2">
                                 <li>• Applicants must be an identified resident within Cebu City, Philippines.</li>
                                 <li>• Applicants must be of ages 6 years old and above. Must be willing to pursue his/her studies.</li>
                                 <li>• Applicants must be of good moral character and preferably with good scholastic records as per school records.</li>
@@ -1915,23 +1915,23 @@
                             </ul>
                         </div>
 
-                        <div class="bg-green-50 border border-green-200 rounded-lg p-4">
-                            <h3 class="font-semibold text-green-800 mb-2">Living Arrangement</h3>
-                            <p class="text-green-700 text-sm">Students live with their families while receiving support for school materials, uniforms, and educational expenses.</p>
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <h3 class="font-semibold text-gray-800 mb-2">Living Arrangement</h3>
+                            <p class="text-gray-700 text-sm">Students live with their families while receiving support for school materials, uniforms, and educational expenses.</p>
                         </div>
 
-                        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                            <h3 class="font-semibold text-yellow-800 mb-2">Requirements</h3>
-                            <ul class="text-yellow-700 text-sm space-y-1">
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <h3 class="font-semibold text-gray-800 mb-2">Requirements</h3>
+                            <ul class="text-gray-700 text-sm space-y-1">
                                 <li>• Regular attendance at organizational meetings</li>
                                 <li>• Participation in Saturday tutoring sessions</li>
                                 <li>• Commitment to community involvement</li>
                             </ul>
                         </div>
 
-                        <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
-                            <h3 class="font-semibold text-indigo-800 mb-2">Support Provided</h3>
-                            <ul class="text-indigo-700 text-sm space-y-1">
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <h3 class="font-semibold text-gray-800 mb-2">Support Provided</h3>
+                            <ul class="text-gray-700 text-sm space-y-1">
                                 <li>• School materials and supplies</li>
                                 <li>• School uniforms</li>
                                 <li>• Educational expenses coverage</li>
