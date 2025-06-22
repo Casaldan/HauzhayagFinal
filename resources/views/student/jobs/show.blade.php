@@ -31,8 +31,8 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#3A5F6B',
-                        secondary: '#2C5F6E',
+                        primary: '#007cba',
+                        secondary: '#005a8a',
                         neutral: '#f8fafc'
                     }
                 }
@@ -64,8 +64,8 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
-        .dashboard-gradient {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .dashboard-primary {
+            background: #007cba;
         }
     </style>
 </head>
@@ -80,12 +80,12 @@
             <div class="lg:hidden h-16"></div>
 <div class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
     <!-- Header -->
-    <div class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-8">
+    <div class="dashboard-primary text-white py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between">
                 <div>
                     <h1 class="text-3xl font-bold">Job Details</h1>
-                    <p class="text-purple-100 mt-2">View complete job information</p>
+                    <p class="text-white/80 mt-2">View complete job information</p>
                 </div>
                 <a href="{{ route('student.jobs.index') }}" class="bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-6 py-3 rounded-xl transition-all duration-300 font-medium backdrop-blur-sm border border-white border-opacity-20 hover:scale-105 flex items-center space-x-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
