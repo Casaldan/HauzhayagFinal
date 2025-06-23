@@ -63,20 +63,17 @@
     }
 
     .gradient-text {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: #007cba;
     }
 
     .dashboard-gradient {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: #007cba;
     }
 </style>
 @endpush
 
 @section('content')
-<div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+<div class="min-h-screen bg-gray-50">
     <!-- Enhanced Header -->
     <div class="dashboard-gradient text-white p-6 lg:p-8 mb-8">
         <div class="max-w-7xl mx-auto">
@@ -110,7 +107,7 @@
 
         <!-- Enhanced Tab Navigation -->
         <div class="glass-card rounded-2xl mb-8 overflow-hidden">
-            <nav class="flex bg-gradient-to-r from-gray-50 to-gray-100" aria-label="Tabs">
+            <nav class="flex bg-gray-100" aria-label="Tabs">
                 <button onclick="showTab('applicants')" id="applicants-tab" class="tab-button flex-1 border-b-4 border-blue-500 text-blue-600 py-4 px-6 text-sm font-semibold transition-all duration-300 ease-in-out flex items-center justify-center space-x-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-3-3v6m-7 4h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
@@ -138,7 +135,7 @@
                             <p class="text-3xl font-bold text-yellow-600">{{ $pendingApplicationsCount ?? 0 }}</p>
                             <p class="text-xs text-gray-500 mt-1">Awaiting review</p>
                         </div>
-                        <div class="w-14 h-14 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-2xl flex items-center justify-center shadow-lg">
+                        <div class="w-14 h-14 bg-yellow-500 rounded-2xl flex items-center justify-center shadow-lg">
                             <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
@@ -154,7 +151,7 @@
                             <p class="text-3xl font-bold text-green-600">{{ $approvedApplicationsCount ?? 0 }}</p>
                             <p class="text-xs text-gray-500 mt-1">Successfully approved</p>
                         </div>
-                        <div class="w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center shadow-lg">
+                        <div class="w-14 h-14 bg-green-500 rounded-2xl flex items-center justify-center shadow-lg">
                             <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
@@ -170,7 +167,7 @@
                             <p class="text-3xl font-bold gradient-text">{{ $activeStudentsCount ?? 0 }}</p>
                             <p class="text-xs text-gray-500 mt-1">Currently enrolled</p>
                         </div>
-                        <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+                        <div class="w-14 h-14 bg-blue-500 rounded-2xl flex items-center justify-center shadow-lg">
                             <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                             </svg>
@@ -242,14 +239,14 @@
 
             <!-- Enhanced Applicants Table -->
             <div class="glass-card rounded-2xl overflow-hidden shadow-xl">
-                <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4 border-b border-gray-200">
+                <div class="bg-gray-100 px-6 py-4 border-b border-gray-200">
                     <h3 class="text-lg font-semibold text-gray-800">Pending Applications</h3>
                     <p class="text-sm text-gray-600">Review and manage scholarship applications</p>
                 </div>
 
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gradient-to-r from-gray-50 to-gray-100">
+                        <thead class="bg-gray-100">
                             <tr>
                                 <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Applicant</th>
                                 <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Contact</th>
@@ -265,7 +262,7 @@
                                     <tr class="hover:bg-gray-50 transition-all duration-200">
                                         <td class="px-6 py-6">
                                             <div class="flex items-center">
-                                                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                                                <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">
                                                     {{ strtoupper(substr($application->full_name, 0, 1)) }}
                                                 </div>
                                                 <div class="ml-4">
@@ -360,14 +357,14 @@
         <div id="students-content" class="tab-content hidden">
             <!-- Enhanced Students Table -->
             <div class="glass-card rounded-2xl overflow-hidden shadow-xl">
-                <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4 border-b border-gray-200">
+                <div class="bg-gray-100 px-6 py-4 border-b border-gray-200">
                     <h3 class="text-lg font-semibold text-gray-800">Active Students</h3>
                     <p class="text-sm text-gray-600">Manage active student accounts</p>
                 </div>
 
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gradient-to-r from-gray-50 to-gray-100">
+                        <thead class="bg-gray-100">
                             <tr>
                                 <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Student</th>
                                 <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Contact</th>
@@ -382,7 +379,7 @@
                                 <tr class="hover:bg-gray-50 transition-all duration-200">
                                     <td class="px-6 py-6">
                                         <div class="flex items-center">
-                                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                                            <div class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">
                                                 {{ strtoupper(substr($student->name, 0, 1)) }}
                                             </div>
                                             <div class="ml-4">

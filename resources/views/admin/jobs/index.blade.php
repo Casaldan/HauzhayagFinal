@@ -22,7 +22,7 @@
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        background: rgba(0, 124, 186, 0.1);
         transition: left 0.5s;
     }
 
@@ -63,20 +63,17 @@
     }
 
     .gradient-text {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: #007cba;
     }
 
     .dashboard-gradient {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: #007cba;
     }
 </style>
 @endpush
 
 @section('content')
-<div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+<div class="min-h-screen bg-gray-50">
     <!-- Enhanced Header -->
     <div class="dashboard-gradient text-white p-6 lg:p-8 mb-8">
         <div class="max-w-7xl mx-auto">
@@ -137,7 +134,7 @@
                         <p class="text-3xl font-bold gradient-text">{{ $jobs->count() }}</p>
                         <p class="text-xs text-gray-500 mt-1">All job listings</p>
                     </div>
-                    <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <div class="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2M8 6v10a2 2 0 002 2h4a2 2 0 002-2V6"/>
                         </svg>
@@ -153,7 +150,7 @@
                         <p class="text-3xl font-bold text-green-600">{{ $jobs->where('status', 'approved')->count() }}</p>
                         <p class="text-xs text-gray-500 mt-1">Currently live</p>
                     </div>
-                    <div class="w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <div class="w-14 h-14 bg-green-600 rounded-2xl flex items-center justify-center shadow-lg">
                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
@@ -169,7 +166,7 @@
                         <p class="text-3xl font-bold text-yellow-600">{{ $jobs->where('status', 'pending')->count() }}</p>
                         <p class="text-xs text-gray-500 mt-1">Awaiting approval</p>
                     </div>
-                    <div class="w-14 h-14 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <div class="w-14 h-14 bg-yellow-600 rounded-2xl flex items-center justify-center shadow-lg">
                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
@@ -185,7 +182,7 @@
                         <p class="text-3xl font-bold text-red-600">{{ $jobs->where('expires_at', '<', now())->count() }}</p>
                         <p class="text-xs text-gray-500 mt-1">Past deadline</p>
                     </div>
-                    <div class="w-14 h-14 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <div class="w-14 h-14 bg-red-600 rounded-2xl flex items-center justify-center shadow-lg">
                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
@@ -238,14 +235,14 @@
 
         <!-- Enhanced Jobs Table -->
         <div class="glass-card rounded-2xl overflow-hidden shadow-xl">
-            <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4 border-b border-gray-200">
+            <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
                 <h3 class="text-lg font-semibold text-gray-800">Job Listings</h3>
                 <p class="text-sm text-gray-600">Manage all job postings and applications</p>
             </div>
 
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gradient-to-r from-gray-50 to-gray-100">
+                    <thead class="bg-gray-50">
                         <tr>
                             <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Job Details</th>
                             <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Company & Location</th>
@@ -259,7 +256,7 @@
                             <tr class="hover:bg-gray-50 transition-all duration-200 {{ $job->status === 'pending' ? 'bg-yellow-50 border-l-4 border-yellow-400' : '' }}">
                                 <td class="px-6 py-6">
                                     <div class="flex items-center">
-                                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold shadow-lg">
+                                        <div class="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold shadow-lg">
                                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2M8 6v10a2 2 0 002 2h4a2 2 0 002-2V6"/>
                                             </svg>
@@ -366,7 +363,7 @@
                                         </div>
                                         <h3 class="text-lg font-semibold text-gray-900 mb-2">No jobs found</h3>
                                         <p class="text-gray-600 mb-6">Get started by creating your first job listing.</p>
-                                        <a href="{{ route('admin.jobs.create') }}" class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-3 rounded-xl transition-all duration-300 font-medium shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2">
+                                        <a href="{{ route('admin.jobs.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl transition-all duration-300 font-medium shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2">
                                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                                             </svg>
