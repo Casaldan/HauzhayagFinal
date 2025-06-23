@@ -285,10 +285,10 @@
                                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-3-3v6m-7 4h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                                                     </svg>
-                                                    <span>View Transcript</span>
+                                                    <span>View Document</span>
                                                 </a>
                                             @else
-                                                <span class="text-gray-400 italic">No transcript</span>
+                                                <span class="text-gray-400 italic">No Document</span>
                                             @endif
                                         </td>
                                         <td class="px-6 py-6">
@@ -369,7 +369,7 @@
                                 <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Student</th>
                                 <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Contact</th>
                                 <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Type</th>
-                                <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Transcript</th>
+                                <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Document</th>
                                 <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Status</th>
                                 <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Actions</th>
                             </tr>
@@ -418,10 +418,10 @@
                                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-3-3v6m-7 4h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                                                 </svg>
-                                                <span>View Transcript</span>
+                                                <span>View Document</span>
                                             </a>
                                         @else
-                                            <span class="text-gray-400 italic">No transcript</span>
+                                            <span class="text-gray-400 italic">No Document</span>
                                         @endif
                                     </td>
                                     <td class="px-6 py-6">
