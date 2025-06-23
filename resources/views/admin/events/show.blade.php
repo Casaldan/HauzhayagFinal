@@ -83,6 +83,10 @@
                                 <h4 class="text-sm font-medium text-gray-500 uppercase tracking-wide">Description</h4>
                                 <p class="mt-1 text-gray-700 leading-relaxed">{{ $event->description }}</p>
                             </div>
+                            <div class="border-l-4 border-orange-500 pl-4">
+                                <h4 class="text-sm font-medium text-gray-500 uppercase tracking-wide">What Are We Looking For?</h4>
+                                <p class="mt-1 text-gray-700 leading-relaxed">{{ $event->what_are_we_looking_for ?? 'Not specified' }}</p>
+                            </div>
                             <div class="border-l-4 border-green-500 pl-4">
                                 <h4 class="text-sm font-medium text-gray-500 uppercase tracking-wide">Location</h4>
                                 <p class="mt-1 text-gray-700">{{ $event->location ?? 'Location TBD' }}</p>

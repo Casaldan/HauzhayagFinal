@@ -141,6 +141,10 @@
                 }
             }
         }
+
+        // Global variables for event modals - declared early to avoid initialization errors
+        var currentEventId = null;
+        var currentEventTitle = null;
     </script>
     <style>
         .animate-on-scroll {
@@ -768,17 +772,29 @@
 
                     <p class="text-gray-600 text-sm mb-8 line-clamp-3 leading-relaxed">{{ $event->description }}</p>
 
-                    <!-- Enhanced register button -->
-                    <button onclick="openEventRegistrationModal('{{ $event->id }}')"
-                            class="group/btn relative overflow-hidden w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6 py-4 rounded-xl hover:from-purple-600 hover:to-indigo-500 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-in-out font-semibold">
-                        <span class="relative z-10 flex items-center justify-center gap-3">
-                            <span>Register Now</span>
-                            <svg class="w-5 h-5 group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                            </svg>
-                        </span>
-                        <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-indigo-500 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                    </button>
+                    <!-- Enhanced action buttons -->
+                    <div class="flex space-x-3">
+                        <button onclick="openEventDetailsModal('{{ $event->id }}')"
+                                class="group/btn relative overflow-hidden flex-1 bg-gradient-to-r from-blue-500 to-cyan-600 text-white px-4 py-3 rounded-xl hover:from-cyan-600 hover:to-blue-500 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-in-out font-semibold">
+                            <span class="relative z-10 flex items-center justify-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                <span>View Details</span>
+                            </span>
+                            <div class="absolute inset-0 bg-gradient-to-r from-cyan-600 to-blue-500 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                        </button>
+                        <button onclick="openEventRegistrationModal('{{ $event->id }}')"
+                                class="group/btn relative overflow-hidden flex-1 bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-4 py-3 rounded-xl hover:from-purple-600 hover:to-indigo-500 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-in-out font-semibold">
+                            <span class="relative z-10 flex items-center justify-center gap-2">
+                                <span>Register Now</span>
+                                <svg class="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </span>
+                            <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-indigo-500 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                        </button>
+                    </div>
                 </div>
             </div>
             @empty
@@ -1361,7 +1377,7 @@
             </div>
 
             <!-- Form -->
-            <form id="eventRegistrationForm" class="space-y-4" onsubmit="submitEventRegistration(event)">
+            <form id="eventRegistrationForm" class="space-y-4" enctype="multipart/form-data" onsubmit="submitEventRegistration(event)">
                 <input type="hidden" id="event_id" name="event_id">
 
                 <!-- Full Name -->
@@ -1411,7 +1427,7 @@
 
                 <!-- Application Reason -->
                 <div class="form-group">
-                    <label for="application_reason" class="block text-xs font-medium text-gray-700 mb-2">Why would you like to participate?</label>
+                    <label for="application_reason" class="block text-xs font-medium text-gray-700 mb-2">Why would you like to participate? <span class="text-red-500">*</span></label>
                     <div class="relative">
                         <textarea id="application_reason" name="application_reason" rows="3"
                                   class="w-full px-3 py-2 pl-8 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-100 focus:border-teal-400 transition-all duration-300 bg-gray-50 hover:bg-white resize-none text-sm"
@@ -1422,6 +1438,29 @@
                             </svg>
                         </div>
                     </div>
+                </div>
+
+                <!-- Volunteer Description -->
+                <div class="form-group">
+                    <label for="volunteer_description" class="block text-xs font-medium text-gray-700 mb-2">Describe yourself as a volunteer <span class="text-red-500">*</span></label>
+                    <div class="relative">
+                        <textarea id="volunteer_description" name="volunteer_description" rows="3"
+                                  class="w-full px-3 py-2 pl-8 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-100 focus:border-teal-400 transition-all duration-300 bg-gray-50 hover:bg-white resize-none text-sm"
+                                  placeholder="Tell us about your skills, experience, and what makes you a good volunteer..." required></textarea>
+                        <div class="absolute top-2 left-0 flex items-center pl-2">
+                            <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Valid ID Upload -->
+                <div class="form-group">
+                    <label for="valid_id" class="block text-xs font-medium text-gray-700 mb-2">Upload Valid ID <span class="text-red-500">*</span></label>
+                    <input type="file" id="valid_id" name="valid_id" required accept="image/*,.pdf"
+                           class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-100 focus:border-teal-400 transition-all duration-300 bg-gray-50 hover:bg-white text-sm file:mr-3 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:font-medium file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100">
+                    <p class="text-xs text-gray-500 mt-1">Please upload a clear photo or scan of your valid government-issued ID. Accepted formats: JPG, PNG, PDF. Max size: 5MB.</p>
                 </div>
 
                 <!-- Terms and Conditions -->
@@ -1460,6 +1499,44 @@
                     Register Now
                 </button>
             </form>
+        </div>
+    </div>
+
+    <!-- Event Details Modal -->
+    <div id="eventDetailsModal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex justify-center items-center z-50 hidden p-4">
+        <div class="bg-white p-6 rounded-xl shadow-2xl w-full max-w-2xl mx-auto relative transform transition-all duration-300 scale-95 modal-content max-h-[90vh] overflow-y-auto">
+            <!-- Close Button -->
+            <button onclick="closeEventDetailsModal()" class="absolute top-3 right-3 w-6 h-6 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:text-gray-700 transition-all duration-200">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+
+            <!-- Header -->
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <h2 class="text-lg font-semibold text-gray-800 mb-1">Event Details</h2>
+                <p class="text-xs text-gray-600">Complete event information</p>
+            </div>
+
+            <!-- Event Details Content -->
+            <div id="eventDetailsContent" class="space-y-4 mb-6">
+                <!-- Event details will be loaded here -->
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex space-x-3 pt-4 border-t border-gray-200">
+                <button onclick="closeEventDetailsModal()" class="flex-1 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-200 font-medium">
+                    Close
+                </button>
+                <button onclick="registerFromDetails()" class="flex-1 px-4 py-2 bg-gradient-to-r from-teal-500 to-blue-500 text-white rounded-lg hover:from-teal-600 hover:to-blue-600 transition-all duration-200 font-medium">
+                    Register for this Event
+                </button>
+            </div>
         </div>
     </div>
 
@@ -2274,11 +2351,13 @@
 
         // Enhanced Event registration functions
         function openEventRegistrationModal(eventId) {
+            currentEventId = eventId;
             document.getElementById('event_id').value = eventId;
             const modal = document.getElementById('eventRegistrationModal');
             const modalContent = modal.querySelector('.modal-content');
 
             modal.classList.remove('hidden');
+            modal.classList.add('flex');
 
             // Add entrance animation
             setTimeout(() => {
@@ -2311,17 +2390,108 @@
 
         function closeEventRegistrationModal() {
             const modal = document.getElementById('eventRegistrationModal');
-            const modalContent = modal.querySelector('.modal-content');
+            if (!modal) return;
 
-            // Add exit animation
-            modalContent.style.transform = 'scale(0.95)';
-            modalContent.style.opacity = '0';
+            const modalContent = modal.querySelector('.modal-content');
+            if (modalContent) {
+                // Add exit animation
+                modalContent.style.transform = 'scale(0.95)';
+                modalContent.style.opacity = '0';
+            }
 
             setTimeout(() => {
                 modal.classList.add('hidden');
+                modal.classList.remove('flex');
                 // Reset form
-                document.getElementById('eventRegistrationForm').reset();
+                const form = document.getElementById('eventRegistrationForm');
+                if (form) form.reset();
             }, 300);
+        }
+
+        function openEventDetailsModal(eventId) {
+            currentEventId = eventId;
+            // Fetch event details
+            fetch(`/api/events/${eventId}`)
+                .then(response => response.json())
+                .then(event => {
+                    currentEventTitle = event.title;
+                    const content = `
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">${event.title}</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                    <div class="flex items-center text-gray-600">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                        </svg>
+                                        <span><strong>Start:</strong> ${new Date(event.start_date).toLocaleDateString('en-US', {
+                                            year: 'numeric',
+                                            month: 'long',
+                                            day: 'numeric',
+                                            hour: '2-digit',
+                                            minute: '2-digit'
+                                        })}</span>
+                                    </div>
+                                    <div class="flex items-center text-gray-600">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                        </svg>
+                                        <span><strong>End:</strong> ${new Date(event.end_date).toLocaleDateString('en-US', {
+                                            year: 'numeric',
+                                            month: 'long',
+                                            day: 'numeric',
+                                            hour: '2-digit',
+                                            minute: '2-digit'
+                                        })}</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center text-gray-600 mb-4">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    </svg>
+                                    <span><strong>Location:</strong> ${event.location}</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-800 mb-2">Description</h4>
+                                <p class="text-gray-700 leading-relaxed">${event.description}</p>
+                            </div>
+                            ${event.what_are_we_looking_for ? `
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-800 mb-2 flex items-center">
+                                    <svg class="w-5 h-5 mr-2 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                    </svg>
+                                    What Are We Looking For?
+                                </h4>
+                                <div class="bg-orange-50 border border-orange-200 rounded-lg p-4">
+                                    <p class="text-gray-700 leading-relaxed">${event.what_are_we_looking_for}</p>
+                                </div>
+                            </div>
+                            ` : ''}
+                        </div>
+                    `;
+                    document.getElementById('eventDetailsContent').innerHTML = content;
+                    const detailsModal = document.getElementById('eventDetailsModal');
+                    detailsModal.classList.remove('hidden');
+                    detailsModal.classList.add('flex');
+                })
+                .catch(error => {
+                    console.error('Error fetching event details:', error);
+                    alert('Error loading event details. Please try again.');
+                });
+        }
+
+        function closeEventDetailsModal() {
+            const detailsModal = document.getElementById('eventDetailsModal');
+            detailsModal.classList.add('hidden');
+            detailsModal.classList.remove('flex');
+        }
+
+        function registerFromDetails() {
+            closeEventDetailsModal();
+            openEventRegistrationModal(currentEventId);
         }
 
         // Add validation for event registration form and scholarship modal
@@ -2377,13 +2547,9 @@
                 eventEmailInput.addEventListener('blur', function(e) {
                     const email = e.target.value;
                     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    const gmailRegex = /@gmail\./i;
 
                     if (!emailRegex.test(email)) {
                         alert('Please enter a valid email address.');
-                        e.target.focus();
-                    } else if (!gmailRegex.test(email)) {
-                        alert('Email must be a Gmail address (must contain @gmail).');
                         e.target.focus();
                     }
                 });
@@ -2435,13 +2601,9 @@
                 scholarshipEmailInput.addEventListener('blur', function(e) {
                     const email = e.target.value;
                     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    const gmailRegex = /@gmail\./i;
 
                     if (!emailRegex.test(email)) {
                         alert('Please enter a valid email address.');
-                        e.target.focus();
-                    } else if (!gmailRegex.test(email)) {
-                        alert('Email must be a valid email address (must contain @gmail).');
                         e.target.focus();
                     }
                 });
@@ -2454,7 +2616,7 @@
                     const phone = scholarshipPhoneInput.value.replace(/\D/g, '');
                     const email = scholarshipEmailInput.value;
                     const termsCheckbox = document.getElementById('welcome_terms');
-                    const gmailRegex = /@gmail\./i;
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
                     if (phone.length !== 11) {
                         e.preventDefault();
@@ -2463,9 +2625,9 @@
                         return;
                     }
 
-                    if (!gmailRegex.test(email)) {
+                    if (!emailRegex.test(email)) {
                         e.preventDefault();
-                        alert('Email must be a valid email address (must contain @gmail).');
+                        alert('Please enter a valid email address.');
                         scholarshipEmailInput.focus();
                         return;
                     }
@@ -2490,7 +2652,7 @@
 
             const phone = phoneInput.value.replace(/\D/g, '');
             const email = emailInput.value;
-            const gmailRegex = /@gmail\./i;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
             if (phone.length !== 11) {
                 alert('Phone number must be exactly 11 digits.');
@@ -2498,8 +2660,8 @@
                 return;
             }
 
-            if (!gmailRegex.test(email)) {
-                alert('Email must be a Gmail address (must contain @gmail).');
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
                 emailInput.focus();
                 return;
             }
@@ -2507,6 +2669,22 @@
             if (!termsCheckbox.checked) {
                 alert('You must agree to the Terms and Conditions to submit your registration.');
                 termsCheckbox.focus();
+                return;
+            }
+
+            // Validate file upload
+            const fileInput = document.getElementById('valid_id');
+            if (!fileInput.files || fileInput.files.length === 0) {
+                alert('Please upload a valid ID.');
+                fileInput.focus();
+                return;
+            }
+
+            // Check file size (5MB limit)
+            const file = fileInput.files[0];
+            if (file.size > 5 * 1024 * 1024) {
+                alert('File size must be less than 5MB.');
+                fileInput.focus();
                 return;
             }
 
@@ -2524,23 +2702,14 @@
             `;
 
             const formData = new FormData(form);
-            const data = {
-                event_id: formData.get('event_id'),
-                full_name: formData.get('full_name'),
-                email: formData.get('email'),
-                phone_number: formData.get('phone_number'),
-                application_reason: formData.get('application_reason'),
-                terms_agreement: formData.get('terms_agreement') ? true : false
-            };
 
             // Send to backend
             fetch('/volunteer/event-registration', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
-                body: JSON.stringify(data)
+                body: formData
             })
             .then(response => response.json())
             .then(result => {

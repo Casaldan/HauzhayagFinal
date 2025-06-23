@@ -167,6 +167,23 @@
                         </div>
                     </div>
 
+                    @if($event->what_are_we_looking_for)
+                        <!-- What Are We Looking For Section -->
+                        <div class="mt-8 pt-8 border-t border-gray-200">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                                <svg class="w-6 h-6 mr-2 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                </svg>
+                                What Are We Looking For?
+                            </h3>
+                            <div class="bg-orange-50 border border-orange-200 rounded-lg p-6">
+                                <div class="prose max-w-none">
+                                    <p class="text-gray-700 leading-relaxed">{{ $event->what_are_we_looking_for }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
                     @if($event->requirements)
                         <!-- Requirements Section -->
                         <div class="mt-8 pt-8 border-t border-gray-200">

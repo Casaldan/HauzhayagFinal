@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone_number');
             $table->text('application_reason');
+            $table->text('volunteer_description')->nullable();
+            $table->string('valid_id_path')->nullable();
             $table->string('tracking_code')->unique();
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->timestamp('applied_at')->useCurrent();

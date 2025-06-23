@@ -42,6 +42,7 @@ class EventController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
+            'what_are_we_looking_for' => 'required|string',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
             'location' => 'required|string|max:255',
@@ -65,6 +66,11 @@ class EventController extends Controller
 
     public function show(Event $event)
     {
+        // Check if this is an API request
+        if (request()->is('api/*')) {
+            return response()->json($event);
+        }
+
         return view('admin.events.show', compact('event'));
     }
 
@@ -78,6 +84,7 @@ class EventController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
+            'what_are_we_looking_for' => 'required|string',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
             'location' => 'required|string|max:255',

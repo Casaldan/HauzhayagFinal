@@ -77,14 +77,14 @@ class VolunteerController extends Controller
         // Validate the request data
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:volunteers', 'regex:/@gmail\./i'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:volunteers'],
             'phone' => ['required', 'string', 'regex:/^\d{11}$/'],
             'skills' => 'nullable|array',
             'status' => 'required|in:Active,Pending,Inactive',
             'notes' => 'nullable|string',
             'start_date' => 'required|date',
         ], [
-            'email.regex' => 'Email must be a Gmail address (must contain @gmail).',
+
             'phone.regex' => 'Phone number must be exactly 11 digits.'
         ]);
 

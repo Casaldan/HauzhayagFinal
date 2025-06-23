@@ -156,7 +156,7 @@
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-sm font-medium text-gray-600 mb-1">Active Volunteers</p>
-                            <p class="text-3xl font-bold text-green-600">{{ $activeVolunteersCount ?? $volunteers->where('status', 'active')->count() }}</p>
+                            <p class="text-3xl font-bold text-green-600">{{ $activeVolunteersCount ?? $volunteers->where('status', 'Active')->count() }}</p>
                             <p class="text-xs text-gray-500 mt-1">Currently active</p>
                         </div>
                         <div class="w-14 h-14 bg-green-600 rounded-2xl flex items-center justify-center shadow-lg">
@@ -249,11 +249,41 @@
                 </form>
             </div>
 
+            <!-- Important Notice -->
+            <div class="bg-blue-50 border border-blue-200 rounded-2xl p-6 mb-6">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <svg class="h-6 w-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <div class="ml-3 flex-1">
+                        <h3 class="text-lg font-medium text-blue-800 mb-2">
+                            <i class="fas fa-info-circle mr-2"></i>
+                            Volunteer Management Information
+                        </h3>
+                        <div class="text-sm text-blue-700 space-y-2">
+                            <p class="font-medium">📋 This directory shows all volunteers (pending and approved).</p>
+                            <p>✅ <strong>Approved volunteers</strong> also appear in <a href="{{ route('users.index', ['role' => 'volunteer']) }}" class="underline font-medium hover:text-blue-900">User Management</a> for account management.</p>
+                            <p>🔄 When you approve a volunteer, they become active in this directory AND get a user account created for login access.</p>
+                            <div class="mt-3 flex space-x-3">
+                                <a href="{{ route('users.index', ['role' => 'volunteer']) }}" class="inline-flex items-center text-blue-600 hover:text-blue-800 text-sm font-medium bg-white px-3 py-1 rounded-lg border border-blue-200 hover:border-blue-300 transition-colors">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
+                                    </svg>
+                                    Manage Volunteer User Accounts
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Enhanced Volunteers Table -->
             <div class="glass-card rounded-2xl overflow-hidden shadow-xl">
                 <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
                     <h3 class="text-lg font-semibold text-gray-800">Volunteer Directory</h3>
-                    <p class="text-sm text-gray-600">Manage all volunteer accounts and permissions</p>
+                    <p class="text-sm text-gray-600">Manage all volunteers (approved volunteers also have user accounts for system access)</p>
                 </div>
 
                 <div class="overflow-x-auto">
@@ -370,13 +400,22 @@
                                                 </svg>
                                             </div>
                                             <h3 class="text-lg font-semibold text-gray-900 mb-2">No volunteers found</h3>
-                                            <p class="text-gray-600 mb-6">No volunteers match your current search criteria.</p>
-                                            <a href="{{ route('users.create', ['role' => 'volunteer']) }}" class="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-6 py-3 rounded-xl transition-all duration-300 font-medium shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2">
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-                                                </svg>
-                                                <span>Add First Volunteer</span>
-                                            </a>
+                                            <p class="text-gray-600 mb-4">No volunteers match your current search criteria.</p>
+                                            <p class="text-sm text-gray-500 mb-6">Approved volunteers also appear in User Management for account access.</p>
+                                            <div class="flex space-x-3">
+                                                <a href="{{ route('users.index', ['role' => 'volunteer']) }}" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl transition-all duration-300 font-medium shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2">
+                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
+                                                    </svg>
+                                                    <span>View User Accounts</span>
+                                                </a>
+                                                <a href="{{ route('users.create', ['role' => 'volunteer']) }}" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl transition-all duration-300 font-medium shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2">
+                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                                                    </svg>
+                                                    <span>Add New Volunteer</span>
+                                                </a>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
@@ -433,6 +472,43 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Application Details Modal -->
+<div id="applicationModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
+    <div class="relative top-10 mx-auto p-6 border max-w-4xl shadow-lg rounded-md bg-white">
+        <div class="mt-3">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-gray-900">Volunteer Application Details</h3>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Application Information -->
+                <div class="space-y-4">
+                    <div id="applicationDetails" class="space-y-3">
+                        <!-- Details will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Uploaded Image -->
+                <div class="space-y-4">
+                    <h4 class="text-lg font-semibold text-gray-900">Uploaded Valid ID</h4>
+                    <div id="uploadedImageContainer" class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+                        <!-- Image will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 flex justify-end space-x-3">
+                <button onclick="closeModal()" class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors">
+                    Close
+                </button>
             </div>
         </div>
     </div>
@@ -578,7 +654,19 @@
         })
         .then(response => response.json())
         .then(data => {
-            if (data.message) {
+            if (data.success) {
+                if (data.redirect_to_user_management && data.user_id) {
+                    // Show success message and redirect to user management
+                    alert(data.message + '\n\nRedirecting to User Management to update account details...');
+                    window.location.href = `/users/${data.user_id}/edit?from=volunteer_approval&new_user=${data.is_new_user}&default_password=${data.default_password || ''}`;
+                } else {
+                    alert(data.message);
+                    // Reload the event applications tab
+                    loadEventApplications();
+                    // Reload the page to update volunteer counts
+                    window.location.reload();
+                }
+            } else if (data.message) {
                 alert(data.message);
                 // Reload the event applications tab
                 loadEventApplications();
@@ -596,13 +684,162 @@
     function viewApplicationDetails(applicationId) {
         fetch(`/admin/volunteer-applications/${applicationId}`)
             .then(response => response.json())
-            .then(application => {
-                alert(`Application Details:\n\nName: ${application.full_name}\nEmail: ${application.email}\nPhone: ${application.phone_number}\nEvent: ${application.event.title}\nReason: ${application.application_reason}\nStatus: ${application.status}\nApplied: ${new Date(application.applied_at || application.created_at).toLocaleDateString()}`);
+            .then(data => {
+                // Populate application details
+                const details = document.getElementById('applicationDetails');
+                details.innerHTML = `
+                    <div class="bg-gray-50 p-4 rounded-lg space-y-3">
+                        <div class="grid grid-cols-1 gap-3">
+                            <div>
+                                <label class="text-sm font-medium text-gray-600">Full Name</label>
+                                <p class="text-gray-900 font-medium">${data.full_name}</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-gray-600">Email Address</label>
+                                <p class="text-gray-900">${data.email}</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-gray-600">Phone Number</label>
+                                <p class="text-gray-900">${data.phone_number || 'Not provided'}</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-gray-600">Event</label>
+                                <p class="text-gray-900 font-medium">${data.event.title}</p>
+                                <p class="text-sm text-gray-600">${data.event.location}</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-gray-600">Tracking Code</label>
+                                <p class="text-gray-900 font-mono bg-blue-100 px-2 py-1 rounded inline-block">${data.tracking_code}</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-gray-600">Application Reason</label>
+                                <p class="text-gray-900">${data.application_reason}</p>
+                            </div>
+                            ${data.volunteer_description ? `
+                            <div>
+                                <label class="text-sm font-medium text-gray-600">Volunteer Description</label>
+                                <p class="text-gray-900">${data.volunteer_description}</p>
+                            </div>
+                            ` : ''}
+                            <div>
+                                <label class="text-sm font-medium text-gray-600">Status</label>
+                                <span class="px-2 py-1 text-xs font-semibold rounded-full
+                                    ${data.status === 'approved' ? 'bg-green-100 text-green-800' :
+                                      data.status === 'rejected' ? 'bg-red-100 text-red-800' :
+                                      'bg-yellow-100 text-yellow-800'}">
+                                    ${data.status.charAt(0).toUpperCase() + data.status.slice(1)}
+                                </span>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-gray-600">Applied Date</label>
+                                <p class="text-gray-900">${data.applied_at ? new Date(data.applied_at).toLocaleDateString() : new Date(data.created_at).toLocaleDateString()}</p>
+                            </div>
+                            ${data.admin_notes ? `
+                            <div>
+                                <label class="text-sm font-medium text-gray-600">Admin Notes</label>
+                                <p class="text-gray-900">${data.admin_notes}</p>
+                            </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+
+                // Populate uploaded image
+                const imageContainer = document.getElementById('uploadedImageContainer');
+                if (data.valid_id_url) {
+                    const fileExtension = data.valid_id_path.split('.').pop().toLowerCase();
+                    if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension)) {
+                        // Display image
+                        imageContainer.innerHTML = `
+                            <div class="space-y-3">
+                                <img src="${data.valid_id_url}" alt="Valid ID" class="max-w-full h-auto rounded-lg shadow-md cursor-pointer" onclick="openImageModal('${data.valid_id_url}')">
+                                <p class="text-sm text-gray-600">Click image to view full size</p>
+                                <a href="${data.valid_id_url}" target="_blank" class="inline-flex items-center text-blue-600 hover:text-blue-800 text-sm">
+                                    <i class="fas fa-external-link-alt mr-1"></i>
+                                    Open in new tab
+                                </a>
+                            </div>
+                        `;
+                    } else if (fileExtension === 'pdf') {
+                        // Display PDF link
+                        imageContainer.innerHTML = `
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-center h-32 bg-red-50 rounded-lg">
+                                    <i class="fas fa-file-pdf text-red-500 text-4xl"></i>
+                                </div>
+                                <p class="text-sm text-gray-600">PDF Document</p>
+                                <a href="${data.valid_id_url}" target="_blank" class="inline-flex items-center bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">
+                                    <i class="fas fa-file-pdf mr-2"></i>
+                                    View PDF
+                                </a>
+                            </div>
+                        `;
+                    } else {
+                        // Display generic file
+                        imageContainer.innerHTML = `
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-center h-32 bg-gray-50 rounded-lg">
+                                    <i class="fas fa-file text-gray-400 text-4xl"></i>
+                                </div>
+                                <p class="text-sm text-gray-600">Uploaded File</p>
+                                <a href="${data.valid_id_url}" target="_blank" class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                    <i class="fas fa-download mr-2"></i>
+                                    Download File
+                                </a>
+                            </div>
+                        `;
+                    }
+                } else {
+                    imageContainer.innerHTML = `
+                        <div class="flex items-center justify-center h-32 text-gray-400">
+                            <div class="text-center">
+                                <i class="fas fa-image text-3xl mb-2"></i>
+                                <p>No image uploaded</p>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                document.getElementById('applicationModal').classList.remove('hidden');
             })
             .catch(error => {
                 console.error('Error loading application details:', error);
                 alert('Error loading application details. Please try again.');
             });
+    }
+
+    function closeModal() {
+        document.getElementById('applicationModal').classList.add('hidden');
+    }
+
+    function openImageModal(imageUrl) {
+        // Create image modal if it doesn't exist
+        let imageModal = document.getElementById('imageModal');
+        if (!imageModal) {
+            imageModal = document.createElement('div');
+            imageModal.id = 'imageModal';
+            imageModal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden';
+            imageModal.innerHTML = `
+                <div class="relative max-w-4xl max-h-full p-4">
+                    <button onclick="closeImageModal()" class="absolute top-2 right-2 text-white hover:text-gray-300 z-10">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                    <img id="modalImage" src="" alt="Full size image" class="max-w-full max-h-full object-contain rounded-lg">
+                </div>
+            `;
+            document.body.appendChild(imageModal);
+        }
+
+        // Set image source and show modal
+        document.getElementById('modalImage').src = imageUrl;
+        imageModal.classList.remove('hidden');
+    }
+
+    function closeImageModal() {
+        const imageModal = document.getElementById('imageModal');
+        if (imageModal) {
+            imageModal.classList.add('hidden');
+        }
     }
 
     // Search form functionality

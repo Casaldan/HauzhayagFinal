@@ -56,9 +56,21 @@
 
                         <div>
                             <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-                            <textarea name="description" id="description" rows="4" required 
+                            <textarea name="description" id="description" rows="4" required
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#2C5F6E] focus:ring-[#2C5F6E]"></textarea>
                             @error('description')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div>
+                            <label for="what_are_we_looking_for" class="block text-sm font-medium text-gray-700">
+                                What Are We Looking For? <span class="text-red-500">*</span>
+                            </label>
+                            <textarea name="what_are_we_looking_for" id="what_are_we_looking_for" rows="4" required
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#2C5F6E] focus:ring-[#2C5F6E]"
+                                placeholder="Describe what kind of volunteers or participants you are looking for..."></textarea>
+                            @error('what_are_we_looking_for')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
                         </div>

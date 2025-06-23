@@ -65,6 +65,18 @@
                                   placeholder="Describe the event details..."></textarea>
                     </div>
 
+                    <div>
+                        <label for="what_are_we_looking_for" class="block text-sm font-medium text-gray-700 mb-2">
+                            What Are We Looking For? <span class="text-red-500">*</span>
+                        </label>
+                        <textarea name="what_are_we_looking_for" id="what_are_we_looking_for" rows="4" required
+                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-300 resize-none"
+                                  placeholder="Describe what kind of volunteers or participants you are looking for..."></textarea>
+                        @error('what_are_we_looking_for')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
                     <div class="flex justify-end space-x-4 pt-6 border-t border-gray-200">
                         <a href="{{ route('events.index') }}"
                            class="inline-flex items-center px-6 py-3 border border-gray-300 text-gray-700 bg-white rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all duration-300">

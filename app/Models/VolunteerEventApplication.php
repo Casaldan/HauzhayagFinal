@@ -13,6 +13,8 @@ class VolunteerEventApplication extends Model
         'email',
         'phone_number',
         'application_reason',
+        'volunteer_description',
+        'valid_id_path',
         'tracking_code',
         'status',
         'applied_at',

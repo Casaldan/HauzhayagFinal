@@ -28,7 +28,7 @@ class ScholarshipController extends Controller
         // 1. Validate the incoming request data
         $validatedData = $request->validate([
             'full_name' => 'required|string|max:255',
-            'email' => ['required', 'email', 'max:255', 'regex:/@gmail\./i'],
+            'email' => ['required', 'email', 'max:255'],
             'phone_number' => ['nullable', 'string', 'regex:/^\d{11}$/'],
             'scholarship_type' => 'required|string|in:community_based,in_house',
             'transcript' => 'required|file|mimes:jpg,jpeg,png|max:5120', // Max 5MB example

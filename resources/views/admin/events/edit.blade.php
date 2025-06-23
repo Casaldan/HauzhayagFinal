@@ -53,6 +53,16 @@
                     <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
                     <textarea name="description" id="description" rows="4" required class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1B4B5A] focus:ring-[#1B4B5A] transition-all duration-300">{{ old('description', $event->description) }}</textarea>
                 </div>
+
+                <div>
+                    <label for="what_are_we_looking_for" class="block text-sm font-medium text-gray-700">
+                        What Are We Looking For? <span class="text-red-500">*</span>
+                    </label>
+                    <textarea name="what_are_we_looking_for" id="what_are_we_looking_for" rows="4" required class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1B4B5A] focus:ring-[#1B4B5A] transition-all duration-300">{{ old('what_are_we_looking_for', $event->what_are_we_looking_for) }}</textarea>
+                    @error('what_are_we_looking_for')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
                 <div class="flex justify-end space-x-3 pt-2">
                     <a href="{{ route('events.show', $event) }}" class="btn-hover inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1B4B5A] transition-all duration-300">Cancel</a>
                     <button type="submit" class="btn-hover inline-flex justify-center py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#1B4B5A] hover:bg-[#25697e] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1B4B5A] transition-all duration-300">Update Event</button>

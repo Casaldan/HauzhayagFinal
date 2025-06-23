@@ -190,8 +190,14 @@
                                     <!-- Event Description -->
                                     <p class="text-gray-700 mb-4">{{ \Illuminate\Support\Str::limit($event->description, 200) }}</p>
 
-                                    <!-- Action Button -->
-                                    <div class="flex justify-end">
+                                    <!-- Action Buttons -->
+                                    <div class="flex justify-end space-x-3">
+                                        <button onclick="openEventDetailsModal({{ $event->id }})" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-all duration-300 hover-scale flex items-center">
+                                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                            View Details
+                                        </button>
                                         <button onclick="openRegistrationModal({{ $event->id }}, '{{ $event->title }}')" class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition-all duration-300 hover-scale flex items-center">
                                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
@@ -224,7 +230,7 @@
         <h2 class="text-2xl font-bold mb-6 text-center">Register for Event</h2>
         <p id="eventTitle" class="text-center text-gray-600 mb-6"></p>
 
-        <form id="registrationForm" class="space-y-4">
+        <form id="registrationForm" class="space-y-4" enctype="multipart/form-data">
             <input type="hidden" id="eventId" name="event_id">
 
             <div>
@@ -245,6 +251,17 @@
             <div>
                 <label for="applicationReason" class="block text-sm font-medium text-gray-700 mb-2">Why do you want to volunteer for this event? *</label>
                 <textarea id="applicationReason" name="application_reason" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="Tell us why you're interested in volunteering for this event..."></textarea>
+            </div>
+
+            <div>
+                <label for="volunteerDescription" class="block text-sm font-medium text-gray-700 mb-2">Describe yourself as a volunteer *</label>
+                <textarea id="volunteerDescription" name="volunteer_description" rows="3" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="Tell us about your skills, experience, and what makes you a good volunteer..."></textarea>
+            </div>
+
+            <div>
+                <label for="validId" class="block text-sm font-medium text-gray-700 mb-2">Upload Valid ID *</label>
+                <input type="file" id="validId" name="valid_id" required accept="image/*,.pdf" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                <p class="text-xs text-gray-500 mt-1">Please upload a clear photo or scan of your valid government-issued ID (Driver's License, Passport, National ID, etc.). Accepted formats: JPG, PNG, PDF. Max size: 5MB.</p>
             </div>
 
             <!-- Terms and Conditions -->
@@ -282,6 +299,27 @@
                 </button>
             </div>
         </form>
+    </div>
+</div>
+
+<!-- Event Details Modal -->
+<div id="eventDetailsModal" class="fixed inset-0 bg-black bg-opacity-50 justify-center items-center z-50 hidden">
+    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-2xl mx-4 relative max-h-[90vh] overflow-y-auto">
+        <button onclick="closeEventDetailsModal()" class="absolute top-4 right-4 text-gray-400 hover:text-black text-2xl font-bold">&times;</button>
+        <h2 class="text-2xl font-bold mb-6 text-center">Event Details</h2>
+
+        <div id="eventDetailsContent" class="space-y-4">
+            <!-- Event details will be loaded here -->
+        </div>
+
+        <div class="flex justify-end space-x-4 pt-6 border-t border-gray-200 mt-6">
+            <button onclick="closeEventDetailsModal()" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
+                Close
+            </button>
+            <button onclick="registerFromDetails()" class="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">
+                Register for this Event
+            </button>
+        </div>
     </div>
 </div>
 
@@ -347,7 +385,12 @@
             }
         }
 
+        let currentEventId = null;
+        let currentEventTitle = null;
+
         function openRegistrationModal(eventId, eventTitle) {
+            currentEventId = eventId;
+            currentEventTitle = eventTitle;
             document.getElementById('eventId').value = eventId;
             document.getElementById('eventTitle').textContent = eventTitle;
             document.getElementById('registrationModal').classList.remove('hidden');
@@ -358,6 +401,90 @@
             document.getElementById('registrationModal').classList.add('hidden');
             document.getElementById('registrationModal').classList.remove('flex');
             document.getElementById('registrationForm').reset();
+        }
+
+        function openEventDetailsModal(eventId) {
+            currentEventId = eventId;
+            // Fetch event details
+            fetch(`/api/events/${eventId}`)
+                .then(response => response.json())
+                .then(event => {
+                    currentEventTitle = event.title;
+                    const content = `
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">${event.title}</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                    <div class="flex items-center text-gray-600">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                        </svg>
+                                        <span><strong>Start:</strong> ${new Date(event.start_date).toLocaleDateString('en-US', {
+                                            year: 'numeric',
+                                            month: 'long',
+                                            day: 'numeric',
+                                            hour: '2-digit',
+                                            minute: '2-digit'
+                                        })}</span>
+                                    </div>
+                                    <div class="flex items-center text-gray-600">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                        </svg>
+                                        <span><strong>End:</strong> ${new Date(event.end_date).toLocaleDateString('en-US', {
+                                            year: 'numeric',
+                                            month: 'long',
+                                            day: 'numeric',
+                                            hour: '2-digit',
+                                            minute: '2-digit'
+                                        })}</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center text-gray-600 mb-4">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    </svg>
+                                    <span><strong>Location:</strong> ${event.location}</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-800 mb-2">Description</h4>
+                                <p class="text-gray-700 leading-relaxed">${event.description}</p>
+                            </div>
+                            ${event.what_are_we_looking_for ? `
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-800 mb-2 flex items-center">
+                                    <svg class="w-5 h-5 mr-2 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                    </svg>
+                                    What Are We Looking For?
+                                </h4>
+                                <div class="bg-orange-50 border border-orange-200 rounded-lg p-4">
+                                    <p class="text-gray-700 leading-relaxed">${event.what_are_we_looking_for}</p>
+                                </div>
+                            </div>
+                            ` : ''}
+                        </div>
+                    `;
+                    document.getElementById('eventDetailsContent').innerHTML = content;
+                    document.getElementById('eventDetailsModal').classList.remove('hidden');
+                    document.getElementById('eventDetailsModal').classList.add('flex');
+                })
+                .catch(error => {
+                    console.error('Error fetching event details:', error);
+                    alert('Error loading event details. Please try again.');
+                });
+        }
+
+        function closeEventDetailsModal() {
+            document.getElementById('eventDetailsModal').classList.add('hidden');
+            document.getElementById('eventDetailsModal').classList.remove('flex');
+        }
+
+        function registerFromDetails() {
+            closeEventDetailsModal();
+            openRegistrationModal(currentEventId, currentEventTitle);
         }
 
         document.getElementById('registrationForm').addEventListener('submit', function(e) {
@@ -371,16 +498,30 @@
                 return;
             }
 
+            // Validate file upload
+            const fileInput = document.getElementById('validId');
+            if (!fileInput.files || fileInput.files.length === 0) {
+                alert('Please upload a valid ID.');
+                fileInput.focus();
+                return;
+            }
+
+            // Check file size (5MB limit)
+            const file = fileInput.files[0];
+            if (file.size > 5 * 1024 * 1024) {
+                alert('File size must be less than 5MB.');
+                fileInput.focus();
+                return;
+            }
+
             const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
 
             fetch('/volunteer/event-registration', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
-                body: JSON.stringify(data)
+                body: formData
             })
             .then(response => response.json())
             .then(data => {
