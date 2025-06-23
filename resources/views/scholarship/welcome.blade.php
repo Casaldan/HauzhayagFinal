@@ -172,13 +172,9 @@
             emailInput.addEventListener('blur', function(e) {
                 const email = e.target.value;
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                const gmailRegex = /@gmail\./i;
 
                 if (!emailRegex.test(email)) {
                     alert('Please enter a valid email address.');
-                    e.target.focus();
-                } else if (!gmailRegex.test(email)) {
-                    alert('Email must be a valid email address (must contain @gmail).');
                     e.target.focus();
                 }
             });
@@ -189,7 +185,7 @@
             form.addEventListener('submit', function(e) {
                 const phone = phoneInput.value.replace(/\D/g, '');
                 const email = emailInput.value;
-                const gmailRegex = /@gmail\./i;
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
                 if (phone.length !== 11) {
                     e.preventDefault();
@@ -198,9 +194,9 @@
                     return;
                 }
 
-                if (!gmailRegex.test(email)) {
+                if (!emailRegex.test(email)) {
                     e.preventDefault();
-                    alert('Email must be a valid email address (must contain @gmail).');
+                    alert('Please enter a valid email address.');
                     emailInput.focus();
                     return;
                 }

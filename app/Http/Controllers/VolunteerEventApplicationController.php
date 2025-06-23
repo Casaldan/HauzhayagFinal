@@ -20,15 +20,28 @@ class VolunteerEventApplicationController extends Controller
         $request->validate([
             'event_id' => 'required|exists:events,id',
             'full_name' => 'required|string|max:255',
-            'email' => ['required', 'email', 'max:255', 'regex:/@gmail\./i'],
+            'email' => ['required', 'email', 'max:255'],
             'phone_number' => ['required', 'string', 'regex:/^\d{11}$/'],
-            'application_reason' => 'required|string|max:1000'
+            'application_reason' => 'required|string|max:1000',
+            'volunteer_description' => 'required|string|max:1000',
+            'valid_id' => 'required|file|mimes:jpeg,jpg,png,pdf|max:5120' // 5MB max
         ], [
-            'email.regex' => 'Email must be a Gmail address (must contain @gmail).',
-            'phone_number.regex' => 'Phone number must be exactly 11 digits.'
+            'phone_number.regex' => 'Phone number must be exactly 11 digits.',
+            'volunteer_description.required' => 'Please describe yourself as a volunteer.',
+            'valid_id.required' => 'Please upload a valid ID.',
+            'valid_id.mimes' => 'Valid ID must be a JPEG, JPG, PNG, or PDF file.',
+            'valid_id.max' => 'Valid ID file size must not exceed 5MB.'
         ]);
 
         try {
+            // Handle file upload
+            $validIdPath = null;
+            if ($request->hasFile('valid_id')) {
+                $file = $request->file('valid_id');
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $validIdPath = $file->storeAs('volunteer_ids', $filename, 'public');
+            }
+
             // Generate unique tracking code
             do {
                 $trackingCode = strtoupper(Str::random(8));
@@ -40,6 +53,8 @@ class VolunteerEventApplicationController extends Controller
                 'email' => $request->email,
                 'phone_number' => $request->phone_number,
                 'application_reason' => $request->application_reason,
+                'volunteer_description' => $request->volunteer_description,
+                'valid_id_path' => $validIdPath,
                 'tracking_code' => $trackingCode,
                 'status' => 'pending'
             ]);
@@ -86,7 +101,14 @@ class VolunteerEventApplicationController extends Controller
     public function show(VolunteerEventApplication $application)
     {
         $application->load('event');
-        return response()->json($application);
+
+        // Add the full URL for the uploaded image
+        $applicationData = $application->toArray();
+        if ($application->valid_id_path) {
+            $applicationData['valid_id_url'] = asset('storage/' . $application->valid_id_path);
+        }
+
+        return response()->json($applicationData);
     }
 
     public function updateStatus(Request $request, VolunteerEventApplication $application)
@@ -123,7 +145,11 @@ class VolunteerEventApplicationController extends Controller
             }
         }
 
-        // If approved, create a new volunteer record and user account
+        // If approved, create both volunteer record and user account
+        $user = null;
+        $isNewUser = false;
+        $defaultPassword = 'volunteer123';
+
         if ($request->status === 'approved') {
             // Check if volunteer with this email already exists
             $existingVolunteer = \App\Models\Volunteer::where('email', $application->email)->first();
@@ -132,39 +158,60 @@ class VolunteerEventApplicationController extends Controller
             $existingUser = \App\Models\User::where('email', $application->email)->first();
 
             if (!$existingVolunteer) {
+                // Create volunteer record in volunteer directory
                 $newVolunteer = \App\Models\Volunteer::create([
                     'name' => $application->full_name,
                     'email' => $application->email,
-                    'phone' => $application->phone_number, // Use actual phone number from application
-                    'skills' => json_encode(['Event Volunteer']), // Default skill
-                    'status' => 'Active', // Use 'Active' to match the enum in migration
-                    'notes' => 'Created from event application: ' . $application->event->title . '. Reason: ' . $application->application_reason,
+                    'phone' => $application->phone_number,
+                    'skills' => json_encode(['Event Volunteer']),
+                    'status' => 'Active', // Set as Active since it's approved
+                    'notes' => 'Approved from event application: ' . $application->event->title . '. Reason: ' . $application->application_reason,
                     'start_date' => now(),
                 ]);
 
-                // Log the creation for debugging
-                Log::info('New volunteer created from event application', [
+                Log::info('New volunteer created in directory from event application', [
                     'volunteer_id' => $newVolunteer->id,
                     'application_id' => $application->id,
                     'email' => $application->email
                 ]);
             }
 
-            // Create user account if it doesn't exist
-            if (!$existingUser) {
-                $newUser = \App\Models\User::create([
+            if ($existingUser) {
+                // Update existing user to volunteer role
+                $existingUser->role = 'volunteer';
+                $existingUser->status = 'active';
+                $existingUser->phone_number = $application->phone_number;
+                // Add volunteer-specific information to user record
+                $existingUser->skills = json_encode(['Event Volunteer']);
+                $existingUser->notes = 'Approved from event application: ' . $application->event->title . '. Reason: ' . $application->application_reason;
+                $existingUser->start_date = now();
+                $existingUser->save();
+                $user = $existingUser;
+
+                Log::info('Existing user updated to volunteer role from event application', [
+                    'user_id' => $user->id,
+                    'application_id' => $application->id,
+                    'email' => $application->email
+                ]);
+            } else {
+                // Create user account for user management
+                $user = \App\Models\User::create([
                     'name' => $application->full_name,
                     'email' => $application->email,
-                    'password' => Hash::make('volunteer123'), // Default password
+                    'password' => Hash::make($defaultPassword), // Default password
                     'role' => 'volunteer',
                     'status' => 'active', // Explicitly set status to active
                     'phone_number' => $application->phone_number, // Add phone number
+                    'skills' => json_encode(['Event Volunteer']), // Default skill
+                    'notes' => 'Approved from event application: ' . $application->event->title . '. Reason: ' . $application->application_reason,
+                    'start_date' => now(),
                     'email_verified_at' => now(),
                 ]);
+                $isNewUser = true;
 
                 // Log the user creation for debugging
                 Log::info('New user created from event application', [
-                    'user_id' => $newUser->id,
+                    'user_id' => $user->id,
                     'application_id' => $application->id,
                     'email' => $application->email,
                     'role' => 'volunteer',
@@ -173,11 +220,23 @@ class VolunteerEventApplicationController extends Controller
             }
         }
 
+        $message = 'Application status updated successfully';
+        if ($request->status === 'approved' && $user) {
+            $message .= $isNewUser
+                ? ". Volunteer approved and added to both Volunteer Directory and User Management with default password '{$defaultPassword}'. Please update the account details."
+                : '. Volunteer approved and added to both Volunteer Directory and User Management. Please review the account details.';
+        }
+
         return response()->json([
             'success' => true,
-            'message' => 'Application status updated successfully',
+            'message' => $message,
             'status' => $request->status,
-            'application' => $application
+            'application' => $application,
+            'user_created' => $request->status === 'approved' && $user,
+            'user_id' => $user ? $user->id : null,
+            'is_new_user' => $isNewUser,
+            'default_password' => $isNewUser ? $defaultPassword : null,
+            'redirect_to_user_management' => $request->status === 'approved' && $user
         ]);
     }
 

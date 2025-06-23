@@ -65,7 +65,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                       d="M9 12h6m-3-3v6m-7 4h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                             </svg>
-                            Post New Job
+                            POST A JOB
                         </h2>
                         <p class="text-gray-600 mt-1">Create a new job listing for review</p>
                     </div>
@@ -133,6 +133,9 @@
                             </svg>
                         </div>
                     </div>
+                    @error('title')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label class="block text-xs font-medium text-gray-700 mb-2">Company Name <span class="text-red-500">*</span></label>
@@ -144,6 +147,9 @@
                             </svg>
                         </div>
                     </div>
+                    @error('company_name')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
             </div>
 
@@ -157,6 +163,9 @@
                         </svg>
                     </div>
                 </div>
+                @error('role')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="form-group">
@@ -169,6 +178,9 @@
                         </svg>
                     </div>
                 </div>
+                @error('description')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="form-group">
@@ -181,132 +193,52 @@
                         </svg>
                     </div>
                 </div>
+                @error('qualifications')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
-            <!-- Employment Details -->
+            <div class="form-group">
+                <label for="employment_type" class="block text-sm font-medium text-gray-700">Employment Type</label>
+                <select id="employment_type" name="employment_type" class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/30 @error('employment_type') border-red-500 @enderror">
+                    <option value="">Select Type (Optional)</option>
+                    <option value="Full-time" {{ old('employment_type') == 'Full-time' ? 'selected' : '' }}>Full-time</option>
+                    <option value="Part-time" {{ old('employment_type') == 'Part-time' ? 'selected' : '' }}>Part-time</option>
+                    <option value="Contract" {{ old('employment_type') == 'Contract' ? 'selected' : '' }}>Contract</option>
+                    <option value="Internship" {{ old('employment_type') == 'Internship' ? 'selected' : '' }}>Internship</option>
+                </select>
+                @error('employment_type')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
+            </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="form-group">
-                    <label class="block text-sm font-semibold text-gray-700 mb-3">Employment Type</label>
-                    <div class="relative">
-                        <select name="employment_type" class="w-full px-4 py-3 pl-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-3 focus:ring-teal-100 focus:border-teal-400 transition-all duration-300 bg-gray-50 hover:bg-white appearance-none">
-                            <option value="">Select Type</option>
-                            <option value="Full-time" {{ old('employment_type') == 'Full-time' ? 'selected' : '' }}>Full-time</option>
-                            <option value="Part-time" {{ old('employment_type') == 'Part-time' ? 'selected' : '' }}>Part-time</option>
-                            <option value="Contract" {{ old('employment_type') == 'Contract' ? 'selected' : '' }}>Contract</option>
-                            <option value="Temporary" {{ old('employment_type') == 'Temporary' ? 'selected' : '' }}>Temporary</option>
-                        </select>
-                        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
-                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                            </svg>
-                        </div>
-                        <div class="absolute inset-y-0 right-0 flex items-center pr-3">
-                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                            </svg>
-                        </div>
-                    </div>
+                <div>
+                    <label for="salary_min" class="block text-sm font-medium text-gray-700">Minimum Salary</label>
+                    <input type="number" step="0.01" id="salary_min" name="salary_min" value="{{ old('salary_min') }}" class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/30 @error('salary_min') border-red-500 @enderror">
+                    @error('salary_min')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                 </div>
-                <div class="form-group">
-                    <label class="block text-sm font-semibold text-gray-700 mb-3">Location</label>
-                    <div class="relative">
-                        <input type="text" name="location" class="w-full px-4 py-3 pl-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-3 focus:ring-teal-100 focus:border-teal-400 transition-all duration-300 bg-gray-50 hover:bg-white" value="{{ old('location') }}" placeholder="e.g. Cebu City, Philippines">
-                        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
-                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                            </svg>
-                        </div>
-                    </div>
+                <div>
+                    <label for="salary_max" class="block text-sm font-medium text-gray-700">Maximum Salary</label>
+                    <input type="number" step="0.01" id="salary_max" name="salary_max" value="{{ old('salary_max') }}" class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/30 @error('salary_max') border-red-500 @enderror">
+                    @error('salary_max')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                 </div>
             </div>
 
-            <!-- Salary Range -->
-            <div class="grid grid-cols-2 gap-6">
-                <div class="form-group">
-                    <label class="block text-sm font-semibold text-gray-700 mb-3">Minimum Salary</label>
-                    <div class="relative">
-                        <input type="number" name="salary_min" class="w-full px-4 py-3 pl-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-3 focus:ring-teal-100 focus:border-teal-400 transition-all duration-300 bg-gray-50 hover:bg-white" value="{{ old('salary_min') }}" min="0" step="0.01" placeholder="0.00">
-                        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
-                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="block text-sm font-semibold text-gray-700 mb-3">Maximum Salary</label>
-                    <div class="relative">
-                        <input type="number" name="salary_max" class="w-full px-4 py-3 pl-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-3 focus:ring-teal-100 focus:border-teal-400 transition-all duration-300 bg-gray-50 hover:bg-white" value="{{ old('salary_max') }}" min="0" step="0.01" placeholder="0.00">
-                        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
-                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Contact Information -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="form-group">
-                    <label class="block text-sm font-semibold text-gray-700 mb-3">Contact Person <span class="text-red-500">*</span></label>
-                    <div class="relative">
-                        <input type="text" name="contact_person" class="w-full px-4 py-3 pl-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-3 focus:ring-teal-100 focus:border-teal-400 transition-all duration-300 bg-gray-50 hover:bg-white" required value="{{ old('contact_person') }}" placeholder="e.g. John Doe">
-                        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
-                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="block text-sm font-semibold text-gray-700 mb-3">Contact Email <span class="text-red-500">*</span></label>
-                    <div class="relative">
-                        <input type="email" name="contact_email" class="w-full px-4 py-3 pl-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-3 focus:ring-teal-100 focus:border-teal-400 transition-all duration-300 bg-gray-50 hover:bg-white" required value="{{ old('contact_email') }}" placeholder="john@company.com">
-                        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
-                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="block text-sm font-semibold text-gray-700 mb-3">Contact Phone</label>
-                    <div class="relative">
-                        <input type="tel" name="contact_phone" class="w-full px-4 py-3 pl-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-3 focus:ring-teal-100 focus:border-teal-400 transition-all duration-300 bg-gray-50 hover:bg-white" value="{{ old('contact_phone') }}" placeholder="+63 912 345 6789">
-                        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
-                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Additional Details -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="form-group">
-                    <label class="block text-sm font-semibold text-gray-700 mb-3">Expiry Date</label>
-                    <div class="relative">
-                        <input type="date" name="expires_at" class="w-full px-4 py-3 pl-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-3 focus:ring-teal-100 focus:border-teal-400 transition-all duration-300 bg-gray-50 hover:bg-white" value="{{ old('expires_at') }}">
-                        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
-                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                            </svg>
-                        </div>
-                    </div>
+                <div>
+                    <label for="category" class="block text-sm font-medium text-gray-700">Category <span class="text-red-500">*</span></label>
+                    <select id="category" name="category" required class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/30 @error('category') border-red-500 @enderror">
+                        <option value="">Select Category</option>
+                        <option value="event management" {{ old('category') == 'event management' ? 'selected' : '' }}>Event Management</option>
+                        <option value="education" {{ old('category') == 'education' ? 'selected' : '' }}>Education</option>
+                        <option value="healthcare" {{ old('category') == 'healthcare' ? 'selected' : '' }}>Healthcare</option>
+                        <option value="technology" {{ old('category') == 'technology' ? 'selected' : '' }}>Technology</option>
+                    </select>
+                    @error('category')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                 </div>
-                <div class="form-group">
-                    <label class="block text-sm font-semibold text-gray-700 mb-3">Category <span class="text-red-500">*</span></label>
-                    <div class="relative">
-                        <input type="text" name="category" class="w-full px-4 py-3 pl-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-3 focus:ring-teal-100 focus:border-teal-400 transition-all duration-300 bg-gray-50 hover:bg-white" required value="{{ old('category') }}" placeholder="e.g. Technology, Healthcare, Education">
-                        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
-                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
-                            </svg>
-                        </div>
-                    </div>
+                <div>
+                    <label for="expires_at" class="block text-sm font-medium text-gray-700">Expiry Date <span class="text-red-500">*</span></label>
+                    <input type="date" id="expires_at" name="expires_at" required value="{{ old('expires_at') }}" class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/30 @error('expires_at') border-red-500 @enderror">
+                    @error('expires_at')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                 </div>
             </div>
 
@@ -318,11 +250,11 @@
                     </svg>
                     Cancel
                 </a>
-                <button type="submit" class="group bg-gradient-to-r from-teal-500 to-green-500 hover:from-teal-600 hover:to-green-600 text-white px-8 py-3 rounded-xl font-medium transition-all duration-300 btn-hover flex items-center shadow-lg hover:shadow-xl">
+                <button type="submit" class="group bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white px-8 py-3 rounded-xl font-medium transition-all duration-300 btn-hover flex items-center shadow-lg hover:shadow-xl">
                     <svg class="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                     </svg>
-                    Submit for Review
+                    POST A JOB
                 </button>
             </div>
         </form>
@@ -330,53 +262,6 @@
             </div>
         </div>
     </div>
-
-    <style>
-        .form-group {
-            position: relative;
-        }
-
-        .form-group input:focus + .absolute svg,
-        .form-group textarea:focus + .absolute svg,
-        .form-group select:focus + .absolute svg {
-            color: #14b8a6;
-            transform: scale(1.1);
-        }
-
-        .card-hover {
-            transition: all 0.3s ease-in-out;
-        }
-
-        .card-hover:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-
-        .btn-hover {
-            transition: all 0.3s ease-in-out;
-        }
-
-        .btn-hover:hover {
-            transform: translateY(-1px);
-        }
-
-        .btn-hover:active {
-            transform: translateY(0);
-        }
-
-        /* Custom select dropdown styling */
-        select {
-            background-image: none;
-        }
-
-        /* Form field focus animations */
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            transform: translateY(-1px);
-            box-shadow: 0 10px 15px -3px rgba(20, 184, 166, 0.1), 0 4px 6px -2px rgba(20, 184, 166, 0.05);
-        }
-    </style>
 
     <script>
         // Enhanced form validation and animations
@@ -406,7 +291,7 @@
                 // Input animations
                 input.addEventListener('input', function() {
                     if (this.value.trim()) {
-                        this.classList.add('border-teal-300', 'bg-white');
+                        this.classList.add('border-blue-300', 'bg-white');
                         this.classList.remove('border-gray-200', 'bg-gray-50');
                     }
                 });
@@ -447,7 +332,7 @@
                     <svg class="w-5 h-5 mr-2 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
                     </svg>
-                    Submitting...
+                    Creating...
                 `;
                 submitBtn.disabled = true;
             });

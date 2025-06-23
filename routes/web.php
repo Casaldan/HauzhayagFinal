@@ -36,9 +36,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/scholars', [AdminController::class, 'showScholars'])->name('admin.scholars');
     Route::get('/settings', [AdminController::class, 'showSettings'])->name('admin.settings');
     Route::put('/settings', [AdminController::class, 'updateSettings'])->name('admin.settings.update');
-    Route::resource('jobs', \App\Http\Controllers\Admin\JobListingController::class);
-    Route::post('jobs/{job}/approve', [\App\Http\Controllers\Admin\JobListingController::class, 'approve'])->name('jobs.approve');
-    Route::post('jobs/{job}/reject', [\App\Http\Controllers\Admin\JobListingController::class, 'reject'])->name('jobs.reject');
+    // Job approval/rejection routes (moved to admin prefix group below)
 
     // Admin Volunteer Management Routes (moved to admin prefix group below)
 
@@ -257,6 +255,9 @@ Route::get('/volunteer/application/{tracking_code}', [App\Http\Controllers\Volun
 // Public volunteer event registration route (for homepage)
 Route::post('/volunteer/event-registration', [App\Http\Controllers\VolunteerEventApplicationController::class, 'store'])->name('volunteer.event-registration');
 
+// API route for event details
+Route::get('/api/events/{event}', [App\Http\Controllers\EventController::class, 'show'])->name('api.events.show');
+
 // Email test routes (for development only - remove in production)
 Route::get('/test-email', function () {
     try {
@@ -283,20 +284,39 @@ Route::get('/test-volunteer-email', function () {
         }
 
         $testApplication = new \App\Models\VolunteerEventApplication([
-            'full_name' => 'Test Volunteer',
-            'email' => 'test@example.com',
-            'tracking_code' => 'VOL123456',
+            'full_name' => 'Merrydell Sombrio',
+            'email' => 'merrydellsombrio083@gmail.com',
+            'tracking_code' => 'NOEKEH1S',
             'status' => 'pending',
             'event_id' => $event->id
         ]);
         $testApplication->event = $event;
 
-        \Illuminate\Support\Facades\Mail::to('hauzhayag15@gmail.com')->send(new \App\Mail\VolunteerEventApplicationConfirmation($testApplication));
+        \Illuminate\Support\Facades\Mail::to('merrydellsombrio083@gmail.com')->send(new \App\Mail\VolunteerEventApplicationConfirmation($testApplication));
 
-        return 'Volunteer event email sent successfully! Check hauzhayag15@gmail.com';
+        return 'Volunteer event email sent successfully! Check merrydellsombrio083@gmail.com';
     } catch (\Exception $e) {
         return 'Email failed: ' . $e->getMessage();
     }
 });
+
+// Simple SMTP test route
+Route::get('/test-smtp', function () {
+    try {
+        \Illuminate\Support\Facades\Mail::raw('This is a simple SMTP test from Hauz Hayag system. If you receive this email, SMTP is working correctly!', function($message) {
+            $message->to('merrydellsombrio083@gmail.com')
+                    ->subject('SMTP Test - Hauz Hayag System');
+        });
+
+        return 'SMTP test email sent successfully! Check your inbox at merrydellsombrio083@gmail.com';
+
+    } catch (\Exception $e) {
+        return 'SMTP Error: ' . $e->getMessage();
+    }
+});
+
+// Admin user management routes (for development/debugging)
+// Route::get('/create-admin', function () { ... });
+// Route::get('/list-admins', function () { ... });
 
 

@@ -715,14 +715,9 @@
         emailInput.addEventListener('blur', function(e) {
             const email = e.target.value;
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            const gmailRegex = /@gmail\./i;
 
             if (!emailRegex.test(email)) {
                 errorMessage.textContent = 'Please enter a valid email address.';
-                errorMessage.classList.remove('hidden');
-                e.target.focus();
-            } else if (!gmailRegex.test(email)) {
-                errorMessage.textContent = 'Email must be a Gmail address (must contain @gmail).';
                 errorMessage.classList.remove('hidden');
                 e.target.focus();
             } else {

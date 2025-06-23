@@ -108,10 +108,15 @@ class AdminController extends Controller
         }
 
         $volunteers = $query->latest()->paginate(10);
+
+        // Get counts for all statuses (for statistics)
         $totalVolunteersCount = Volunteer::count();
         $activeVolunteersCount = Volunteer::where('status', 'Active')->count();
         $inactiveVolunteersCount = Volunteer::where('status', 'Inactive')->count();
         $pendingVolunteersCount = Volunteer::where('status', 'Pending')->count();
+
+        // Count volunteers who also have user accounts
+        $volunteersWithUserAccounts = \App\Models\User::where('role', 'volunteer')->count();
 
         // Get volunteer event applications
         $volunteerEventApplications = \App\Models\VolunteerEventApplication::with('event')
@@ -139,7 +144,8 @@ class AdminController extends Controller
             'volunteerEventApplications',
             'pendingEventApplicationsCount',
             'hoursServed',
-            'upcomingEventsCount'
+            'upcomingEventsCount',
+            'volunteersWithUserAccounts'
         ));
     }
 
@@ -154,7 +160,8 @@ class AdminController extends Controller
 
     public function approveVolunteer(Volunteer $volunteer)
     {
-        $volunteer->status = 'Active'; // Use 'Active' to match the enum in migration
+        // Update volunteer status to Active (keep in volunteer directory)
+        $volunteer->status = 'Active';
         $volunteer->save();
 
         // Check if a user with this email already exists
@@ -167,8 +174,12 @@ class AdminController extends Controller
             $user->role = 'volunteer';
             $user->status = 'active';
             $user->phone_number = $volunteer->phone; // Update phone number
+            // Copy volunteer-specific data to user
+            $user->skills = $volunteer->skills;
+            $user->notes = $volunteer->notes;
+            $user->start_date = $volunteer->start_date;
             $user->save();
-            $message = 'Volunteer approved successfully and existing user account updated. They can now be managed in User Management.';
+            $message = 'Volunteer approved successfully. User account updated and volunteer is now active in both directories.';
         } else {
             // If user does not exist, create a new volunteer user with default password
             $user = \App\Models\User::create([
@@ -178,10 +189,13 @@ class AdminController extends Controller
                 'role' => 'volunteer',
                 'status' => 'active',
                 'phone_number' => $volunteer->phone,
+                'skills' => $volunteer->skills,
+                'notes' => $volunteer->notes,
+                'start_date' => $volunteer->start_date,
                 'email_verified_at' => now(),
             ]);
             $isNewUser = true;
-            $message = "Volunteer approved successfully and user account created with default password '{$defaultPassword}'. They can now be managed in User Management where you can change their password.";
+            $message = "Volunteer approved successfully. User account created with default password '{$defaultPassword}' and volunteer is now active in both directories.";
         }
 
         // Log the user creation/update for debugging
@@ -192,10 +206,17 @@ class AdminController extends Controller
             'role' => 'volunteer',
             'status' => 'active',
             'action' => $isNewUser ? 'created' : 'updated',
-            'default_password_used' => $isNewUser
+            'default_password_used' => $isNewUser,
+            'volunteer_kept_in_directory' => true
         ]);
 
-        return back()->with('success', $message);
+        // Redirect to user management with the created/updated user highlighted
+        return redirect()->route('users.edit', $user->id)
+            ->with('success', $message . ' Please update the account details in User Management.')
+            ->with('highlight_user', $user->id)
+            ->with('volunteer_approved', true)
+            ->with('volunteer_kept_in_directory', true)
+            ->with('default_password', $isNewUser ? $defaultPassword : null);
     }
 
     public function rejectVolunteer(Volunteer $volunteer)

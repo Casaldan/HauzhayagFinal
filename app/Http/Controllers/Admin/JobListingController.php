@@ -35,27 +35,30 @@ class JobListingController extends Controller
             'end_date' => 'nullable|date',
             'requirements' => 'nullable|string',
             'benefits' => 'nullable|string',
-            'contact_email' => ['required', 'email', 'max:255', 'regex:/@gmail\./i'],
-            'contact_phone' => ['nullable', 'string', 'regex:/^\d{11}$/'],
+            'contact_email' => ['required', 'email', 'max:255'],
+            'contact_phone' => ['required', 'string', 'regex:/^\d{11}$/'],
             'contact_person' => 'required|string|max:255',
             'qualifications' => 'required|string',
             'salary_min' => 'nullable|numeric|min:0',
             'salary_max' => 'nullable|numeric|min:0',
-            'expires_at' => 'nullable|date',
+            'expires_at' => 'required|date|after:today',
             'status' => 'nullable|string|max:255',
         ], [
-            'contact_email.regex' => 'Contact email must be a valid email address (must contain @gmail).',
-            'contact_phone.regex' => 'Contact phone number must be exactly 11 digits.'
+            'contact_phone.required' => 'Contact phone number is required.',
+            'contact_phone.regex' => 'Contact phone number must be exactly 11 digits.',
+            'expires_at.required' => 'The expiry date is required.',
+            'expires_at.after' => 'The expiry date must be a future date.'
         ]);
 
         // Set default values for admin-created jobs
         $validated['status'] = $validated['status'] ?? 'approved';
         $validated['is_admin_posted'] = true;
+        $validated['posted_by'] = auth()->id();
         $validated['type'] = $validated['employment_type'] ?? 'full-time';
 
         $job = JobListing::create($validated);
 
-        return redirect()->route('admin.jobs.index')
+        return redirect()->route('admin.dashboard')
             ->with('success', 'Job listing created and approved successfully.');
     }
 
@@ -84,16 +87,18 @@ class JobListingController extends Controller
             'end_date' => 'nullable|date',
             'requirements' => 'nullable|string',
             'benefits' => 'nullable|string',
-            'contact_email' => ['required', 'email', 'max:255', 'regex:/@gmail\./i'],
-            'contact_phone' => ['nullable', 'string', 'regex:/^\d{11}$/'],
+            'contact_email' => ['required', 'email', 'max:255'],
+            'contact_phone' => ['required', 'string', 'regex:/^\d{11}$/'],
             'contact_person' => 'required|string|max:255',
             'qualifications' => 'required|string',
             'salary_min' => 'nullable|numeric|min:0',
             'salary_max' => 'nullable|numeric|min:0',
-            'expires_at' => 'nullable|date',
+            'expires_at' => 'required|date|after:today',
         ], [
-            'contact_email.regex' => 'Contact email must be a valid email address (must contain @gmail).',
-            'contact_phone.regex' => 'Contact phone number must be exactly 11 digits.'
+            'contact_phone.required' => 'Contact phone number is required.',
+            'contact_phone.regex' => 'Contact phone number must be exactly 11 digits.',
+            'expires_at.required' => 'The expiry date is required.',
+            'expires_at.after' => 'The expiry date must be a future date.'
         ]);
 
         $job->update($validated);

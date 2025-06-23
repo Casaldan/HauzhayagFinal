@@ -61,6 +61,76 @@
                 </div>
             @endif
 
+            <!-- Volunteer Approval Special Notice -->
+            @if (session('volunteer_approved') || request('from') === 'volunteer_approval')
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-6 w-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            </svg>
+                        </div>
+                        <div class="ml-3 flex-1">
+                            <h3 class="text-lg font-medium text-blue-800 mb-2">
+                                <i class="fas fa-user-check mr-2"></i>
+                                Volunteer Account Management
+                            </h3>
+                            <div class="text-sm text-blue-700 space-y-2">
+                                @if (session('volunteer_kept_in_directory'))
+                                    <p class="font-medium">✅ This volunteer was approved and is now active in both the volunteer directory and user management.</p>
+                                    <p>🔄 The volunteer remains visible in the volunteer directory and can now access the system with this user account.</p>
+                                @else
+                                    <p class="font-medium">This user account was created from an approved volunteer application.</p>
+                                @endif
+
+                                @if (session('default_password') || request('default_password'))
+                                    <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mt-3">
+                                        <div class="flex items-center">
+                                            <svg class="h-5 w-5 text-yellow-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                                            </svg>
+                                            <div>
+                                                <p class="font-medium text-yellow-800">Default Password Assigned</p>
+                                                <p class="text-yellow-700">
+                                                    Current password: <code class="bg-yellow-100 px-2 py-1 rounded font-mono">{{ session('default_password') ?: request('default_password') ?: 'volunteer123' }}</code>
+                                                </p>
+                                                <p class="text-yellow-700 text-xs mt-1">⚠️ Please update the password below for security.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+
+                                <div class="mt-4">
+                                    <h4 class="font-medium text-blue-800 mb-2">Recommended Actions:</h4>
+                                    <ul class="list-disc list-inside space-y-1 text-blue-700">
+                                        <li>✅ Verify the user's contact information</li>
+                                        <li>🔑 Set a secure password (or ask the volunteer to change it on first login)</li>
+                                        <li>📱 Confirm the phone number is correct</li>
+                                        <li>👤 Ensure the role is set to "Volunteer"</li>
+                                        <li>✅ Verify the status is "Active"</li>
+                                    </ul>
+                                </div>
+
+                                <div class="mt-4 flex space-x-3">
+                                    <a href="{{ route('admin.volunteers.index') }}" class="inline-flex items-center text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                                        </svg>
+                                        Back to Volunteers
+                                    </a>
+                                    <a href="{{ route('admin.volunteer-applications.index') }}" class="inline-flex items-center text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                        </svg>
+                                        View Applications
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
             <!-- Display validation errors -->
             @if ($errors->any())
                 <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
@@ -216,6 +286,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('form');
     const updateBtn = document.getElementById('updateBtn');
     const btnText = document.getElementById('btnText');
+
+    // Check if coming from volunteer approval
+    const urlParams = new URLSearchParams(window.location.search);
+    const fromVolunteerApproval = urlParams.get('from') === 'volunteer_approval';
+    const isNewUser = urlParams.get('new_user') === 'true';
+    const defaultPassword = urlParams.get('default_password');
+
+    if (fromVolunteerApproval) {
+        // Highlight the password field if it's a new user
+        if (isNewUser && defaultPassword) {
+            const passwordField = document.querySelector('input[name="password"]');
+            if (passwordField) {
+                passwordField.focus();
+                passwordField.style.borderColor = '#f59e0b';
+                passwordField.style.boxShadow = '0 0 0 3px rgba(245, 158, 11, 0.1)';
+                passwordField.placeholder = 'Current: ' + defaultPassword + ' - Enter new password';
+            }
+        }
+
+        // Show additional guidance
+        console.log('User editing from volunteer approval:', {
+            isNewUser: isNewUser,
+            defaultPassword: defaultPassword
+        });
+    }
 
     console.log('Form found:', form);
     console.log('Update button found:', updateBtn);

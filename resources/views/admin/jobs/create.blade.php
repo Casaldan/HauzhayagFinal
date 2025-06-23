@@ -58,9 +58,15 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M9 12h6m-3-3v6m-7 4h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
             </svg>
-            Create New Job Listing
+            Post a Job
         </h2>
         <div class="flex items-center space-x-3">
+            <a href="{{ route('admin.dashboard') }}" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all duration-300 flex items-center">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                Back to Dashboard
+            </a>
             <span class="text-gray-600">Admin</span>
             <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-medium">
                 AD
@@ -70,7 +76,7 @@
 
     <!-- Page Header -->
     <div class="mb-6">
-        <h1 class="text-2xl font-bold text-gray-800">Add New Job Listing</h1>
+        <h1 class="text-2xl font-bold text-gray-800">Post a Job</h1>
         <p class="text-gray-600">Create a new job posting for students and applicants</p>
     </div>
 
@@ -155,8 +161,8 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label for="contact_phone" class="block text-sm font-medium text-gray-700">Contact Phone</label>
-                    <input type="tel" id="contact_phone" name="contact_phone" value="{{ old('contact_phone') }}" class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/30 @error('contact_phone') border-red-500 @enderror">
+                    <label for="contact_phone" class="block text-sm font-medium text-gray-700">Contact Phone <span class="text-red-500">*</span></label>
+                    <input type="tel" id="contact_phone" name="contact_phone" required value="{{ old('contact_phone') }}" class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/30 @error('contact_phone') border-red-500 @enderror">
                     @error('contact_phone')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                 </div>
                 <div class="mb-4">
@@ -218,8 +224,8 @@
                     @error('category')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                 </div>
                 <div>
-                    <label for="expires_at" class="block text-sm font-medium text-gray-700">Expiry Date</label>
-                    <input type="date" id="expires_at" name="expires_at" value="{{ old('expires_at') }}" class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/30 @error('expires_at') border-red-500 @enderror">
+                    <label for="expires_at" class="block text-sm font-medium text-gray-700">Expiry Date <span class="text-red-500">*</span></label>
+                    <input type="date" id="expires_at" name="expires_at" required value="{{ old('expires_at') }}" class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/30 @error('expires_at') border-red-500 @enderror">
                     @error('expires_at')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                 </div>
             </div>
@@ -248,7 +254,7 @@
                     <svg class="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                     </svg>
-                    Create Job Listing
+                    POST A JOB
                 </button>
             </div>
         </form>
