@@ -223,137 +223,6 @@
             <!-- Spacer for lower positioning -->
             <div class="mb-12"></div>
 
-                <!-- Profile Modal -->
-                <div id="profile-modal" class="fixed inset-0 bg-black bg-opacity-50 z-[9999] hidden flex items-center justify-center p-4">
-                    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] flex flex-col">
-                        <!-- Modal Header -->
-                        <div class="relative bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-6 text-white rounded-t-2xl flex-shrink-0">
-                            <button onclick="toggleProfileModal()" class="absolute top-4 right-4 text-white/80 hover:text-white transition-colors">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                                </svg>
-                            </button>
-
-                            <!-- Profile Avatar -->
-                            <div class="text-center">
-                                <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3 backdrop-blur-sm">
-                                    @if(Auth::user()->profile_picture)
-                                        <img src="{{ Storage::url(Auth::user()->profile_picture) }}" alt="{{ Auth::user()->name }}" class="w-16 h-16 rounded-full object-cover">
-                                    @else
-                                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                                        </svg>
-                                    @endif
-                                </div>
-                                <h2 class="text-lg font-bold">{{ Auth::user()->name }}</h2>
-                                <p class="text-blue-100 text-sm">Student Profile</p>
-                            </div>
-                        </div>
-
-                        <!-- Modal Content -->
-                        <div class="flex-1 overflow-y-auto p-6">
-                            <!-- Password Management Section -->
-                            <div class="space-y-6">
-                                <!-- Change Password Section -->
-                                <div class="bg-gray-50 border border-gray-200 p-5 rounded-lg">
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <h3 class="text-base font-medium text-gray-800">Password Settings</h3>
-                                            <p class="text-sm text-gray-600 mt-1">Update your account password for security</p>
-                                        </div>
-                                        <button onclick="togglePasswordChangeForm()" class="text-sm bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors duration-200 font-medium">
-                                            Change Password
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <!-- Password Change Form -->
-                                <div id="password-change-form" class="hidden mt-6 bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
-                                    <div class="flex items-center justify-between mb-6">
-                                        <h3 class="text-lg font-semibold text-gray-800">Change Password</h3>
-                                        <button type="button" onclick="togglePasswordChangeForm()" class="text-gray-400 hover:text-gray-600 transition-colors">
-                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                                            </svg>
-                                        </button>
-                                    </div>
-
-                                    <!-- Success/Error Messages -->
-                                    @if(session('success'))
-                                        <div class="mb-4 p-3 bg-green-50 border border-green-200 text-green-800 rounded-lg text-sm flex items-center">
-                                            <svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                                            </svg>
-                                            {{ session('success') }}
-                                        </div>
-                                    @endif
-
-                                    @if(session('error'))
-                                        <div class="mb-4 p-3 bg-red-50 border border-red-200 text-red-800 rounded-lg text-sm flex items-center">
-                                            <svg class="w-4 h-4 mr-2 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                            </svg>
-                                            {{ session('error') }}
-                                        </div>
-                                    @endif
-
-                                    @if($errors->any())
-                                        <div class="mb-4 p-3 bg-red-50 border border-red-200 text-red-800 rounded-lg text-sm">
-                                            <div class="flex items-start">
-                                                <svg class="w-4 h-4 mr-2 text-red-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                                </svg>
-                                                <ul class="list-disc list-inside text-xs space-y-1">
-                                                    @foreach($errors->all() as $error)
-                                                        <li>{{ $error }}</li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    @endif
-
-                                    <form action="{{ route('student.profile.password.change') }}" method="POST" class="space-y-5">
-                                        @csrf
-
-                                        <!-- Current Password -->
-                                        <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Current Password</label>
-                                            <input type="password" name="current_password" class="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" required placeholder="Enter your current password">
-                                            <p class="text-xs text-gray-500 mt-2">Use the password from your email or your current password</p>
-                                        </div>
-
-                                        <!-- New Password -->
-                                        <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">New Password</label>
-                                            <input type="password" name="new_password" class="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" required placeholder="Enter new password" minlength="8">
-                                            <p class="text-xs text-gray-500 mt-2">Minimum 8 characters</p>
-                                        </div>
-
-                                        <!-- Confirm Password -->
-                                        <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Confirm New Password</label>
-                                            <input type="password" name="new_password_confirmation" class="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" required placeholder="Confirm new password">
-                                        </div>
-
-                                        <!-- Form Buttons -->
-                                        <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200">
-                                            <button type="button" onclick="togglePasswordChangeForm()" class="px-5 py-2 text-sm text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
-                                                Cancel
-                                            </button>
-                                            <button type="submit" class="px-5 py-2 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-200 font-medium">
-                                                Update Password
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-
-                            <!-- Bottom Padding -->
-                            <div class="h-6"></div>
-                        </div>
-                    </div>
-                </div>
-
             <!-- Student Navigation -->
             <a href="{{ route('student.dashboard') }}" class="sidebar-link flex items-center py-3 px-4 rounded-lg transition-all duration-300 ease-in-out hover:bg-white/10 {{ str_contains($currentRoute, 'student.dashboard') ? 'bg-white/20 shadow-md' : '' }}">
                 <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -398,6 +267,163 @@
 
     </div>
 </div>
+
+<!-- Profile Modal (Outside sidebar for proper z-index) -->
+@if(Auth::check() && Auth::user()->role === 'student')
+<div id="profile-modal" class="fixed inset-0 bg-black bg-opacity-50 z-[9999] hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl max-h-[95vh] flex flex-col">
+        <!-- Modal Header -->
+        <div class="relative bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-6 text-white flex-shrink-0">
+            <button onclick="toggleProfileModal()" class="absolute top-4 right-4 text-white/80 hover:text-white transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+
+            <!-- Profile Header -->
+            <div class="flex items-center">
+                <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mr-4 backdrop-blur-sm">
+                    @if(Auth::user()->profile_picture)
+                        <img src="{{ Storage::url(Auth::user()->profile_picture) }}" alt="{{ Auth::user()->name }}" class="w-16 h-16 rounded-full object-cover">
+                    @else
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                    @endif
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold">{{ Auth::user()->name }}</h2>
+                    <p class="text-blue-100 text-sm">Student Profile</p>
+                    <p class="text-blue-200 text-xs mt-1">{{ Auth::user()->email }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Content -->
+        <div class="flex-1 overflow-y-auto p-8">
+            <!-- Profile Information -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <!-- Full Name -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                    <div class="p-3 bg-gray-50 border border-gray-200 rounded-lg">
+                        <p class="text-gray-800">{{ Auth::user()->name }}</p>
+                    </div>
+                </div>
+
+                <!-- Email Address -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                    <div class="p-3 bg-gray-50 border border-gray-200 rounded-lg">
+                        <p class="text-gray-800">{{ Auth::user()->email }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Password Management Section -->
+            <div class="border-t border-gray-200 pt-8">
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Password Settings</h3>
+                    <p class="text-sm text-gray-600">Update your account password for security. Your temporary password was sent to your Gmail address.</p>
+                </div>
+
+                <button onclick="togglePasswordChangeForm()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors duration-200 font-medium">
+                    Change Password
+                </button>
+            </div>
+
+            <!-- Password Change Form -->
+            <div id="password-change-form" class="hidden mt-8 bg-gray-50 rounded-lg p-8 border border-gray-200">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800">Change Your Password</h3>
+                        <p class="text-sm text-gray-600 mt-1">Enter your current password and choose a new secure password</p>
+                    </div>
+                    <button type="button" onclick="togglePasswordChangeForm()" class="text-gray-400 hover:text-gray-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Success/Error Messages -->
+                @if(session('success'))
+                    <div class="mb-4 p-3 bg-green-50 border border-green-200 text-green-800 rounded-lg text-sm flex items-center">
+                        <svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if(session('error'))
+                    <div class="mb-4 p-3 bg-red-50 border border-red-200 text-red-800 rounded-lg text-sm flex items-center">
+                        <svg class="w-4 h-4 mr-2 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        {{ session('error') }}
+                    </div>
+                @endif
+
+                @if($errors->any())
+                    <div class="mb-4 p-3 bg-red-50 border border-red-200 text-red-800 rounded-lg text-sm">
+                        <div class="flex items-start">
+                            <svg class="w-4 h-4 mr-2 text-red-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <ul class="list-disc list-inside text-xs space-y-1">
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                @endif
+
+                <form action="{{ route('student.profile.password.change') }}" method="POST" class="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                    @csrf
+
+                    <div class="grid grid-cols-1 gap-6">
+                        <!-- Current Password -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-3">Current Password *</label>
+                            <input type="password" name="current_password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" required placeholder="Enter your current password">
+                            <p class="text-sm text-blue-600 mt-2">💡 Use the temporary password sent to your Gmail: <strong>{{ Auth::user()->email }}</strong></p>
+                        </div>
+
+                        <!-- New Password -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-3">New Password *</label>
+                            <input type="password" name="new_password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" required placeholder="Enter your new password" minlength="8">
+                            <p class="text-sm text-gray-500 mt-2">Password must be at least 8 characters long</p>
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-3">Confirm New Password *</label>
+                            <input type="password" name="new_password_confirmation" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" required placeholder="Confirm your new password">
+                            <p class="text-sm text-gray-500 mt-2">Re-enter your new password to confirm</p>
+                        </div>
+                    </div>
+
+                    <!-- Form Buttons -->
+                    <div class="flex justify-end space-x-4 mt-8 pt-6 border-t border-gray-200">
+                        <button type="button" onclick="togglePasswordChangeForm()" class="px-6 py-3 text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200 font-medium">
+                            Cancel
+                        </button>
+                        <button type="submit" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-200 font-medium">
+                            Update Password
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Bottom Padding -->
+            <div class="h-6"></div>
+        </div>
+    </div>
+</div>
+@endif
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
