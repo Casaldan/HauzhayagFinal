@@ -158,15 +158,45 @@
                 <div class="next-steps">
                     <h3>🎉 Congratulations!</h3>
                     <p>Your scholarship application has been <strong>approved</strong>! We're excited to support your educational journey.</p>
-                    
+
+                    @if($user && $temporaryPassword)
+                        <div style="background-color: #fef3c7; border: 2px solid #f59e0b; border-radius: 8px; padding: 20px; margin: 20px 0;">
+                            <h4 style="color: #92400e; margin-top: 0;">🔐 Student Portal Access</h4>
+                            <p style="color: #92400e; margin-bottom: 15px;">A student account has been created for you! Here are your login credentials:</p>
+
+                            <div style="background-color: white; padding: 15px; border-radius: 6px; margin: 15px 0;">
+                                <p style="margin: 5px 0;"><strong>Email:</strong> {{ $application->email }}</p>
+                                <p style="margin: 5px 0;"><strong>Temporary Password:</strong> <span style="font-family: monospace; font-size: 16px; font-weight: bold; color: #1f2937;">{{ $temporaryPassword }}</span></p>
+                            </div>
+
+                            <p style="color: #92400e; font-size: 14px; margin-bottom: 0;">
+                                ⚠️ <strong>Important:</strong> Please change your password after your first login for security purposes.
+                            </p>
+                        </div>
+
+                        <div style="background-color: #dbeafe; border: 2px solid #3b82f6; border-radius: 8px; padding: 20px; margin: 20px 0;">
+                            <h4 style="color: #1e40af; margin-top: 0;">📚 How to Access Your Student Dashboard</h4>
+                            <ol style="color: #1e40af; padding-left: 20px;">
+                                <li>Visit our website and click on "Student Login"</li>
+                                <li>Enter your email: <strong>{{ $application->email }}</strong></li>
+                                <li>Enter your temporary password: <strong>{{ $temporaryPassword }}</strong></li>
+                                <li>Once logged in, click on "View Profile" to change your password</li>
+                                <li>Explore your student dashboard to access events, job listings, and more!</li>
+                            </ol>
+                        </div>
+                    @endif
+
                     <p><strong>Next Steps:</strong></p>
                     <ul>
-                        <li>A student account will be created for you with access to our student portal</li>
+                        <li>Log in to your student portal using the credentials above</li>
+                        <li>Complete your profile information</li>
+                        <li>Change your temporary password for security</li>
+                        <li>Explore available events and job opportunities</li>
                         <li>You will receive additional information about scholarship benefits and requirements</li>
                         <li>Please keep this email and your tracking code for your records</li>
                         <li>If you have any questions, please don't hesitate to contact us</li>
                     </ul>
-                    
+
                     <p><strong>Important:</strong> Please log in to your student portal to access scholarship resources and updates.</p>
                 </div>
             @elseif($application->status === 'declined')

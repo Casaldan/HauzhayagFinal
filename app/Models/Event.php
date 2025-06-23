@@ -62,4 +62,9 @@ class Event extends Model
         return $query->where('status', 'active')
                     ->where('start_date', '>', Carbon::now());
     }
+
+    public function scopeNotCompleted($query)
+    {
+        return $query->where('status', '!=', 'completed');
+    }
 }

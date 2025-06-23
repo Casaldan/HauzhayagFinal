@@ -15,13 +15,17 @@ class ScholarshipApplicationStatusUpdate extends Mailable
     use Queueable, SerializesModels;
 
     public $application;
+    public $user;
+    public $temporaryPassword;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(ScholarshipApplication $application)
+    public function __construct(ScholarshipApplication $application, $user = null, $temporaryPassword = null)
     {
         $this->application = $application;
+        $this->user = $user;
+        $this->temporaryPassword = $temporaryPassword;
     }
 
     /**

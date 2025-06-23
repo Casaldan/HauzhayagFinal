@@ -20,7 +20,23 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::guard('student')->attempt($credentials, $request->boolean('remember'))) {
+        // First try normal authentication
+        if (Auth::attempt($credentials, $request->boolean('remember'))) {
+            $request->session()->regenerate();
+            $user = Auth::user();
+            if ($user->role === 'student') {
+                return redirect()->intended(route('student.dashboard'));
+            }
+        }
+
+        // If normal auth fails, check if it's a temporary password for a student
+        $user = \App\Models\User::where('email', $credentials['email'])
+                                ->where('role', 'student')
+                                ->first();
+
+        if ($user && $user->temporary_password && $credentials['password'] === $user->temporary_password) {
+            // Login with temporary password
+            Auth::login($user, $request->boolean('remember'));
             $request->session()->regenerate();
             return redirect()->intended(route('student.dashboard'));
         }
@@ -32,7 +48,7 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::guard('student')->logout();
+        Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('student.login');

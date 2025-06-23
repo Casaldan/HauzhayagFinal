@@ -426,7 +426,7 @@
                     <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 animate-fade-in">Welcome to Hauz Hayag</h1>
                     <p class="text-xl md:text-2xl text-white/90 mb-8 animate-fade-in delay-100">Empowering communities through education and opportunities</p>
                     <div class="flex flex-col md:flex-row gap-4 justify-center animate-slide-up delay-200">
-                        <button class="bg-primary text-white px-8 py-3 rounded-lg hover:bg-blue-400 transition hover-scale" onclick="openDonationModal()">
+                        <button class="bg-primary text-white px-8 py-3 rounded-lg hover:bg-blue-400 transition hover-scale" onclick="window.open('https://www.paypal.com/donate', '_blank')">
                             <i class="fas fa-heart mr-2 animate-pulse-slow"></i>Donate Now
                         </button>
                     </div>
@@ -1674,78 +1674,7 @@
         </div>
     </div>
 
-    <!-- Donation Modal -->
-    <div id="donationModal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex justify-center items-center z-50 hidden" onclick="backgroundCloseDonationModal(event)">
-        <div class="bg-white p-6 rounded-xl shadow-2xl w-full max-w-sm mx-4 relative transform transition-all duration-300 scale-95 modal-content" onclick="event.stopPropagation()">
-            <!-- Close Button -->
-            <button onclick="closeDonationModal()" class="absolute top-3 right-3 w-6 h-6 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:text-gray-700 transition-all duration-200">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                </svg>
-            </button>
-
-            <!-- Header -->
-            <div class="text-center mb-6">
-                <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
-                    </svg>
-                </div>
-                <h2 class="text-lg font-semibold text-gray-800 mb-1">Make a Donation</h2>
-                <p class="text-xs text-gray-600">Support our mission</p>
-            </div>
-
-            <!-- Form -->
-            <form id="donationForm" class="space-y-4">
-                <!-- Amount -->
-                <div class="form-group">
-                    <label class="block text-xs font-medium text-gray-700 mb-2">Amount</label>
-                    <div class="relative">
-                        <input type="number" class="w-full px-3 py-2 pl-8 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-100 focus:border-green-400 transition-all duration-300 bg-gray-50 hover:bg-white text-sm" placeholder="0.00" required>
-                        <div class="absolute inset-y-0 left-0 flex items-center pl-2">
-                            <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Name -->
-                <div class="form-group">
-                    <label class="block text-xs font-medium text-gray-700 mb-2">Full Name</label>
-                    <div class="relative">
-                        <input type="text" class="w-full px-3 py-2 pl-8 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-100 focus:border-green-400 transition-all duration-300 bg-gray-50 hover:bg-white text-sm" placeholder="Your full name" required>
-                        <div class="absolute inset-y-0 left-0 flex items-center pl-2">
-                            <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Email -->
-                <div class="form-group">
-                    <label class="block text-xs font-medium text-gray-700 mb-2">Email Address</label>
-                    <div class="relative">
-                        <input type="email" class="w-full px-3 py-2 pl-8 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-100 focus:border-green-400 transition-all duration-300 bg-gray-50 hover:bg-white text-sm" placeholder="your.email@example.com" required>
-                        <div class="absolute inset-y-0 left-0 flex items-center pl-2">
-                            <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Submit Button -->
-                <button type="submit" class="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white py-2.5 rounded-lg font-medium text-sm shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300 flex items-center justify-center">
-                    <svg class="w-3 h-3 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                    </svg>
-                    Donate Now
-                </button>
-            </form>
-        </div>
-    </div>
+    <!-- Donation Modal Removed -->
 
     <!-- Registration Modal -->
     <div id="registrationModal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex justify-center items-center z-50 hidden">
@@ -1907,13 +1836,7 @@
             document.getElementById('loginModal').classList.add('hidden');
         }
 
-        function openDonationModal() {
-            document.getElementById('donationModal').classList.remove('hidden');
-        }
-
-        function closeDonationModal() {
-            document.getElementById('donationModal').classList.add('hidden');
-        }
+        // Donation modal functions removed
 
         function openScholarshipModal(scholarshipType = 'community_based') {
             // Set the scholarship type in the hidden field
@@ -2141,7 +2064,6 @@
         // Close modals when clicking outside
         document.addEventListener('click', function(event) {
             const loginModal = document.getElementById('loginModal');
-            const donationModal = document.getElementById('donationModal');
             const scholarshipModal = document.getElementById('scholarshipApplicationModal');
             const jobDetailsModal = document.getElementById('jobDetailsModal');
             const eventModal = document.getElementById('eventRegistrationModal');
@@ -2149,9 +2071,6 @@
 
             if (event.target === loginModal) {
                 closeLoginModal();
-            }
-            if (event.target === donationModal) {
-                closeDonationModal();
             }
             if (event.target === scholarshipModal) {
                 closeScholarshipModal();

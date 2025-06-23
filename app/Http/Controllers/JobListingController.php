@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\JobListing;
+use Carbon\Carbon;
 
 class JobListingController extends Controller
 {
@@ -231,5 +232,152 @@ class JobListingController extends Controller
         return redirect()->route('admin.jobs.index')->with('success', 'Job deleted successfully!');
     }
 
+    public function importCsv(Request $request)
+    {
+        $request->validate([
+            'csv_file' => 'required|file|mimes:csv,txt|max:2048'
+        ]);
+
+        try {
+            $file = $request->file('csv_file');
+            $path = $file->getRealPath();
+            $handle = fopen($path, 'r');
+
+            // Read header row
+            $header = fgetcsv($handle);
+
+            $imported = 0;
+            $errors = [];
+
+            while (($row = fgetcsv($handle)) !== false) {
+                try {
+                    $data = array_combine($header, $row);
+
+                    // Prepare job data for volunteer submission (pending status)
+                    $jobData = $this->prepareVolunteerJobDataFromCsv($data);
+
+                    JobListing::create($jobData);
+                    $imported++;
+
+                } catch (\Exception $e) {
+                    $errors[] = "Row error: " . $e->getMessage();
+                }
+            }
+
+            fclose($handle);
+
+            $message = "Successfully imported {$imported} job listings for admin review.";
+            if (count($errors) > 0) {
+                $message .= " " . count($errors) . " errors encountered.";
+            }
+
+            return redirect()->route('volunteer.jobs.create')
+                ->with('success', $message);
+
+        } catch (\Exception $e) {
+            return redirect()->route('volunteer.jobs.create')
+                ->with('error', 'Import failed: ' . $e->getMessage());
+        }
+    }
+
+    public function downloadTemplate()
+    {
+        $headers = [
+            'title',
+            'company_name',
+            'role',
+            'description',
+            'qualifications',
+            'employment_type',
+            'location',
+            'category',
+            'contact_person',
+            'contact_email',
+            'contact_phone',
+            'salary_min',
+            'salary_max',
+            'expires_at',
+            'benefits',
+            'requirements'
+        ];
+
+        $filename = 'volunteer_job_listings_template.csv';
+        $handle = fopen('php://output', 'w');
+
+        // Set headers for download
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+
+        // Write CSV header
+        fputcsv($handle, $headers);
+
+        // Write sample data
+        fputcsv($handle, [
+            'Community Volunteer Coordinator',
+            'Local NGO Foundation',
+            'Volunteer Coordinator',
+            'Coordinate volunteer activities and community outreach programs...',
+            'Bachelor\'s degree preferred, Strong communication skills, Experience in community work',
+            'Part-time',
+            'Cebu City, Philippines',
+            'Community Service',
+            'Maria Santos',
+            'hr@localngo.gmail.com',
+            '09171234567',
+            '15000',
+            '25000',
+            '2024-12-31',
+            'Flexible hours, Community impact, Training provided',
+            'Passion for community service, Team collaboration'
+        ]);
+
+        fputcsv($handle, [
+            'Social Media Assistant',
+            'Community Center',
+            'Social Media Assistant',
+            'Help manage social media accounts and create content for community programs...',
+            'Social media experience, Creative writing skills, Basic graphic design knowledge',
+            'Part-time',
+            'Makati City, Philippines',
+            'Marketing',
+            'John Cruz',
+            'admin@communitycenter.gmail.com',
+            '09181234567',
+            '12000',
+            '20000',
+            '2024-11-30',
+            'Remote work options, Skill development, Portfolio building',
+            'Social media knowledge, Content creation skills'
+        ]);
+
+        fclose($handle);
+        exit;
+    }
+
+    private function prepareVolunteerJobDataFromCsv($data)
+    {
+        return [
+            'title' => $data['title'] ?? 'Untitled Position',
+            'company_name' => $data['company_name'] ?? 'Unknown Organization',
+            'role' => $data['role'] ?? $data['title'] ?? 'General Role',
+            'description' => $data['description'] ?? 'No description provided',
+            'qualifications' => $data['qualifications'] ?? 'To be discussed',
+            'employment_type' => $data['employment_type'] ?? 'Part-time',
+            'type' => $data['employment_type'] ?? 'Part-time',
+            'location' => $data['location'] ?? 'Remote',
+            'category' => $data['category'] ?? 'Community Service',
+            'contact_person' => $data['contact_person'] ?? 'Contact Person',
+            'contact_email' => $data['contact_email'] ?? 'contact@organization.gmail.com',
+            'contact_phone' => $data['contact_phone'] ?? null,
+            'salary_min' => !empty($data['salary_min']) ? (float)$data['salary_min'] : null,
+            'salary_max' => !empty($data['salary_max']) ? (float)$data['salary_max'] : null,
+            'expires_at' => !empty($data['expires_at']) ? Carbon::parse($data['expires_at']) : Carbon::now()->addMonths(2),
+            'benefits' => $data['benefits'] ?? null,
+            'requirements' => $data['requirements'] ?? null,
+            'status' => 'pending', // All volunteer imports are pending
+            'is_admin_posted' => false, // Volunteer posted
+            'posted_by' => auth()->id(),
+        ];
+    }
 
 }

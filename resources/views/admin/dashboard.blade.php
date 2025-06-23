@@ -366,7 +366,7 @@
                     @php
                         // Get recent activities from the system
                         $recentUsers = \App\Models\User::latest()->take(2)->get();
-                        $recentEvents = \App\Models\Event::latest()->take(2)->get();
+                        $recentEvents = \App\Models\Event::notCompleted()->latest()->take(2)->get();
                     @endphp
 
                     @forelse($recentUsers as $user)

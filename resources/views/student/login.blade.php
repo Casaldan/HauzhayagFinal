@@ -48,9 +48,8 @@
                     Sign in
                 </button>
             </div>
-            <div class="flex justify-between mt-4">
-                <a href="{{ route('student.register') }}" class="text-sm text-indigo-600 hover:text-indigo-500">Register</a>
-                <a href="{{ route('student.password.request') }}" class="text-sm text-indigo-600 hover:text-indigo-500">Forgot your password?</a>
+            <div class="flex justify-center mt-4">
+                <a href="{{ route('login') }}" class="text-sm text-indigo-600 hover:text-indigo-500">Back to Main Login</a>
             </div>
         </form>
     </div>

@@ -15,6 +15,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'temporary_password',
         'role',
         'status',
         'class_year',
@@ -25,7 +26,8 @@ class User extends Authenticatable
         'start_date',
         'transcript_path',
         'scholarship_type',
-        'is_admin'
+        'is_admin',
+        'profile_picture'
     ];
 
     protected $hidden = [

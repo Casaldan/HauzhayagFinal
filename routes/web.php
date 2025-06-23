@@ -69,12 +69,20 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
+// Student authentication routes
+Route::get('/student/login', [App\Http\Controllers\Student\Auth\LoginController::class, 'showLoginForm'])->name('student.login');
+Route::post('/student/login', [App\Http\Controllers\Student\Auth\LoginController::class, 'login']);
+Route::get('/student/register', [App\Http\Controllers\Student\Auth\RegisterController::class, 'showRegistrationForm'])->name('student.register');
+Route::post('/student/register', [App\Http\Controllers\Student\Auth\RegisterController::class, 'register']);
+
 // Student routes
 Route::middleware(['auth', \App\Http\Middleware\RedirectIfNotStudent::class])->prefix('student')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\Student\DashboardController::class, 'index'])->name('student.dashboard');
     Route::get('/events', [App\Http\Controllers\Student\DashboardController::class, 'eventsIndex'])->name('student.events.index');
     Route::get('/jobs', [App\Http\Controllers\Student\DashboardController::class, 'jobsIndex'])->name('student.jobs.index');
     Route::get('/jobs/{job}', [App\Http\Controllers\Student\DashboardController::class, 'showJob'])->name('student.jobs.show');
+    Route::post('/profile/picture', [App\Http\Controllers\Student\ProfileController::class, 'uploadPicture'])->name('student.profile.picture.upload');
+    Route::post('/profile/password', [App\Http\Controllers\Student\ProfileController::class, 'changePassword'])->name('student.profile.password.change');
 });
 
 // Other routes...
@@ -108,6 +116,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
     Route::put('/events/{event}', [EventController::class, 'update'])->name('events.update');
     Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
+    Route::post('/events/import', [EventController::class, 'importCsv'])->name('admin.events.import');
+    Route::get('/events/download-template', [EventController::class, 'downloadTemplate'])->name('admin.events.download-template');
 });
 
 // Volunteer routes with auth (moved outside the main authenticated group)
@@ -130,6 +140,8 @@ Route::middleware(['auth'])->group(function () {
     // Volunteer job posting routes
     Route::get('/volunteer/jobs/create', [\App\Http\Controllers\JobListingController::class, 'create'])->name('volunteer.jobs.create');
     Route::post('/volunteer/jobs', [\App\Http\Controllers\JobListingController::class, 'store'])->name('volunteer.jobs.store');
+    Route::post('/volunteer/jobs/import', [\App\Http\Controllers\JobListingController::class, 'importCsv'])->name('volunteer.jobs.import');
+    Route::get('/volunteer/jobs/download-template', [\App\Http\Controllers\JobListingController::class, 'downloadTemplate'])->name('volunteer.jobs.download-template');
 
 });
 
@@ -228,6 +240,8 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::delete('/jobs/{job}', [App\Http\Controllers\Admin\JobListingController::class, 'destroy'])->name('admin.jobs.destroy');
     Route::post('/jobs/{job}/approve', [App\Http\Controllers\Admin\JobListingController::class, 'approve'])->name('admin.jobs.approve');
     Route::post('/jobs/{job}/reject', [App\Http\Controllers\Admin\JobListingController::class, 'reject'])->name('admin.jobs.reject');
+    Route::post('/jobs/import', [App\Http\Controllers\Admin\JobListingController::class, 'importCsv'])->name('admin.jobs.import');
+    Route::get('/jobs/download-template', [App\Http\Controllers\Admin\JobListingController::class, 'downloadTemplate'])->name('admin.jobs.download-template');
 });
 
 // API route for job details (for modal)
