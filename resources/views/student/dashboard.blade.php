@@ -202,12 +202,7 @@
                                 </div>
                             </div>
 
-                            <div class="flex items-center space-x-3">
-                                <span class="text-blue-100 font-medium">Student</span>
-                                <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center text-white font-bold text-lg backdrop-blur-sm border border-white border-opacity-20">
-                                    {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
-                                </div>
-                            </div>
+                            <!-- Removed student indicator - now in sidebar -->
                         </div>
                     </div>
                 </div>

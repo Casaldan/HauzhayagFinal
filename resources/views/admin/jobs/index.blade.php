@@ -103,13 +103,24 @@
                     </div>
                 </div>
 
-                <!-- Add Job Button -->
-                <a href="{{ route('admin.jobs.create') }}" class="bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-6 py-3 rounded-xl transition-all duration-300 font-medium backdrop-blur-sm border border-white border-opacity-20 hover:scale-105 flex items-center space-x-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-                    </svg>
-                    <span>Add New Job</span>
-                </a>
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <!-- CSV Import Button -->
+                    <button onclick="openImportModal()" class="bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-6 py-3 rounded-xl transition-all duration-300 font-medium backdrop-blur-sm border border-white border-opacity-20 hover:scale-105 flex items-center space-x-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"/>
+                        </svg>
+                        <span>Import CSV</span>
+                    </button>
+
+                    <!-- Add Job Button -->
+                    <a href="{{ route('admin.jobs.create') }}" class="bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-6 py-3 rounded-xl transition-all duration-300 font-medium backdrop-blur-sm border border-white border-opacity-20 hover:scale-105 flex items-center space-x-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                        <span>Add New Job</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -371,6 +382,73 @@
         </div>
     </div>
 </div>
+
+<!-- CSV Import Modal -->
+<div id="importModal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex justify-center items-center z-50 hidden">
+    <div class="bg-white p-6 rounded-2xl shadow-2xl w-full max-w-md mx-4 relative transform transition-all duration-300 scale-95 modal-content">
+        <!-- Close Button -->
+        <button onclick="closeImportModal()" class="absolute top-3 right-3 w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:text-gray-700 transition-all duration-200">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+        </button>
+
+        <!-- Header -->
+        <div class="text-center mb-6">
+            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"/>
+                </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Import Job Listings</h2>
+            <p class="text-gray-600">Upload a CSV file to bulk import job listings</p>
+        </div>
+
+        <!-- Form -->
+        <form action="{{ route('admin.jobs.import') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+            @csrf
+
+            <!-- File Upload -->
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700">CSV File</label>
+                <div class="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-blue-400 transition-colors duration-300">
+                    <input type="file" name="csv_file" accept=".csv" required class="hidden" id="csvFile" onchange="updateFileName(this)">
+                    <label for="csvFile" class="cursor-pointer">
+                        <svg class="w-12 h-12 text-gray-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"/>
+                        </svg>
+                        <p class="text-gray-600 font-medium">Click to upload CSV file</p>
+                        <p class="text-gray-400 text-sm mt-1">or drag and drop</p>
+                    </label>
+                    <p id="fileName" class="text-sm text-blue-600 mt-2 hidden"></p>
+                </div>
+            </div>
+
+            <!-- CSV Format Info -->
+            <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                <h4 class="font-semibold text-blue-800 mb-2">CSV Format Requirements:</h4>
+                <ul class="text-blue-700 text-sm space-y-1">
+                    <li>• Required columns: title, company_name, description, location</li>
+                    <li>• Optional: employment_type, category, salary_min, salary_max</li>
+                    <li>• Contact info: contact_person, contact_email, contact_phone</li>
+                </ul>
+                <div class="mt-3">
+                    <a href="{{ route('admin.jobs.download-template') }}" class="text-blue-600 hover:text-blue-800 font-medium text-sm underline">
+                        Download CSV Template
+                    </a>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-3 rounded-xl font-medium shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300 flex items-center justify-center space-x-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"/>
+                </svg>
+                <span>Import Jobs</span>
+            </button>
+        </form>
+    </div>
+</div>
 @endsection
 
 @push('scripts')
@@ -449,6 +527,46 @@
                     successMessage.remove();
                 }, 300);
             }, 5000);
+        }
+    });
+
+    // CSV Import Modal Functions
+    function openImportModal() {
+        document.getElementById('importModal').classList.remove('hidden');
+        document.querySelector('.modal-content').classList.remove('scale-95');
+        document.querySelector('.modal-content').classList.add('scale-100');
+    }
+
+    function closeImportModal() {
+        document.querySelector('.modal-content').classList.remove('scale-100');
+        document.querySelector('.modal-content').classList.add('scale-95');
+        setTimeout(() => {
+            document.getElementById('importModal').classList.add('hidden');
+        }, 200);
+    }
+
+    function updateFileName(input) {
+        const fileName = document.getElementById('fileName');
+        if (input.files.length > 0) {
+            fileName.textContent = `Selected: ${input.files[0].name}`;
+            fileName.classList.remove('hidden');
+        } else {
+            fileName.classList.add('hidden');
+        }
+    }
+
+    // Close modal when clicking outside
+    document.addEventListener('click', function(event) {
+        const modal = document.getElementById('importModal');
+        if (event.target === modal) {
+            closeImportModal();
+        }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeImportModal();
         }
     });
 </script>

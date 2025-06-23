@@ -51,23 +51,29 @@ class StudentController extends Controller
     public function approve($tracking_code)
     {
         $application = ScholarshipApplication::where('tracking_code', $tracking_code)->firstOrFail();
-        
+
+        // Generate temporary password
+        $temporaryPassword = 'HauzHayag' . date('Y');
+
         // Check if a user with this email already exists
         $user = User::where('email', $application->email)->first();
 
         if ($user) {
-            // If user exists, update their role to 'student'
+            // If user exists, update their role to 'student' and set temporary password
             $user->role = 'student';
             $user->status = 'active'; // Assuming active status upon approval
             $user->scholarship_type = $application->scholarship_type; // Update scholarship type for existing user
             $user->transcript_path = $application->transcript_path; // Copy transcript from application
+            $user->password = bcrypt($temporaryPassword); // Set temporary password
+            $user->temporary_password = $temporaryPassword; // Store plain text for display
             $user->save();
         } else {
             // If user does not exist, create a new student user
             $user = User::create([
                 'name' => $application->full_name,
                 'email' => $application->email,
-                'password' => bcrypt(Str::random(10)), // Generate random password
+                'password' => bcrypt($temporaryPassword), // Use temporary password
+                'temporary_password' => $temporaryPassword, // Store plain text for display
                 'role' => 'student',
                 'status' => 'active',
                 'phone_number' => $application->phone_number,
@@ -81,15 +87,16 @@ class StudentController extends Controller
         $application->status = 'approved';
         $application->save();
 
-        // Send status update email
+        // Send status update email with temporary password
         try {
-            Mail::to($application->email)->send(new ScholarshipApplicationStatusUpdate($application));
-            Log::info('Scholarship application approval email sent', [
+            Mail::to($application->email)->send(new ScholarshipApplicationStatusUpdate($application, $user, $temporaryPassword));
+            Log::info('Scholarship application approval email sent with temporary password', [
                 'application_id' => $application->id,
                 'email' => $application->email,
                 'old_status' => $oldStatus,
                 'new_status' => 'approved',
-                'tracking_code' => $application->tracking_code
+                'tracking_code' => $application->tracking_code,
+                'temporary_password_sent' => true
             ]);
         } catch (\Exception $e) {
             Log::error('Failed to send scholarship application approval email: ' . $e->getMessage(), [
@@ -99,7 +106,7 @@ class StudentController extends Controller
             ]);
         }
 
-        return redirect()->route('admin.students.index.shortcut')->with('success', 'Application approved and student account created successfully');
+        return redirect()->route('admin.students.index.shortcut')->with('success', 'Application approved, student account created, and login credentials sent via email successfully');
     }
 
     /**

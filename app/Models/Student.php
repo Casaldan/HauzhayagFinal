@@ -16,6 +16,10 @@ class Student extends Authenticatable
         'phone_number',
         'scholarship_type',
         'password',
+        'temporary_password',
+        'profile_picture',
+        'class_year',
+        'status',
         // Add other necessary fields
     ];
 
